@@ -1,0 +1,59 @@
+{{!----------------titre -----------------}}
+<h1>GET SINGLE {{ dbActu.title }}</h1>
+{{!----------------/titre -----------------}}
+
+{{!----------------actualité -----------------}}
+<div>
+    <div>
+        <img src="{{ dbActu.image }}" alt="Responsive image">
+    </div>
+    <div>
+        <p>
+            {{ dbActu.content }}
+        </p>
+    </div>
+    <div>
+        <p>
+            Article écrit le {{ createDate }}, par {{ dbActu.author }}
+        </p>
+    </div>
+</div>
+{{!----------------/actualité -----------------}}
+
+{{!-- bouton suppression --}}
+<form action="/actuSingle/{{ dbActu._id }}/?_method=delete" method="POST">
+    <button type="submit">Supprimer</button>
+</form>
+
+
+{{!----------------titre -----------------}}
+<h1>PUT {{ dbActu.title }}</h1>
+{{!----------------/titre -----------------}}
+
+{{!-- Edition Article --}}
+<form action="/actuSingle/{{ dbActu._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div>
+        <div>
+            <label for="title">Titre</label>
+            <input type="text" name="title" value="{{ dbActu.title }}" />
+        </div>
+        <div>
+            <label for="content">Description</label>
+            <textarea rows="3" name="content">{{ dbActu.content }}</textarea>
+        </div>
+        <div>
+            <label>
+                <input type="file" name="image" value="{{ dbActu.image }}">
+                <span class="file-label">
+                    Envoyer une nouvelle image au format .jpg .jpeg .gif uniquement
+                </span>
+            </label>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-sign">Modifier </button>
+    </div>
+</form>
+{{!-- /Modal Editer Article --}}
+
+<a href="/">Retour à l'accueil</a>
