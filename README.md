@@ -88,12 +88,12 @@ Blog projet perso arinfo
 // selon le framework : penser à mettre le lien dans le "head"
 
 // GITHUB : 
-// penser à créer le gitignore comprenant : node_modules/*
+// penser à créer le fichier .gitignore comprenant : node_modules/*
 // créer un nouveau repository (penser à créer un readme)
 // récupérer le lien SSH dans "clone or download" et faire un "git clone copiercoller" via le terminal (penser à être sur le dossier github dans le bureau)
 // créer une branch premaster : "git branch premaster"
 // coller le projet déjà démarré dans le dossier github
 // faire un "git status", "git add .", "git commit -m 'nomcommit'" et "git push origin master" (car au départ on est sur la master)
-// lors de la création du repository github et de la mise en place sur github du projet,
+// se mettre sur la branch premaster "git checkout premaster" et récupérer le projet sur la master "git pull origin master", "git commit -m 'nomcommit' et "git push origin premaster"
 
 // mongoDB Cloud : lors de la création penser à faire le "config.js" contenant la clé ainsi que les chemins et indiquer ce fichier dans le gitignore
