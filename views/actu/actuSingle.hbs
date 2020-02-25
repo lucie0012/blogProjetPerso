@@ -5,7 +5,7 @@
 {{!----------------actualité -----------------}}
 <div>
     <div>
-        <img src="{{ dbActu.image }}" alt="Responsive image">
+        <img src="{{ dbActu.image }}" alt="image actu">
     </div>
     <div>
         <p>
@@ -44,14 +44,14 @@
         <div>
             <label>
                 <input type="file" name="image" value="{{ dbActu.image }}">
-                <span class="file-label">
+                <span>
                     Envoyer une nouvelle image au format .jpg .jpeg .gif uniquement
                 </span>
             </label>
         </div>
     </div>
     <div>
-        <button type="submit" class="btn btn-sign">Modifier </button>
+        <button type="submit">Modifier </button>
     </div>
 </form>
 {{!-- /Modal Editer Article --}}

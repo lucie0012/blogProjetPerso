@@ -1,0 +1,20 @@
+{{!---------------- titre -----------------}}
+<h1>Liste User</h1>
+{{!----------------/titre -----------------}}
+
+{{!----------------card actu --------------}}
+{{#each dbUser }}
+<div>
+    <div>
+        <img src="{{ image }}" alt="image user" widht="200px" height="200px">
+    </div>
+    <div>
+        <h5>{{ name }} </h5>
+        <p> {{ status }} </p>
+        <a href="/userEdit/{{ id }}">Editer le profil</a>
+    </div>
+</div>
+{{/each }}
+{{!----------------/card actu -------------}}
+
+<a href="/">Retour à l'accueil</a>

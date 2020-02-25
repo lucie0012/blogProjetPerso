@@ -8,9 +8,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const MomentHandler = require("handlebars.moment");
 const Handlebars = require("handlebars");
+// const expressSession = require('express-session');
+// const MongoStore = require('connect-mongo');
 
 
 const app = express();
+// const mongoStore = MongoStore(expressSession);
 
 /*
  * Gestion urlDB et port
@@ -41,6 +44,25 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+// /*
+//  * Express session
+//  ******************************/
+// app.use(expressSession({
+//     secret: 'securite',
+//     name: 'cookie',
+//     saveUninitialized: true,
+//     resave: false,
+//     store: new mongoStore(
+//         { mongooseConnection: mongoose.connection }
+//     ),
+//     expires: new Date(Date.now() + (3600000))
+// }));
+
+// app.use('*', (req, res, next) => {
+//     res.locals.id = req.session.userId
+//     next()
+// })
 
 /*
  * Moment

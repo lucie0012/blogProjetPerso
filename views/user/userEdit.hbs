@@ -1,0 +1,36 @@
+<h1>Edition User</h1>
+
+{{!----------------titre -----------------}}
+<h1>PUT {{ dbUser.name }}</h1>
+{{!----------------/titre -----------------}}
+
+{{!-- Edition Article --}}
+<form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div>
+        <div>
+            <label for="title">Nom d'utilisateur</label>
+            <input type="text" name="name" value="{{ dbUser.name }}" />
+        </div>
+        <div>
+            <label for="content">Adresse Email</label>
+            <textarea rows="3" name="email">{{ dbUser.email }}</textarea>
+        </div>
+        <div>
+            <label>
+                <input type="file" name="image" value="{{ dbUser.image }}">
+                <span>
+                    Envoyer une nouvelle image au format .jpg .jpeg .gif uniquement
+                </span>
+            </label>
+        </div>
+    </div>
+    <div>
+        <button type="submit">Modifier </button>
+    </div>
+</form>
+<form action="/userEdit/{{ dbUser._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+        <button type="submit">Supprimer </button>
+</form>
+{{!-- /Modal Editer Article --}}
+
+<a href="/">Retour à l'accueil</a>

@@ -10,6 +10,7 @@ const router = express.Router()
  ***********/
 const home = require('./controllers/home')
 const actus = require('./controllers/actus')
+const user = require('./controllers/user')
 
 
 /*
@@ -44,5 +45,20 @@ router.route('/actuCreate')
     .get(actus.getActuCreate)
     .post(multer, actus.postActuCreate)
 
+
+/*
+ * User
+ ***********/
+router.route('/userCreate')
+    .get(user.getUser)
+    .post(multer, user.postUserCreate)
+
+router.route('/userList')
+    .get(user.getUserList)
+
+router.route('/userEdit/:id')
+    .get(user.getUserEdit)
+    .put(multer, user.putUserEdit)
+    .delete(user.deleteOneUser)
 
 module.exports = router
