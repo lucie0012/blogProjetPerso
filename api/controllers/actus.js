@@ -1,4 +1,9 @@
 const actuCollection = require('../database/models/actuModel');
+const path = require('path');
+// pour gestion suppression image
+const fs = require('fs')
+// pour gestion suppression image
+
 
 module.exports = {
 
@@ -18,7 +23,8 @@ module.exports = {
                     {
                         title: req.body.title,
                         content: req.body.content,
-                        image: `/public/ressources/images/${req.file.filename}`
+                        image: `/public/ressources/images/${req.file.filename}`,
+                        nameImage: req.file.filename
                     },
                     (err, post) => {
                         res.redirect('/actus')
@@ -51,14 +57,25 @@ module.exports = {
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 
 
-    deleteOneActuSingle: (req, res) => {
+    deleteOneActuSingle: async (req, res) => {
         // console.log(req.params.id);
         // console.log('delete Article')
+        const dbActu = await actuCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbActu.nameImage)
         actuCollection.deleteOne(
             { _id: req.params.id },
             (err) => {
                 if (!err) {
-                    res.redirect('/actus')
+                    fs.unlink(pathImage,
+                        (err) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("File delete");
+                                res.redirect('/actus')
+                            }
+                        }
+                    )
                 } else {
                     res.send(err)
                 }
@@ -71,7 +88,6 @@ module.exports = {
         if (!req.file) {
             if (!req.body.title) {
                 console.log('no req.body.title & no req.file')
-
             } else if (req.body.title) {
                 // console.log('req.body.title')
                 actuCollection.findOneAndUpdate(
@@ -93,7 +109,6 @@ module.exports = {
             } else {
                 console.log('no req.file');
             }
-
         } else {
             actuCollection.findOneAndUpdate(
                 { _id: req.params.id },

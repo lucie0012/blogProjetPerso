@@ -4,6 +4,7 @@ const actuSchema = new mongoose.Schema({
 
     title : String,
     image : String,
+    nameImage : String,
     content : String,
     comment : String,
     createDate : {
