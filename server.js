@@ -10,15 +10,23 @@ const MomentHandler = require("handlebars.moment");
 const Handlebars = require("handlebars");
 
 
-const app = express()
-const port = process.env.PORT || 5000
-const urlDB = "mongodb://localhost:27017/projetperso"
+const app = express();
+
+/*
+ * Gestion urlDB et port
+ ******************************/
+const config = require('./api/config/config');
+// const port = process.env.PORT || 5000
+const port = config.dev.port;
+// const urlDB = "mongodb://localhost:27017/projetperso"
+// const urlDB = "mongodb+srv://lucie:eodeezae250812@blogprojetperso-ycggc.mongodb.net/test?retryWrites=true&w=majority"
+const urlDB = config.prod.urlDBcloud;
 
 
 /* Gestion fichiers statiques
  ******************************/
-app.use(express.static('public'));
-app.use('/assets', express.static('public'));
+// app.use(express.static('public'));
+app.use('/public', express.static('public'));
 
 
 /*

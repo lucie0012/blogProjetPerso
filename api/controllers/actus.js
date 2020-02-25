@@ -18,7 +18,7 @@ module.exports = {
                     {
                         title: req.body.title,
                         content: req.body.content,
-                        image: `/assets/ressources/images/${req.file.filename}`
+                        image: `/public/ressources/images/${req.file.filename}`
                     },
                     (err, post) => {
                         res.redirect('/actus')
@@ -26,14 +26,14 @@ module.exports = {
                 // console.log(req.body)
                 // on redirige vers le lien /actus qui fait référence dans router à la route /actus et au get
             } else if (req.file.size > limitSize) {
-                console.log('Pas bien');
+                // console.log('Pas bien');
                 res.redirect('back')
             }
         }
     },
 
     getActu: async (req, res) => {
-    // "async" car on utilise "await" pour attendre de récupérer les données
+        // "async" car on utilise "await" pour attendre de récupérer les données
         const dbActu = await actuCollection.find({})
         // console.log(dbActu);
 
@@ -68,14 +68,12 @@ module.exports = {
 
     putActuSingle: (req, res) => {
         // console.log(req.params.id);
-
         if (!req.file) {
             if (!req.body.title) {
                 console.log('no req.body.title & no req.file')
-                
-            } else if (req.body.title) {
-                console.log('req.body.title')
 
+            } else if (req.body.title) {
+                // console.log('req.body.title')
                 actuCollection.findOneAndUpdate(
                     { _id: req.params.id },
                     {
@@ -103,7 +101,7 @@ module.exports = {
                     title: req.body.title,
                     content: req.body.content,
                     createDate: req.body.date,
-                    image: `/assets/ressources/images/${req.file.filename}`
+                    image: `/public/ressources/images/${req.file.filename}`
                 },
                 { multi: true },
                 (err) => {

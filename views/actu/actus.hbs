@@ -3,20 +3,20 @@
 {{!----------------/titre -----------------}}
 
 {{!----------------card actu --------------}}
-<div class="container mt-3">
-            {{#each dbActu }}
-            <div>
-                <img src="{{ image }}" alt="Card image cap" widht="200px" height="200px">
-                <div class="card-body">
-                    <h5>{{ title }} </h5>
-                    <p> {{ content }} </p>
-                    <a href="/actuSingle/{{ id }}">Voir l'article</a>
-                </div>
-                <div>
-                    <small>Publié le {{ moment createDate format="DD/MM/YYYY" }}</small>
-                </div>
-            </div>
-            {{/each }}
+<div>
+    {{#each dbActu }}
+    <div>
+        <img src="{{ image }}" alt="Card image cap" widht="200px" height="200px">
+        <div class="card-body">
+            <h5>{{ title }} </h5>
+            <p> {{ content }} </p>
+            <a href="/actuSingle/{{ id }}">Voir l'article</a>
+        </div>
+        <div>
+            <small>Publié le {{ moment createDate format="DD/MM/YYYY" }}</small>
+        </div>
+    </div>
+    {{/each }}
 </div>
 {{!----------------/card actu -------------}}
 

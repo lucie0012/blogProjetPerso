@@ -76,6 +76,11 @@ Blog projet perso arinfo
 
 // installer handlebars.moment (pour gérer la mise en forme de la date) : "npm i handlebars.moment"
 // require le module handlebars.moment et handlebars (installer précedemment si erreur de "parents" sinon l'installer) et paramétrer
+// bien penser à paramétrer le model :
+    createDate : {
+        type: Date,
+        default : new Date(),
+    },
 
 // installer "multer" (pour gérer upload photo) : "npm i multer"
 // require le module (ici dans router.js) et paramétrer (ici dans router.js), paramétrer son chemin statique (dans server.js)
@@ -83,9 +88,7 @@ Blog projet perso arinfo
 // gérer ensuite le format et le type d'image : dans le paramétrage multer dans "router.js" mais aussi dans notre post de actus.js (gestion erreur)
 // mieux de gérer la taille de l'image dans actus.js
 
-//
 
-// selon le framework : penser à mettre le lien dans le "head"
 
 // GITHUB : 
 // penser à créer le fichier .gitignore comprenant : node_modules/*
@@ -96,4 +99,19 @@ Blog projet perso arinfo
 // faire un "git status", "git add .", "git commit -m 'nomcommit'" et "git push origin master" (car au départ on est sur la master)
 // se mettre sur la branch premaster "git checkout premaster" et récupérer le projet sur la master "git pull origin master", "git commit -m 'nomcommit' et "git push origin premaster"
 
-// mongoDB Cloud : lors de la création penser à faire le "config.js" contenant la clé ainsi que les chemins et indiquer ce fichier dans le gitignore
+// mongoDB Cloud : 
+// sur mongodb cloud (atlas) faire un "new project" puis "build a cluster" / free / franckfurt (le plus proche) / name 
+// sur le cluster concerné : connect
+// "add your current IP adress" : 0.0.0.0 (pour y accéder de toutes les adresse IP) puis "add IP adress"
+// créer "username" et "password" (cf word github) puis "choose a connection method"
+// "connect your application"
+// copier le "connexion string only" et le copier dans notre const urlDb en complément de celle local (et mettre la local en commentaire) / remplacer le <password> par celui créé à l'étape précédente
+// créer le dossier "config" dans le dossier api puis le fichier "config.js" et y mettre en  module.exports les infos urldb et port
+// dans server.js : require le fichier et l'appeler dans nos constantes pour les utiliser
+// indiquer ce fichier dans le gitignore
+
+
+
+
+
+// selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)
