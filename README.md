@@ -115,9 +115,14 @@ Blog projet perso arinfo
 // créer le modèle utilisateur
 // créer la page "création de compte" / "liste utilisateur" / "edition de compte" / "supp compte" avec gestion image
 
-// gérer la connexion
+// gérer la connexion simple via le controllers
 
-// gérer le chiffrage des mdp
+// gérer le chiffrage des mdp via bcrypt
+// installer bcrypt : "npm i bcrypt"
+// le require dans le modèle utilisateur la où on "pré" hash le mdp (le faire ici comme ça à chaque fois qu'on utilise/appel notre modele utilisateur il effectue le pre hash directement), la création de cloud avec chiffrage se fait donc automatiquement (rien à faire dans le post du controllers)
+// gérer l'authentification avec le chiffrage (penser à require "bcrypt" dans le controllers)
+
+// 
 
 // gérer l'authentification avec les sessions :
 // installer express-session (créer les cookies de session) et connect-mongo (connecter les cookies à la BDD) via "npm i express-session" et "npm i connect-mongo"

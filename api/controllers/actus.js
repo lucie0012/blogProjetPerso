@@ -7,10 +7,12 @@ const fs = require('fs')
 
 module.exports = {
 
+    /**************Affichage page création d'article***************/
     getActuCreate: (req, res) => {
         res.render('actu/actuCreate')
     },
 
+    /**************Création d'article***************/
     postActuCreate: (req, res) => {
         const limitSize = '1000000'
         // console.log(req.file.size)
@@ -38,6 +40,7 @@ module.exports = {
         }
     },
 
+    /**************Affichage page de tous les articles***************/
     getActu: async (req, res) => {
         // "async" car on utilise "await" pour attendre de récupérer les données
         const dbActu = await actuCollection.find({})
@@ -48,6 +51,8 @@ module.exports = {
     },
     // ATTENTION : dans la page actus, bien penser à mettre le "each" pour afficher tout les élements de la BDD et indiquer plusieurs infos (cf page actus)
 
+
+    /**************Affichage page article seul***************/
     getActuSingle: async (req, res) => {
         const dbActu = await actuCollection.findById(req.params.id)
         // console.log(req.params.id);
@@ -57,6 +62,7 @@ module.exports = {
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 
 
+    /**************Suppression d'article***************/
     deleteOneActuSingle: async (req, res) => {
         // console.log(req.params.id);
         const dbActu = await actuCollection.findById(req.params.id);
@@ -82,6 +88,7 @@ module.exports = {
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
+    /**************Edition d'article***************/
     putActuSingle: async (req, res) => {
         // console.log(req.params.id);
         const dbActu = await actuCollection.findById(req.params.id);

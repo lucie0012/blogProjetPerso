@@ -1,6 +1,8 @@
 const userCollection = require('../database/models/userModel');
 
 module.exports = {
+
+    /**************Affichage liste utilisateur pour admin***************/
     getUserList: async (req, res) => {
         const dbUser = await userCollection.find({})
         // console.log(dbUser);
@@ -8,6 +10,7 @@ module.exports = {
         res.render('admin/adminUserList', { dbUser })
     },
 
+    /**************Affichage page édition utilisateur pour admin***************/
     getUserEdit: async (req, res) => {
         const dbUser = await userCollection.findById(req.params.id)
         // console.log(req.params.id);
@@ -15,6 +18,7 @@ module.exports = {
         res.render('admin/adminUserEdit', { dbUser })
     },
 
+    /**************Edition utilisateur pour admin***************/
     putlistUser: (req, res) => {
         // console.log(req.body.role);
         // console.log(req.params.id);
@@ -98,6 +102,7 @@ module.exports = {
         }
     },
 
+    /**************Suppression utilisateur pour admin***************/
     deleteOneUser: (req, res) => {
         userCollection.deleteOne(
             { _id: req.params.id },

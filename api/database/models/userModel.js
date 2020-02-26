@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
 
@@ -14,7 +15,7 @@ const userSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'user'
+        default: 'Utilisateur'
     },
     isVerified:{
         type: Boolean,
@@ -37,6 +38,14 @@ const userSchema = new mongoose.Schema({
         default: "https://i.stack.imgur.com/34AD2.jpg"
     },
     nameImage : String
+})
+
+userSchema.pre('save', function (next) {
+    const user = this
+    bcrypt.hash(user.password, 12, (err, encrypted) => {
+        user.password = encrypted
+        next()
+    })
 })
 
 const userCollection = mongoose.model('userCollection', userSchema)
