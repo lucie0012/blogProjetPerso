@@ -113,9 +113,13 @@ Blog projet perso arinfo
 
 
 // créer le modèle utilisateur
-// créer la page "création de compte" / "liste utilisateur" / "edition de compte" / "supp compte"
+// créer la page "création de compte" / "liste utilisateur" / "edition de compte" / "supp compte" avec gestion image
 
-// gérer l'authentification et les sessions :
+// gérer la connexion
+
+// gérer le chiffrage des mdp
+
+// gérer l'authentification avec les sessions :
 // installer express-session (créer les cookies de session) et connect-mongo (connecter les cookies à la BDD) via "npm i express-session" et "npm i connect-mongo"
 // require les modules
 // connecter connect mongo à express session (dans server.js)

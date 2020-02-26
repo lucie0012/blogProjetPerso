@@ -52,11 +52,18 @@ module.exports = {
         }
     },
 
-    getUserList: async (req, res) => {
+    getUserListing: async (req, res) => {
         const dbUser = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('user/userList', { dbUser })
+        res.render('user/userListing', { dbUser })
+    },
+
+    getUserSingle: async (req, res) => {
+        const dbUser = await userCollection.find({})
+        // console.log(dbUser);
+
+        res.render('user/userSingle', { dbUser })
     },
 
     getUserEdit: async (req, res) => {
@@ -146,4 +153,18 @@ module.exports = {
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
+    getUserAuth: (req, res) => {
+        res.render('user/authentification')
+    },
+
+    postUserAuth: async (req, res) => {
+        const dbUser = await userCollection.findOne({ email : req.body.email })
+        if (!dbUser) {
+            console.log('pas dans la DB');
+            res.redirect('/userCreate')
+        } else {
+            res.redirect('/')
+        }
+        
+    }
 }

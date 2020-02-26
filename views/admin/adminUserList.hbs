@@ -1,0 +1,25 @@
+{{!---------------- titre -----------------}}
+<h1>Liste User</h1>
+{{!----------------/titre -----------------}}
+
+{{!---------------user --------------}}
+{{#each dbUser }}
+<div>
+    <div>
+        <img src="{{ image }}" alt="image user" widht="200px" height="200px">
+    </div>
+    <div>
+        <p>Utilisateur : {{ name }} </p>
+        <p>Email : {{ email }} </p>
+        <p>Status : {{ status }} </p>
+        <p>Utilisateur vérifié : {{ isVerified }} </p>
+        <p>Modérateur : {{isModo}} </p>
+        <p>Admin : {{isAdmin}} </p>
+        <p>Bannis : {{isBan}} </p>
+        <a href="/adminUserEdit/{{ id }}">Editer le profil</a>
+    </div>
+</div>
+{{/each }}
+{{!----------------/user -------------}}
+
+<a href="/">Retour à l'accueil</a>

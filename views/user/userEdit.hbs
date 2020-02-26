@@ -4,7 +4,7 @@
 <h1>PUT {{ dbUser.name }}</h1>
 {{!----------------/titre -----------------}}
 
-{{!-- Edition Article --}}
+{{!-- Edition compte user --}}
 <form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
     <div>
         <div>
@@ -34,6 +34,6 @@
 <form action="/userEdit/{{ dbUser._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
     <button type="submit">Supprimer </button>
 </form>
-{{!-- /Modal Editer Article --}}
+{{!-- /Edition compte user --}}
 
 <a href="/">Retour à l'accueil</a>
