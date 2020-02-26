@@ -50,7 +50,7 @@ router.route('/actuCreate')
  * User
  ***********/
 router.route('/userCreate')
-    .get(user.getUser)
+    .get(user.getUserCreate)
     .post(multer, user.postUserCreate)
 
 router.route('/userList')

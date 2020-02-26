@@ -8,6 +8,9 @@
 <form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
     <div>
         <div>
+            <img src="{{ dbUser.image }}" alt="image user" widht="200px" height="200px">
+        </div>
+        <div>
             <label for="title">Nom d'utilisateur</label>
             <input type="text" name="name" value="{{ dbUser.name }}" />
         </div>
@@ -29,7 +32,7 @@
     </div>
 </form>
 <form action="/userEdit/{{ dbUser._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
-        <button type="submit">Supprimer </button>
+    <button type="submit">Supprimer </button>
 </form>
 {{!-- /Modal Editer Article --}}
 

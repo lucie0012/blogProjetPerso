@@ -5,7 +5,7 @@ const fs = require('fs')
 // pour gestion suppression image
 
 module.exports = {
-    getUser: (req, res) => {
+    getUserCreate: (req, res) => {
         res.render('user/userCreate')
     },
 
@@ -17,28 +17,44 @@ module.exports = {
 
         if (Pass !== confPass) {
             //comparaison des mots de passe
-            res.redirect('/signup')
+            res.redirect('/userCreate')
+            // "back" indique la page 
         } else {
-            userCollection.create(
-                {
-                    email: req.body.email,
-                    name: req.body.name,
-                    password: Pass,
-                    image: `/public/ressources/images/${req.file.filename}`,
-                    nameImage: req.file.filename,
-                    isVerified: false,
-                    isModo: false,
-                    isAdmin: false,
-                    isBan: false
-                },
-            )
-            res.render('home')
+            if (!req.file) {
+                userCollection.create(
+                    {
+                        email: req.body.email,
+                        name: req.body.name,
+                        password: Pass,
+                        isVerified: false,
+                        isModo: false,
+                        isAdmin: false,
+                        isBan: false
+                    },
+                )
+                res.render('home')
+            } else {
+                userCollection.create(
+                    {
+                        email: req.body.email,
+                        name: req.body.name,
+                        password: Pass,
+                        image: `/public/ressources/images/${req.file.filename}`,
+                        nameImage: req.file.filename,
+                        isVerified: false,
+                        isModo: false,
+                        isAdmin: false,
+                        isBan: false
+                    },
+                )
+                res.render('home')
+            }
         }
     },
 
     getUserList: async (req, res) => {
         const dbUser = await userCollection.find({})
-        console.log(dbUser);
+        // console.log(dbUser);
 
         res.render('user/userList', { dbUser })
     },
@@ -50,48 +66,56 @@ module.exports = {
         res.render('user/userEdit', { dbUser })
     },
 
-    putUserEdit: (req, res) => {
+    putUserEdit: async (req, res) => {
         // console.log(req.params.id);
+        const dbUser = await userCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
+        // console.log(req.file);
+
         if (!req.file) {
-            if (!req.body.name) {
-                console.log('no req.body.title & no req.file')
-            } else if (req.body.name) {
-                // console.log('req.body.name')
+            if (req.body) {
+                // console.log(req.body);
                 userCollection.findOneAndUpdate(
                     { _id: req.params.id },
                     {
                         email: req.body.email,
                         name: req.body.name,
-                        nameImage: req.file.filename
                     },
                     { multi: true },
                     (err) => {
-                        if (!err) {
-                            // console.log('UPDATE OK');
-                            res.redirect('/userEdit/' + req.params.id)
+                        if (err) {
+                            res.redirect("/")
                         } else {
-                            res.send(err)
+                            console.log('UPDATE OK');
+                            res.redirect('/userEdit/' + req.params.id)
                         }
                     })
             } else {
-                console.log('no req.file');
+                res.redirect("/")
+                console.log('no req.body');
             }
         } else {
+            // console.log(req.file);
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
                     email: req.body.email,
                     name: req.body.name,
-                    image: `/public/ressources/images/${req.file.filename}`
+                    image: `/public/ressources/images/${req.file.filename}`,
+                    nameImage: req.file.filename,
                 },
                 { multi: true },
-                (err) => {
-                    if (!err) {
-                        // console.log('UPDATE OK');
-                        res.redirect('/userEdit/' + req.params.id)
-                    } else {
-                        res.send(err)
-                    }
+                (err, post) => {
+                    fs.unlink(pathImage,
+                        (err) => {
+                            if (err) {
+                                // res.redirect("/")
+                                console.log(err);
+                            } else {
+                                console.log('File delete');
+                                res.redirect('/userEdit/' + req.params.id)
+                            }
+                        })
                 })
         }
     },
