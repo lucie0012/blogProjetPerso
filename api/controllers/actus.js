@@ -59,7 +59,6 @@ module.exports = {
 
     deleteOneActuSingle: async (req, res) => {
         // console.log(req.params.id);
-        // console.log('delete Article')
         const dbActu = await actuCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbActu.nameImage)
         actuCollection.deleteOne(
@@ -83,13 +82,15 @@ module.exports = {
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
-    putActuSingle: (req, res) => {
+    putActuSingle: async (req, res) => {
         // console.log(req.params.id);
+        const dbActu = await actuCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbActu.nameImage)
+        // console.log(req.file);
+
         if (!req.file) {
-            if (!req.body.title) {
-                console.log('no req.body.title & no req.file')
-            } else if (req.body.title) {
-                // console.log('req.body.title')
+            if (req.body.title) {
+                // console.log(req.body);
                 actuCollection.findOneAndUpdate(
                     { _id: req.params.id },
                     {
@@ -99,35 +100,41 @@ module.exports = {
                     },
                     { multi: true },
                     (err) => {
-                        if (!err) {
-                            // console.log('UPDATE OK');
-                            res.redirect('/actuSingle/' + req.params.id)
+                        if (err) {
+                            res.redirect("/")
                         } else {
-                            res.send(err)
+                            console.log('UPDATE OK');
+                            res.redirect('/actuSingle/' + req.params.id)
                         }
                     })
             } else {
-                console.log('no req.file');
+                res.redirect("/")
+                console.log('no req.body');
             }
         } else {
+            // console.log(req.file);
             actuCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
                     title: req.body.title,
                     content: req.body.content,
                     createDate: req.body.date,
-                    image: `/public/ressources/images/${req.file.filename}`
+                    image: `/public/ressources/images/${req.file.filename}`,
+                    nameImage: req.file.filename
                 },
                 { multi: true },
-                (err) => {
-                    if (!err) {
-                        // console.log('UPDATE OK');
-                        res.redirect('/actuSingle/' + req.params.id)
-                    } else {
-                        res.send(err)
-                    }
+                (err, post) => {
+                    fs.unlink(pathImage,
+                        (err) => {
+                            if (err) {
+                                // res.redirect("/")
+                                console.log(err);
+                            } else {
+                                console.log('File delete');
+                                res.redirect('/actuSingle/' + req.params.id)
+                            }
+                        })
                 })
         }
     }
 }
-

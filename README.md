@@ -87,6 +87,7 @@ Blog projet perso arinfo
 // penser également à indiquer : enctype="multipart/form-data" dans le "form"
 // gérer ensuite le format et le type d'image : dans le paramétrage multer dans "router.js" mais aussi dans notre post de actus.js (gestion erreur)
 // mieux de gérer la taille de l'image dans actus.js
+// pour supprimer l'image, besoin de require les modules "path" et "fs" (inclus dans nodejs) donc pas à installer
 
 
 
