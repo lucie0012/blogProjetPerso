@@ -158,13 +158,18 @@ module.exports = {
     },
 
     postUserAuth: async (req, res) => {
-        const dbUser = await userCollection.findOne({ email : req.body.email })
+        const dbUser = await userCollection.findOne({ email: req.body.email })
         if (!dbUser) {
-            console.log('pas dans la DB');
+            // console.log('pas dans la DB');
             res.redirect('/userCreate')
         } else {
-            res.redirect('/')
+            if (req.body.password != dbUser.password) {
+                // console.log('mdp non correct');
+                res.redirect('/userCreate')
+            } else {
+                res.redirect('/')
+            }
         }
-        
+
     }
 }
