@@ -7,7 +7,8 @@ module.exports = {
         const dbUser = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('admin/adminUserList', { dbUser })
+        res.render('admin/adminUserList', { layout: 'adminMain', dbUser })
+        // appel du layout spécifique "adminMain"
     },
 
     /**************Affichage page édition utilisateur pour admin***************/

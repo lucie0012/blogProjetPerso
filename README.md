@@ -132,6 +132,7 @@ Blog projet perso arinfo
 
 // faire les middleware pour protéger les pages
 
-// 
+// ajouter un layout "admin" : faire un nouveau fichier adminMain.hbs (bien le faire dans le dossier views puis layouts) puis paramétrer son chemin das server.js puis l'appeler où l'on souhaite dans les controllers
+
 
 // selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)

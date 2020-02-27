@@ -96,7 +96,9 @@ mongoose.connect(urlDB, {
 var handlebars = require('handlebars')
 app.engine('hbs', exphbs({
     extname: 'hbs',
-    defaultLayout: 'main'
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts/'
+    // ajout du 2ème layout
 }));
 app.set('view engine', 'hbs');
 
