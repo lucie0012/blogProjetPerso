@@ -19,6 +19,7 @@ const admin = require('./controllers/admin')
  ***********/
 const multer = require('../middleware/multer-config')
 const isAdmin = require('../middleware/isAdmin')
+const preMulter = require('../middleware/preMulter')
 
 
 /*
@@ -54,7 +55,7 @@ router.route('/actuCreate')
 // Création de compte
 router.route('/userCreate')
     .get(user.getUserCreate)
-    .post(multer, user.postUserCreate)
+    .post(preMulter, multer, user.postUserCreate)
 
 // Connexion
 router.route('/authentification')

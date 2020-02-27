@@ -37,7 +37,7 @@ module.exports = {
                         isBan: false
                     },
                 )
-                res.render('home')
+                res.redirect('/')
             } else {
                 userCollection.create(
                     {
@@ -142,24 +142,41 @@ module.exports = {
         // console.log('delete Article')
         const dbUser = await userCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
-        userCollection.deleteOne(
-            { _id: req.params.id },
-            (err) => {
-                if (!err) {
-                    fs.unlink(pathImage,
-                        (err) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                // console.log("File delete");
-                                res.redirect('/userListing')
+        // console.log(dbUser);
+
+        if (dbUser.nameImage == null) {
+            console.log("pas d'image");
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        // console.log("User delete");
+                        res.redirect('/userListing')
+                    } else {
+                        console.log(err);
+                    }
+                })
+        } else {
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        fs.unlink(pathImage,
+                            (err) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    // console.log("User and File delete");
+                                    res.redirect('/userListing')
+                                }
                             }
-                        }
-                    )
-                } else {
-                    res.send(err)
-                }
-            })
+                        )
+                    } else {
+                        res.send(err)
+                    }
+                })
+        }
+
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
