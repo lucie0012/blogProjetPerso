@@ -24,7 +24,7 @@ const multer = require('../middleware/multer-config')
  * Home
  ***********/
 router.route('/')
-    .get(home.get)
+    .get(home.getHome)
 
 
 /*
@@ -55,24 +55,28 @@ router.route('/userCreate')
     .get(user.getUserCreate)
     .post(multer, user.postUserCreate)
 
-//Connexion
+// Connexion
 router.route('/authentification')
     .get(user.getUserAuth)
     .post(user.postUserAuth)
 
-//Listing (temporaire car pour accéder au compte)
+// Listing (temporaire car pour accéder au compte)
 router.route('/userListing')
     .get(user.getUserListing)
 
-//Affichage compte
+// Affichage compte
 router.route('/userSingle/:id')
     .get(user.getUserSingle)
 
-//Gestion compte
+// Gestion compte
 router.route('/userEdit/:id')
     .get(user.getUserEdit)
     .put(multer, user.putUserEdit)
     .delete(user.deleteOneUser)
+
+// Déconnexion
+router.route('/userLogOut')
+    .get(user.getLogOut)
 
 
 /*
@@ -82,7 +86,7 @@ router.route('/userEdit/:id')
 router.route('/adminUserList')
     .get(admin.getUserList)
 
-//Gestion des utilisateurs
+// Gestion des utilisateurs
 router.route('/adminUserEdit/:id')
     .get(admin.getUserEdit)
     .put(admin.putlistUser)

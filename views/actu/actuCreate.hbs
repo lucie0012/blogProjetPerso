@@ -9,15 +9,15 @@
         {{!-- "method" : correspond à la methode utilisée : ici POST --}}
         <div>
             <div>
-                <label for="title">Titre de l'article</label>
-                <input type="text" name="title">
+                <label for="title" >Titre de l'article</label>
+                <input type="text" name="title" required>
                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
             </div>
         </div>
         <div>
             <div>
                 <label for="description">Contenu</label>
-                <textarea type="text" name="content"></textarea>
+                <textarea type="text" name="content" required></textarea>
             </div>
         </div>
         <div>

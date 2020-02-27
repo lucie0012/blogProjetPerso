@@ -27,7 +27,7 @@ module.exports = {
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    status: "Administrateur",
+                    fonction: "Administrateur",
                     isVerified: true,
                     isModo: true,
                     isAdmin: true,
@@ -46,7 +46,7 @@ module.exports = {
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    status: "Modérateur",
+                    fonction: "Modérateur",
                     isVerified: true,
                     isModo: true,
                     isAdmin: false,
@@ -65,7 +65,7 @@ module.exports = {
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    status: "Vérifié",
+                    fonction: "Vérifié",
                     isVerified: true,
                     isModo: false,
                     isAdmin: false,
@@ -84,7 +84,7 @@ module.exports = {
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
-                    status: "Bannis",
+                    fonction: "Bannis",
                     isVerified: false,
                     isModo: false,
                     isAdmin: false,

@@ -1,5 +1,6 @@
+
 module.exports = {
-    get: (req, res) => {
+    getHome: (req, res) => {
         res.render('home')
     }
 }

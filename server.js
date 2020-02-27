@@ -8,12 +8,12 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const MomentHandler = require("handlebars.moment");
 const Handlebars = require("handlebars");
-// const expressSession = require('express-session');
-// const MongoStore = require('connect-mongo');
+const expressSession = require('express-session');
+const MongoStore = require('connect-mongo');
 
 
 const app = express();
-// const mongoStore = MongoStore(expressSession);
+const mongoStore = MongoStore(expressSession);
 
 /*
  * Gestion urlDB et port
@@ -45,24 +45,33 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
-// /*
-//  * Express session
-//  ******************************/
-// app.use(expressSession({
-//     secret: 'securite',
-//     name: 'cookie',
-//     saveUninitialized: true,
-//     resave: false,
-//     store: new mongoStore(
-//         { mongooseConnection: mongoose.connection }
-//     ),
-//     expires: new Date(Date.now() + (3600000))
-// }));
+/*
+ * Express session
+ ******************************/
+app.use(expressSession({
+    secret: 'securite',
+    name: 'cookie',
+    saveUninitialized: true,
+    resave: false,
+    store: new mongoStore(
+        { mongooseConnection: mongoose.connection }
+    ),
+    // expires: new Date(Date.now() + (3600000))
+}));
 
-// app.use('*', (req, res, next) => {
-//     res.locals.id = req.session.userId
-//     next()
-// })
+app.use('*', (req, res, next) => {
+    res.locals.id = req.session.userId
+    res.locals.user = req.session.status
+    // // le req.session.status et donc le dbUser.status est toujours "user" dès lors qu'il a un compte
+    // // donc res.locals.user signifie que la personne a un compte et est connecté
+    res.locals.name = req.session.name
+    res.locals.fonction = req.session.fonction
+    res.locals.isAdmin = req.session.isAdmin
+    res.locals.isModo = req.session.isModo
+    res.locals.isVerified = req.session.isVerified
+    res.locals.isBan = req.session.isBan
+    next()
+})
 
 /*
  * Moment

@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     },
     status: {
         type: String,
+        default: 'user'
+    },
+    fonction: {
+        type: String,
         default: 'Utilisateur'
     },
     isVerified:{
@@ -35,7 +39,6 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: "https://i.stack.imgur.com/34AD2.jpg"
     },
     nameImage : String
 })

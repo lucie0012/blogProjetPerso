@@ -8,11 +8,13 @@
 <a href="/userCreate">Créer un user : POST</a>
 <a href="/userListing">Lister les users pour accéder à user single : GET</a>
 <a href="/authentification">Se connecter : GET</a>
-
-
+{{#if user}}
+<a href="/userLogOut">Se deconnecter : GET</a>
+{{/if}}
 
 
 <p>Liens admin</p>
+{{#if isAdmin }}
 <a href="/adminUserList">Tous les users : GET</a>
-
+{{/if}}
 

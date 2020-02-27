@@ -23,6 +23,7 @@ module.exports = {
         if (Pass !== confPass) {
             //comparaison des mots de passe
             res.redirect('/userCreate')
+            // res.render('user/userCreate')
         } else {
             if (!req.file) {
                 userCollection.create(
@@ -169,25 +170,44 @@ module.exports = {
 
     /**************Connexion***************/
     postUserAuth: async (req, res) => {
-        const dbUser = await userCollection.findOne({ email: req.body.email })
+        const { email, password } = req.body
+        // comme si on faisait const email = req.body. email et const password = req.body.password
+        const dbUser = await userCollection.findOne({ email })
+
         if (!dbUser) {
-            // console.log('pas dans la DB');
+            console.log('user pas dans la DB');
             res.redirect('/userCreate')
         } else {
-            bcrypt.compare(req.body.password, dbUser.password, (err, same) => {
+            const sess = req.session
+            // console.log(req.body)
+            // console.log(sess);
+
+            bcrypt.compare(password, dbUser.password, (err, same) => {
                 if (!same) {
-                    // console.log('mdp non correct');
-                    res.redirect('/userCreate')
+                    console.log('mdp non correct');
+                    res.redirect('back')
                 } else {
+                    sess.userId = dbUser._id
+                    sess.status = dbUser.status
+                    sess.name = dbUser.name
+                    sess.email = dbUser.email
+                    sess.fonction = dbUser.fonction
+                    sess.isVerified = dbUser.isVerified
+                    sess.isAdmin = dbUser.isAdmin
+                    sess.isModo = dbUser.isModo
+                    sess.isBan = dbUser.isBan
+                    // console.log(sess);
                     res.redirect('/')
                 }
             })
-            // if (req.body.password != dbUser.password) {
-            //     // console.log('mdp non correct');
-            //     res.redirect('/userCreate')
-            // } else {
-            //     res.redirect('/')
-            // }
         }
+    },
+
+    /**************Déconnexion***************/
+    getLogOut: (req, res, next) => {
+        req.session.destroy(() => {
+            res.clearCookie('clear cookie OK');
+            res.redirect('/')
+        })
     }
 }

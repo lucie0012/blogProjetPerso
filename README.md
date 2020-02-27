@@ -88,7 +88,7 @@ Blog projet perso arinfo
 // gérer ensuite le format et le type d'image : dans le paramétrage multer dans "router.js" mais aussi dans notre post de actus.js (gestion erreur)
 // mieux de gérer la taille de l'image dans actus.js
 // pour supprimer l'image, besoin de require les modules "path" et "fs" (inclus dans nodejs) donc pas à installer
-
+// ATTENTION : 
 
 
 // GITHUB : 
@@ -122,15 +122,13 @@ Blog projet perso arinfo
 // le require dans le modèle utilisateur la où on "pré" hash le mdp (le faire ici comme ça à chaque fois qu'on utilise/appel notre modele utilisateur il effectue le pre hash directement), la création de cloud avec chiffrage se fait donc automatiquement (rien à faire dans le post du controllers)
 // gérer l'authentification avec le chiffrage (penser à require "bcrypt" dans le controllers)
 
-// 
-
 // gérer l'authentification avec les sessions :
 // installer express-session (créer les cookies de session) et connect-mongo (connecter les cookies à la BDD) via "npm i express-session" et "npm i connect-mongo"
 // require les modules
 // connecter connect mongo à express session (dans server.js)
 // paramétrer express session
-// créer le "app.use('*')
-
+// dans le controller et dans le post de connexion, affecter les données de la bdd utilisateur à la session (ex : req.session.name = dbUser.name)
+// créer le "app.use('*') (* pour toutes les pages) pour affecter chaque données req.session au res.local de la même donnée (ex: res.locals.name = req.session.name)
 
 
 // selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)
