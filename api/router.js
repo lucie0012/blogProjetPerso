@@ -18,6 +18,7 @@ const admin = require('./controllers/admin')
  * Import Middleware
  ***********/
 const multer = require('../middleware/multer-config')
+const isAdmin = require('../middleware/isAdmin')
 
 
 /*
@@ -84,11 +85,11 @@ router.route('/userLogOut')
  ***********/
 // Liste d'utilisateur
 router.route('/adminUserList')
-    .get(admin.getUserList)
+    .get(isAdmin, admin.getUserList)
 
 // Gestion des utilisateurs
 router.route('/adminUserEdit/:id')
-    .get(admin.getUserEdit)
+    .get(isAdmin, admin.getUserEdit)
     .put(admin.putlistUser)
     .delete(admin.deleteOneUser)
 

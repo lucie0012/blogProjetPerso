@@ -130,5 +130,8 @@ Blog projet perso arinfo
 // dans le controller et dans le post de connexion, affecter les données de la bdd utilisateur à la session (ex : req.session.name = dbUser.name)
 // créer le "app.use('*') (* pour toutes les pages) pour affecter chaque données req.session au res.local de la même donnée (ex: res.locals.name = req.session.name)
 
+// faire les middleware pour protéger les pages
+
+// 
 
 // selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)
