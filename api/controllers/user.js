@@ -18,7 +18,7 @@ module.exports = {
         // console.log(req.body);
         const Pass = req.body.password
         const confPass = req.body.confPassword
-        // console.log(Pass + ' ' + confPass);
+        console.log(Pass + ' ' + confPass);
 
         if (Pass !== confPass) {
             //comparaison des mots de passe

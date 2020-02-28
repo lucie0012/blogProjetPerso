@@ -134,5 +134,10 @@ Blog projet perso arinfo
 
 // ajouter un layout "admin" : faire un nouveau fichier adminMain.hbs (bien le faire dans le dossier views puis layouts) puis paramétrer son chemin das server.js puis l'appeler où l'on souhaite dans les controllers
 
+// MEP nodemailer : (https://www.supinfo.com/articles/single/2102-envoyer-mails-avec-nodejs-nodemailer)
+// installer nodemailer ?
+// créer une boite mail pour cette gestion et bien penser à activer le paramètre "Autoriser les applications moins sécurisées" 
+// require le module (dans le controller)
+// 
 
 // selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)
