@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "reinstall": "sudo rm -r node_modules* && npm i && npm start"
+    "reinstall": "sudo rm -r node_modules* && npm i && npm start",
+    "sass": "sass --watch ./public/css/bootstrap/scss/bootstrap.scss:./public/css/style.css"
   },
   "author": "lulu",
   "license": "ISC",

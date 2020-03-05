@@ -134,10 +134,28 @@ Blog projet perso arinfo
 
 // ajouter un layout "admin" : faire un nouveau fichier adminMain.hbs (bien le faire dans le dossier views puis layouts) puis paramétrer son chemin das server.js puis l'appeler où l'on souhaite dans les controllers
 
+// selon le framework : penser à mettre le lien CSS dans le "head" et le lien JS avant la balise </body> ou à insérer le sass du framework dans le projet (cf doc insertion boostrap) :
+// ICI : j'ai installé directement bootstrap : "npm i bootstrap"
+// puis dans node module, copier le dossier bootstrap et coller dans dossier public/css
+// dans package.json, ajouter ligne dans scripts{}:
+"sass": "sass --watch ./public/css/bootstrap/scss/bootstrap.scss:./public/css/style.css"
+// dans le head de la page main.hbs, mettre la ligne ci dessous (lien CSS) : 
+"<link rel="stylesheet" href="public/css/style.css">"
+// dans le fichier end, avant la balise </body> mettre les liens JS de bootstrap (getting started site bootstrap)
+// créer le fichier style.css dans le dossier public/css (il est vide c’est normal)
+// supprimer la ligne « bootstrap » dans package.json pour qu’au prochain "npm run reinstall", le module ne se réinstalle pas (car plus besoin vu qu’on a copié le dossier)
+// démarrer le projet : « nodemon » sur un terminal (comme d’hab)
+// puis démarrer sass « npm run sass » (sur un terminal à part). 
+// Aller modifier dans un fichier bootstrap (ex : _alert.scss) (ajouter un retour à la ligne par ex) : seulement à faire la première fois pour que bootstrap voit une différence et écrive dans le style.css
+// ATTENTION : ne jamais écrire dans le style.css (ou bootstrap.scss) : c’est bootstrap qui le fait : il faut modifier directement dans les dossier concerné dans scss
+// SI BESOIN : créer un fichier "_mystyle.scss" dans le dossier style/css/bootstrap puis dans bootstrap.scss faire @import « mystyle » (dedans on pourra créer notre propre scss : attention cela peut rentrer en conflit avec les classes bootstrap)
+// Dès qu’on est en phase dev : on lance « nodemon » sur notre terminal et « npm run sass » (sur un terminal à part) mais en phase prod (pas besoin) 
+
+
+
 // MEP nodemailer : (https://www.supinfo.com/articles/single/2102-envoyer-mails-avec-nodejs-nodemailer)
 // installer nodemailer ?
 // créer une boite mail pour cette gestion et bien penser à activer le paramètre "Autoriser les applications moins sécurisées" 
 // require le module (dans le controller)
 // 
 
-// selon le framework : penser à mettre le lien dans le "head" ou à insérer le sass du framework dans le projet (cf doc insertion boostrap)
