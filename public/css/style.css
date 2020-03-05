@@ -7881,5 +7881,11 @@ a.text-color1:hover, a.text-color1:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
+.scrollup {
+  z-index: 10;
+  position: fixed;
+  width: 100px;
+  top: 90vh;
+  right: -60px; }
 
 /*# sourceMappingURL=style.css.map */
