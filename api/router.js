@@ -81,12 +81,12 @@ router.route('/about')
  ***********/
 // Création de compte
 router.route('/userCreate')
-    .get(user.getUserCreate)
+    // .get(user.getUserCreate)
     .post(preMulter, multer, user.postUserCreate)
 
 // Connexion
 router.route('/authentification')
-    .get(user.getUserAuth)
+    // .get(user.getUserAuth)
     .post(user.postUserAuth)
 
 // Listing (temporaire car pour accéder au compte)
@@ -99,7 +99,7 @@ router.route('/userSingle/:id')
 
 // Gestion compte
 router.route('/userEdit/:id')
-    .get(user.getUserEdit)
+    // .get(user.getUserEdit)
     .put(multer, user.putUserEdit)
     .delete(user.deleteOneUser)
 

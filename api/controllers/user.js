@@ -8,17 +8,17 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    /**************Affichage page création compte***************/
-    getUserCreate: (req, res) => {
-        res.render('user/userCreate')
-    },
+    // /**************Affichage page création compte***************/
+    // getUserCreate: (req, res) => {
+    //     res.render('user/userCreate')
+    // },
 
     /**************Création compte*************/
     postUserCreate: (req, res) => {
         // console.log(req.body);
         const Pass = req.body.password
         const confPass = req.body.confPassword
-        console.log(Pass + ' ' + confPass);
+        // console.log(Pass + ' ' + confPass);
 
         if (Pass !== confPass) {
             //comparaison des mots de passe
@@ -73,13 +73,13 @@ module.exports = {
         res.render('user/userSingle', { dbUser })
     },
 
-    /**************Affichage page édition compte***************/
-    getUserEdit: async (req, res) => {
-        const dbUser = await userCollection.findById(req.params.id)
-        // console.log(req.params.id);
+    // /**************Affichage page édition compte***************/
+    // getUserEdit: async (req, res) => {
+    //     const dbUser = await userCollection.findById(req.params.id)
+    //     // console.log(req.params.id);
 
-        res.render('user/userEdit', { dbUser })
-    },
+    //     res.render('user/userEdit', { dbUser })
+    // },
 
     /**************Edition compte***************/
     putUserEdit: async (req, res) => {
@@ -180,10 +180,10 @@ module.exports = {
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
-    /**************Affichage page se connecter***************/
-    getUserAuth: (req, res) => {
-        res.render('user/authentification')
-    },
+    // /**************Affichage page se connecter***************/
+    // getUserAuth: (req, res) => {
+    //     res.render('user/authentification')
+    // },
 
     /**************Connexion***************/
     postUserAuth: async (req, res) => {

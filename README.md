@@ -159,7 +159,7 @@ Blog projet perso arinfo
 
 // créer les pages nécessaire au site et leur chemin
 
-// 
+// créer les modals lié à la page d'accueil
 
 
 // MEP nodemailer : (https://www.supinfo.com/articles/single/2102-envoyer-mails-avec-nodejs-nodemailer)
