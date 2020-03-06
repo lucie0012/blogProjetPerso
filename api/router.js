@@ -10,6 +10,9 @@ const router = express.Router()
  ***********/
 const home = require('./controllers/home')
 const actus = require('./controllers/actus')
+const repertory = require('./controllers/repertory')
+const contact = require('./controllers/contact')
+const about = require('./controllers/about')
 const user = require('./controllers/user')
 const admin = require('./controllers/admin')
 
@@ -50,6 +53,30 @@ router.route('/actuCreate')
 
 
 /*
+ * Répertoire
+ ***********/
+// Affichage de tout le répertoire
+router.route('/repertory')
+    .get(repertory.getRepertory)
+
+
+/*
+ * Contact
+ ***********/
+// Affichage page contact
+router.route('/contact')
+    .get(contact.getContact)
+
+
+/*
+ * About
+ ***********/
+router.route('/about')
+    .get(about.getAbout)
+
+
+
+/*
  * User
  ***********/
 // Création de compte
@@ -84,6 +111,10 @@ router.route('/userLogOut')
 /*
  * Admin
  ***********/
+// Affichage page admin
+router.route('/admin')
+    .get(isAdmin, admin.getAdmin)
+
 // Liste d'utilisateur
 router.route('/adminUserList')
     .get(isAdmin, admin.getUserList)

@@ -1,26 +1,35 @@
 <header>
     <ul class="nav justify-content-end" id="scrollup">
+        {{#if isAdmin }}
         <li class="nav-item">
-            <a class="nav-link text-muted" href="#/about">A propos</a>
+            <a class="nav-link text-muted" href="/admin">Admin</a>
+        </li>
+        {{/if}}
+        <li class="nav-item">
+            <a class="nav-link text-muted" href="/about">A propos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-muted" href="#/contact">Contact</a>
+            <a class="nav-link text-muted" href="/contact">Contact</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-muted dropdown-toggle dropdown-menu-right" data-toggle="dropdown" href="#" role="button"
-                aria-haspopup="true" aria-expanded="false">Compte</a>
+            <a class="nav-link text-muted dropdown-toggle dropdown-menu-right" data-toggle="dropdown" href="#"
+                role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item" href="#/myAccount">Mon compte</a>
                 <a class="dropdown-item" href="#/createAccount">Créer un compte</a>
                 <a class="dropdown-item" href="#/logIn">Se connecter</a>
-                <a class="dropdown-item" href="#/logOut">Se déconnecter</a>
+                {{#if user}}
+                <a class="dropdown-item" href="/userLogOut">Se déconnecter</a>
+                {{/if}}
             </div>
         </li>
     </ul>
 </header>
 
 <div>
-    <img src="#" class="img-fluid" alt="Image du site">
+    <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block" style="height : 150px"
+        alt="Image du site">
+    <p class="text-center">Le blog sans allergènes qui répertorie les autres !!</p>
 </div>
 
 <div class="container-fluid d-flex justify-content-center">
@@ -31,14 +40,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item mx-4">
-                    <a class="nav-link" href="#/home">Accueil</a>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="/">Accueil</a>
                 </li>
                 <li class="nav-item mx-4">
-                    <a class="nav-link" href="#/repertory">Répertoire</a>
+                    <a class="nav-link" href="/repertory">Répertoire</a>
                 </li>
-                <li class="nav-item mx-4">
-                    <a class="nav-link" href="#/articles">Mes articles</a>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="/actus">Mes articles</a>
                 </li>
             </ul>
         </div>

@@ -3,16 +3,13 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
 
-    name: {
-        type: String,
-    },
+    name: String,
+    pseudo : String,
     email: {
         type: String,
         unique: true,
     },
-    password: {
-        type: String,
-    },
+    password: String,
     status: {
         type: String,
         default: 'user'
@@ -21,13 +18,18 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: 'Utilisateur'
     },
+    image: {
+        type: String,
+        default: "/public/ressources/images/profilDefaultImage.jpg"
+    },
+    nameImage : String,
+    createDate : {
+        type: Date,
+        default : new Date(),
+    },
     isVerified:{
         type: Boolean,
         default: false
-    },
-    isModo: {
-        type: Boolean,
-        default: false,
     },
     isAdmin: {
         type: Boolean,
@@ -37,11 +39,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    image: {
-        type: String,
-        default: "/public/ressources/images/profilDefaultImage.jpg"
-    },
-    nameImage : String
 })
 
 userSchema.pre('save', function (next) {

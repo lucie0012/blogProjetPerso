@@ -2,6 +2,11 @@ const userCollection = require('../database/models/userModel');
 
 module.exports = {
 
+    /**************Affichage page admin***************/
+    getAdmin: async (req, res) => {
+        res.render('admin/admin')
+    },
+
     /**************Affichage liste utilisateur pour admin***************/
     getUserList: async (req, res) => {
         const dbUser = await userCollection.find({})
