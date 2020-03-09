@@ -1,4 +1,54 @@
-<h1>Accueil</h1>
+<div class="container">
+    <h1>Les sites les plus recommandés</h1>
+    <div class="row">
+        <div class="card-deck">
+            {{#each (limitEach dbActu 3 ) }}
+            <div class="card">
+                <div class="card-header">
+                    <small class="text-muted">Dans catégorie : </small>
+                </div>
+                <div class="card-body">
+                    <img src="{{ image }}" class="rounded float-left" height="120px" width="100px"
+                        alt="image du site">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ title }}</h5>
+                    <a href="#">www.google.fr</a>
+                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                </div>
+                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
+            </div>
+            {{/each }}
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <h1>Mes derniers articles</h1>
+
+    <div class="row">
+        <div class="card-deck">
+            {{#each (limitEach dbActu 3 ) }}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mt-2">{{ title }}</h5>
+                    <p class="card-text">{{ truncate content 200 }}</p>
+                </div>
+                <a href="/actuSingle/{{ id }}" class="btn">Voir l'article</a>
+                <div class="card-body">
+                    <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
+                        alt="image de l'article">
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Publié le
+                        {{ moment createDate format="DD/MM/YYYY" }}</small>
+                </div>
+            </div>
+            {{/each }}
+        </div>
+    </div>
+</div>
 
 <p>Liens actus</p>
 <a href="/actuCreate">Créer une actu : POST</a>
@@ -12,5 +62,3 @@
 {{#if isAdmin }}
 <a href="/adminUserList">Tous les users : GET</a>
 {{/if}}
-
-

@@ -46,6 +46,32 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 
 /*
+ * Helpers
+ ******************************/
+
+// **************limitEach***********
+Handlebars.registerHelper('limitEach', function (arr, limitEach) {
+    if (!Array.isArray(arr)) { return []; }
+    return arr.slice(-limitEach).reverse();
+});
+
+// **************limitation taille texte cards**********
+Handlebars.registerHelper('truncate', function (str, len) {
+    if (str != null && str.length > len && str.length > 0) {
+        return new Handlebars.SafeString(str.substring(0, len) + '...');
+    }
+    return str;
+
+});
+
+// **************reverse***********
+Handlebars.registerHelper('reverse', function (arr) {
+    if (!Array.isArray(arr)) { return []; }
+    return arr.reverse();
+});
+
+
+/*
  * Express session
  ******************************/
 app.use(expressSession({

@@ -1,3 +1,5 @@
+const userCollection = require('../database/models/userModel');
+
 module.exports = {
 
     /**************Affichage page A propos***************/

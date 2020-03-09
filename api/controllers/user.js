@@ -149,7 +149,7 @@ module.exports = {
         // console.log(dbUser);
 
         if (dbUser.nameImage == null) {
-            console.log("pas d'image");
+            // console.log("pas d'image");
             userCollection.deleteOne(
                 { _id: req.params.id },
                 (err) => {

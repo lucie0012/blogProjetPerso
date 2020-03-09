@@ -1,5 +1,7 @@
 const actuCollection = require('../database/models/actuModel');
 const userCollection = require('../database/models/userModel');
+const commentCollection = require('../database/models/commentModel');
+
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
@@ -50,7 +52,7 @@ module.exports = {
         const dbUser = await userCollection.findById(req.session.userId)
 
         res.render('actu/actus', { dbActu: dbActu, dbUser: dbUser })
-        // on renvoi la page "actus" avec les données de la BDD
+        // on renvoi la page "actus" avec les données de chaque BDD nécessaire dans cette page
     },
     // ATTENTION : dans la page actus, bien penser à mettre le "each" pour afficher tout les élements de la BDD et indiquer plusieurs infos (cf page actus)
 
@@ -60,9 +62,10 @@ module.exports = {
         const dbActu = await actuCollection.findById(req.params.id)
         // console.log(req.params.id);
         const dbUser = await userCollection.findById(req.session.userId)
+        const dbComment = await commentCollection.find({ articleId: req.params.id })
 
 
-        res.render('actu/actuSingle', { dbActu: dbActu, dbUser: dbUser })
+        res.render('actu/actuSingle', { dbActu: dbActu, dbUser: dbUser, dbComment: dbComment })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 
@@ -148,5 +151,34 @@ module.exports = {
                         })
                 })
         }
-    }
+    },
+
+    /**************Création de commentaire***************/
+    postActuComment: (req, res) => {
+        commentCollection.create(
+            {
+                content: req.body.content,
+                pseudoAuthor: req.session.pseudo,
+                authorId: req.session.userId,
+                articleId: req.params.id,
+            },
+            (err) => {
+                if (!err) {
+                    // res.redirect('/actuSingle/' + req.params.id)
+                    res.redirect('back')
+                    // 'back' permet de revenir à la page précédente
+                } else {
+                    res.send(err)
+                }
+            })
+        // console.log(req.body)
+        // console.log(req.params.id)
+    },
+
+    /**************Suppression de commentaire***************/
+
+    /**************Modification de commentaire***************/
+
+
+
 }

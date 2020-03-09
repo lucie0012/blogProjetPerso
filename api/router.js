@@ -60,6 +60,12 @@ router.route('/actuCreate')
 
 
 /*
+ * Comment
+ ***********/
+router.route('/commentaireActu/:id')
+    .post(actus.postActuComment)
+
+/*
  * Répertoire
  ***********/
 // Affichage de tout le répertoire
@@ -73,6 +79,7 @@ router.route('/repertory')
 // Affichage page contact
 router.route('/contact')
     .get(contact.getContact)
+    .post(contact.postMessage)
 
 
 /*

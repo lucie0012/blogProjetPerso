@@ -1,1 +1,50 @@
-<h1>Répertoire</h1>
+<div class="container">
+    <h1>Répertoire</h1>
+    <div class="row">
+        <div class="card-deck">
+            {{#each (limitEach dbActu 3 ) }}
+            <div class="card">
+                <div class="card-header">
+                    <small class="text-muted">Dans catégorie : </small>
+                </div>
+                <div class="card-body">
+                    <img src="{{ image }}" class="rounded float-left" height="120px" width="100px" alt="image du site">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ title }}</h5>
+                    <a href="#">www.google.fr</a>
+                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                </div>
+                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
+            </div>
+            {{/each }}
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Répertoire</h1>
+    <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis,
+        circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas
+    </p>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ image }}" class="card-img" alt="image du site">
+            </div>
+            <div class="col-md-8">
+                <div class="card-header">
+                    <small class="text-muted">Dans catégorie : / Note : </small>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Titre {{ title }}</h5>
+                    <a href="#">www.google.fr</a>
+                    <p class="card-text mt-2">Eius populus ab incunabulis primis ad usque pueritiae tempus extremum,
+                        quod annis circumcluditur fere trecentis,
+                        circummurana pertulit bella {{ truncate content 200 }}</p>
+                </div>
+                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
+            </div>
+        </div>
+    </div>
+</div>

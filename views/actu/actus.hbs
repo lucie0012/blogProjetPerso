@@ -1,22 +1,29 @@
 {{!---------------- titre -----------------}}
-<h1>Mes articles</h1>
-<h2>GET</h2>
-{{!----------------/titre -----------------}}
+<div class="container">
+    <h1>Mes articles</h1>
+    {{!----------------/titre -----------------}}
 
-{{!----------------card actu --------------}}
-<div>
-    {{#each dbActu }}
-    <div>
-        <img src="{{ image }}" alt="image actu" widht="200px" height="200px">
-        <div>
-            <h5>{{ title }} </h5>
-            <p> {{ content }} </p>
-            <a href="/actuSingle/{{ id }}">Voir l'article</a>
-        </div>
-        <div>
-            <small>Publié le {{ moment createDate format="DD/MM/YYYY" }}</small>
+    {{!----------------card actu --------------}}
+    <div class="row">
+        <div class="card-deck">
+            {{#each (reverse dbActu) }}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mt-2">{{ title }}</h5>
+                    <p class="card-text">{{ truncate content 200 }}</p>
+                </div>
+                <a href="/actuSingle/{{ id }}" class="btn">Voir l'article</a>
+                <div class="card-body">
+                    <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
+                        alt="image de l'article">
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Publié le
+                        {{ moment createDate format="DD/MM/YYYY" }}</small>
+                </div>
+            </div>
+            {{/each }}
         </div>
     </div>
-    {{/each }}
 </div>
 {{!----------------/card actu -------------}}
