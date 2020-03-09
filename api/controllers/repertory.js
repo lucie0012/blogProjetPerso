@@ -1,4 +1,5 @@
 const repertoryCollection = require('../database/models/repertoryModel');
+const userCollection = require('../database/models/userModel');
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
@@ -8,8 +9,10 @@ const fs = require('fs')
 module.exports = {
 
     /**************Affichage page Repertoire***************/
-    getRepertory: (req, res) => {
-        res.render('repertory/repertory')
+    getRepertory: async (req, res) => {
+        const dbUser = await userCollection.findById(req.session.userId)
+
+        res.render('repertory/repertory', { dbUser: dbUser })
     },
 
 }

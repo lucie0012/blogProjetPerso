@@ -4,7 +4,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 /*
  * Import Controllers
  ***********/
@@ -19,11 +18,19 @@ const admin = require('./controllers/admin')
 
 /*
  * Import Middleware
- ***********/
+ *******************/
 const multer = require('../middleware/multer-config')
 const isAdmin = require('../middleware/isAdmin')
 const preMulter = require('../middleware/preMulter')
 
+/*
+ * dbUser
+ *******************/
+// const userCollection = require('./database/models/userModel')
+// router.get('*', async (req, res, next) => {
+//     const dbUser = await userCollection.findById(req.session.userId)
+//     next({dbUser})
+// })
 
 /*
  * Home

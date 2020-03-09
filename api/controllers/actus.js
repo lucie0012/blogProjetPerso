@@ -1,4 +1,5 @@
 const actuCollection = require('../database/models/actuModel');
+const userCollection = require('../database/models/userModel');
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
@@ -9,6 +10,7 @@ module.exports = {
 
     /**************Affichage page création d'article***************/
     getActuCreate: (req, res) => {
+
         res.render('actu/actuCreate')
     },
 
@@ -45,8 +47,9 @@ module.exports = {
         // "async" car on utilise "await" pour attendre de récupérer les données
         const dbActu = await actuCollection.find({})
         // console.log(dbActu);
+        const dbUser = await userCollection.findById(req.session.userId)
 
-        res.render('actu/actus', { dbActu })
+        res.render('actu/actus', { dbActu: dbActu, dbUser: dbUser })
         // on renvoi la page "actus" avec les données de la BDD
     },
     // ATTENTION : dans la page actus, bien penser à mettre le "each" pour afficher tout les élements de la BDD et indiquer plusieurs infos (cf page actus)
@@ -56,8 +59,10 @@ module.exports = {
     getActuSingle: async (req, res) => {
         const dbActu = await actuCollection.findById(req.params.id)
         // console.log(req.params.id);
+        const dbUser = await userCollection.findById(req.session.userId)
 
-        res.render('actu/actuSingle', { dbActu })
+
+        res.render('actu/actuSingle', { dbActu: dbActu, dbUser: dbUser })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 

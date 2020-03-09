@@ -1,6 +1,11 @@
 {{!------------ nav 1 ------------------}}
 <header>
     <ul class="nav justify-content-end" id="scrollup">
+        {{!-- {{#if (userSess.isAdmin =true) }}
+        <li class="nav-item">
+            <a class="nav-link text-muted" href="/admin">{{userSess.name}}</a>
+        </li>
+        {{/if}} --}}
         {{#if isAdmin }}
         <li class="nav-item">
             <a class="nav-link text-muted" href="/admin">Admin</a>
@@ -17,21 +22,15 @@
                 role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
             <div class="dropdown-menu dropdown-menu-right">
                 {{#if user}}
+                <button class="dropdown-item" type="submit" data-toggle="modal"
+                    data-target="#modalUserEdit{{ _id }}">Gérer
+                    mon compte</button>
+                <a class="dropdown-item" href="/userLogOut">Se déconnecter</a>
                 {{else}}
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalUserCreate">Créer un
                     compte</button>
-                {{/if}}
-                {{#if user}}
-                {{else}}
                 <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalAuthentification">Se
                     connecter</button>
-                {{/if}}
-                {{#if user}}
-                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalUserEdit">Gérer
-                    mon compte</button>
-                {{/if}}
-                {{#if user}}
-                <a class="dropdown-item" href="/userLogOut">Se déconnecter</a>
                 {{/if}}
             </div>
         </li>
@@ -102,9 +101,13 @@
                         <div class="col-md-12">
 
                             <div class="form-group">
-                                <label for="name">Nom d'utilisateur</label>
-                                <input type="input" name="name" required>
+                                <label for="name">Nom</label>
+                                <input type="text" name="name" required>
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="pseudo">Pseudo</label>
+                                <input type="text" name="pseudo" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Adresse Email</label>
@@ -135,7 +138,6 @@
                                     la politique de confidentialité
                                 </label>
                             </div>
-                            {{!-- /formulaire d'inscription --}}
 
                         </div>
                         <div class="col-md-12 ">
@@ -186,7 +188,7 @@
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Se connecter</button>
+                                <button type="submit" class="btn">Me connecter</button>
                                 <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
@@ -200,7 +202,7 @@
 {{!------------ /modal Connexion ------------------}}
 
 {{!------------ modal Gestion compte ------------------}}
-<div class="modal fade" id="modalUserEdit" tabindex="-1" role="dialog" aria-labelledby="#modalUserEditLabel"
+<div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog" aria-labelledby="#modalUserEditLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -211,12 +213,35 @@
                 </button>
             </div>
 
-            <form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="post">
+            <form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
-
-                            {{!-- A METTRE CORPS EDITION (cf page userEdit) --}}
+                            <div>
+                                <img src="{{ dbUser.image }}" alt="image utilisateur" widht="200px" height="200px">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Nom</label>
+                                <input type="text" name="name" value="{{ dbUser.name }}">
+                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="pseudo">Pseudo</label>
+                                <input type="text" name="pseudo" value="{{ dbUser.pseudo }}">
+                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Adresse Email</label>
+                                <input type="email" name="email" value="{{ dbUser.email }}">
+                            </div>
+                            <div>
+                                <label>
+                                    <input type="file" name="image" value="{{ dbUser.image }}">
+                                    <span>
+                                        Envoyer une nouvelle image
+                                    </span>
+                                </label>
+                            </div>
 
                         </div>
                         <div class="col-md-12 ">
@@ -227,6 +252,9 @@
                         </div>
                     </div>
                 </div>
+            </form>
+            <form action="/userEdit/{{ dbUser._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                <button type="submit" class="btn">*Supprimer mon compte*</button>
             </form>
 
         </div>

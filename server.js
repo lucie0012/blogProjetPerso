@@ -59,17 +59,20 @@ app.use(expressSession({
     // expires: new Date(Date.now() + (3600000))
 }));
 
-app.use('*', (req, res, next) => {
+app.use('*', async (req, res, next) => {
     res.locals.id = req.session.userId
     res.locals.user = req.session.status
     // // le req.session.status et donc le dbUser.status est toujours "user" dès lors qu'il a un compte
     // // donc res.locals.user signifie que la personne a un compte et est connecté
+    res.locals.userSess = req.session
     res.locals.name = req.session.name
+    res.locals.pseudo = req.session.pseudo
     res.locals.fonction = req.session.fonction
     res.locals.isAdmin = req.session.isAdmin
     res.locals.isModo = req.session.isModo
     res.locals.isVerified = req.session.isVerified
     res.locals.isBan = req.session.isBan
+    // console.log(res.locals.userSess);  
     next()
 })
 

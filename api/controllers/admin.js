@@ -4,7 +4,8 @@ module.exports = {
 
     /**************Affichage page admin***************/
     getAdmin: async (req, res) => {
-        res.render('admin/admin')
+        const dbUser = await userCollection.findById(req.session.userId)
+        res.render('admin/admin' , { dbUser: dbUser })
     },
 
     /**************Affichage liste utilisateur pour admin***************/
@@ -12,7 +13,10 @@ module.exports = {
         const dbUser = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('admin/adminUserList', { layout: 'adminMain', dbUser })
+        res.render('admin/adminUserList', { 
+            layout: 'adminMain',
+            dbUser: dbUser
+         })
         // appel du layout spécifique "adminMain"
     },
 

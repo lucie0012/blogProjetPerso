@@ -22,7 +22,7 @@ module.exports = {
 
         if (Pass !== confPass) {
             //comparaison des mots de passe
-            res.redirect('/userCreate')
+            res.redirect('/')
             // res.render('user/userCreate')
         } else {
             if (!req.file) {
@@ -30,6 +30,7 @@ module.exports = {
                     {
                         email: req.body.email,
                         name: req.body.name,
+                        pseudo: req.body.pseudo,
                         password: Pass,
                         isVerified: false,
                         isModo: false,
@@ -43,6 +44,7 @@ module.exports = {
                     {
                         email: req.body.email,
                         name: req.body.name,
+                        pseudo: req.body.pseudo,
                         password: Pass,
                         image: `/public/ressources/images/${req.file.filename}`,
                         nameImage: req.file.filename,
@@ -83,7 +85,7 @@ module.exports = {
 
     /**************Edition compte***************/
     putUserEdit: async (req, res) => {
-        // console.log(req.params.id);
+        console.log(req.params.id);
         const dbUser = await userCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
         // console.log(req.file);
@@ -95,6 +97,7 @@ module.exports = {
                     { _id: req.params.id },
                     {
                         email: req.body.email,
+                        pseudo: req.body.pseudo,
                         name: req.body.name,
                     },
                     { multi: true },
@@ -103,7 +106,7 @@ module.exports = {
                             res.redirect("/")
                         } else {
                             console.log('UPDATE OK');
-                            res.redirect('/userEdit/' + req.params.id)
+                            res.redirect('/')
                         }
                     })
             } else {
@@ -116,6 +119,7 @@ module.exports = {
                 { _id: req.params.id },
                 {
                     email: req.body.email,
+                    pseudo: req.body.pseudo,
                     name: req.body.name,
                     image: `/public/ressources/images/${req.file.filename}`,
                     nameImage: req.file.filename,
@@ -129,7 +133,7 @@ module.exports = {
                                 console.log(err);
                             } else {
                                 console.log('File delete');
-                                res.redirect('/userEdit/' + req.params.id)
+                                res.redirect('/')
                             }
                         })
                 })
@@ -151,7 +155,8 @@ module.exports = {
                 (err) => {
                     if (!err) {
                         // console.log("User delete");
-                        res.redirect('/userListing')
+                        // res.redirect('/')
+                        res.render('home')
                     } else {
                         console.log(err);
                     }
@@ -167,7 +172,8 @@ module.exports = {
                                     console.log(err);
                                 } else {
                                     // console.log("User and File delete");
-                                    res.redirect('/userListing')
+                                    // res.redirect('/')
+                                    res.render('home')
                                 }
                             }
                         )
@@ -207,6 +213,7 @@ module.exports = {
                     sess.userId = dbUser._id
                     sess.status = dbUser.status
                     sess.name = dbUser.name
+                    sess.pseudo = dbUser.pseudo
                     sess.email = dbUser.email
                     sess.fonction = dbUser.fonction
                     sess.isVerified = dbUser.isVerified
