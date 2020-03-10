@@ -133,6 +133,10 @@ router.route('/admin')
 router.route('/adminUserList')
     .get(isAdmin, admin.getUserList)
 
+// Editition utilisateur en isVerified
+router.route('/verifiedUser/:id')
+    .put(isAdmin, admin.putVerifiedUser)
+
 // Gestion des utilisateurs
 router.route('/adminUserEdit/:id')
     .get(isAdmin, admin.getUserEdit)

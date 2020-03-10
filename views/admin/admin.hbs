@@ -1,36 +1,3 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-2">
-            {{!--Nav vertical admin --}}
-            <ul class="nav flex-sm-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Utilisateurs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Commentaires</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Notes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Sites</a>
-                </li>
-            </ul>
-            {{!--/Nav vertical admin --}}
-        </div>
-        <div class="col-sm-10">
-
-        </div>
-
-    </div>
-</div>
-
 <div class="container-fluid h-100">
   <div class="row h-100">
     <aside class="col-12 col-md-2 p-0">
@@ -38,15 +5,680 @@
         <div class="collapse navbar-collapse">
           <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
             <li class="nav-item">
-               <a class="nav-link pl-0" href="#">Menu 1</a>
+              {{!-- <a class="nav-link pl-0" href="#utilisateur">Utilisateurs</a> --}}
+              <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseOne"
+                aria-expanded="false" aria-controls="collapseOne">Utilisateurs</a>
             </li>
-            <!-- Insérez ici le reste de votre menu -->            
+            <li class="nav-item">
+              {{!-- <a class="nav-link pl-0" href="#article">Articles</a> --}}
+              <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="false" aria-controls="collapseTwo">Articles</a>
+            </li>
+            <li class="nav-item">
+              {{!-- <a class="nav-link pl-0" href="#message">Messages</a> --}}
+              <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseThree"
+                aria-expanded="false" aria-controls="collapseThree">Messages</a>
+            </li>
+            <li class="nav-item">
+              {{!-- <a class="nav-link pl-0" href="#commentaire">Commentaires</a> --}}
+              <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseFour"
+                aria-expanded="false" aria-controls="collapseFour">Commentaires</a>
+            </li>
+            <li class="nav-item">
+              {{!-- <a class="nav-link pl-0" href="#note">Notes</a> --}}
+              <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseFive"
+                aria-expanded="false" aria-controls="collapseFive">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pl-0" type="button" href="#site">Sites</a>
+              {{!-- <a class="pl-0 btn collapsed" role="button" data-toggle="collapse" data-target="#collapseSix"
+                aria-expanded="false" aria-controls="collapseSix">Sites</a> --}}
+            </li>
           </ul>
         </div>
       </nav>
     </aside>
     <main class="col">
+      <div class="text-center">
+        <h1>Admin</h1>
+      </div>
+
+      <div class="accordion" id="accordionExample">
+
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        Liste des utilisateurs
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <ul class="list-group">
+                {{#each dbUser}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ pseudo }}
+                  <span>
+                    {{#if isVerified}}
+                    {{else}}
+                    <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                      data-toggle="modal" data-target="#modalConfirmValid{{ _id }}">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                      {{!-- 
+                       <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateArticle"><i
+                          class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a> --}}
+                    </button>
+                    {{/if}}
+                    <button class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </li>
+
+{{!------------------ Modal confirmation validation ----------------}}
+<div class="modal fade" id="modalConfirmValid{{ _id }}" tabindex="-1" role="dialog"
+  aria-labelledby="#modalConfirmValidLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/verifiedUser/{{ _id }}/?_method=PUT" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <p>Confirmez-vous la vérification de {{ pseudo }} ?</p>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Oui</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!--------------------- /Modal confirmation validation ---------------}}
+
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        Liste des articles
+                      </a>
+                      <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateArticle"><i
+                          class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Article 1
+                  <span>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Article 2
+                  <span>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Article 3
+                  <span>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        Liste des messages
+                      </a>
+                      <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateMessage"><i
+                          class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Message 1
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Message 2
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Message 3
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="false" aria-controls="collapseFour">
+                        Liste des commentaires
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Commentaire 1
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Commentaire 2
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Commentaire 3
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingFive">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+                        aria-expanded="false" aria-controls="collapseFive">
+                        Liste des notes/avis
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Note 1
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Note 2
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Note 3
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header" id="headingSix">
+            <h2 class="mb-0">
+              <div class="container">
+                <div class="row modal-body">
+                  <div class="col-md-12">
+                    <div class="d-flex flex-row" id="site">
+                      <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
+                        aria-expanded="false" aria-controls="collapseSix">
+                        Liste des sites de l'annuaire
+                      </a>
+                      <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateSite"><i
+                          class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h2>
+          </div>
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Site 1
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Site 2
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Site 3
+                  <span>
+                    <a class="btn btn-default border border-dark" href="#" aria-label="Valider">
+                      <i class="far fa-check-circle" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-primary" href="#" aria-label="Editer">
+                      <i class="far fa-edit" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-danger" href="#" aria-label="Supprimer">
+                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
       <!-- Insérez ici le contenu principal du site ou de l'application -->
     </main>
   </div>
 </div>
+
+
+
+
+
+
+{{!-- Modal création article --}}
+<div class="modal fade" id="modalCreateArticle" tabindex="-1" role="dialog" aria-labelledby="#modalCreateArticle"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCreateArticleLabel">Me connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/authentification" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Votre Email *" value="" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Votre mot de passe *" value=""
+                  required />
+              </div>
+              <div class="checkbox">
+                <label> <input type="checkbox"> Se rappeler de moi. </label>
+              </div>
+              <div class="form-group">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Me connecter</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!-- /Modal création article--}}
+
+
+{{!-- Modal envoi message --}}
+<div class="modal fade" id="modalCreateMessage" tabindex="-1" role="dialog" aria-labelledby="#modalCreateMessage"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCreateMessageLabel">Me connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/authentification" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Votre Email *" value="" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Votre mot de passe *" value=""
+                  required />
+              </div>
+              <div class="checkbox">
+                <label> <input type="checkbox"> Se rappeler de moi. </label>
+              </div>
+              <div class="form-group">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Me connecter</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!-- /Modal envoi message --}}
+
+
+{{!-- Modal création site dans l'annuaire --}}
+<div class="modal fade" id="modalCreateSite" tabindex="-1" role="dialog" aria-labelledby="#modalCreateSiteLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCreateSiteLabel">Me connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/authentification" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Votre Email *" value="" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Votre mot de passe *" value=""
+                  required />
+              </div>
+              <div class="checkbox">
+                <label> <input type="checkbox"> Se rappeler de moi. </label>
+              </div>
+              <div class="form-group">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Me connecter</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!----------------- /Modal création site dans l'annuaire ---------------}}
+
+
+{{!------------------ Modal confirmation suppression ----------------}}
+<div class="modal fade" id="modalConfirmSupp" tabindex="-1" role="dialog" aria-labelledby="#modalConfirmSuppLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalConfirmSuppLabel">Me connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/authentification" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Votre Email *" value="" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Votre mot de passe *" value=""
+                  required />
+              </div>
+              <div class="checkbox">
+                <label> <input type="checkbox"> Se rappeler de moi. </label>
+              </div>
+              <div class="form-group">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Me connecter</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!--------------------- /Modal confirmation suppression ---------------}}
+
+
+{{!-- Modal édition utilisateur --}}
+<div class="modal fade" id="modalEditUser" tabindex="-1" role="dialog" aria-labelledby="#modalEditUserLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditUserLabel">Me connecter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="/authentification" method="POST">
+        <div class="container">
+          <div class="row modal-body">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="email" class="form-control" name="email" placeholder="Votre Email *" value="" required />
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Votre mot de passe *" value=""
+                  required />
+              </div>
+              <div class="checkbox">
+                <label> <input type="checkbox"> Se rappeler de moi. </label>
+              </div>
+              <div class="form-group">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+            </div>
+            <div class="col-md-12 ">
+              <div class="d-flex flex-row-reverse">
+                <button type="submit" class="btn">Me connecter</button>
+                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{{!-- /Modal édition utilisateur--}}

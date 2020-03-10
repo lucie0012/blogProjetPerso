@@ -4,8 +4,9 @@ module.exports = {
 
     /**************Affichage page admin***************/
     getAdmin: async (req, res) => {
-        const dbUser = await userCollection.findById(req.session.userId)
-        res.render('admin/admin' , { dbUser: dbUser })
+        const dbUserId = await userCollection.findById(req.session.userId)
+        const dbUser = await userCollection.find({})
+        res.render('admin/admin' , { dbUserId: dbUserId, dbUser: dbUser })
     },
 
     /**************Affichage liste utilisateur pour admin***************/
@@ -26,6 +27,25 @@ module.exports = {
         // console.log(req.params.id);
 
         res.render('admin/adminUserEdit', { dbUser })
+    },
+
+    /**************Edition utilisateur en isVerified pour admin***************/
+    putVerifiedUser: (req, res) => {
+        userCollection.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                isVerified: true,
+            },
+            (err) => {
+                if (!err) {
+                    // console.log('UPDATE OK');
+                    res.redirect('/admin')
+                } else {
+                    res.send(err)
+                }
+            })
+
+        // console.log(req.params.id);
     },
 
     /**************Edition utilisateur pour admin***************/
