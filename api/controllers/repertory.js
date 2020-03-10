@@ -10,9 +10,9 @@ module.exports = {
 
     /**************Affichage page Repertoire***************/
     getRepertory: async (req, res) => {
-        const dbUser = await userCollection.findById(req.session.userId)
+        const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('repertory/repertory', { dbUser: dbUser })
+        res.render('repertory/repertory', { dbUserId: dbUserId })
     },
 
 }

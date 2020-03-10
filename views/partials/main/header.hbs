@@ -213,30 +213,30 @@
                 </button>
             </div>
 
-            <form action="/userEdit/{{ dbUser._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+            <form action="/userEdit/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
                             <div>
-                                <img src="{{ dbUser.image }}" alt="image utilisateur" class="mb-3" widht="100px" height="100px">
+                                <img src="{{ dbUserId.image }}" alt="image utilisateur" class="mb-3" widht="100px" height="100px">
                             </div>
                             <div class="form-group">
                                 <label for="name">Nom</label>
-                                <input type="text" name="name" value="{{ dbUser.name }}">
+                                <input type="text" name="name" value="{{ dbUserId.name }}">
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
                             <div class="form-group">
                                 <label for="pseudo">Pseudo</label>
-                                <input type="text" name="pseudo" value="{{ dbUser.pseudo }}">
+                                <input type="text" name="pseudo" value="{{ dbUserId.pseudo }}">
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
                             <div class="form-group">
                                 <label for="email">Adresse Email</label>
-                                <input type="email" name="email" value="{{ dbUser.email }}">
+                                <input type="email" name="email" value="{{ dbUserId.email }}">
                             </div>
                             <div>
                                 <label>
-                                    <input type="file" name="image" value="{{ dbUser.image }}">
+                                    <input type="file" name="image" value="{{ dbUserId.image }}">
                                     <span>
                                         Envoyer une nouvelle image
                                     </span>

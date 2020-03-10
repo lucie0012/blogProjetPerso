@@ -6,16 +6,16 @@ module.exports = {
 
     /**************Affichage page création Contact***************/
     getContact: async (req, res) => {
-        const dbUser = await userCollection.findById(req.session.userId)
+        const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('contact', { dbUser: dbUser })
+        res.render('contact', { dbUserId: dbUserId })
     },
 
     /**************Envoi d'un message***************/
     postMessage: (req, res) => {
         messageCollection.create(
             {
-                nameAuthor : req.body.name,
+                nameAuthor: req.body.name,
                 pseudoAuthor: req.body.pseudo,
                 emailAuthor: req.body.email,
                 subject: req.body.subject,
@@ -33,5 +33,22 @@ module.exports = {
         // console.log(req.body)
         // console.log(req.params.id)
     },
+
+    /**************Suppression de message***************/
+    deleteOneMessage: (req, res) => {
+        // console.log(req.params.id);
+
+        messageCollection.deleteOne(
+            { _id: req.params.id },
+            (err) => {
+                if (err) {
+                    res.send(err)
+                    // console.log('suppression pas OK');
+                } else {
+                    res.redirect('/admin')
+                    // console.log('suppression OK');
+                }
+            })
+    }
 
 }

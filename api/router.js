@@ -64,6 +64,7 @@ router.route('/actuCreate')
  ***********/
 router.route('/commentaireActu/:id')
     .post(actus.postActuComment)
+    // .delete(actus.deleteOneComment)
 
 /*
  * Répertoire
@@ -80,6 +81,9 @@ router.route('/repertory')
 router.route('/contact')
     .get(contact.getContact)
     .post(contact.postMessage)
+
+router.route('/contact/:id')
+    .delete(contact.deleteOneMessage)
 
 
 /*

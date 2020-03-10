@@ -2,6 +2,7 @@ const actuCollection = require('../database/models/actuModel');
 const userCollection = require('../database/models/userModel');
 const commentCollection = require('../database/models/commentModel');
 
+
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
@@ -49,9 +50,9 @@ module.exports = {
         // "async" car on utilise "await" pour attendre de récupérer les données
         const dbActu = await actuCollection.find({})
         // console.log(dbActu);
-        const dbUser = await userCollection.findById(req.session.userId)
+        const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('actu/actus', { dbActu: dbActu, dbUser: dbUser })
+        res.render('actu/actus', { dbActu: dbActu, dbUserId: dbUserId })
         // on renvoi la page "actus" avec les données de chaque BDD nécessaire dans cette page
     },
     // ATTENTION : dans la page actus, bien penser à mettre le "each" pour afficher tout les élements de la BDD et indiquer plusieurs infos (cf page actus)
@@ -61,11 +62,11 @@ module.exports = {
     getActuSingle: async (req, res) => {
         const dbActu = await actuCollection.findById(req.params.id)
         // console.log(req.params.id);
-        const dbUser = await userCollection.findById(req.session.userId)
+        const dbUserId = await userCollection.findById(req.session.userId)
         const dbComment = await commentCollection.find({ articleId: req.params.id })
 
 
-        res.render('actu/actuSingle', { dbActu: dbActu, dbUser: dbUser, dbComment: dbComment })
+        res.render('actu/actuSingle', { dbActu: dbActu, dbUserId: dbUserId, dbComment: dbComment })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 
@@ -85,7 +86,7 @@ module.exports = {
                                 console.log(err);
                             } else {
                                 console.log("File delete");
-                                res.redirect('/actus')
+                                res.redirect('/admin')
                             }
                         }
                     )
@@ -175,10 +176,22 @@ module.exports = {
         // console.log(req.params.id)
     },
 
-    /**************Suppression de commentaire***************/
+    // /**************Suppression de commentaire***************/
+    // deleteOneComment: (req, res) => {
+    //     console.log(req.params.id);
 
-    /**************Modification de commentaire***************/
-
+    //     commentCollection.deleteOne(
+    //         { _id: req.params.id },
+    //         (err) => {
+    //             if (err) {
+    //                 res.send(err)
+    //                 console.log('suppression pas OK');
+    //             } else {
+    //                 res.redirect('/admin')
+    //                 console.log('suppression OK');
+    //             }
+    //         })
+    // }
 
 
 }

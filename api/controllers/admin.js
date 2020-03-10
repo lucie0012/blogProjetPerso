@@ -1,4 +1,11 @@
 const userCollection = require('../database/models/userModel');
+const actuCollection = require('../database/models/actuModel');
+const messageCollection = require('../database/models/messageModel');
+
+const path = require('path');
+// pour gestion suppression image
+const fs = require('fs')
+// pour gestion suppression image
 
 module.exports = {
 
@@ -6,7 +13,9 @@ module.exports = {
     getAdmin: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbUser = await userCollection.find({})
-        res.render('admin/admin' , { dbUserId: dbUserId, dbUser: dbUser })
+        const dbActu = await actuCollection.find({})
+        const dbMessage = await messageCollection.find({})
+        res.render('admin/admin', { dbUserId: dbUserId, dbUser: dbUser, dbActu: dbActu, dbMessage: dbMessage })
     },
 
     /**************Affichage liste utilisateur pour admin***************/
@@ -14,10 +23,10 @@ module.exports = {
         const dbUser = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('admin/adminUserList', { 
+        res.render('admin/adminUserList', {
             layout: 'adminMain',
             dbUser: dbUser
-         })
+        })
         // appel du layout spécifique "adminMain"
     },
 
@@ -35,6 +44,7 @@ module.exports = {
             { _id: req.params.id },
             {
                 isVerified: true,
+                fonction: "Vérifié",
             },
             (err) => {
                 if (!err) {
@@ -53,39 +63,19 @@ module.exports = {
         // console.log(req.body.role);
         // console.log(req.params.id);
         if (req.body.role === 'isAdmin') {
-            // "role" est le name du "select" dans la page adminUserEdit
+            // "role" est le name du "select" dans la page admin
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
                     fonction: "Administrateur",
                     isVerified: true,
-                    isModo: true,
                     isAdmin: true,
                     isBan: false
                 },
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/adminUserList')
-                    } else {
-                        res.rend(err)
-                    }
-                }
-            )
-        } else if (req.body.role === 'isModo') {
-            userCollection.findOneAndUpdate(
-                { _id: req.params.id },
-                {
-                    fonction: "Modérateur",
-                    isVerified: true,
-                    isModo: true,
-                    isAdmin: false,
-                    isBan: false
-                },
-                { multi: true },
-                (err) => {
-                    if (!err) {
-                        res.redirect('/adminUserList')
+                        res.redirect('/admin')
                     } else {
                         res.rend(err)
                     }
@@ -97,14 +87,13 @@ module.exports = {
                 {
                     fonction: "Vérifié",
                     isVerified: true,
-                    isModo: false,
                     isAdmin: false,
                     isBan: false
                 },
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/adminUserList')
+                        res.redirect('/admin')
                     } else {
                         res.rend(err)
                     }
@@ -116,14 +105,13 @@ module.exports = {
                 {
                     fonction: "Bannis",
                     isVerified: false,
-                    isModo: false,
                     isAdmin: false,
                     isBan: true
                 },
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/adminUserList')
+                        res.redirect('/admin')
                     } else {
                         res.rend(err)
                     }
@@ -133,15 +121,27 @@ module.exports = {
     },
 
     /**************Suppression utilisateur pour admin***************/
-    deleteOneUser: (req, res) => {
+    deleteOneUser: async (req, res) => {
+        // console.log(req.params.id);
+        const dbUser = await userCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
         userCollection.deleteOne(
             { _id: req.params.id },
             (err) => {
                 if (!err) {
-                    res.redirect('/adminUserList')
+                    fs.unlink(pathImage,
+                        (err) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log("File delete");
+                                res.redirect('/admin')
+                            }
+                        }
+                    )
                 } else {
                     res.send(err)
                 }
             })
-    }
+    },
 }

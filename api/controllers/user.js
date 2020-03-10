@@ -61,18 +61,18 @@ module.exports = {
 
     /**************Affichage page liste compte (temporaire car pour ensuite afficher page mon compte***************/
     getUserListing: async (req, res) => {
-        const dbUser = await userCollection.find({})
+        const dbUserId = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('user/userListing', { dbUser })
+        res.render('user/userListing', { dbUserId })
     },
 
     /**************Affichage page mon compte***************/
     getUserSingle: async (req, res) => {
-        const dbUser = await userCollection.find({})
+        const dbUserId = await userCollection.find({})
         // console.log(dbUser);
 
-        res.render('user/userSingle', { dbUser })
+        res.render('user/userSingle', { dbUserId })
     },
 
     // /**************Affichage page édition compte***************/
