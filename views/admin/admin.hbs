@@ -66,154 +66,169 @@
           </div>
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-              <ul class="list-group">
-                {{#each dbUser}}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ pseudo }}
-                  <span>
-                    {{#unless isVerified}}
-                    <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
-                      data-toggle="modal" data-target="#modalConfirmValidUser{{ _id }}">
-                      <i class="far fa-check-circle" aria-hidden="true"></i>
-                      {{!-- 
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Fonction</th>
+                    <th scope="col">Outils</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbUser}}
+                  <tr>
+                    <td>{{ name }}</td>
+                    <td>{{ pseudo }}</td>
+                    <td>{{ fonction }}</td>
+                    <td>
+                      <span>
+                        {{#unless isVerified}}
+                        <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                          data-toggle="modal" data-target="#modalConfirmValidUser{{ _id }}">
+                          <i class="far fa-check-circle" aria-hidden="true"></i>
+                          {{!-- 
                        <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateArticle"><i
                           class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a> --}}
-                    </button>
-                    {{/unless}}
-                    <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
-                      data-target="#modalEditUser{{_id}}">
-                      <i class="far fa-edit" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppUser{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-
-                  </span>
-                </li>
-
-                {{!------------------ Modal confirmation validation utilisateur -------------------}}
-                <div class="modal fade" id="modalConfirmValidUser{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmValidUserLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
                         </button>
-                      </div>
+                        {{/unless}}
+                        <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
+                          data-target="#modalEditUser{{_id}}">
+                          <i class="far fa-edit" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppUser{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
 
-                      <form action="/verifiedUser/{{ _id }}/?_method=PUT" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la vérification de "{{ pseudo }}" ?</p>
+
+                  {{!------------------ Modal confirmation validation utilisateur -------------------}}
+                  <div class="modal fade" id="modalConfirmValidUser{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmValidUserLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/verifiedUser/{{ _id }}/?_method=PUT" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la vérification de "{{ pseudo }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation validation utilisateur -------------------}}
+                  {{!--------------------- /Modal confirmation validation utilisateur -------------------}}
 
 
-                {{!----------------------- Modal édition utilisateur ---------------------------}}
-                <div class="modal fade" id="modalEditUser{{_id}}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalEditUserLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditUserLabel">Modifier l'utilisateur "{{ pseudo }}"</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!----------------------- Modal édition utilisateur ---------------------------}}
+                  <div class="modal fade" id="modalEditUser{{_id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalEditUserLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalEditUserLabel">Modifier l'utilisateur "{{ pseudo }}"</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/adminUserEdit/{{ _id }}/?_method=PUT" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <img src="{{ image }}" alt="image user" widht="150px" height="150px">
+                        <form action="/adminUserEdit/{{ _id }}/?_method=PUT" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <img src="{{ image }}" alt="image user" widht="150px" height="150px">
+                                </div>
+                                <div class="form-group">
+                                  <p>Nom d'utilisateur : {{ name }}</p>
+                                  <p>Pseudo : {{ pseudo }}</p>
+                                  <p>Adresse Email : {{ email }}</p>
+                                  <p>Fonction : {{ fonction }} </p>
+                                </div>
+                                <div class="form-group">
+                                  <label>Modifer la fonction de l'utilisateur:</label>
+                                  <select name="role" required>
+                                    <option value="">Rôle utilisateur</option>
+                                    <option value="isAdmin">Administrateur</option>
+                                    <option value="isVerified">Vérifié</option>
+                                    <option value="isBan">Bannis</option>
+                                  </select>
+                                </div>
                               </div>
-                              <div class="form-group">
-                                <p>Nom d'utilisateur : {{ name }}</p>
-                                <p>Pseudo : {{ pseudo }}</p>
-                                <p>Adresse Email : {{ email }}</p>
-                                <p>Fonction : {{ fonction }} </p>
-                              </div>
-                              <div class="form-group">
-                                <label>Modifer la fonction de l'utilisateur:</label>
-                                <select name="role" required>
-                                  <option value="">Rôle utilisateur</option>
-                                  <option value="isAdmin">Administrateur</option>
-                                  <option value="isVerified">Vérifié</option>
-                                  <option value="isBan">Bannis</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Modifier</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Modifier</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!------------------------ /Modal édition utilisateur -------------------------------}}
+                  {{!------------------------ /Modal édition utilisateur -------------------------------}}
 
-                {{!------------------ Modal confirmation suppression utilisateur-------------------}}
-                <div class="modal fade" id="modalConfirmSuppUser{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppUserLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!------------------ Modal confirmation suppression utilisateur-------------------}}
+                  <div class="modal fade" id="modalConfirmSuppUser{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppUserLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/adminUserEdit/{{ _id }}/?_method=delete" method="POST"
-                        enctype="multipart/form-data">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression de "{{ pseudo }}"" ?</p>
+                        <form action="/adminUserEdit/{{ _id }}/?_method=delete" method="POST"
+                          enctype="multipart/form-data">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression de "{{ pseudo }}"" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression utilisateur-------------------}}
+                  {{!--------------------- /Modal confirmation suppression utilisateur-------------------}}
 
-                {{/each}}
-              </ul>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -242,113 +257,123 @@
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
             <div class="card-body">
 
-              <ul class="list-group">
-                {{#each dbActu}}
 
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ title }}
-                  <span>
-                    <button class="btn btn-primary" aria-label="Editer" data-toggle="modal"
-                      data-target="#modalEditArticle{{_id}}">
-                      <i class="far fa-edit" aria-hidden="true"></i>
-                    </button>
-
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppArticle{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </li>
-
-                {{!----------------------- Modal édition article -----------------------}}
-                <div class="modal fade" id="modalEditArticle{{_id}}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalEditArticle" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Outils</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbActu}}
+                  <tr>
+                    <td>{{ title }}</td>
+                    <td>
+                      <span>
+                        <button class="btn btn-primary" aria-label="Editer" data-toggle="modal"
+                          data-target="#modalEditArticle{{_id}}">
+                          <i class="far fa-edit" aria-hidden="true"></i>
                         </button>
-                      </div>
 
-                      <form action="/actuSingle/{{ _id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <img src="{{ image }}" alt="image article" widht="100px" height="100px">
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppArticle{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+
+                  {{!----------------------- Modal édition article -----------------------}}
+                  <div class="modal fade" id="modalEditArticle{{_id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalEditArticle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/actuSingle/{{ _id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <img src="{{ image }}" alt="image article" widht="100px" height="100px">
+                                </div>
+                                <div class="form-group">
+                                  <label for="title">Titre de l'article</label>
+                                  <input type="text" class="form-control" name="title" value="{{ title }}" required>
+                                  {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                                </div>
+                                <div class="form-group">
+                                  <label for="description">Contenu</label>
+                                  <textarea type="text" class="form-control" name="content" rows="3"
+                                    required> {{ content }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label>
+                                    <input type="file" name="image">
+                                    <span>
+                                      Envoyer une image
+                                    </span>
+                                  </label>
+                                </div>
                               </div>
-                              <div class="form-group">
-                                <label for="title">Titre de l'article</label>
-                                <input type="text" class="form-control" name="title" value="{{ title }}" required>
-                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
-                              </div>
-                              <div class="form-group">
-                                <label for="description">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" rows="3"
-                                  required> {{ content }}</textarea>
-                              </div>
-                              <div class="form-group">
-                                <label>
-                                  <input type="file" name="image">
-                                  <span>
-                                    Envoyer une image
-                                  </span>
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Modifier</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Modifier</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!------------------ /Modal édition article --------------}}
+                  {{!------------------ /Modal édition article --------------}}
 
-                {{!------------------ Modal confirmation suppression article-------------------}}
-                <div class="modal fade" id="modalConfirmSuppArticle{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppArticleLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!------------------ Modal confirmation suppression article-------------------}}
+                  <div class="modal fade" id="modalConfirmSuppArticle{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppArticleLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/actuSingle/{{ _id }}/?_method=delete" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression de "{{ title}}" ?</p>
+                        <form action="/actuSingle/{{ _id }}/?_method=delete" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression de "{{ title}}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression article -------------------}}
+                  {{!--------------------- /Modal confirmation suppression article -------------------}}
 
-                {{/each}}
-              </ul>
+                  {{/each}}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -428,59 +453,71 @@
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
             <div class="card-body">
 
-              <ul class="list-group">
-
-                {{#each dbMessage}}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ pseudoAuthor }} -
-                  {{ emailAuthor }} -
-                  {{ subject }} -
-                  {{ content }} -
-                  <span>
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppMessage{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </li>
-
-                {{!------------------ Modal confirmation suppression message -------------------}}
-                <div class="modal fade" id="modalConfirmSuppMessage{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppMessageLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Sujet</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Outils</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbMessage}}
+                  <tr>
+                    <td>{{ pseudoAuthor }}</td>
+                    <td>{{ emailAuthor}}</td>
+                    <td>{{ subject }}</td>
+                    <td>{{ content }}</td>
+                    <td>
+                      <span>
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppMessage{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
                         </button>
-                      </div>
+                      </span>
+                    </td>
+                  </tr>
 
-                      <form action="/contact/{{ _id }}/?_method=delete" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression du message de "{{ pseudoAuthor }}" ?</p>
+                  {{!------------------ Modal confirmation suppression message -------------------}}
+                  <div class="modal fade" id="modalConfirmSuppMessage{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppMessageLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/contact/{{ _id }}/?_method=delete" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression du message de "{{ pseudoAuthor }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression message-------------------}}
+                  {{!--------------------- /Modal confirmation suppression message-------------------}}
 
-                {{/each}}
+                  {{/each}}
 
-              </ul>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -508,97 +545,109 @@
           <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
             <div class="card-body">
 
-              <ul class="list-group">
-
-                {{#each dbComment}}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ pseudoAuthor }} -
-                  {{ content }} -
-                  <span>
-                    {{#unless isVerified}}
-                    <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
-                      data-toggle="modal" data-target="#modalConfirmValidComm{{ _id }}">
-                      <i class="far fa-check-circle" aria-hidden="true"></i>
-                    </button>
-                    {{/unless}}
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppComm{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </li>
-
-                {{!------------------ Modal confirmation validation commentaire -------------------}}
-                <div class="modal fade" id="modalConfirmValidComm{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmValidCommLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Titre article</th>
+                    <th scope="col">Commentaire</th>
+                    <th scope="col">Outils</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbComment}}
+                  <tr>
+                    <td>{{ pseudoAuthor }}</td>
+                    <td>Titre article-à gérer</td>
+                    <td>{{ content }}</td>
+                    <td>
+                      <span>
+                        {{#unless isVerified}}
+                        <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                          data-toggle="modal" data-target="#modalConfirmValidComm{{ _id }}">
+                          <i class="far fa-check-circle" aria-hidden="true"></i>
                         </button>
-                      </div>
+                        {{/unless}}
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppComm{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
 
-                      <form action="/commentaireActu/{{ _id }}/?_method=PUT" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la vérification du commentaire de "{{ pseudoAuthor }}" ?</p>
+                  {{!------------------ Modal confirmation validation commentaire -------------------}}
+                  <div class="modal fade" id="modalConfirmValidComm{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmValidCommLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/commentaireActu/{{ _id }}/?_method=PUT" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la vérification du commentaire de "{{ pseudoAuthor }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation validation commentaire -------------------}}
+                  {{!--------------------- /Modal confirmation validation commentaire -------------------}}
 
-                {{!------------------ Modal confirmation suppression commentaire -------------------}}
-                <div class="modal fade" id="modalConfirmSuppComm{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppCommLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!------------------ Modal confirmation suppression commentaire -------------------}}
+                  <div class="modal fade" id="modalConfirmSuppComm{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppCommLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/commentaireActu/{{ _id }}/?_method=delete" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression du commentaire de "{{ pseudoAuthor }}" ?</p>
+                        <form action="/commentaireActu/{{ _id }}/?_method=delete" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression du commentaire de "{{ pseudoAuthor }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression commentaire -------------------}}
+                  {{!--------------------- /Modal confirmation suppression commentaire -------------------}}
 
-                {{/each}}
+                  {{/each}}
 
-              </ul>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -626,98 +675,108 @@
           <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
             <div class="card-body">
 
-              <ul class="list-group">
-
-                {{#each dbNote }}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ pseudoAuthor }} -
-                  {{ note }} -
-                  {{ comment }}
-                  <span>
-                    {{#unless isVerified}}
-                    <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
-                      data-toggle="modal" data-target="#modalConfirmValidNote{{ _id }}">
-                      <i class="far fa-check-circle" aria-hidden="true"></i>
-                    </button>
-                    {{/unless}}
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppNote{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </li>
-
-                {{!------------------ Modal confirmation validation note/commentaire -------------------}}
-                <div class="modal fade" id="modalConfirmValidNote{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmValidNoteLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Note</th>
+                    <th scope="col">Commentaire</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbNote }}
+                  <tr>
+                    <td>{{ pseudoAuthor }}</td>
+                    <td>{{ note }}</td>
+                    <td>{{  comment }}</td>
+                    <td>
+                      <span>
+                        {{#unless isVerified}}
+                        <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                          data-toggle="modal" data-target="#modalConfirmValidNote{{ _id }}">
+                          <i class="far fa-check-circle" aria-hidden="true"></i>
                         </button>
-                      </div>
+                        {{/unless}}
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppNote{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
 
-                      <form action="/note/{{ _id }}/?_method=PUT" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la note de "{{ pseudoAuthor }}" ?</p>
+                  {{!------------------ Modal confirmation validation note/commentaire -------------------}}
+                  <div class="modal fade" id="modalConfirmValidNote{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmValidNoteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/note/{{ _id }}/?_method=PUT" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la note de "{{ pseudoAuthor }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation validation note/commentaire -------------------}}
+                  {{!--------------------- /Modal confirmation validation note/commentaire -------------------}}
 
-                {{!------------------ Modal confirmation suppression note/commentaire -------------------}}
-                <div class="modal fade" id="modalConfirmSuppNote{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppNoteLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!------------------ Modal confirmation suppression note/commentaire -------------------}}
+                  <div class="modal fade" id="modalConfirmSuppNote{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppNoteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/note/{{ _id }}/?_method=delete" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression de la note de "{{ pseudoAuthor }}" ?</p>
+                        <form action="/note/{{ _id }}/?_method=delete" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression de la note de "{{ pseudoAuthor }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression note/commentaire -------------------}}
+                  {{!--------------------- /Modal confirmation suppression note/commentaire -------------------}}
 
-                {{/each}}
+                  {{/each}}
 
-              </ul>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -748,104 +807,116 @@
           <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
             <div class="card-body">
 
-              <ul class="list-group">
-
-                {{#each dbRepertory }}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  {{ title }} -
-                  <a href="{{ url }}">{{ url }}</a>
-                  <span>
-                    {{#unless isVerified}}
-                    <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
-                      data-toggle="modal" data-target="#modalConfirmValidSite{{ _id }}">
-                      <i class="far fa-check-circle" aria-hidden="true"></i>
-                    </button>
-                    {{/unless}}
-                    <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
-                      data-target="#modalEditSite{{_id}}">
-                      <i class="far fa-edit" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
-                      data-target="#modalConfirmSuppSite{{ _id }}">
-                      <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </li>
-
-                {{!------------------ Modal confirmation validation site répertoire -------------------}}
-                <div class="modal fade" id="modalConfirmValidSite{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmValidSiteLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Titre du site</th>
+                    <th scope="col">URL</th>
+                    <th scope="col">Outils</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each dbRepertory }}
+                  <tr>
+                    <td>Pseudo-à gérer</td>
+                    <td>{{ title }}</td>
+                    <td><a href="{{ url }}">{{ url }}</a></td>
+                    <td>
+                      <span>
+                        {{#unless isVerified}}
+                        <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                          data-toggle="modal" data-target="#modalConfirmValidSite{{ _id }}">
+                          <i class="far fa-check-circle" aria-hidden="true"></i>
                         </button>
-                      </div>
+                        {{/unless}}
+                        <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
+                          data-target="#modalEditSite{{_id}}">
+                          <i class="far fa-edit" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                          data-target="#modalConfirmSuppSite{{ _id }}">
+                          <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
 
-                      <form action="/repertoryValid/{{ _id }}/?_method=PUT" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous l'ajout du site "{{ title }}" ?</p>
+                  {{!------------------ Modal confirmation validation site répertoire -------------------}}
+                  <div class="modal fade" id="modalConfirmValidSite{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmValidSiteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/repertoryValid/{{ _id }}/?_method=PUT" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous l'ajout du site "{{ title }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation validation site répertoire -------------------}}
+                  {{!--------------------- /Modal confirmation validation site répertoire -------------------}}
 
 
-                {{!----------------------- Modal édition site/répertoire -----------------------}}
-                <div class="modal fade" id="modalEditSite{{_id}}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalEditSite" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
+                  {{!----------------------- Modal édition site/répertoire -----------------------}}
+                  <div class="modal fade" id="modalEditSite{{_id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalEditSite" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
 
-                      <form action="/repertory/{{ _id }}/?_method=PUT" method="POST">
-                        {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <img src="{{ image }}" alt="image site" widht="100px" height="100px">
-                              </div>
-                              <div class="form-group">
-                                <label for="title">Titre du site</label>
-                                <input type="text" class="form-control" name="title" value="{{ title }}" required>
-                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
-                              </div>
-                              <div class="form-group">
-                                <label for="url">URL du site</label>
-                                <input type="text" class="form-control" name="url" value="{{ url }}" required>
-                              </div>
-                              <div class="form-group">
-                                <label for="content">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" rows="3"
-                                  required> {{ content }}</textarea>
-                              </div>
-                              <div class="form-group">
-                                <label for="category">Catégorie</label>
-                                <input type="text" class="form-control" name="category" value="{{ category }}" required>
-                              </div>
-                              {{!-- <div class="form-group">
+                        <form action="/repertory/{{ _id }}/?_method=PUT" method="POST">
+                          {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <img src="{{ image }}" alt="image site" widht="100px" height="100px">
+                                </div>
+                                <div class="form-group">
+                                  <label for="title">Titre du site</label>
+                                  <input type="text" class="form-control" name="title" value="{{ title }}" required>
+                                  {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                                </div>
+                                <div class="form-group">
+                                  <label for="url">URL du site</label>
+                                  <input type="text" class="form-control" name="url" value="{{ url }}" required>
+                                </div>
+                                <div class="form-group">
+                                  <label for="content">Contenu</label>
+                                  <textarea type="text" class="form-control" name="content" rows="3"
+                                    required> {{ content }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="category">Catégorie</label>
+                                  <input type="text" class="form-control" name="category" value="{{ category }}"
+                                    required>
+                                </div>
+                                {{!-- <div class="form-group">
                                 <label>
                                   <input type="file" name="image">
                                   <span>
@@ -853,60 +924,61 @@
                                   </span>
                                 </label>
                               </div> --}}
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Modifier</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                              </div>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Modifier</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
-                    </div>
-                  </div>
-                </div>
-                {{!------------------ /Modal édition site/répertoire --------------}}
-
-
-                {{!------------------ Modal confirmation suppression site/répertoire -------------------}}
-                <div class="modal fade" id="modalConfirmSuppSite{{ _id }}" tabindex="-1" role="dialog"
-                  aria-labelledby="#modalConfirmSuppSiteLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
                       </div>
+                    </div>
+                  </div>
+                  {{!------------------ /Modal édition site/répertoire --------------}}
 
-                      <form action="/repertory/{{ _id }}/?_method=delete" method="POST">
-                        <div class="container">
-                          <div class="row modal-body">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <p>Confirmez-vous la suppression du site "{{ title }}" ?</p>
+
+                  {{!------------------ Modal confirmation suppression site/répertoire -------------------}}
+                  <div class="modal fade" id="modalConfirmSuppSite{{ _id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="#modalConfirmSuppSiteLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+
+                        <form action="/repertory/{{ _id }}/?_method=delete" method="POST">
+                          <div class="container">
+                            <div class="row modal-body">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <p>Confirmez-vous la suppression du site "{{ title }}" ?</p>
+                                </div>
                               </div>
-                            </div>
-                            <div class="col-md-12 ">
-                              <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Oui</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                              <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                  <button type="submit" class="btn">Oui</button>
+                                  <button type="button" class="btn p-2" data-dismiss="modal">Non</button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
-                </div>
-                {{!--------------------- /Modal confirmation suppression site/répertoire -------------------}}
+                  {{!--------------------- /Modal confirmation suppression site/répertoire -------------------}}
 
-                {{/each}}
+                  {{/each}}
 
-              </ul>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

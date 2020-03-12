@@ -33,7 +33,6 @@ module.exports = {
                         pseudo: req.body.pseudo,
                         password: Pass,
                         isVerified: false,
-                        isModo: false,
                         isAdmin: false,
                         isBan: false
                     },
@@ -49,12 +48,11 @@ module.exports = {
                         image: `/public/ressources/images/${req.file.filename}`,
                         nameImage: req.file.filename,
                         isVerified: false,
-                        isModo: false,
                         isAdmin: false,
                         isBan: false
                     },
                 )
-                res.render('home')
+                res.redirect('/')
             }
         }
     },
