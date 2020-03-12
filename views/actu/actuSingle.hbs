@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label for="pseudoComment" class="col-form-label">Votre pseudo : </label>
                                 <input class="form-control" id="pseudoComment" type="text" name="pseudo"
-                                    value="{{ dbUser.pseudo }}" disabled="disabled">
+                                    value="{{ dbUserId.pseudo }}" disabled="disabled">
                             </div>
                             <div class="form-group">
                                 <label for="commentActu" class="col-form-label">Votre commentaire : </label>
@@ -74,6 +74,7 @@
     <div class="row">
         <div class="list-group">
             {{#each (reverse dbComment) }}
+            {{#if isVerified}}
             <div class="list-group-item list-group-item-action">
                 <p class="mb-1"> {{ content }} </p>
                 <div class="d-flex w-100 justify-content-between">
@@ -81,71 +82,9 @@
                     <small>Posté le {{ moment createDate format="DD-MM-YY"}}</small>
                 </div>
             </div>
-            {{!-- <div class="list-group-item list-group-item-action">
-                <p class="mb-1">Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque
-                    coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa
-                    conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox
-                    abiecerunt in flumen.</p>
-                <div class="d-flex w-100 justify-content-between">
-                    <small>Pseudo</small>
-                    <small>Date post</small>
-                </div>
-            </div>
-            <div class="list-group-item list-group-item-action">
-                <p class="mb-1">Et eodem impetu Domitianum praecipitem per scalas itidem funibus constrinxerunt, eosque
-                    coniunctos per ampla spatia civitatis acri raptavere discursu. iamque artuum et membrorum divulsa
-                    conpage superscandentes corpora mortuorum ad ultimam truncata deformitatem velut exsaturati mox
-                    abiecerunt in flumen.</p>
-                <div class="d-flex w-100 justify-content-between">
-                    <small>Pseudo</small>
-                    <small>Date post</small>
-                </div>
-            </div> --}}
+            {{/if}}
             {{/each }}
         </div>
     </div>
 </div>
 {{!-- /Zone commentaire --}}
-
-
-
-
-
-
-
-
-{{!-- bouton suppression --}}
-<form action="/actuSingle/{{ dbActu._id }}/?_method=delete" method="POST">
-    <button type="submit">Supprimer</button>
-</form>
-
-
-{{!----------------titre -----------------}}
-<h1>PUT {{ dbActu.title }}</h1>
-{{!----------------/titre -----------------}}
-
-{{!-- Edition Article --}}
-<form action="/actuSingle/{{ dbActu._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
-    <div>
-        <div>
-            <label for="title">Titre</label>
-            <input type="text" name="title" value="{{ dbActu.title }}" />
-        </div>
-        <div>
-            <label for="content">Description</label>
-            <textarea rows="3" name="content">{{ dbActu.content }}</textarea>
-        </div>
-        <div>
-            <label>
-                <input type="file" name="image" value="{{ dbActu.image }}">
-                <span>
-                    Envoyer une nouvelle image au format .jpg .jpeg .gif uniquement
-                </span>
-            </label>
-        </div>
-    </div>
-    <div>
-        <button type="submit">Modifier </button>
-    </div>
-</form>
-{{!-- /Editer Article --}}

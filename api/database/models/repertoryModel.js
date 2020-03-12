@@ -5,7 +5,9 @@ const repertorySchema = new mongoose.Schema({
     title : String,
     image : String,
     nameImage : String,
+    content : String,
     url : String,
+    category : String,
     note : String,
     createDate : {
         type: Date,

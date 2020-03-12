@@ -13,7 +13,7 @@ const noteSchema = new mongoose.Schema({
     },
     isVerified : {
         type : Boolean,
-        default : true,
+        default : false,
     },
 
 })

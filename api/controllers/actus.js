@@ -11,11 +11,11 @@ const fs = require('fs')
 
 module.exports = {
 
-    /**************Affichage page création d'article***************/
-    getActuCreate: (req, res) => {
+    // /**************Affichage page création d'article***************/
+    // getActuCreate: (req, res) => {
 
-        res.render('actu/actuCreate')
-    },
+    //     res.render('actu/actuCreate')
+    // },
 
     /**************Création d'article***************/
     postActuCreate: (req, res) => {
@@ -176,22 +176,43 @@ module.exports = {
         // console.log(req.params.id)
     },
 
-    // /**************Suppression de commentaire***************/
-    // deleteOneComment: (req, res) => {
-    //     console.log(req.params.id);
+    /**************Validation de commentaire***************/
+    putActuComment: (req, res) => {
+        // console.log(req.params.id);
 
-    //     commentCollection.deleteOne(
-    //         { _id: req.params.id },
-    //         (err) => {
-    //             if (err) {
-    //                 res.send(err)
-    //                 console.log('suppression pas OK');
-    //             } else {
-    //                 res.redirect('/admin')
-    //                 console.log('suppression OK');
-    //             }
-    //         })
-    // }
+        commentCollection.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                isVerified: true,
+            },
+            (err) => {
+                if (!err) {
+                    // console.log("update ok");
+                    res.redirect('back')
+                    // 'back' permet de revenir à la page précédente
+                } else {
+                    res.send(err)
+                }
+            })
+    },
+
+
+    /**************Suppression de commentaire***************/
+    deleteOneComment: (req, res) => {
+        // console.log(req.params.id);
+
+        commentCollection.deleteOne(
+            { _id: req.params.id },
+            (err) => {
+                if (err) {
+                    res.send(err)
+                    // console.log('suppression pas OK');
+                } else {
+                    res.redirect('/admin')
+                    // console.log('suppression OK');
+                }
+            })
+    }
 
 
 }

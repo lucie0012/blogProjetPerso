@@ -39,6 +39,7 @@ router.route('/')
     .get(home.getHome)
 
 
+
 /*
  * Actus
  ***********/
@@ -55,8 +56,9 @@ router.route('/actuSingle/:id')
 
 // Création d'actu
 router.route('/actuCreate')
-    .get(actus.getActuCreate)
+    // .get(actus.getActuCreate)
     .post(multer, actus.postActuCreate)
+
 
 
 /*
@@ -64,26 +66,51 @@ router.route('/actuCreate')
  ***********/
 router.route('/commentaireActu/:id')
     .post(actus.postActuComment)
-    // .delete(actus.deleteOneComment)
+    .put(actus.putActuComment)
+    .delete(actus.deleteOneComment)
+
+
 
 /*
  * Répertoire
- ***********/
-// Affichage de tout le répertoire
+ ****************/
+// Affichage page répertoire et création site/répertoire
 router.route('/repertory')
     .get(repertory.getRepertory)
+    .post(repertory.postSiteCreate)
+
+// Edition de site/répertoire 
+router.route('/repertory/:id')
+    .put(repertory.putSite)
+    .delete(repertory.deleteOneSite)
+
+// Validation de site/répertoire
+router.route('/repertoryValid/:id')
+    .put(repertory.putSiteValid)
+
+
+/*
+ *Note
+ ****************/
+// Création de note/commentaire
+router.route('/note/:id')
+    .post(repertory.postNote)
+    .put(repertory.putNoteValid)
+    .delete(repertory.deleteOneNote)
 
 
 /*
  * Contact
- ***********/
-// Affichage page contact
+ ************/
+// Affichage page contact et envoi message
 router.route('/contact')
     .get(contact.getContact)
     .post(contact.postMessage)
 
+// Suppression d'un message
 router.route('/contact/:id')
     .delete(contact.deleteOneMessage)
+
 
 
 /*
@@ -107,9 +134,9 @@ router.route('/authentification')
     // .get(user.getUserAuth)
     .post(user.postUserAuth)
 
-// Listing (temporaire car pour accéder au compte)
-router.route('/userListing')
-    .get(user.getUserListing)
+// // Listing (temporaire car pour accéder au compte)
+// router.route('/userListing')
+//     .get(user.getUserListing)
 
 // Affichage compte
 router.route('/userSingle/:id')
@@ -124,6 +151,7 @@ router.route('/userEdit/:id')
 // Déconnexion
 router.route('/userLogOut')
     .get(user.getLogOut)
+
 
 
 /*
@@ -144,7 +172,7 @@ router.route('/verifiedUser/:id')
 // Gestion des utilisateurs
 router.route('/adminUserEdit/:id')
     .get(isAdmin, admin.getUserEdit)
-    .put(admin.putlistUser)
-    .delete(admin.deleteOneUser)
+    .put(isAdmin, admin.putlistUser)
+    .delete(isAdmin, admin.deleteOneUser)
 
 module.exports = router

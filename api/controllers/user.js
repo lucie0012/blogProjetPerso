@@ -59,13 +59,13 @@ module.exports = {
         }
     },
 
-    /**************Affichage page liste compte (temporaire car pour ensuite afficher page mon compte***************/
-    getUserListing: async (req, res) => {
-        const dbUserId = await userCollection.find({})
-        // console.log(dbUser);
+    // /**************Affichage page liste compte (temporaire car pour ensuite afficher page mon compte***************/
+    // getUserListing: async (req, res) => {
+    //     const dbUserId = await userCollection.find({})
+    //     // console.log(dbUser);
 
-        res.render('user/userListing', { dbUserId })
-    },
+    //     res.render('user/userListing', { dbUserId })
+    // },
 
     /**************Affichage page mon compte***************/
     getUserSingle: async (req, res) => {

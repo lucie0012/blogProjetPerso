@@ -1,32 +1,10 @@
 <div class="container">
     <h1>Répertoire</h1>
-    <div class="row">
-        <div class="card-deck">
-            {{#each (limitEach dbActu 3 ) }}
-            <div class="card">
-                <div class="card-header">
-                    <small class="text-muted">Dans catégorie : </small>
-                </div>
-                <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="120px" width="100px" alt="image du site">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ title }}</h5>
-                    <a href="#">www.google.fr</a>
-                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
-                </div>
-                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
-            </div>
-            {{/each }}
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <h1>Répertoire</h1>
     <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis,
         circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas
     </p>
+
+    {{#each (reverse dbRepertory) }}
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row no-gutters">
             <div class="col-md-4">
@@ -34,17 +12,70 @@
             </div>
             <div class="col-md-8">
                 <div class="card-header">
-                    <small class="text-muted">Dans catégorie : / Note : </small>
+                    <small class="text-muted">Dans catégorie : {{ category }} / Note : </small>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Titre {{ title }}</h5>
-                    <a href="#">www.google.fr</a>
-                    <p class="card-text mt-2">Eius populus ab incunabulis primis ad usque pueritiae tempus extremum,
-                        quod annis circumcluditur fere trecentis,
-                        circummurana pertulit bella {{ truncate content 200 }}</p>
+                    <a href="{{ url }}">{{ url }}</a>
+                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
                 </div>
-                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
+                {{!-- bouton noter --}}
+                {{#if isVerified}}
+                <a class="btn d-flex flex-row-reverse" type="button" data-toggle="modal"
+                    data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</a>
+                {{/if}}
+                {{!-- bouton noter --}}
             </div>
         </div>
     </div>
+
+    {{!-- Modal noter site/répertoire --}}
+    <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog" aria-labelledby="#modalNoterLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalNoterLabel">Ajouter une note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="/note/{{ _id }}" method="POST">
+                    <div class="container">
+                        <div class="row modal-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="pseudoComment" class="col-form-label">Votre pseudo : </label>
+                                    <input class="form-control" id="pseudoComment" type="text" name="pseudo"
+                                        value="{{ ../dbUserId.pseudo }}" disabled="disabled">
+                                        {{!-- pour "sortir" du each et obtenir d'autres infos de bdd il faut utiliser : "../" : (changing the context handlebars) --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="noteSite" class="col-form-label">Votre note : </label>
+                                    <input class="form-control" id="noteSite" type="text" name="note" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="commentNote" class="col-form-label">Votre commentaire : </label>
+                                    <textarea class="form-control" id="commentNote" type="text" name="comment"
+                                        required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn">Poster</button>
+                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {{!-- /Modal noter site/répertoire --}}
+
+    {{/each }}
+
 </div>
