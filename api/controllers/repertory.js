@@ -28,7 +28,8 @@ module.exports = {
                 title: req.body.title,
                 url: req.body.url,
                 content: req.body.content,
-                category: "Indéfini",
+                category: req.body.category,
+                pseudo: req.session.pseudo
             },
             (err) => {
                 if (!err) {

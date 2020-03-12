@@ -1,81 +1,168 @@
 <div class="container">
     <h1>Répertoire</h1>
-    <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere trecentis,
-        circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas
-    </p>
-
-    {{#each (reverse dbRepertory) }}
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{ image }}" class="card-img" alt="image du site">
-            </div>
-            <div class="col-md-8">
-                <div class="card-header">
-                    <small class="text-muted">Dans catégorie : {{ category }} / Note : </small>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Titre {{ title }}</h5>
-                    <a href="{{ url }}">{{ url }}</a>
-                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
-                </div>
-                {{!-- bouton noter --}}
-                {{#if isVerified}}
-                <a class="btn d-flex flex-row-reverse" type="button" data-toggle="modal"
-                    data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</a>
-                {{/if}}
-                {{!-- bouton noter --}}
-            </div>
+    <div class="row">
+        <div class="col-md-10">
+            <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere
+                trecentis,
+                circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas
+            </p>
+        </div>
+        <div class="col-md-2">
+            {{#if isVerified}}
+            <a class="btn" type="button" data-toggle="modal" data-target="#modalPropoSite"
+                data-whatever="@getbootstrap"><i class="far fa-plus-square fa-2x"></i>Ajouter un site</a>
+            {{/if}}
         </div>
     </div>
 
-    {{!-- Modal noter site/répertoire --}}
-    <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog" aria-labelledby="#modalNoterLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalNoterLabel">Ajouter une note</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div>
+        <div class="col-md-8">
+            {{#each (reverse dbRepertory) }}
+            {{#if isVerified}}
+            <div class="card mb-3" style="max-width: 650px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ image }}" class="card-img" alt="image du site">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-header">
+                            <small class="text-muted">Dans catégorie : {{ category }} / Note : </small>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ title }}</h5>
+                            <a href="{{ url }}">{{ url }}</a>
+                            <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                        </div>
+                        {{!-- bouton noter --}}
+                        {{#if  dbUserId.isVerified}}
+                        {{!-- A REVOIR --}}
+                        <a class="btn d-flex flex-row-reverse" type="button" data-toggle="modal"
+                            data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</a>
+                        {{/if}}
+                        {{!-- bouton noter --}}
+                    </div>
                 </div>
+            </div>
 
-                <form action="/note/{{ _id }}" method="POST">
-                    <div class="container">
-                        <div class="row modal-body">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="pseudoComment" class="col-form-label">Votre pseudo : </label>
-                                    <input class="form-control" id="pseudoComment" type="text" name="pseudo"
-                                        value="{{ ../dbUserId.pseudo }}" disabled="disabled">
-                                        {{!-- pour "sortir" du each et obtenir d'autres infos de bdd il faut utiliser : "../" : (changing the context handlebars) --}}
-                                </div>
-                                <div class="form-group">
-                                    <label for="noteSite" class="col-form-label">Votre note : </label>
-                                    <input class="form-control" id="noteSite" type="text" name="note" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="commentNote" class="col-form-label">Votre commentaire : </label>
-                                    <textarea class="form-control" id="commentNote" type="text" name="comment"
-                                        required></textarea>
+            {{!-- Modal noter site/répertoire --}}
+            <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog"
+                aria-labelledby="#modalNoterLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalNoterLabel">Ajouter une note</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form action="/note/{{ _id }}" method="POST">
+                            <div class="container">
+                                <div class="row modal-body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="pseudoComment" class="col-form-label">Votre pseudo : </label>
+                                            <input class="form-control" id="pseudoComment" type="text" name="pseudo"
+                                                value="{{ ../dbUserId.pseudo }}" disabled="disabled">
+                                            {{!-- pour "sortir" du each et obtenir d'autres infos de bdd il faut utiliser : "../" : (changing the context handlebars) --}}
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="noteSite" class="col-form-label">Votre note : </label>
+                                            <input class="form-control" id="noteSite" type="text" name="note" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="commentNote" class="col-form-label">Votre commentaire : </label>
+                                            <textarea class="form-control" id="commentNote" type="text" name="comment"
+                                                required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <div class="d-flex flex-row-reverse">
+                                            <button type="submit" class="btn">Poster</button>
+                                            <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 ">
-                                <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn">Poster</button>
-                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
-                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            {{!-- /Modal noter site/répertoire --}}
+            {{/if}}
+            {{/each }}
+        </div>
+
+        <div class="col-md-4">
+            <aside>
+
+            </aside>
+        </div>
+    </div>
+
+</div>
+
+{{!----------------------- Modal proposition site pour répertoire -----------------------}}
+<div class="modal fade" id="modalPropoSite" tabindex="-1" role="dialog" aria-labelledby="#modalPropoSite"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">Ajouter un site dans le répertoire</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="/repertory" method="POST">
+                {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
+                {{!-- "method" : correspond à la methode utilisée : ici POST --}}
+                {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pseudo">Votre pseudo</label>
+                                <input type="text" class="form-control" name="pseudo" value="{{ dbUserId.pseudo }}"
+                                    disabled="disabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Titre du site</label>
+                                <input type="text" class="form-control" name="title" required>
+                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="url">URL du site</label>
+                                <input type="text" class="form-control" name="url" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Catégorie</label>
+                                <input type="text" class="form-control" name="category" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" required></textarea>
+                            </div>
+                            {{!-- <div class="form-group">
+                        <label>
+                          <input type="file" name="image">
+                          <span>
+                            Envoyer une image
+                          </span>
+                        </label>
+                      </div> --}}
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn">Créer</button>
+                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
+            </form>
 
-            </div>
         </div>
     </div>
-    {{!-- /Modal noter site/répertoire --}}
-
-    {{/each }}
-
 </div>
+{{!------------------ /Modal proposition site pour répertoire --------------}}

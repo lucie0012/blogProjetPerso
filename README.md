@@ -1,4 +1,9 @@
 # blogProjetPerso
+Pour démarrer le projet : 
+"nodemon" (ou "npm i") et si besoin "npm run reinstall"
+sur un autre terminal : "npm run sass"
+
+
 Blog projet perso arinfo
 
 #// INDICATIONS :

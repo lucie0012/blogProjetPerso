@@ -819,7 +819,7 @@
                 <tbody>
                   {{#each dbRepertory }}
                   <tr>
-                    <td>Pseudo-à gérer</td>
+                    <td>{{ pseudo }}</td>
                     <td>{{ title }}</td>
                     <td><a href="{{ url }}">{{ url }}</a></td>
                     <td>
@@ -1009,6 +1009,10 @@
                       <div class="form-group">
                         <label for="url">URL du site</label>
                         <input type="text" class="form-control" name="url" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="category">Catégorie</label>
+                        <input type="text" class="form-control" name="category" required>
                       </div>
                       <div class="form-group">
                         <label for="description">Contenu</label>

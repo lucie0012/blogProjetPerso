@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const repertorySchema = new mongoose.Schema({
 
+    pseudo : String,
     title : String,
     image : String,
     nameImage : String,
@@ -15,7 +16,7 @@ const repertorySchema = new mongoose.Schema({
     },
     isVerified : {
         type : Boolean,
-        default : true,
+        default : false,
     },
 
 })
