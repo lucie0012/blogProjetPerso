@@ -15,8 +15,8 @@
         </div>
     </div>
 
-    <div>
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-9">
             {{#each (reverse dbRepertory) }}
             {{#if isVerified}}
             <div class="card mb-3" style="max-width: 650px;">
@@ -94,11 +94,44 @@
             {{/each }}
         </div>
 
-        <div class="col-md-4">
-            <aside>
-
-            </aside>
+        <div class="col-md-3">
+            <table class="table">
+                <thead>
+                    <p>Trier par catégorie</p>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansGluten">
+                        </th>
+                        <td> <label class="form-check-label" for="sansGluten">
+                                Sans gluten
+                            </label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansLactose">
+                        </th>
+                        <td> <label class="form-check-label" for="sansLactose">
+                                Sans lactose
+                            </label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansOeufs">
+                        </th>
+                        <td> <label class="form-check-label" for="sansOeufs">
+                                Sans oeufs
+                            </label></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="recommandes">
+                        </th>
+                        <td> <label class="form-check-label" for="recommandes">
+                                Les plus recommandés
+                            </label></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+
     </div>
 
 </div>
