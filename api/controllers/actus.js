@@ -11,12 +11,6 @@ const fs = require('fs')
 
 module.exports = {
 
-    // /**************Affichage page création d'article***************/
-    // getActuCreate: (req, res) => {
-
-    //     res.render('actu/actuCreate')
-    // },
-
     /**************Création d'article***************/
     postActuCreate: (req, res) => {
         const limitSize = '1000000'

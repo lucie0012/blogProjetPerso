@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Les sites les plus recommandés</h1>
+    <h1><a href="/repertory" class="text-reset"> Les sites les plus recommandés</a></h1>
     <div class="row">
         <div class="card-deck">
             {{#each (limitEach dbActu 3 ) }}
@@ -8,8 +8,7 @@
                     <small class="text-muted">Dans catégorie : </small>
                 </div>
                 <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="120px" width="100px"
-                        alt="image du site">
+                    <img src="{{ image }}" class="rounded float-left" height="120px" width="100px" alt="image du site">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ title }}</h5>
@@ -25,8 +24,7 @@
 
 
 <div class="container">
-    <h1>Mes derniers articles</h1>
-
+    <h1><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
     <div class="row">
         <div class="card-deck">
             {{#each (limitEach dbActu 3 ) }}
@@ -49,16 +47,3 @@
         </div>
     </div>
 </div>
-
-<p>Liens actus</p>
-{{!-- <a href="/actuCreate">Créer une actu : POST</a> --}}
-
-<p>Liens user</p>
-{{!-- <a href="/userCreate">Créer un user : POST</a> --}}
-{{!-- <a href="/userListing">Lister les users pour accéder à user single : GET</a> --}}
-
-
-<p>Liens admin</p>
-{{#if isAdmin }}
-{{!-- <a href="/adminUserList">Tous les users : GET</a> --}}
-{{/if}}

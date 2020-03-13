@@ -8,11 +8,6 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
 
-    // /**************Affichage page création compte***************/
-    // getUserCreate: (req, res) => {
-    //     res.render('user/userCreate')
-    // },
-
     /**************Création compte*************/
     postUserCreate: (req, res) => {
         // console.log(req.body);
@@ -57,29 +52,6 @@ module.exports = {
         }
     },
 
-    // /**************Affichage page liste compte (temporaire car pour ensuite afficher page mon compte***************/
-    // getUserListing: async (req, res) => {
-    //     const dbUserId = await userCollection.find({})
-    //     // console.log(dbUser);
-
-    //     res.render('user/userListing', { dbUserId })
-    // },
-
-    /**************Affichage page mon compte***************/
-    getUserSingle: async (req, res) => {
-        const dbUserId = await userCollection.find({})
-        // console.log(dbUser);
-
-        res.render('user/userSingle', { dbUserId })
-    },
-
-    // /**************Affichage page édition compte***************/
-    // getUserEdit: async (req, res) => {
-    //     const dbUser = await userCollection.findById(req.params.id)
-    //     // console.log(req.params.id);
-
-    //     res.render('user/userEdit', { dbUser })
-    // },
 
     /**************Edition compte***************/
     putUserEdit: async (req, res) => {
@@ -183,11 +155,6 @@ module.exports = {
 
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
-
-    // /**************Affichage page se connecter***************/
-    // getUserAuth: (req, res) => {
-    //     res.render('user/authentification')
-    // },
 
     /**************Connexion***************/
     postUserAuth: async (req, res) => {

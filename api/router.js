@@ -43,27 +43,24 @@ router.route('/')
 /*
  * Actus
  ***********/
-// Affichage de toutes les actualités
+// Affichage des actus et création d'actu
 router.route('/actus')
     .get(actus.getActu)
+    .post(multer, actus.postActuCreate)
 
-// Affichage et gestion actus single
+// Affichage, gestion et suppression actus single
 router.route('/actuSingle/:id')
     .get(actus.getActuSingle)
     .delete(actus.deleteOneActuSingle)
     .put(multer, actus.putActuSingle)
 // s'il y a un middleware à ajouter c'est avant le actus.deleteOneActuSingle / ex : .get(auth, actus.getActuSingle) : auth étant un middleware
 
-// Création d'actu
-router.route('/actuCreate')
-    // .get(actus.getActuCreate)
-    .post(multer, actus.postActuCreate)
-
 
 
 /*
  * Comment
  ***********/
+// Création, validation et suppression
 router.route('/commentaireActu/:id')
     .post(actus.postActuComment)
     .put(actus.putActuComment)
@@ -79,7 +76,7 @@ router.route('/repertory')
     .get(repertory.getRepertory)
     .post(repertory.postSiteCreate)
 
-// Edition de site/répertoire 
+// Edition de site/répertoire et suppression
 router.route('/repertory/:id')
     .put(repertory.putSite)
     .delete(repertory.deleteOneSite)
@@ -89,14 +86,16 @@ router.route('/repertoryValid/:id')
     .put(repertory.putSiteValid)
 
 
+
 /*
  *Note
  ****************/
-// Création de note/commentaire
+// Création, validation et suppression de note/commentaire
 router.route('/note/:id')
     .post(repertory.postNote)
     .put(repertory.putNoteValid)
     .delete(repertory.deleteOneNote)
+
 
 
 /*
@@ -116,6 +115,7 @@ router.route('/contact/:id')
 /*
  * About
  ***********/
+// Affichage page a propos
 router.route('/about')
     .get(about.getAbout)
 
@@ -126,25 +126,15 @@ router.route('/about')
  ***********/
 // Création de compte
 router.route('/userCreate')
-    // .get(user.getUserCreate)
     .post(preMulter, multer, user.postUserCreate)
 
 // Connexion
 router.route('/authentification')
-    // .get(user.getUserAuth)
     .post(user.postUserAuth)
 
-// // Listing (temporaire car pour accéder au compte)
-// router.route('/userListing')
-//     .get(user.getUserListing)
 
-// Affichage compte
-router.route('/userSingle/:id')
-    .get(user.getUserSingle)
-
-// Gestion compte
+// Gestion compte (édition et suppression)
 router.route('/userEdit/:id')
-    // .get(user.getUserEdit)
     .put(multer, user.putUserEdit)
     .delete(user.deleteOneUser)
 
@@ -161,10 +151,6 @@ router.route('/userLogOut')
 router.route('/admin')
     .get(isAdmin, admin.getAdmin)
 
-// Liste d'utilisateur
-router.route('/adminUserList')
-    .get(isAdmin, admin.getUserList)
-
 // Editition utilisateur en isVerified
 router.route('/verifiedUser/:id')
     .put(isAdmin, admin.putVerifiedUser)
@@ -174,5 +160,6 @@ router.route('/adminUserEdit/:id')
     .get(isAdmin, admin.getUserEdit)
     .put(isAdmin, admin.putlistUser)
     .delete(isAdmin, admin.deleteOneUser)
+    
 
 module.exports = router

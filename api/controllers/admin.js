@@ -23,7 +23,10 @@ module.exports = {
         const dbRepertory = await repertoryCollection.find({})
         const dbNote = await noteCollection.find({})
 
+        // console.log(dbUser);
+
         res.render('admin/admin', {
+            layout: 'adminMain',
             dbUserId: dbUserId,
             dbUser: dbUser,
             dbActu: dbActu,
@@ -31,17 +34,6 @@ module.exports = {
             dbComment: dbComment,
             dbRepertory: dbRepertory,
             dbNote: dbNote
-        })
-    },
-
-    /**************Affichage liste utilisateur pour admin***************/
-    getUserList: async (req, res) => {
-        const dbUser = await userCollection.find({})
-        // console.log(dbUser);
-
-        res.render('admin/adminUserList', {
-            layout: 'adminMain',
-            dbUser: dbUser
         })
         // appel du layout spécifique "adminMain"
     },
