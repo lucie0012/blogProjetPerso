@@ -21,6 +21,7 @@ const admin = require('./controllers/admin')
  *******************/
 const multer = require('../middleware/multer-config')
 const isAdmin = require('../middleware/isAdmin')
+const isVerified = require('../middleware/isVerified')
 const preMulter = require('../middleware/preMulter')
 
 /*
@@ -46,13 +47,13 @@ router.route('/')
 // Affichage des actus et création d'actu
 router.route('/actus')
     .get(actus.getActu)
-    .post(multer, actus.postActuCreate)
+    .post(isAdmin, multer, actus.postActuCreate)
 
 // Affichage, gestion et suppression actus single
 router.route('/actuSingle/:id')
     .get(actus.getActuSingle)
-    .delete(actus.deleteOneActuSingle)
-    .put(multer, actus.putActuSingle)
+    .delete(isAdmin, actus.deleteOneActuSingle)
+    .put(isAdmin, multer, actus.putActuSingle)
 // s'il y a un middleware à ajouter c'est avant le actus.deleteOneActuSingle / ex : .get(auth, actus.getActuSingle) : auth étant un middleware
 
 
@@ -62,9 +63,9 @@ router.route('/actuSingle/:id')
  ***********/
 // Création, validation et suppression
 router.route('/commentaireActu/:id')
-    .post(actus.postActuComment)
-    .put(actus.putActuComment)
-    .delete(actus.deleteOneComment)
+    .post(isVerified, actus.postActuComment)
+    .put(isAdmin, actus.putActuComment)
+    .delete(isAdmin, actus.deleteOneComment)
 
 
 
@@ -74,16 +75,16 @@ router.route('/commentaireActu/:id')
 // Affichage page répertoire et création site/répertoire
 router.route('/repertory')
     .get(repertory.getRepertory)
-    .post(repertory.postSiteCreate)
+    .post(isVerified, repertory.postSiteCreate)
 
 // Edition de site/répertoire et suppression
 router.route('/repertory/:id')
-    .put(repertory.putSite)
-    .delete(repertory.deleteOneSite)
+    .put(isAdmin, repertory.putSite)
+    .delete(isAdmin, repertory.deleteOneSite)
 
 // Validation de site/répertoire
 router.route('/repertoryValid/:id')
-    .put(repertory.putSiteValid)
+    .put(isAdmin, repertory.putSiteValid)
 
 
 
@@ -92,9 +93,9 @@ router.route('/repertoryValid/:id')
  ****************/
 // Création, validation et suppression de note/commentaire
 router.route('/note/:id')
-    .post(repertory.postNote)
-    .put(repertory.putNoteValid)
-    .delete(repertory.deleteOneNote)
+    .post(isVerified, repertory.postNote)
+    .put(isAdmin, repertory.putNoteValid)
+    .delete(isAdmin, repertory.deleteOneNote)
 
 
 
@@ -108,7 +109,7 @@ router.route('/contact')
 
 // Suppression d'un message
 router.route('/contact/:id')
-    .delete(contact.deleteOneMessage)
+    .delete(isAdmin, contact.deleteOneMessage)
 
 
 
@@ -132,7 +133,6 @@ router.route('/userCreate')
 router.route('/authentification')
     .post(user.postUserAuth)
 
-
 // Gestion compte (édition et suppression)
 router.route('/userEdit/:id')
     .put(multer, user.putUserEdit)
@@ -142,7 +142,15 @@ router.route('/userEdit/:id')
 router.route('/userLogOut')
     .get(user.getLogOut)
 
+// Edition utilisateur en isVerified par admin
+router.route('/verifiedUser/:id')
+    .put(isAdmin, user.putVerifiedUser)
 
+// Gestion des utilisateurs par admin
+router.route('/adminUserEdit/:id')
+    .get(isAdmin, user.getUserEdit)
+    .put(isAdmin, user.putlistUser)
+    .delete(isAdmin, user.deleteOneUser)
 
 /*
  * Admin
@@ -151,15 +159,7 @@ router.route('/userLogOut')
 router.route('/admin')
     .get(isAdmin, admin.getAdmin)
 
-// Editition utilisateur en isVerified
-router.route('/verifiedUser/:id')
-    .put(isAdmin, admin.putVerifiedUser)
 
-// Gestion des utilisateurs
-router.route('/adminUserEdit/:id')
-    .get(isAdmin, admin.getUserEdit)
-    .put(isAdmin, admin.putlistUser)
-    .delete(isAdmin, admin.deleteOneUser)
-    
+
 
 module.exports = router

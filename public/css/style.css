@@ -7888,4 +7888,8 @@ a.text-color1:hover, a.text-color1:focus {
   top: 90vh;
   right: -60px; }
 
+.limitCard {
+  min-width: 340px;
+  max-width: 340px; }
+
 /*# sourceMappingURL=style.css.map */
