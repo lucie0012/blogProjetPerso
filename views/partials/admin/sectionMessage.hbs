@@ -1,0 +1,92 @@
+{{!------------------------------------------------------------- MESSAGES-----------------------------------------------------------}}
+
+<div class="card">
+    <div class="card-header" id="headingThree">
+        <h2 class="mb-0">
+            <div class="container">
+                <div class="row modal-body">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row">
+                            <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                Liste des messages
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+        <div class="card-body">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Sujet</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dbMessage}}
+                    <tr>
+                        <td>{{ pseudoAuthor }}</td>
+                        <td>{{ emailAuthor}}</td>
+                        <td>{{ subject }}</td>
+                        <td>{{ content }}</td>
+                        <td>
+                            <span>
+                                <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                                    data-target="#modalConfirmSuppMessage{{ _id }}">
+                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+
+                    {{!------------------ Modal confirmation suppression message -------------------}}
+                    <div class="modal fade" id="modalConfirmSuppMessage{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmSuppMessageLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/contact/{{ _id }}/?_method=delete" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la suppression du message de "{{ pseudoAuthor }}"
+                                                        ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation suppression message-------------------}}
+
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

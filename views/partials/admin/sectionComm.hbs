@@ -1,0 +1,132 @@
+{{!------------------------------------------------------------- COMMENTAIRES-----------------------------------------------------------}}
+
+<div class="card">
+    <div class="card-header" id="headingFour">
+        <h2 class="mb-0">
+            <div class="container">
+                <div class="row modal-body">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row">
+                            <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour"
+                                aria-expanded="false" aria-controls="collapseFour">
+                                Liste des commentaires
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+        <div class="card-body">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Titre article</th>
+                        <th scope="col">Commentaire</th>
+                        <th scope="col">Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dbComment}}
+                    <tr>
+                        <td>{{ pseudoAuthor }}</td>
+                        <td>Titre article-à gérer</td>
+                        <td>{{ content }}</td>
+                        <td>
+                            <span>
+                                {{#unless isVerified}}
+                                <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                                    data-toggle="modal" data-target="#modalConfirmValidComm{{ _id }}">
+                                    <i class="far fa-check-circle" aria-hidden="true"></i>
+                                </button>
+                                {{/unless}}
+                                <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                                    data-target="#modalConfirmSuppComm{{ _id }}">
+                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+
+                    {{!------------------ Modal confirmation validation commentaire -------------------}}
+                    <div class="modal fade" id="modalConfirmValidComm{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmValidCommLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/commentaireActu/{{ _id }}/?_method=PUT" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la vérification du commentaire de
+                                                        "{{ pseudoAuthor }}" ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation validation commentaire -------------------}}
+
+                    {{!------------------ Modal confirmation suppression commentaire -------------------}}
+                    <div class="modal fade" id="modalConfirmSuppComm{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmSuppCommLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/commentaireActu/{{ _id }}/?_method=delete" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la suppression du commentaire de
+                                                        "{{ pseudoAuthor }}" ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation suppression commentaire -------------------}}
+
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,264 @@
+{{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
+
+<div class="card">
+    <div class="card-header" id="headingSix">
+        <h2 class="mb-0">
+            <div class="container">
+                <div class="row modal-body">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row" id="site">
+                            <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
+                                aria-expanded="false" aria-controls="collapseSix">
+                                Liste des sites de l'annuaire
+                            </a>
+                            <a class="dropdown-item" type="button" data-toggle="modal" data-target="#modalCreateSite"><i
+                                    class="fas fa-plus-circle fa-sm" aria-hidden="true"></i>Ajouter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+        <div class="card-body">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Pseudo</th>
+                        <th scope="col">Titre du site</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dbRepertory }}
+                    <tr>
+                        <td>{{ pseudo }}</td>
+                        <td>{{ title }}</td>
+                        <td><a href="{{ url }}">{{ url }}</a></td>
+                        <td>
+                            <span>
+                                {{#unless isVerified}}
+                                <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                                    data-toggle="modal" data-target="#modalConfirmValidSite{{ _id }}">
+                                    <i class="far fa-check-circle" aria-hidden="true"></i>
+                                </button>
+                                {{/unless}}
+                                <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
+                                    data-target="#modalEditSite{{_id}}">
+                                    <i class="far fa-edit" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                                    data-target="#modalConfirmSuppSite{{ _id }}">
+                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+
+                    {{!------------------ Modal confirmation validation site répertoire -------------------}}
+                    <div class="modal fade" id="modalConfirmValidSite{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmValidSiteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/repertoryValid/{{ _id }}/?_method=PUT" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous l'ajout du site "{{ title }}" ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation validation site répertoire -------------------}}
+
+
+                    {{!----------------------- Modal édition site/répertoire -----------------------}}
+                    <div class="modal fade" id="modalEditSite{{_id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalEditSite" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/repertory/{{ _id }}/?_method=PUT" method="POST">
+                                    {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <img src="{{ image }}" alt="image site" widht="100px"
+                                                        height="100px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="title">Titre du site</label>
+                                                    <input type="text" class="form-control" name="title"
+                                                        value="{{ title }}" required>
+                                                    {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="url">URL du site</label>
+                                                    <input type="text" class="form-control" name="url" value="{{ url }}"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="content">Contenu</label>
+                                                    <textarea type="text" class="form-control" name="content" rows="3"
+                                                        required> {{ content }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="category">Catégorie</label>
+                                                    <input type="text" class="form-control" name="category"
+                                                        value="{{ category }}" required>
+                                                </div>
+                                                {{!-- <div class="form-group">
+                                <label>
+                                  <input type="file" name="image">
+                                  <span>
+                                    Envoyer une image
+                                  </span>
+                                </label>
+                              </div> --}}
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Modifier</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!------------------ /Modal édition site/répertoire --------------}}
+
+
+                    {{!------------------ Modal confirmation suppression site/répertoire -------------------}}
+                    <div class="modal fade" id="modalConfirmSuppSite{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmSuppSiteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/repertory/{{ _id }}/?_method=delete" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la suppression du site "{{ title }}" ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation suppression site/répertoire -------------------}}
+
+                    {{/each}}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{!----------------------- Modal création site pour répertoire -----------------------}}
+<div class="modal fade" id="modalCreateSite" tabindex="-1" role="dialog" aria-labelledby="#modalCreateSite"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">Ajouter un site dans le répertoire</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="/repertory" method="POST">
+                {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
+                {{!-- "method" : correspond à la methode utilisée : ici POST --}}
+                {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="title">Titre du site</label>
+                                <input type="text" class="form-control" name="title" required>
+                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="url">URL du site</label>
+                                <input type="text" class="form-control" name="url" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Catégorie</label>
+                                <input type="text" class="form-control" name="category" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" required></textarea>
+                            </div>
+                            {{!-- <div class="form-group">
+                        <label>
+                          <input type="file" name="image">
+                          <span>
+                            Envoyer une image
+                          </span>
+                        </label>
+                      </div> --}}
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn">Créer</button>
+                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{{!------------------ /Modal création site pour répertoire --------------}}

@@ -1,0 +1,202 @@
+{{!------------------------------------------------------------- ARTICLES-----------------------------------------------------------}}
+
+<div class="card">
+    <div class="card-header" id="headingTwo">
+        <h2 class="mb-0">
+            <div class="container">
+                <div class="row modal-body">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row">
+                            <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+                                Liste des articles
+                            </a>
+                            <a class="dropdown-item" type="button" data-toggle="modal"
+                                data-target="#modalCreateArticle"><i class="fas fa-plus-circle fa-sm"
+                                    aria-hidden="true"></i>Ajouter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dbActu}}
+                    <tr>
+                        <td>{{ title }}</td>
+                        <td>
+                            <span>
+                                <button class="btn btn-primary" aria-label="Editer" data-toggle="modal"
+                                    data-target="#modalEditArticle{{_id}}">
+                                    <i class="far fa-edit" aria-hidden="true"></i>
+                                </button>
+
+                                <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                                    data-target="#modalConfirmSuppArticle{{ _id }}">
+                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
+
+                    {{!----------------------- Modal édition article -----------------------}}
+                    <div class="modal fade" id="modalEditArticle{{_id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalEditArticle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/actuSingle/{{ _id }}/?_method=PUT" method="POST"
+                                    enctype="multipart/form-data">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <img src="{{ image }}" alt="image article" widht="100px"
+                                                        height="100px">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="title">Titre de l'article</label>
+                                                    <input type="text" class="form-control" name="title"
+                                                        value="{{ title }}" required>
+                                                    {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="description">Contenu</label>
+                                                    <textarea type="text" class="form-control" name="content" rows="3"
+                                                        required> {{ content }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="file" name="image">
+                                                        <span>
+                                                            Envoyer une image
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Modifier</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!------------------ /Modal édition article --------------}}
+
+                    {{!------------------ Modal confirmation suppression article-------------------}}
+                    <div class="modal fade" id="modalConfirmSuppArticle{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmSuppArticleLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <form action="/actuSingle/{{ _id }}/?_method=delete" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la suppression de "{{ title}}" ?</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn">Oui</button>
+                                                    <button type="button" class="btn p-2"
+                                                        data-dismiss="modal">Non</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{!--------------------- /Modal confirmation suppression article -------------------}}
+
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{{!----------------------- Modal création article -----------------------}}
+<div class="modal fade" id="modalCreateArticle" tabindex="-1" role="dialog" aria-labelledby="#modalCreateArticle"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCreateArticleLabel">Créer un article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form action="/actus" method="POST" enctype="multipart/form-data">
+                {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
+                {{!-- "method" : correspond à la methode utilisée : ici POST --}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="title">Titre de l'article</label>
+                                <input type="text" class="form-control" name="title" required>
+                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="file" name="image">
+                                    <span>
+                                        Envoyer une image
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn">Créer</button>
+                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{{!------------------ /Modal création article --------------}}
