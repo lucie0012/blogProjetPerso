@@ -34,7 +34,7 @@
                             <p class="card-text mt-2">{{ truncate content 200 }}</p>
                         </div>
                         {{!-- bouton noter --}}
-                        {{#if  dbUserId.isVerified}}
+                        {{#if ../userVerified }}
                         {{!-- A REVOIR --}}
                         <a class="btn d-flex flex-row-reverse" type="button" data-toggle="modal"
                             data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</a>

@@ -14,10 +14,19 @@ module.exports = {
     getRepertory: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbRepertory = await repertoryCollection.find({})
+        // console.log(dbUserId);
+        // console.log(dbUserId.isVerified);
+
+        let userVerified = dbUserId != null ? dbUserId.isVerified : false;
+        // condition ternaire
+        // console.log(userVerified);
+
+
 
         res.render('repertory/repertory', {
             dbUserId: dbUserId,
-            dbRepertory: dbRepertory
+            dbRepertory: dbRepertory,
+            userVerified : userVerified
         })
     },
 

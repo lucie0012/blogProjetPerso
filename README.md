@@ -1,9 +1,4 @@
 # blogProjetPerso
-Pour démarrer le projet : 
-"nodemon" (ou "npm i") et si besoin "npm run reinstall"
-sur un autre terminal : "npm run sass"
-
-
 Blog projet perso arinfo
 
 #// INDICATIONS :
@@ -145,7 +140,7 @@ Blog projet perso arinfo
 // dans package.json, ajouter ligne dans scripts{}:
 "sass": "sass --watch ./public/css/bootstrap/scss/bootstrap.scss:./public/css/style.css"
 // dans le head de la page main.hbs, mettre la ligne ci dessous (lien CSS) : 
-"<link rel="stylesheet" href="/public/css/style.css">" (fait référence au chemin « public » créé dans server.js)
+"<link rel="stylesheet" href="public/css/style.css">"
 // dans le fichier end, avant la balise </body> mettre les liens JS de bootstrap (getting started site bootstrap)
 // créer le fichier style.css dans le dossier public/css (il est vide c’est normal)
 // supprimer la ligne « bootstrap » dans package.json pour qu’au prochain "npm run reinstall", le module ne se réinstalle pas (car plus besoin vu qu’on a copié le dossier)
@@ -153,20 +148,9 @@ Blog projet perso arinfo
 // puis démarrer sass « npm run sass » (sur un terminal à part). 
 // Aller modifier dans un fichier bootstrap (ex : _alert.scss) (ajouter un retour à la ligne par ex) : seulement à faire la première fois pour que bootstrap voit une différence et écrive dans le style.css
 // ATTENTION : ne jamais écrire dans le style.css (ou bootstrap.scss) : c’est bootstrap qui le fait : il faut modifier directement dans les dossier concerné dans scss
-// Créer un fichier "_mystyle.scss" dans le dossier style/css/bootstrap/scss, puis dans bootstrap.scss faire @import « mystyle » (dedans on pourra créer notre propre scss : attention cela peut rentrer en conflit avec les classes bootstrap)
+// SI BESOIN : créer un fichier "_mystyle.scss" dans le dossier style/css/bootstrap puis dans bootstrap.scss faire @import « mystyle » (dedans on pourra créer notre propre scss : attention cela peut rentrer en conflit avec les classes bootstrap)
 // Dès qu’on est en phase dev : on lance « nodemon » sur notre terminal et « npm run sass » (sur un terminal à part) mais en phase prod (pas besoin) 
 
-// créer les pages header (contenant nav) et footer et les intégrer dans le main.hbs (via les {{> }})
-// utilisation balise "header" pour la partie liens et logo/titre et "nav" pour la navbar (cf structure html5)
-// créer la page scrollup et intégrer dans le main.hbs (utilisation balise "aside" : car lié à la page mais ne fait pas partie du contenu principal)
-
-// créer le header avec les nav (pour l'ajout de l'image dans le header, bien penser à indiquer son chemin via /public/...)
-
-// créer les pages nécessaire au site et leur chemin
-
-// créer les modals lié à la page d'accueil
-
-// cf word dossier projet
 
 
 // MEP nodemailer : (https://www.supinfo.com/articles/single/2102-envoyer-mails-avec-nodejs-nodemailer)

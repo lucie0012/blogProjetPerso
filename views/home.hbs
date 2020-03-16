@@ -1,8 +1,8 @@
 <div class="container">
-    <h1><a href="/repertory" class="text-reset"> Les sites les plus recommandés</a></h1>
+    <h1><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
     <div class="row">
         <div class="card-deck">
-            {{#each (limitEach dbActu 3 ) }}
+            {{#each (limitEach dbRepertoryVerified 3 ) }}
             <div class="card">
                 <div class="card-header">
                     <small class="text-muted">Dans catégorie : </small>
@@ -12,10 +12,10 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ title }}</h5>
-                    <a href="#">www.google.fr</a>
+                    <a href="{{ url }}">{{ url }}</a>
                     <p class="card-text mt-2">{{ truncate content 200 }}</p>
                 </div>
-                <a href="#" class="btn d-flex flex-row-reverse">Noter</a>
+                {{!-- <a href="#" class="btn d-flex flex-row-reverse">Noter</a> --}}
             </div>
             {{/each }}
         </div>
