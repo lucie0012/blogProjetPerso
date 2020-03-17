@@ -22,7 +22,7 @@ const admin = require('./controllers/admin')
 const multer = require('../middleware/multer-config')
 const isAdmin = require('../middleware/isAdmin')
 const isVerified = require('../middleware/isVerified')
-const preMulter = require('../middleware/preMulter')
+// const preMulter = require('../middleware/preMulter')
 
 /*
  * dbUser
@@ -127,7 +127,7 @@ router.route('/about')
  ***********/
 // Création de compte
 router.route('/userCreate')
-    .post(preMulter, multer, user.postUserCreate)
+    .post(multer, user.postUserCreate)
 
 // Connexion
 router.route('/authentification')
@@ -150,7 +150,7 @@ router.route('/verifiedUser/:id')
 router.route('/adminUserEdit/:id')
     .get(isAdmin, user.getUserEdit)
     .put(isAdmin, user.putlistUser)
-    .delete(isAdmin, user.deleteOneUser)
+    .delete(isAdmin, user.deleteOneUserAdmin)
 
 /*
  * Admin

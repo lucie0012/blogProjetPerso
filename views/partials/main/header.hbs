@@ -179,9 +179,9 @@
                                 <input type="password" class="form-control" name="password"
                                     placeholder="Votre mot de passe *" value="" required />
                             </div>
-                            <div class="checkbox">
+                            {{!-- <div class="checkbox">
                                 <label> <input type="checkbox"> Se rappeler de moi. </label>
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <a href="#" class="ForgetPwd">Mot de passe oublié</a>
                             </div>
@@ -255,7 +255,7 @@
             </form>
 
 {{!------------ bouton suppression compte  ------------------}}
-            <form action="/userEdit/{{ dbUser._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+            <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

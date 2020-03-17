@@ -55,10 +55,11 @@ module.exports = {
 
     /**************Edition compte***************/
     putUserEdit: async (req, res) => {
-        console.log(req.params.id);
+        // console.log(req.params.id);
         const dbUser = await userCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
         // console.log(req.file);
+        // console.log(dbUser.nameImage);
 
         if (!req.file) {
             if (req.body) {
@@ -83,8 +84,27 @@ module.exports = {
                 res.redirect("/")
                 console.log('no req.body');
             }
+        } else if (dbUser.nameImage == null) {
+            userCollection.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    email: req.body.email,
+                    pseudo: req.body.pseudo,
+                    name: req.body.name,
+                    image: `/public/ressources/images/${req.file.filename}`,
+                    nameImage: req.file.filename,
+                },
+                { multi: true },
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.send(err)
+                    } else {
+                        console.log('File MAJ');
+                        res.redirect('/')
+                    }
+                })
         } else {
-            // console.log(req.file);
             userCollection.findOneAndUpdate(
                 { _id: req.params.id },
                 {
@@ -99,10 +119,9 @@ module.exports = {
                     fs.unlink(pathImage,
                         (err) => {
                             if (err) {
-                                // res.redirect("/")
                                 console.log(err);
                             } else {
-                                console.log('File delete');
+                                console.log('New img OK and old File delete');
                                 res.redirect('/')
                             }
                         })
@@ -113,20 +132,26 @@ module.exports = {
     /**************Suppression compte***************/
     deleteOneUser: async (req, res) => {
         // console.log(req.params.id);
-        // console.log('delete Article')
         const dbUser = await userCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
         // console.log(dbUser);
+        // console.log(dbUser.nameImage);
+
 
         if (dbUser.nameImage == null) {
-            // console.log("pas d'image");
+            // mettre undefined plutôt ??
+            console.log("pas d'image");
             userCollection.deleteOne(
                 { _id: req.params.id },
                 (err) => {
                     if (!err) {
-                        // console.log("User delete");
+                        console.log("User delete");
+                        req.session.destroy(() => {
+                            res.clearCookie('clear cookie OK et déco ok');
+                            res.redirect('/')
+                        })
                         // res.redirect('/')
-                        res.render('home')
+                        // res.render('home')
                     } else {
                         console.log(err);
                     }
@@ -141,9 +166,13 @@ module.exports = {
                                 if (err) {
                                     console.log(err);
                                 } else {
-                                    // console.log("User and File delete");
+                                    console.log("User and File delete et déco ok");
+                                    req.session.destroy(() => {
+                                        res.clearCookie('clear cookie OK');
+                                        res.redirect('/')
+                                    })
                                     // res.redirect('/')
-                                    res.render('home')
+                                    // res.render('home')
                                 }
                             }
                         )
@@ -164,7 +193,7 @@ module.exports = {
 
         if (!dbUser) {
             console.log('user pas dans la DB');
-            res.redirect('/userCreate')
+            res.redirect('/')
         } else {
             const sess = req.session
             // console.log(req.body)
@@ -291,27 +320,48 @@ module.exports = {
     },
 
     /**************Suppression utilisateur pour admin***************/
-    deleteOneUser: async (req, res) => {
+    deleteOneUserAdmin: async (req, res) => {
+
         // console.log(req.params.id);
         const dbUser = await userCollection.findById(req.params.id);
         const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
-        userCollection.deleteOne(
-            { _id: req.params.id },
-            (err) => {
-                if (!err) {
-                    fs.unlink(pathImage,
-                        (err) => {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                console.log("File delete");
-                                res.redirect('/admin')
+        // console.log(dbUser);
+        // console.log(dbUser.nameImage);
+
+        if (dbUser.nameImage == null) {
+            // mettre undefined plutôt ??
+            console.log("pas d'image");
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        console.log("User delete");
+                        res.redirect('/admin')
+                        // res.render('admin')
+                    } else {
+                        console.log(err);
+                    }
+                })
+        } else {
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        fs.unlink(pathImage,
+                            (err) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log("User and File delete");
+                                    res.redirect('/admin')
+                                    // res.render('admin')
+                                }
                             }
-                        }
-                    )
-                } else {
-                    res.send(err)
-                }
-            })
+                        )
+                    } else {
+                        res.send(err)
+                    }
+                })
+        }
     },
 }
