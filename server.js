@@ -19,11 +19,11 @@ const mongoStore = MongoStore(expressSession);
  * Gestion urlDB et port
  ******************************/
 const config = require('./api/config/config');
-// const port = process.env.PORT || 5000
+// au départ du projet : le port et l'urlDb peuvent être ici
 const port = config.dev.port;
-// const urlDB = "mongodb://localhost:27017/projetperso"
-// const urlDB = "mongodb+srv://lucie:eodeezae250812@blogprojetperso-ycggc.mongodb.net/test?retryWrites=true&w=majority"
 const urlDB = config.prod.urlDBcloud;
+// const urlDB = config.prod.urlDBlocal;
+
 
 
 /* Gestion fichiers statiques
@@ -116,7 +116,9 @@ mongoose.connect(urlDB, {
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
-});
+})
+.then(() => console.log('Connecté à MongoDb Cloud'))
+.catch((err) => console.log(err))
 
 
 /*

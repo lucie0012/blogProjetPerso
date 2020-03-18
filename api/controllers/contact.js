@@ -8,11 +8,13 @@ module.exports = {
     getContact: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('contact', { dbUserId: dbUserId })
+        res.render('contact', { dbUserId: dbUserId,
+         needAlert: false})
     },
 
     /**************Envoi d'un message***************/
     postMessage: (req, res) => {
+ 
         messageCollection.create(
             {
                 nameAuthor: req.body.name,
@@ -22,13 +24,16 @@ module.exports = {
                 content: req.body.content,
             },
             (err) => {
-                if (!err) {
-                    // res.redirect('/actuSingle/' + req.params.id)
-                    res.redirect('back')
-                    // 'back' permet de revenir à la page précédente
-                } else {
-                    res.send(err)
-                }
+                // err != null -> est l'équivalent d'une condition if qui retourne un boolean
+                let isError = err != null;
+
+                if(isError)
+                {
+                    console.log(err);
+                }    
+
+                res.render('contact', { needAlert : true,
+                    isError : isError})
             })
         // console.log(req.body)
         // console.log(req.params.id)
