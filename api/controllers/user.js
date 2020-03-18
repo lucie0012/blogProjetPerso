@@ -191,9 +191,13 @@ module.exports = {
         // comme si on faisait const email = req.body. email et const password = req.body.password
         const dbUser = await userCollection.findOne({ email })
 
+        // console.log("test");
+        // console.log(req.body.email);
+
         if (!dbUser) {
             console.log('user pas dans la DB');
-            res.redirect('/')
+            res.json({ message: "Email ou mot de passe incorrect." });
+            // res.redirect('/')
         } else {
             const sess = req.session
             // console.log(req.body)
@@ -202,7 +206,8 @@ module.exports = {
             bcrypt.compare(password, dbUser.password, (err, same) => {
                 if (!same) {
                     console.log('mdp non correct');
-                    res.redirect('back')
+                    res.json({ message: "Email ou mot de passe incorrect." });
+                    // res.redirect('back')
                 } else {
                     sess.userId = dbUser._id
                     sess.status = dbUser.status
@@ -215,7 +220,8 @@ module.exports = {
                     sess.isModo = dbUser.isModo
                     sess.isBan = dbUser.isBan
                     // console.log(sess);
-                    res.redirect('/')
+                    // res.redirect('/')
+                    res.json({ noError: true });
                 }
             })
         }
