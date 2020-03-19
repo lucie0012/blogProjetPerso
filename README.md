@@ -90,6 +90,8 @@ Blog projet perso arinfo
 // pour supprimer l'image, besoin de require les modules "path" et "fs" (inclus dans nodejs) donc pas à installer
 // ATTENTION : 
 
+// installer handlebars helpers pour utiliser leur librairie d'helpers déjà créé : "npm install --save handlebars-helpers"
+// puis require : "var helpers = require('handlebars-helpers')();" pour require tout les helpers (sinon possible de sélectionner) : https://github.com/helpers/handlebars-helpers#comparison
 
 // GITHUB : 
 // penser à créer le fichier .gitignore comprenant : node_modules/*

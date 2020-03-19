@@ -26,7 +26,20 @@
                     </div>
                     <div class="col-md-8">
                         <div class="card-header">
-                            <small class="text-muted">Dans catégorie : {{ category }} / Note : </small>
+                            <small class="text-muted">Dans catégorie :
+                                {{#contains category "sansGluten" }}
+                                Sans gluten
+                                {{/contains }}
+                                {{#contains category "sansLactose" }}
+                                Sans lactose
+                                {{/contains }}
+                                {{#contains category "sansOeufs" }}
+                                Sans oeufs
+                                {{/contains }}
+                                {{#contains category "sansCaseine" }}
+                                Sans caséine
+                                {{/contains }}
+                                / Note : </small>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ title }}</h5>
@@ -44,7 +57,7 @@
                 </div>
             </div>
 
-            {{!-- Modal noter site/répertoire --}}
+            {{!-------------- Modal noter site/répertoire -------------------}}
             <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog"
                 aria-labelledby="#modalNoterLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -89,47 +102,57 @@
                     </div>
                 </div>
             </div>
-            {{!-- /Modal noter site/répertoire --}}
+            {{!-------------------- /Modal noter site/répertoire --------------------}}
             {{/if}}
             {{/each }}
         </div>
 
         <div class="col-md-3">
-            <table class="table">
-                <thead>
-                    <p>Trier par catégorie</p>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansGluten">
-                        </th>
-                        <td> <label class="form-check-label" for="sansGluten">
-                                Sans gluten
-                            </label></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansLactose">
-                        </th>
-                        <td> <label class="form-check-label" for="sansLactose">
-                                Sans lactose
-                            </label></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="sansOeufs">
-                        </th>
-                        <td> <label class="form-check-label" for="sansOeufs">
-                                Sans oeufs
-                            </label></td>
-                    </tr>
-                    <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="recommandes">
-                        </th>
-                        <td> <label class="form-check-label" for="recommandes">
-                                Les plus recommandés
-                            </label></td>
-                    </tr>
-                </tbody>
-            </table>
+            <form action="/repertoryFilter" method="POST">
+                <table class="table">
+                    <thead>
+                        <p>Trier par catégorie</p>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansGluten" id="sansGluten">
+                            </th>
+                            <td> <label class="form-check-label" for="sansGluten">
+                                    Sans gluten
+                                </label></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansLactose" id="sansLactose">
+                            </th>
+                            <td> <label class="form-check-label" for="sansLactose">
+                                    Sans lactose
+                                </label></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansOeufs" id="sansOeufs">
+                            </th>
+                            <td> <label class="form-check-label" for="sansOeufs">
+                                    Sans oeufs
+                                </label></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansCaseine" id="sansCaseine">
+                            </th>
+                            <td> <label class="form-check-label" for="sansOeufs">
+                                    Sans caséine
+                                </label></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> <input class="form-check-input" type="checkbox" value="" id="populaires">
+                            </th>
+                            <td> <label class="form-check-label" for="populaires">
+                                    Les plus populaires
+                                </label></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn">Rechercher</button>
+            </form>
         </div>
 
     </div>
@@ -173,22 +196,22 @@
                                 </br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="category"
-                                        value="Sans gluten">
+                                        value="sansGluten">
                                     <label class="form-check-label" for="inlineCheckbox1">Sans gluten</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="category"
-                                        value="Sans lactose">
+                                        value="sansLactose">
                                     <label class="form-check-label" for="inlineCheckbox2">Sans lactose</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="category"
-                                        value="Sans oeufs">
+                                        value="sansOeufs">
                                     <label class="form-check-label" for="inlineCheckbox3">Sans oeufs</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="category"
-                                        value="Sans caseine">
+                                        value="sansCaseine">
                                     <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
                                 </div>
 

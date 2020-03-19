@@ -10,6 +10,8 @@ const MomentHandler = require("handlebars.moment");
 const Handlebars = require("handlebars");
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo');
+const helpers = require('handlebars-helpers')();
+// pour utiliser tout les helpers de la librairie (sinon possible de sélectionner l'helpers souhaité)
 
 
 const app = express();

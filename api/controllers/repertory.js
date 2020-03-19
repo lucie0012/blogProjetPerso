@@ -13,7 +13,7 @@ module.exports = {
     /**************Affichage page Repertoire***************/
     getRepertory: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
-        const dbRepertory = await (await repertoryCollection.find({})).reverse()
+        const dbRepertory = await (await repertoryCollection.find({})).reverse()    //double await suite au ".reverse()"
         // console.log(dbUserId);
         // console.log(dbUserId.isVerified);
 
@@ -26,7 +26,7 @@ module.exports = {
         res.render('repertory/repertory', {
             dbUserId: dbUserId,
             dbRepertory: dbRepertory,
-            userVerified : userVerified
+            userVerified: userVerified
         })
     },
 
@@ -49,8 +49,8 @@ module.exports = {
                 }
             })
 
-        console.log(req.body)
-        console.log(req.body.category)
+        // console.log(req.body)
+        // console.log(req.body.category)
         // console.log(req.params.id)
     },
 
@@ -85,7 +85,7 @@ module.exports = {
                 title: req.body.title,
                 url: req.body.url,
                 content: req.body.content,
-                category: "Indéfini",
+                category: req.body.category,
             },
             (err) => {
                 if (!err) {
@@ -175,6 +175,74 @@ module.exports = {
                     // console.log('suppression OK');
                 }
             })
+    },
+
+    /**************Suppression d'une note/commentaire ***************/
+    postSiteFilter: async (req, res) => {
+        // // console.log(req.body.category);
+
+        // const search = req.body.category;
+        // const dbRepertoryFilter = await repertoryCollection.find({ category : search })
+
+        // // console.log(dbRepertoryFilter);
+
+        // res.render('repertory/repertory', { dbRepertory : dbRepertoryFilter })
+
+        // TEST OK : récupère pour sans gluten coché tout les sites où il y a sans gluten (même les sans gluten et sans lactose)
+        // et pour sans gluten et sans lactose coché récupère les sites où il y a sans gluten ET sans lactose
+
+        // console.log(req.body.category);
+
+        const search = req.body.category;
+        const dbRepertory = await repertoryCollection.find({})
+
+        let dbRepertoryFilter;
+        if (Array.isArray(search)) {
+            console.log(1);
+            dbRepertoryFilter = await repertoryCollection.find({ category: { $in: [search[0], search[1], search[2], search[3]] } })
+        } else {
+            console.log(2);
+
+            dbRepertoryFilter = await repertoryCollection.find({ category: search })
+        }
+
+        // // console.log(dbRepertoryFilter);
+
+        res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
+
+        // TEST 2 OK : récupère pour sans gluten et sans lactose coché : les sites où il y a sans gluten, 
+        // sans lactose et sans gluten ET sans lactose / pour sans gluten coché : récupère les sites où il y a sans gluten (même les sans gluten et sans lactose)
+
+
+        // console.log(req.body.category);
+
+        // const search = req.body.category;
+        // const dbRepertory = await repertoryCollection.find({})
+
+        // let dbRepertoryFilter;
+        // if (Array.isArray(search)) {
+        //     console.log(1);
+
+        //     dbRepertoryFilter = await repertoryCollection.find({ category: { $in: [search[0], search[1]] } })
+        // } else {
+        //     console.log(2);
+
+        //     dbRepertoryFilter = await repertoryCollection.find({ category: search })
+        // }
+
+        // console.log(dbRepertoryFilter);
+        // console.log(search);
+        // console.log(search[0]);
+        // console.log(dbRepertory.category);
+
+        // if (search == "sansGluten") {
+        //     console.log("test 1");
+        // } else if ((search == "sansGluten" & search == "sansLactose")) {
+        //     console.log("test 2");
+        // }
+
+        // res.redirect('/admin')
+
     },
 
 }

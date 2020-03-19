@@ -77,6 +77,10 @@ router.route('/repertory')
     .get(repertory.getRepertory)
     .post(isVerified, repertory.postSiteCreate)
 
+// Filtre par catégorie
+router.route('/repertoryFilter')
+    .post(repertory.postSiteFilter)
+
 // Edition de site/répertoire et suppression
 router.route('/repertory/:id')
     .put(isAdmin, repertory.putSite)
@@ -87,7 +91,7 @@ router.route('/repertoryValid/:id')
     .put(isAdmin, repertory.putSiteValid)
 
 
-
+    
 /*
  *Note
  ****************/
