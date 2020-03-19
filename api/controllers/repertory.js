@@ -13,7 +13,7 @@ module.exports = {
     /**************Affichage page Repertoire***************/
     getRepertory: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
-        const dbRepertory = await repertoryCollection.find({})
+        const dbRepertory = await (await repertoryCollection.find({})).reverse()
         // console.log(dbUserId);
         // console.log(dbUserId.isVerified);
 
@@ -48,7 +48,9 @@ module.exports = {
                     res.send(err)
                 }
             })
-        // console.log(req.body)
+
+        console.log(req.body)
+        console.log(req.body.category)
         // console.log(req.params.id)
     },
 

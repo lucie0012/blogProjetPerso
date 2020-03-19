@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-md-9">
-            {{#each (reverse dbRepertory) }}
+            {{#each dbRepertory }}
             {{#if isVerified}}
             <div class="card mb-3" style="max-width: 650px;">
                 <div class="row no-gutters">
@@ -169,8 +169,31 @@
                                 <input type="text" class="form-control" name="url" required>
                             </div>
                             <div class="form-group">
-                                <label for="category">Catégorie</label>
-                                <input type="text" class="form-control" name="category" required>
+                                <label required for="category">Catégorie</label>
+                                </br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="category"
+                                        value="Sans gluten">
+                                    <label class="form-check-label" for="inlineCheckbox1">Sans gluten</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="category"
+                                        value="Sans lactose">
+                                    <label class="form-check-label" for="inlineCheckbox2">Sans lactose</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="category"
+                                        value="Sans oeufs">
+                                    <label class="form-check-label" for="inlineCheckbox3">Sans oeufs</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="category"
+                                        value="Sans caseine">
+                                    <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
+                                </div>
+
+                                {{!-- <label for="category">Catégorie</label>
+                                <input type="text" class="form-control" name="category" required> --}}
                             </div>
                             <div class="form-group">
                                 <label for="description">Contenu</label>

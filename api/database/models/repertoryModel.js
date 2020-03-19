@@ -8,7 +8,7 @@ const repertorySchema = new mongoose.Schema({
     nameImage : String,
     content : String,
     url : String,
-    category : String,
+    category : Array,
     note : String,
     createDate : {
         type: Date,

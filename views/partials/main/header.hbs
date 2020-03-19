@@ -171,7 +171,7 @@
             <div class="container">
                 <div class="row modal-body">
                     <div class="col-md-12">
-                        <label id="messageErrorAuth" class="text-danger"></label>
+                        <label id="messageErrorAuth" class="text-danger d-none"></label>
                         <div class="form-group">
                             <input type="email" class="form-control" name="emailAuth" placeholder="Votre Email *"
                                 value="" required />
@@ -213,6 +213,7 @@
             dataType: 'json',
             success: function (json, statut) {
                 console.log(json.message);
+                $("#messageErrorAuth").removeClass("d-none");
                 $("#messageErrorAuth").text(json.message);
 
                 if (json.noError) {
