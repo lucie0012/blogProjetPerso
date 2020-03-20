@@ -75,7 +75,7 @@ router.route('/commentaireActu/:id')
 // Affichage page répertoire et création site/répertoire
 router.route('/repertory')
     .get(repertory.getRepertory)
-    .post(isVerified, repertory.postSiteCreate)
+    .post(isVerified, multer, repertory.postSiteCreate)
 
 // Filtre par catégorie
 router.route('/repertoryFilter')
@@ -83,7 +83,7 @@ router.route('/repertoryFilter')
 
 // Edition de site/répertoire et suppression
 router.route('/repertory/:id')
-    .put(isAdmin, repertory.putSite)
+    .put(isAdmin, multer, repertory.putSite)
     .delete(isAdmin, repertory.deleteOneSite)
 
 // Validation de site/répertoire

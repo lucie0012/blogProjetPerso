@@ -115,28 +115,32 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansGluten" id="sansGluten">
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                                    value="sansGluten" id="sansGluten">
                             </th>
                             <td> <label class="form-check-label" for="sansGluten">
                                     Sans gluten
                                 </label></td>
                         </tr>
                         <tr>
-                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansLactose" id="sansLactose">
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                                    value="sansLactose" id="sansLactose">
                             </th>
                             <td> <label class="form-check-label" for="sansLactose">
                                     Sans lactose
                                 </label></td>
                         </tr>
                         <tr>
-                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansOeufs" id="sansOeufs">
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                                    value="sansOeufs" id="sansOeufs">
                             </th>
                             <td> <label class="form-check-label" for="sansOeufs">
                                     Sans oeufs
                                 </label></td>
                         </tr>
                         <tr>
-                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category" value="sansCaseine" id="sansCaseine">
+                            <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                                    value="sansCaseine" id="sansCaseine">
                             </th>
                             <td> <label class="form-check-label" for="sansOeufs">
                                     Sans caséine
@@ -170,7 +174,7 @@
                 </button>
             </div>
 
-            <form action="/repertory" method="POST">
+            <form action="/repertory" method="POST" enctype="multipart/form-data">
                 {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
                 {{!-- "method" : correspond à la methode utilisée : ici POST --}}
                 {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
@@ -222,14 +226,14 @@
                                 <label for="description">Contenu</label>
                                 <textarea type="text" class="form-control" name="content" required></textarea>
                             </div>
-                            {{!-- <div class="form-group">
-                        <label>
-                          <input type="file" name="image">
-                          <span>
-                            Envoyer une image
-                          </span>
-                        </label>
-                      </div> --}}
+                            <div class="form-group">
+                                <label>
+                                    <input type="file" name="image">
+                                    <span>
+                                        Envoyer une image
+                                    </span>
+                                </label>
+                            </div>
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">

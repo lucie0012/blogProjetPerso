@@ -5,7 +5,20 @@
             {{#each (limitEach dbRepertoryVerified 3 ) }}
             <div class="card">
                 <div class="card-header">
-                    <small class="text-muted">Dans catégorie : </small>
+                    <small class="text-muted">Dans catégorie :
+                        {{#contains category "sansGluten" }}
+                        Sans gluten
+                        {{/contains }}
+                        {{#contains category "sansLactose" }}
+                        Sans lactose
+                        {{/contains }}
+                        {{#contains category "sansOeufs" }}
+                        Sans oeufs
+                        {{/contains }}
+                        {{#contains category "sansCaseine" }}
+                        Sans caséine
+                        {{/contains }}
+                        / Note : </small>
                 </div>
                 <div class="card-body">
                     <img src="{{ image }}" class="rounded float-left" height="120px" width="100px" alt="image du site">

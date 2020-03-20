@@ -32,22 +32,50 @@ module.exports = {
 
     /**************Création d'un site pour le répertoire ***************/
     postSiteCreate: (req, res) => {
-        repertoryCollection.create(
-            {
-                title: req.body.title,
-                url: req.body.url,
-                content: req.body.content,
-                category: req.body.category,
-                pseudo: req.session.pseudo
-            },
-            (err) => {
-                if (!err) {
-                    res.redirect('/repertory')
-                    // 'back' permet de revenir à la page précédente
-                } else {
-                    res.send(err)
-                }
-            })
+        const limitSize = '1000000'
+        // console.log(req.body)
+
+        if (!req.file) {
+            console.log("pas de photo");
+            repertoryCollection.create(
+                {
+                    title: req.body.title,
+                    url: req.body.url,
+                    content: req.body.content,
+                    category: req.body.category,
+                    pseudo: req.session.pseudo,
+                },
+                (err, post) => {
+                    res.redirect('back')
+                })
+        } else {
+            if (req.file.size < limitSize) {
+                // console.log(req.file)
+                // console.log(req.file.size)
+                console.log('Size photo OK');
+                repertoryCollection.create(
+                    {
+                        title: req.body.title,
+                        url: req.body.url,
+                        content: req.body.content,
+                        category: req.body.category,
+                        pseudo: req.session.pseudo,
+                        image: `/public/ressources/images/${req.file.filename}`,
+                        nameImage: req.file.filename
+                    },
+                    (err, post) => {
+                        if (err) {
+                            res.send(err)
+                        } else {
+                            res.redirect('back')
+                            // 'back' permet de revenir à la page précédente
+                        }
+                    })
+            } else if (req.file.size > limitSize) {
+                console.log('Size photo not OK');
+                res.redirect('back')
+            }
+        }
 
         // console.log(req.body)
         // console.log(req.body.category)
@@ -75,44 +103,133 @@ module.exports = {
     },
 
     /************** Edition d'un site pour le répertoire ***************/
-    putSite: (req, res) => {
-        console.log(req.params.id);
-        console.log(req.body);
+    putSite: async (req, res) => {
+        // console.log(req.params.id);
+        // console.log(req.body);
 
-        repertoryCollection.findOneAndUpdate(
-            { _id: req.params.id },
-            {
-                title: req.body.title,
-                url: req.body.url,
-                content: req.body.content,
-                category: req.body.category,
-            },
-            (err) => {
-                if (!err) {
-                    // console.log("update ok");
-                    res.redirect('back')
-                    // 'back' permet de revenir à la page précédente
-                } else {
-                    res.send(err)
-                }
-            })
+        const dbRepertory = await repertoryCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbRepertory.nameImage)
+        // console.log(req.file);
+        // console.log(dbUser.nameImage);
+
+        if (!req.file) {
+            if (req.body) {
+                // console.log(req.body);
+                repertoryCollection.findOneAndUpdate(
+                    { _id: req.params.id },
+                    {
+                        title: req.body.title,
+                        url: req.body.url,
+                        content: req.body.content,
+                        category: req.body.category,
+                    },
+                    { multi: true },
+                    (err) => {
+                        if (err) {
+                            res.send(err)
+                        } else {
+                            console.log('UPDATE OK');
+                            res.redirect('back')
+                        }
+                    })
+            } else {
+                res.redirect("back")
+                console.log('no req.body');
+            }
+        } else if (dbRepertory.nameImage == null) {
+            repertoryCollection.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    title: req.body.title,
+                    url: req.body.url,
+                    content: req.body.content,
+                    category: req.body.category,
+                    image: `/public/ressources/images/${req.file.filename}`,
+                    nameImage: req.file.filename,
+                },
+                { multi: true },
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.send(err)
+                    } else {
+                        console.log('File MAJ');
+                        res.redirect("back")
+                    }
+                })
+        } else {
+            repertoryCollection.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    title: req.body.title,
+                    url: req.body.url,
+                    content: req.body.content,
+                    category: req.body.category,
+                    image: `/public/ressources/images/${req.file.filename}`,
+                    nameImage: req.file.filename,
+                },
+                { multi: true },
+                (err, post) => {
+                    fs.unlink(pathImage,
+                        (err) => {
+                            if (err) {
+                                console.log(err);
+                                res.send(err)
+                            } else {
+                                console.log('New img OK and old File delete');
+                                res.redirect("back")
+
+                            }
+                        })
+                })
+        }
     },
 
     /**************Suppression d'un site pour le répertoire ***************/
-    deleteOneSite: (req, res) => {
+    deleteOneSite: async (req, res) => {
         // console.log(req.params.id);
 
-        repertoryCollection.deleteOne(
-            { _id: req.params.id },
-            (err) => {
-                if (err) {
-                    res.send(err)
-                    // console.log('suppression pas OK');
-                } else {
-                    res.redirect('/admin')
-                    // console.log('suppression OK');
-                }
-            })
+        const dbRepertory = await repertoryCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbRepertory.nameImage)
+        // console.log(dbUser);
+        // console.log(dbUser.nameImage);
+
+
+        if (dbRepertory.nameImage == null) {
+            // mettre undefined plutôt ??
+            console.log("pas d'image");
+            repertoryCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.send(err)
+                    } else {
+                        console.log("Site delete");
+                        res.redirect('/admin')
+                    }
+                })
+        } else {
+            repertoryCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (err) {
+                        res.send(err)
+                    } else {
+                        fs.unlink(pathImage,
+                            (err) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log("Site and File delete");
+                                    res.redirect('/admin')
+                                }
+                            }
+                        )
+                    }
+                })
+        }
+
     },
 
     /**************Création d'une note ***************/
@@ -179,36 +296,36 @@ module.exports = {
 
     /**************Suppression d'une note/commentaire ***************/
     postSiteFilter: async (req, res) => {
-        // // console.log(req.body.category);
+        // console.log(req.body.category);
 
-        // const search = req.body.category;
-        // const dbRepertoryFilter = await repertoryCollection.find({ category : search })
+        const search = req.body.category;
+        const dbRepertoryFilter = await repertoryCollection.find({ category: search })
 
-        // // console.log(dbRepertoryFilter);
+        // console.log(dbRepertoryFilter);
 
-        // res.render('repertory/repertory', { dbRepertory : dbRepertoryFilter })
+        res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
 
         // TEST OK : récupère pour sans gluten coché tout les sites où il y a sans gluten (même les sans gluten et sans lactose)
         // et pour sans gluten et sans lactose coché récupère les sites où il y a sans gluten ET sans lactose
 
-        // console.log(req.body.category);
+        // // console.log(req.body.category);
 
-        const search = req.body.category;
-        const dbRepertory = await repertoryCollection.find({})
+        // const search = req.body.category;
+        // const dbRepertory = await repertoryCollection.find({})
 
-        let dbRepertoryFilter;
-        if (Array.isArray(search)) {
-            console.log(1);
-            dbRepertoryFilter = await repertoryCollection.find({ category: { $in: [search[0], search[1], search[2], search[3]] } })
-        } else {
-            console.log(2);
+        // let dbRepertoryFilter;
+        // if (Array.isArray(search)) {
+        //     console.log(1);
+        //     dbRepertoryFilter = await repertoryCollection.find({ category: { $in: [search[0], search[1], search[2], search[3]] } })
+        // } else {
+        //     console.log(2);
 
-            dbRepertoryFilter = await repertoryCollection.find({ category: search })
-        }
+        //     dbRepertoryFilter = await repertoryCollection.find({ category: search })
+        // }
 
         // // console.log(dbRepertoryFilter);
 
-        res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
+        // res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
 
         // TEST 2 OK : récupère pour sans gluten et sans lactose coché : les sites où il y a sans gluten, 
         // sans lactose et sans gluten ET sans lactose / pour sans gluten coché : récupère les sites où il y a sans gluten (même les sans gluten et sans lactose)

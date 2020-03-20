@@ -4,7 +4,10 @@ const repertorySchema = new mongoose.Schema({
 
     pseudo : String,
     title : String,
-    image : String,
+    image: {
+        type: String,
+        default: "/public/ressources/images/siteDefaultImage.jpeg"
+    },
     nameImage : String,
     content : String,
     url : String,
