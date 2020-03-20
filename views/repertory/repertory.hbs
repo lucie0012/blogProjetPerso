@@ -174,7 +174,8 @@
                 </button>
             </div>
 
-            <form action="/repertory" method="POST" enctype="multipart/form-data">
+            <form action="/repertory" method="POST" enctype="multipart/form-data" name="scriptCheckbox"
+                id="scriptCheckboxUser">
                 {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
                 {{!-- "method" : correspond à la methode utilisée : ici POST --}}
                 {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
@@ -196,26 +197,27 @@
                                 <input type="text" class="form-control" name="url" required>
                             </div>
                             <div class="form-group">
-                                <label required for="category">Catégorie</label>
+                                <label for="category">Catégorie</label>
+                                <label id="messageErrorAddSite" class="text-danger d-none"></label>
                                 </br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="category"
-                                        value="sansGluten">
-                                    <label class="form-check-label" for="inlineCheckbox1">Sans gluten</label>
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox1" name="category" value="sansGluten">
+                                    <label class="form-check-label " for="inlineCheckbox1">Sans gluten</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="category"
-                                        value="sansLactose">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox2" name="category" value="sansLactose">
                                     <label class="form-check-label" for="inlineCheckbox2">Sans lactose</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="category"
-                                        value="sansOeufs">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox3" name="category" value="sansOeufs">
                                     <label class="form-check-label" for="inlineCheckbox3">Sans oeufs</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="category"
-                                        value="sansCaseine">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox4" name="category" value="sansCaseine">
                                     <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
                                 </div>
 
@@ -249,3 +251,28 @@
     </div>
 </div>
 {{!------------------ /Modal proposition site pour répertoire --------------}}
+
+{{!-- SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
+{{!-- avec JQuery --}}
+<script>
+
+    $("#scriptCheckboxUser").submit(function (event) {
+        //on vérifie que nos conditions d'envoi sont bonnes
+        if (countCheckedJQuery() >= 1) {
+            console.log("submitted !");
+        } else {
+            //on empêche le questionnaire de s'envoyer
+            event.preventDefault();
+            $("#messageErrorAddSite").removeClass("d-none");
+            $("#messageErrorAddSite").text("Veuillez cocher au moins une case");
+            console.log("unsubmit");
+        }
+    });
+
+    function countCheckedJQuery() {
+        var checked = $(".groupCheckboxScript:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
+        return checked.length;
+    }
+
+</script>
+{{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
