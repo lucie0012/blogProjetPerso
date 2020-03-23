@@ -147,7 +147,7 @@ app.use("/", router)
  * Error 404
  ******************************/
 app.use((req, res) => {
-    res.render('error404')
+    res.render('error')
 })
 
 

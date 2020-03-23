@@ -154,10 +154,10 @@ Blog projet perso arinfo
 // Dès qu’on est en phase dev : on lance « nodemon » sur notre terminal et « npm run sass » (sur un terminal à part) mais en phase prod (pas besoin) 
 
 
-
 // MEP nodemailer : (https://www.supinfo.com/articles/single/2102-envoyer-mails-avec-nodejs-nodemailer)
-// installer nodemailer ?
-// créer une boite mail pour cette gestion et bien penser à activer le paramètre "Autoriser les applications moins sécurisées" 
-// require le module (dans le controller)
-// 
+// installer nodemailer : "npm i nodemailer"
+// créer une boite mail pour cette gestion et bien penser dans "mon compte", "sécurité" à activer le paramètre "Accès moins sécurisé des applications" 
+// require le module (dans le controller où on l'utilise : ici "user.js")
+// paramétrer nodemailer en créant son "transporteur"
+// l'utiliser où il est nécessaire
 

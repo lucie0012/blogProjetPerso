@@ -296,6 +296,7 @@ module.exports = {
 
     /**************Suppression d'une note/commentaire ***************/
     postSiteFilter: async (req, res) => {
+        const dbUserId = await userCollection.findById(req.session.userId)
         // console.log(req.body.category);
 
         const search = req.body.category;
@@ -303,7 +304,10 @@ module.exports = {
 
         // console.log(dbRepertoryFilter);
 
-        res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
+        res.render('repertory/repertory', { 
+            dbRepertory: dbRepertoryFilter,
+            dbUserId: dbUserId
+        })
 
         // TEST OK : récupère pour sans gluten coché tout les sites où il y a sans gluten (même les sans gluten et sans lactose)
         // et pour sans gluten et sans lactose coché récupère les sites où il y a sans gluten ET sans lactose

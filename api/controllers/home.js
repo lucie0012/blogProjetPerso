@@ -10,7 +10,7 @@ module.exports = {
 
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbActu = await actuCollection.find({})
-        const dbRepertoryVerified = await repertoryCollection.find({ isVerified : true })
+        const dbRepertoryVerified = await repertoryCollection.find({ isVerified: true })
 
         res.render('home', {
             dbActu: dbActu,

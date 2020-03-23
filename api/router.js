@@ -91,7 +91,7 @@ router.route('/repertoryValid/:id')
     .put(isAdmin, repertory.putSiteValid)
 
 
-    
+
 /*
  *Note
  ****************/
@@ -133,6 +133,14 @@ router.route('/about')
 router.route('/userCreate')
     .post(multer, user.postUserCreate)
 
+// Vérification mail via nodemailer
+router.route('/verifyMail/:id') //lien créé dans user.js dans la config nodemailer du postUserCreate (id : correspond au chiffre random)
+    .get(user.getVerifyMail)
+
+router.route('/verifyMail')
+    .get(user.getConfirmVerifyMail)
+
+
 // Connexion
 router.route('/authentification')
     .post(user.postUserAuth)
@@ -155,6 +163,7 @@ router.route('/adminUserEdit/:id')
     .get(isAdmin, user.getUserEdit)
     .put(isAdmin, user.putlistUser)
     .delete(isAdmin, user.deleteOneUserAdmin)
+
 
 /*
  * Admin
