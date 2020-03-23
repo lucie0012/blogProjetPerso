@@ -29,11 +29,12 @@ const transporter = nodemailer.createTransport({
 })
 
 let rand, mailOptions, host, link    //création de variable sans affectation (pour utilisation à suivre)
+let randForgotPass, mailOptionsForgotPass, hostForgotPass, linkForgotPass   //création de variable sans affectation (pour utilisation à suivre)
 
 
 module.exports = {
 
-    /**************Création compte*************/
+    /**************Création compte et envoi mail réinitialisation mot de passe*************/
     postUserCreate: (req, res) => {
 
         // Nodemailer config et affectation des constantes declarées plus haut
@@ -78,7 +79,7 @@ module.exports = {
                             // Envoi mail validation NODEMAILER     
                             transporter.sendMail(mailOptions, (err, res, next) => { // utilisation de la constante transporter et de la fonction d'envoi de mail avec en paramètre les options mail prédéfini (afin de les envoyer dans le mail (ne le sont qu'au 1er clic))
                                 if (err) {
-                                    console.error(err);
+                                    console.error("ERREUR :" + err);
                                     res.render("error")
                                 } else {
                                     console.log('Message envoyé');
@@ -106,7 +107,7 @@ module.exports = {
                             // Envoi mail validation NODEMAILER     
                             transporter.sendMail(mailOptions, (err, res, next) => { // utilisation de la constante transporter et de la fonction d'envoi de mail avec en paramètre les options mail prédéfini
                                 if (err) {
-                                    console.error(err);
+                                    console.error("ERREUR :" + err);
                                     res.render("error")
                                 } else {
                                     console.log('Message envoyé');
@@ -161,7 +162,7 @@ module.exports = {
 
     // *************Affichage page confirmation vérification mail***************
     getConfirmVerifyMail: (req, res) => {
-        res.render('confirmVerifyMail')
+        res.render('user/confirmVerifyMail')
     },
 
 
@@ -481,5 +482,88 @@ module.exports = {
                     }
                 })
         }
+    },
+
+
+    /**************Affichage page réinitialisation mot de passe***************/
+    getForgotPassword: (req, res) => {
+        res.render('user/forgotPassword')
+    },
+
+
+    /**************Envoi mail réinitialisation mot de passe***************/
+    postForgotPassword: async (req, res) => {
+        // Nodemailer config et affectation des constantes declarées plus haut
+        randForgotPass = Math.floor((Math.random() * 100) + 53)   //créer un chiffre random qui servira d'ID
+        hostForgotPass = req.get('host')  // adresse du site hébergeant l'envoi du mail de verif (req.get est une fonction avec en paramètre ici 'host' (vu par une console log de "req.get"))
+        linkForgotPass = "http://" + req.get('host') + "/resetPassword/" + randForgotPass  // construction du lien (qui servira de lien de validation dans le mail) avec l'adresse du site et le chiffre random
+        mailOptionsForgotPass = {
+            from: 'blogSansAllergenes@gmail.com', // adresse du mail qui envoi le lien de verif
+            to: req.body.email, // adresse de la personne à qui envoyer (celle de l'utilisateur qui s'inscrit)
+            subject: 'Votre demande de réinitialisation de mot de passe', // sujet du mail de verif
+            randForgotPass: randForgotPass, // nombre random généré à l'envoi du mail
+            html: "Bonjour.<br> Merci de cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe <br><a href=" + linkForgotPass + ">Cliquer ici pour le réinitialiser</a> <br>L'équipe Blog Sans Allergenes",  // contenu du mail
+        }
+
+        console.log("link :" + linkForgotPass);   //donne : "http://localhost:5000/verifyMail/142" (ici 142 est l'un des chiffre random)
+        // console.log("host :" + hostForgotPass);   //donne : "localhost:5000"
+        // console.log("mailOptions.to : " + mailOptionsForgotPass.to);  //donne l'adresse mail renseigné lors de la création du compte
+
+        const email = req.body.email
+        // console.log(req.body.email)
+
+        const user = await userCollection.findOne({ email })
+        // console.log(user);
+
+        if (!user) {
+            console.log('user pas dans la DB');
+            // res.json({ message: "Vous n'avez pas de compte." });
+            res.redirect('/')
+            // faire un res.render avec le retour d'une variable pour afficher le message (comme dans contact)
+        } else {
+            transporter.sendMail(mailOptionsForgotPass, (err, res, next) => { // utilisation de la constante transporter et de la fonction d'envoi de mail avec en paramètre les options mail prédéfini (afin de les envoyer dans le mail (ne le sont qu'au 1er clic))
+                if (err) {
+                    console.error("ERREUR :" + err);
+                    res.render("error")
+                } else {
+                    console.log('Message envoyé');
+                    next()
+                }
+            }),
+                res.redirect('/')
+        }
+        // res.redirect('/')
+    },
+
+
+    /**************Affichage page création nouveau mot de passe suite lien***************/
+    getResetPassword: async (req, res) => {
+        // ajouter autre chose ?? / récupérer
+
+        console.log("1 get");
+        console.log("mailOptionsForgotPass.to :" + mailOptionsForgotPass.to);
+
+        const user = await userCollection.findOne({ email: mailOptionsForgotPass.to })  //recherche de l'utilisateur concerné par l'email (celui à qui on envoi et donc celui recup via req.body lors du post)
+
+        console.log("user :" + user);
+
+        res.render('user/resetPassword', { user })
+    },
+
+    /**************Création nouveau mot de passe***************/
+    postResetPassword: async (req, res) => {
+
+        console.log(req.body);
+
+        console.log("2 post");
+        console.log("ID : " + req.params.id)
+
+        const user = await userCollection.findById(req.params.id)  //recherche de l'utilisateur concerné par l'email (celui à qui on envoi et donc celui recup via req.body lors du post)
+
+        console.log("user" + user);
+        console.log("req.protocol : " + req.protocol);  //donne "http"
+
+        res.redirect('/')
+        // res.render('user/resetPassword') avec une variable et un message comme page contact ?
     },
 }

@@ -140,6 +140,15 @@ router.route('/verifyMail/:id') //lien créé dans user.js dans la config nodema
 router.route('/verifyMail')
     .get(user.getConfirmVerifyMail)
 
+// Réinitialisation mot de passe via nodemailer
+router.route('/forgotPassword')
+    .get(user.getForgotPassword)
+    .post(user.postForgotPassword)
+
+// Réinitialisation mot de passe via nodemailer
+router.route('/resetPassword/:id')  //(id : correspond au chiffre random)
+    .get(user.getResetPassword)
+    .post(user.postResetPassword)
 
 // Connexion
 router.route('/authentification')
