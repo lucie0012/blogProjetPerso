@@ -94,7 +94,7 @@ Blog projet perso arinfo
 // puis require : "var helpers = require('handlebars-helpers')();" pour require tout les helpers (sinon possible de sélectionner) : https://github.com/helpers/handlebars-helpers#comparison
 
 // GITHUB : 
-// penser à créer le fichier .gitignore comprenant : node_modules/*
+// penser à créer le fichier .gitignore comprenant : node_modules/* (et .sass-cache ??)
 // créer un nouveau repository (penser à créer un readme)
 // récupérer le lien SSH dans "clone or download" et faire un "git clone copiercoller" via le terminal (penser à être sur le dossier github dans le bureau)
 // créer une branch premaster : "git branch premaster"

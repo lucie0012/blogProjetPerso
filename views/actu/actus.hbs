@@ -1,5 +1,5 @@
 {{!---------------- titre -----------------}}
-<div class="container">
+<div class="container my-5">
     <h1>Mes articles</h1>
     {{!----------------/titre -----------------}}
 
@@ -7,9 +7,9 @@
     <div class="row">
         <div class="card-deck">
             {{#each (reverse dbActu) }}
-            <div class="card limitCard">
+            <div class="card limitCard mt-4">
                 <div class="card-body">
-                    <h5 class="card-title mt-2">{{ title }}</h5>
+                    <h5 class="card-title">{{ title }}</h5>
                     <p class="card-text">{{ truncate content 200 }}</p>
                 </div>
                 <a href="/actuSingle/{{ id }}" class="btn">Voir l'article</a>

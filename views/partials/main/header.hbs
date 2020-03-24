@@ -1,306 +1,310 @@
 {{!------------ nav 1 ------------------}}
-<header>
-    <ul class="nav justify-content-end" id="scrollup">
-        {{!-- {{#if (userSess.isAdmin =true) }}
-        <li class="nav-item">
-            <a class="nav-link text-muted" href="/admin">{{userSess.name}}</a>
-        </li>
-        {{/if}} --}}
-        {{#if isAdmin }}
-        <li class="nav-item">
-            <a class="nav-link text-muted" href="/admin">Admin</a>
-        </li>
-        {{/if}}
-        <li class="nav-item">
-            <a class="nav-link text-muted" href="/about">A propos</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-muted" href="/contact">Contact</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-muted dropdown-toggle dropdown-menu-right" data-toggle="dropdown" href="#"
-                role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
-            <div class="dropdown-menu dropdown-menu-right">
-                {{#if user}}
-                <button class="dropdown-item" type="submit" data-toggle="modal"
-                    data-target="#modalUserEdit{{ _id }}">Gérer
-                    mon compte</button>
-                <a class="dropdown-item" href="/userLogOut">Se déconnecter</a>
-                {{else}}
-                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalUserCreate">Créer un
-                    compte</button>
-                <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalAuthentification">Se
-                    connecter</button>
-                {{/if}}
+<header class="d-table-row">
+{{!-- <header> --}}
+
+    <div>
+        <ul class="nav justify-content-end" id="scrollup">
+            {{#if isAdmin }}
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="/admin">Admin</a>
+            </li>
+            {{/if}}
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="/about">A propos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-muted dropdown-toggle dropdown-menu-right" data-toggle="dropdown" href="#"
+                    role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    {{#if user}}
+                    <button class="dropdown-item" type="submit" data-toggle="modal"
+                        data-target="#modalUserEdit{{ _id }}">Gérer
+                        mon compte</button>
+                    <a class="dropdown-item" href="/userLogOut">Se déconnecter</a>
+                    {{else}}
+                    <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalUserCreate">Créer
+                        un
+                        compte</button>
+                    <button class="dropdown-item" type="button" data-toggle="modal"
+                        data-target="#modalAuthentification">Se
+                        connecter</button>
+                    {{/if}}
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    {{!------------ /nav 1 ------------------}}
+
+
+    {{!------------ Image logo + phrase d'accroche ------------------}}
+    <div>
+        <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block"
+            style="height : 150px" alt="Image du site">
+        <p class="text-center">Le blog sans allergènes qui répertorie les autres !!</p>
+    </div>
+    {{!------------ /Image logo + phrase d'accroche ------------------}}
+
+
+    {{!------------ nav 2 ------------------}}
+    <div class="container-fluid d-flex justify-content-center">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav">
+                    <li class="nav-item mx-5">
+                        <a class="nav-link" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link" href="/repertory">Répertoire</a>
+                    </li>
+                    <li class="nav-item mx-5">
+                        <a class="nav-link" href="/actus">Mes articles</a>
+                    </li>
+                </ul>
             </div>
-        </li>
-    </ul>
-</header>
-{{!------------ /nav 1 ------------------}}
+        </nav>
+    </div>
+    {{!------------ /nav 2 ------------------}}
 
 
-{{!------------ Image logo + phrase d'accroche ------------------}}
-<div>
-    <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block" style="height : 150px"
-        alt="Image du site">
-    <p class="text-center">Le blog sans allergènes qui répertorie les autres !!</p>
-</div>
-{{!------------ /Image logo + phrase d'accroche ------------------}}
+    {{!------------ barre recherche ------------------}}
+    <div class="container d-flex justify-content-center ">
+        <form class="form-inline">
+            <input class="form-control form-control-sm" type="search" placeholder="Rechercher" aria-label="Search">
+            <button class="btn btn-light my-2 my-sm-0 btn-sm" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    {{!------------ /barre recherche ------------------}}
 
 
-{{!------------ nav 2 ------------------}}
-<div class="container-fluid d-flex justify-content-center">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav">
-                <li class="nav-item mx-5">
-                    <a class="nav-link" href="/">Accueil</a>
-                </li>
-                <li class="nav-item mx-5">
-                    <a class="nav-link" href="/repertory">Répertoire</a>
-                </li>
-                <li class="nav-item mx-5">
-                    <a class="nav-link" href="/actus">Mes articles</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-{{!------------ /nav 2 ------------------}}
 
+    {{!------------ modal Création compte ------------------}}
+    <div class="modal fade" id="modalUserCreate" tabindex="-1" role="dialog" aria-labelledby="#modalUserCreateLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUserCreateLabel">Créer mon compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-{{!------------ barre recherche ------------------}}
-<div class="container d-flex justify-content-center ">
-    <form class="form-inline">
-        <input class="form-control form-control-sm" type="search" placeholder="Rechercher" aria-label="Search">
-        <button class="btn btn-light my-2 my-sm-0 btn-sm" type="submit"><i class="fas fa-search"></i></button>
-    </form>
-</div>
-{{!------------ /barre recherche ------------------}}
+                <form action="/userCreate" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row modal-body">
+                            <div class="col-md-12">
 
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" name="name" required>
+                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pseudo">Pseudo</label>
+                                    <input type="text" name="pseudo" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Adresse Email</label>
+                                    <input type="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="conf-password">Confirmer le mot de passe</label>
+                                    <input type="password" name="confPassword" required>
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="file" name="image">
+                                        <span>
+                                            Envoyer une photo de profil
+                                        </span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="gridCheck" required>
+                                    {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
+                                    <label>
+                                        J'accepte les termes des conditions d’utilisation de ce site.
+                                    </label>
+                                </div>
 
-{{!------------ modal Création compte ------------------}}
-<div class="modal fade" id="modalUserCreate" tabindex="-1" role="dialog" aria-labelledby="#modalUserCreateLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalUserCreateLabel">Créer mon compte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form action="/userCreate" method="POST" enctype="multipart/form-data">
-                <div class="container">
-                    <div class="row modal-body">
-                        <div class="col-md-12">
-
-                            <div class="form-group">
-                                <label for="name">Nom</label>
-                                <input type="text" name="name" required>
-                                {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
-                            <div class="form-group">
-                                <label for="pseudo">Pseudo</label>
-                                <input type="text" name="pseudo" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Adresse Email</label>
-                                <input type="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Mot de passe</label>
-                                <input type="password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="conf-password">Confirmer le mot de passe</label>
-                                <input type="password" name="confPassword" required>
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="file" name="image">
-                                    <span>
-                                        Envoyer une photo de profil
-                                    </span>
-                                </label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="gridCheck" required>
-                                {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
-                                <label>
-                                    J'accepte les termes des conditions d’utilisation de ce site.
-                                </label>
-                            </div>
-
-                        </div>
-                        <div class="col-md-12 ">
-                            <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Créer</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                            <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn">Créer</button>
+                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
+            </div>
         </div>
     </div>
-</div>
-{{!------------ /modal Création compte ------------------}}
+    {{!------------ /modal Création compte ------------------}}
 
-{{!------------ modal Connexion ------------------}}
-<div class="modal fade" id="modalAuthentification" tabindex="-1" role="dialog"
-    aria-labelledby="#modalAuthentificationLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAuthentificationLabel">Me connecter</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+    {{!------------ modal Connexion ------------------}}
+    <div class="modal fade" id="modalAuthentification" tabindex="-1" role="dialog"
+        aria-labelledby="#modalAuthentificationLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAuthentificationLabel">Me connecter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-            {{!-- <form action="/authentification" method="POST"> --}}
-            <div class="container">
-                <div class="row modal-body">
-                    <div class="col-md-12">
-                        <label id="messageErrorAuth" class="text-danger d-none"></label>
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="emailAuth" placeholder="Votre Email *"
-                                value="" required />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" name="passwordAuth"
-                                placeholder="Votre mot de passe *" value="" required />
-                        </div>
-                        {{!-- <div class="checkbox">
+                {{!-- <form action="/authentification" method="POST"> --}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <label id="messageErrorAuth" class="text-danger d-none"></label>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="emailAuth" placeholder="Votre Email *"
+                                    value="" required />
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="passwordAuth"
+                                    placeholder="Votre mot de passe *" value="" required />
+                            </div>
+                            {{!-- <div class="checkbox">
                                 <label> <input type="checkbox"> Se rappeler de moi. </label>
                             </div> --}}
-                        <div class="form-group">
-                            <a href="/forgotPassword" class="ForgetPwd">Mot de passe oublié</a>
-                        </div>
-                    </div>
-                    <div class="col-md-12 ">
-                        <div class="d-flex flex-row-reverse">
-                            <button type="submit" class="btn" onclick="connexionModal()">Me connecter</button>
-                            <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{!-- </form> --}}
-
-        </div>
-    </div>
-</div>
-{{!------------ /modal Connexion ------------------}}
-
-{{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
-{{!-- Requête ajax avec Jquery --}}
-<script>
-
-    function connexionModal() {
-        console.log("test");
-        $.ajax({
-            url: '/authentification',
-            type: 'POST',
-            data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
-            dataType: 'json',
-            success: function (json, statut) {
-                console.log(json.message);
-                $("#messageErrorAuth").removeClass("d-none");
-                $("#messageErrorAuth").text(json.message);
-
-                if (json.noError) {
-                    window.location.replace("/");
-                }
-            },
-            error: function (resultat, statut, erreur) {
-                console.log(resultat);
-                console.log(statut);
-                console.log(erreur);
-            }
-        });
-    };
-
-</script>
-{{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
-
-
-{{!------------ modal Gestion compte ------------------}}
-<div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog" aria-labelledby="#modalUserEditLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalUserEditLabel">Modifier mon compte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form action="/userEdit/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
-                <div class="container">
-                    <div class="row modal-body">
-                        <div class="col-md-12">
-                            <div>
-                                <img src="{{ dbUserId.image }}" alt="image utilisateur" class="mb-3" widht="100px"
-                                    height="100px">
-                            </div>
                             <div class="form-group">
-                                <label for="name">Nom</label>
-                                <input type="text" name="name" value="{{ dbUserId.name }}">
-                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                                <a href="/forgotPassword" class="ForgetPwd">Mot de passe oublié</a>
                             </div>
-                            <div class="form-group">
-                                <label for="pseudo">Pseudo</label>
-                                <input type="text" name="pseudo" value="{{ dbUserId.pseudo }}">
-                                {{!--required permet de forcer le remplissage de la zone de texte --}}
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Adresse Email</label>
-                                <input type="email" name="email" value="{{ dbUserId.email }}">
-                            </div>
-                            <div>
-                                <label>
-                                    <input type="file" name="image" value="{{ dbUserId.image }}">
-                                    <span>
-                                        Envoyer une nouvelle photo de profil
-                                    </span>
-                                </label>
-                            </div>
-
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Modifier</button>
+                                <button type="submit" class="btn" onclick="connexionModal()">Me connecter</button>
                                 <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
+                {{!-- </form> --}}
 
-            {{!------------ bouton suppression compte  ------------------}}
-            <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="btn">*Supprimer mon compte*</button>
+            </div>
+        </div>
+    </div>
+    {{!------------ /modal Connexion ------------------}}
+
+    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
+    {{!-- Requête ajax avec Jquery --}}
+    <script>
+
+        function connexionModal() {
+            console.log("test");
+            $.ajax({
+                url: '/authentification',
+                type: 'POST',
+                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
+                dataType: 'json',
+                success: function (json, statut) {
+                    console.log(json.message);
+                    $("#messageErrorAuth").removeClass("d-none");
+                    $("#messageErrorAuth").text(json.message);
+
+                    if (json.noError) {
+                        window.location.replace("/");
+                    }
+                },
+                error: function (resultat, statut, erreur) {
+                    console.log(resultat);
+                    console.log(statut);
+                    console.log(erreur);
+                }
+            });
+        };
+
+    </script>
+    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
+
+
+    {{!------------ modal Gestion compte ------------------}}
+    <div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog"
+        aria-labelledby="#modalUserEditLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUserEditLabel">Modifier mon compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="/userEdit/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row modal-body">
+                            <div class="col-md-12">
+                                <div>
+                                    <img src="{{ dbUserId.image }}" alt="image utilisateur" class="mb-3" widht="100px"
+                                        height="100px">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" name="name" value="{{ dbUserId.name }}">
+                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="pseudo">Pseudo</label>
+                                    <input type="text" name="pseudo" value="{{ dbUserId.pseudo }}">
+                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Adresse Email</label>
+                                    <input type="email" name="email" value="{{ dbUserId.email }}">
+                                </div>
+                                <div>
+                                    <label>
+                                        <input type="file" name="image" value="{{ dbUserId.image }}">
+                                        <span>
+                                            Envoyer une nouvelle photo de profil
+                                        </span>
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn">Modifier</button>
+                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            {{!------------ /bouton suppression compte  ------------------}}
+                </form>
 
+                {{!------------ bouton suppression compte  ------------------}}
+                <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="d-flex flex-row">
+                                    <button type="submit" class="btn">*Supprimer mon compte*</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {{!------------ /bouton suppression compte  ------------------}}
+
+            </div>
         </div>
     </div>
-</div>
-{{!------------ /modal Gestion compte  ------------------}}
+    {{!------------ /modal Gestion compte  ------------------}}
+
+</header>
