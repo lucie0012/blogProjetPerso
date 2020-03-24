@@ -14,6 +14,7 @@ const contact = require('./controllers/contact')
 const about = require('./controllers/about')
 const user = require('./controllers/user')
 const admin = require('./controllers/admin')
+const password = require('./controllers/password')
 
 
 /*
@@ -24,14 +25,7 @@ const isAdmin = require('../middleware/isAdmin')
 const isVerified = require('../middleware/isVerified')
 // const preMulter = require('../middleware/preMulter')
 
-/*
- * dbUser
- *******************/
-// const userCollection = require('./database/models/userModel')
-// router.get('*', async (req, res, next) => {
-//     const dbUser = await userCollection.findById(req.session.userId)
-//     next({dbUser})
-// })
+
 
 /*
  * Home
@@ -140,16 +134,6 @@ router.route('/verifyMail/:id') //lien créé dans user.js dans la config nodema
 router.route('/verifyMail')
     .get(user.getConfirmVerifyMail)
 
-// Réinitialisation mot de passe via nodemailer
-router.route('/forgotPassword')
-    .get(user.getForgotPassword)
-    .post(user.postForgotPassword)
-
-// Réinitialisation mot de passe via nodemailer
-router.route('/resetPassword/:id')  //(id : correspond au chiffre random)
-    .get(user.getResetPassword)
-    .post(user.postResetPassword)
-
 // Connexion
 router.route('/authentification')
     .post(user.postUserAuth)
@@ -163,15 +147,19 @@ router.route('/userEdit/:id')
 router.route('/userLogOut')
     .get(user.getLogOut)
 
-// Edition utilisateur en isVerified par admin
-router.route('/verifiedUser/:id')
-    .put(isAdmin, user.putVerifiedUser)
 
-// Gestion des utilisateurs par admin
-router.route('/adminUserEdit/:id')
-    .get(isAdmin, user.getUserEdit)
-    .put(isAdmin, user.putlistUser)
-    .delete(isAdmin, user.deleteOneUserAdmin)
+/*
+ * Password
+ **************/
+// Réinitialisation mot de passe via nodemailer
+router.route('/forgotPassword')
+    .get(password.getForgotPassword)
+    .post(password.postForgotPassword)
+
+// Réinitialisation mot de passe via nodemailer
+router.route('/resetPassword/:id')  //(id : correspond au chiffre random)
+    .get(password.getResetPassword)
+    .post(password.postResetPassword)
 
 
 /*
@@ -181,7 +169,15 @@ router.route('/adminUserEdit/:id')
 router.route('/admin')
     .get(isAdmin, admin.getAdmin)
 
+// Edition utilisateur en isVerified par admin
+router.route('/verifiedUser/:id')
+    .put(isAdmin, admin.putVerifiedUser)
 
+// Gestion des utilisateurs par admin
+router.route('/adminUserEdit/:id')
+    .get(isAdmin, admin.getUserEdit)
+    .put(isAdmin, admin.putlistUser)
+    .delete(isAdmin, admin.deleteOneUserAdmin)
 
 
 module.exports = router
