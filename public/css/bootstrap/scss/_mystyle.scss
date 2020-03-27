@@ -7,7 +7,59 @@
 }
 
 .limitCard {
+    border-color: #BCBF56;
+    box-shadow: 10px 10px 5px rgba(188, 191, 86, 0.3);
     min-width: 340px;
     max-width: 340px;
 }
 
+.bgNav {
+    background-color: #F2CA80;
+}
+
+.bdNavAdmin {
+    background-color: #BCBF56;
+}
+
+.bgBody {
+    background-color: rgba(247, 253, 246, 0.5);
+}
+
+.bgFooter {
+    background-color: #CCD9D7;
+}
+
+.colorGreen {
+    color: #BCBF56;
+}
+
+// //mise en forme des boutons
+// .btn-actu {
+//     color: #fff;
+//     background-color: #3098D9;
+//     border-color: #3098D9; }
+//     .btn-actu:hover {
+//       color: #fff;
+//       background-color:  #2485c2;
+//       border-color: #1c6897; }
+
+// .card-actu {
+//     border-color: rgb(48, 152, 217);
+//     transition: 1s;
+//     box-shadow: 10px 10px 5px rgba(48, 152, 217, 0.5) ;
+//     min-width: 300px;
+//     max-width: 300px;
+// }
+
+// .card-actu:hover {
+//     box-shadow: 20px 20px 10px rgba(48, 152, 217, 0.3);
+//     transition: 1s;
+//     transform: scale(1.05, 1.05);
+// }
+
+// .card {
+//     border: solid 2px ;
+//     border-radius: 10px;  
+//     transition: width 1s, height 1s, transform 0.7s;
+//     margin: 10px;
+// }

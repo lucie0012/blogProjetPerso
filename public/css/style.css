@@ -7889,7 +7889,24 @@ a.text-color1:hover, a.text-color1:focus {
   right: -60px; }
 
 .limitCard {
+  border-color: #BCBF56;
+  box-shadow: 10px 10px 5px rgba(188, 191, 86, 0.3);
   min-width: 340px;
   max-width: 340px; }
+
+.bgNav {
+  background-color: #F2CA80; }
+
+.bdNavAdmin {
+  background-color: #BCBF56; }
+
+.bgBody {
+  background-color: rgba(247, 253, 246, 0.5); }
+
+.bgFooter {
+  background-color: #CCD9D7; }
+
+.colorGreen {
+  color: #BCBF56; }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,5 +1,5 @@
 <div class="container my-5">
-    <h1>Répertoire</h1>
+    <h1 class="colorGreen">Répertoire</h1>
     <div class="row mt-4">
         <div class="col-md-10 mb-4">
             <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere
@@ -19,7 +19,7 @@
         <div class="col-md-9">
             {{#each dbRepertory }}
             {{#if isVerified}}
-            <div class="card mb-5" style="max-width: 650px;">
+            <div class="card mb-5 limitCard" style="max-width: 650px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         <img src="{{ image }}" class="card-img" alt="image du site">
@@ -183,18 +183,18 @@
                     <div class="row modal-body">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="pseudo">Votre pseudo</label>
-                                <input type="text" class="form-control" name="pseudo" value="{{ dbUserId.pseudo }}"
+                                <label for="pseudoModalAddSite">Votre pseudo</label>
+                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite" value="{{ dbUserId.pseudo }}"
                                     disabled="disabled">
                             </div>
                             <div class="form-group">
-                                <label for="title">Titre du site</label>
-                                <input type="text" class="form-control" name="title" required>
+                                <label for="titleModalAddSite">Titre du site</label>
+                                <input type="text" class="form-control" name="title" id="titleModalAddSite" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
-                                <label for="url">URL du site</label>
-                                <input type="text" class="form-control" name="url" required>
+                                <label for="urlModalAddSite">URL du site</label>
+                                <input type="text" class="form-control" name="url" id="urlModalAddSite" required>
                             </div>
                             <div class="form-group">
                                 <label for="category">Catégorie</label>
@@ -225,17 +225,26 @@
                                 <input type="text" class="form-control" name="category" required> --}}
                             </div>
                             <div class="form-group">
-                                <label for="description">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" required></textarea>
+                                <label for="descriptionModalAddSite">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite" required></textarea>
                             </div>
-                            <div class="form-group">
+
+                                <div class="form-group row">
+                                    <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="file" class="form-control-file col-sm-12" id="editProfilPhoto"
+                                        name="image" value="{{ dbUserId.image }}">
+                                </div>
+
+                            {{!-- <div class="form-group">
                                 <label>
                                     <input type="file" name="image">
                                     <span>
                                         Envoyer une image
                                     </span>
                                 </label>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">

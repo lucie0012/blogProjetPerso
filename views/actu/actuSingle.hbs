@@ -1,21 +1,21 @@
-<div class="container">
+<div class="container my-5">
     <div class="row">
-        {{!----------------titre -----------------}}
-        <h1>{{ dbActu.title }} </h1>
-        {{!----------------/titre -----------------}}
+        <div class="col-md-12 mb-4 text-center">
+            {{!----------------titre -----------------}}
+            <h1 class="colorGreen">{{ dbActu.title }} </h1>
+            {{!----------------/titre -----------------}}
+        </div>
 
         {{!----------------actualité -----------------}}
-        <div>
-            <div>
-                <img src="{{ dbActu.image }}" alt="image actu" widht="200px" height="200px">
-            </div>
-            <div>
-                <p>
-                    {{ dbActu.content }}
-                </p>
-            </div>
+        <div class="col-md-12 mb-4 text-center">
+            <p>
+                {{ dbActu.content }}
+            </p>
         </div>
-        <div>
+        <div class="col-md-12 mb-5 text-center">
+            <img src="{{ dbActu.image }}" alt="image actu" widht="200px" height="200px">
+        </div>
+        <div class="col-md-12 d-flex flex-row-reverse">
             {{!-- bouton commenter --}}
             {{#if isVerified}}
             <button class="btn" data-toggle="modal" data-target="#modalCommenter{{_id}}" data-whatever="@getbootstrap"
@@ -26,6 +26,28 @@
         {{!----------------/actualité -----------------}}
     </div>
 </div>
+
+{{!-- Zone commentaire --}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-5">
+            <div class="list-group">
+                {{#each (reverse dbComment) }}
+                {{#if isVerified}}
+                <div class="list-group-item list-group-item-action">
+                    <p class="mb-1"> {{ content }} </p>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>{{ pseudoAuthor }}</small>
+                        <small>Posté le {{ moment createDate format="DD-MM-YY"}}</small>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each }}
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- /Zone commentaire --}}
 
 {{!-- Modal commenter actualité --}}
 <div class="modal fade" id="modalCommenter{{_id}}" tabindex="-1" role="dialog" aria-labelledby="#modalCommenterLabel"
@@ -68,23 +90,3 @@
     </div>
 </div>
 {{!-- /Modal commenter actualité --}}
-
-{{!-- Zone commentaire --}}
-<div class="container">
-    <div class="row">
-        <div class="list-group">
-            {{#each (reverse dbComment) }}
-            {{#if isVerified}}
-            <div class="list-group-item list-group-item-action">
-                <p class="mb-1"> {{ content }} </p>
-                <div class="d-flex w-100 justify-content-between">
-                    <small>{{ pseudoAuthor }}</small>
-                    <small>Posté le {{ moment createDate format="DD-MM-YY"}}</small>
-                </div>
-            </div>
-            {{/if}}
-            {{/each }}
-        </div>
-    </div>
-</div>
-{{!-- /Zone commentaire --}}

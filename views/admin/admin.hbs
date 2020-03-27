@@ -1,6 +1,6 @@
-<div class="container-fluid h-100">
+<div class="container-fluid h-100 my-5">
   <div class="row h-100">
-    <aside class="col-12 col-md-2 p-0">
+    <aside class="col-12 col-md-1 p-0 bgFooter">
       <nav class="navbar navbar-expand flex-md-column flex-row align-items-start">
         <div class="collapse navbar-collapse">
           <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
@@ -57,39 +57,42 @@
         </div>
       </nav>
     </aside>
-    <main class="col">
-      <div class="text-center">
-        <h1>Admin</h1>
+
+    <main class="col-md-11">
+      <div class="text-center mb-5">
+        <h1 class="colorGreen">Admin</h1>
       </div>
 
-      <div class="accordion" id="accordionExample">
+      <div class="col-md-11">
+        <div class="accordion mr-5" id="accordionExample">
 
-        {{!------------------------------------------------------------- UTILISATEURS-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- UTILISATEURS-----------------------------------------------------------}}
 
-        {{> admin/sectionUser }}
+          {{> admin/sectionUser }}
 
-        {{!------------------------------------------------------------- ARTICLES-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- ARTICLES-----------------------------------------------------------}}
 
-        {{> admin/sectionActu }}
+          {{> admin/sectionActu }}
 
-        {{!------------------------------------------------------------- MESSAGES-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- MESSAGES-----------------------------------------------------------}}
 
-        {{> admin/sectionMessage }}
+          {{> admin/sectionMessage }}
 
-        {{!------------------------------------------------------------- COMMENTAIRES-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- COMMENTAIRES-----------------------------------------------------------}}
 
-        {{> admin/sectionComm }}
+          {{> admin/sectionComm }}
 
-        {{!------------------------------------------------------------- NOTES/COMMENTAIRE-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- NOTES/COMMENTAIRE-----------------------------------------------------------}}
 
-        {{> admin/sectionNote }}
+          {{> admin/sectionNote }}
 
-        {{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
+          {{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
 
-        {{> admin/sectionSite }}
+          {{> admin/sectionSite }}
 
+        </div>
+        <!-- Insérez ici le contenu principal du site ou de l'application -->
       </div>
-      <!-- Insérez ici le contenu principal du site ou de l'application -->
     </main>
   </div>
 </div>
