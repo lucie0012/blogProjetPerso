@@ -1,12 +1,15 @@
 const userCollection = require('../database/models/userModel');
 const path = require('path');
 // pour gestion suppression image
-const fs = require('fs')
+const fs = require('fs');
 // pour gestion suppression image
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 // pour compare password chiffré
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 // pour utiliser nodemailer
+
+const config = require('../config/config');
+// import fichier config pour mail/mdp nodemailer
 
 
 /**************Paramétrage nodemailer*************/
@@ -19,8 +22,8 @@ const transporter = nodemailer.createTransport({
     // Si "false" (par défaut), TLS est utilisé si le serveur prend en charge l'extension STARTTLS (laisser sur false lors de l'utilisation des ports 587 et 25)
     auth: {
         // définission des données d'authentification
-        user: "blogSansAllergenes@gmail.com",
-        pass: "blog1234"
+        user: config.nodemailer.email,
+        pass: config.nodemailer.password
     },
     tls: {
         rejectUnauthorized: false,  //définit des options TLSSocket node.js supplémentaires à transmettre au constructeur de socket
