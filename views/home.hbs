@@ -15,7 +15,7 @@
     <div class="row">
         <div class="card-deck mt-4">
             {{#each (limitEach dbRepertoryVerified 3 ) }}
-            <div class="card limitCard">
+            <div class="card limitCard ml-3">
                 <div class="card-header">
                     <small class="text-muted">Dans catégorie :
                         {{#contains category "sansGluten" }}
@@ -51,9 +51,9 @@
 <div class="container my-5">
     <h1 class="colorWrite"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
     <div class="row">
-        <div class="card-deck mt-4 ">
+        <div class="card-deck mt-4">
             {{#each (limitEach dbActu 3 ) }}
-            <div class="card limitCard">
+            <div class="card limitCard ml-3">
                 <div class="card-body">
                     <h5 class="card-title mt-2">{{ title }}</h5>
                     <p class="card-text">{{ truncate content 200 }}</p>

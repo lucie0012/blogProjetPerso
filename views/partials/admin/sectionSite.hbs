@@ -122,19 +122,19 @@
                                                             height="100px">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="titleModalEditSite">Titre du site</label>
-                                                        <input type="text" class="form-control" name="title" id="titleModalEditSite"
+                                                        <label for="titleModalEditSite{{_id}}">Titre du site</label>
+                                                        <input type="text" class="form-control" name="title" id="titleModalEditSite{{_id}}"
                                                             value="{{ title }}" required>
                                                         {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="urlModalEditSite">URL du site</label>
-                                                        <input type="text" class="form-control" name="url" id="urlModalEditSite"
+                                                        <label for="urlModalEditSite{{_id}}">URL du site</label>
+                                                        <input type="text" class="form-control" name="url" id="urlModalEditSite{{_id}}"
                                                             value="{{ url }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="contentModalEditSite">Contenu</label>
-                                                        <textarea type="text" class="form-control" name="content" id="contentModalEditSite"
+                                                        <label for="contentModalEditSite{{_id}}">Contenu</label>
+                                                        <textarea type="text" class="form-control" name="content" id="contentModalEditSite{{_id}}"
                                                             rows="6" required> {{ content }}</textarea>
                                                     </div>
                                                     <div class="form-group">

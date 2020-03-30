@@ -13,6 +13,11 @@
     max-width: 340px;
 }
 
+.cardRepertory {
+    border-color: #F2CA80;
+    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+}
+
 .bgNav {
     background-color: #BCBF56;
 }
@@ -34,7 +39,7 @@
 }
 
 .colorBlack {
-    color: $black !important
+    color: $white !important
 }
 
 .btnSite {

@@ -300,14 +300,33 @@ module.exports = {
         // console.log(req.body.category);
 
         const search = req.body.category;
-        const dbRepertoryFilter = await repertoryCollection.find({ category: search })
+        // console.log(search);
 
+
+        let dbRepertoryFilter;
+        if (search == undefined) {
+            dbRepertoryFilter = await repertoryCollection.find({})
+        } else {
+            dbRepertoryFilter = await repertoryCollection.find({ category: search })
+        }
+
+        let isEmpty = false;
+        if (dbRepertoryFilter.length === 0) {
+            isEmpty = true;
+        }
         // console.log(dbRepertoryFilter);
 
-        res.render('repertory/repertory', { 
+        res.render('repertory/filterRepertory', {
+            layout: '',
             dbRepertory: dbRepertoryFilter,
-            dbUserId: dbUserId
+            dbUserId: dbUserId,
+            isEmpty: isEmpty
         })
+
+        // res.json({
+        //     dbRepertory: dbRepertoryFilter,
+        //     dbUserId: dbUserId
+        // })
 
         // TEST OK : récupère pour sans gluten coché tout les sites où il y a sans gluten (même les sans gluten et sans lactose)
         // et pour sans gluten et sans lactose coché récupère les sites où il y a sans gluten ET sans lactose
@@ -329,7 +348,10 @@ module.exports = {
 
         // // console.log(dbRepertoryFilter);
 
-        // res.render('repertory/repertory', { dbRepertory: dbRepertoryFilter })
+        // res.render('repertory/repertory', { 
+        //     dbRepertory: dbRepertoryFilter,
+        //     dbUserId: dbUserId
+        // })
 
         // TEST 2 OK : récupère pour sans gluten et sans lactose coché : les sites où il y a sans gluten, 
         // sans lactose et sans gluten ET sans lactose / pour sans gluten coché : récupère les sites où il y a sans gluten (même les sans gluten et sans lactose)

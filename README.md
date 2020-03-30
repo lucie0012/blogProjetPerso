@@ -156,6 +156,7 @@ Blog projet perso arinfo
 // si besoin : ajout lien jquery pour l'utiliser : 
 dans le "head.hbs" mettre 
     <!-- "<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>" -->
+et bien penser dans le "end.js" a mettre en commentaire la ligne jquery (la 1ère) du script bootstrap
 
 
 
