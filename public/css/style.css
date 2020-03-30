@@ -3141,7 +3141,7 @@ input[type="button"].btn-block {
   .nav-link:hover, .nav-link:focus {
     text-decoration: none; }
   .nav-link.disabled {
-    color: #6c757d;
+    color: #000;
     pointer-events: none;
     cursor: default; }
 
@@ -3156,12 +3156,12 @@ input[type="button"].btn-block {
     .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
       border-color: #e9ecef #e9ecef #dee2e6; }
     .nav-tabs .nav-link.disabled {
-      color: #6c757d;
+      color: #000;
       background-color: transparent;
       border-color: transparent; }
   .nav-tabs .nav-link.active,
   .nav-tabs .nav-item.show .nav-link {
-    color: #495057;
+    color: #000;
     background-color: #fff;
     border-color: #dee2e6 #dee2e6 #fff; }
   .nav-tabs .dropdown-menu {
@@ -7889,16 +7889,16 @@ a.text-color1:hover, a.text-color1:focus {
   right: -60px; }
 
 .limitCard {
-  border-color: #BCBF56;
-  box-shadow: 10px 10px 5px rgba(188, 191, 86, 0.3);
+  border-color: #F2CA80;
+  box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
   min-width: 340px;
   max-width: 340px; }
 
 .bgNav {
-  background-color: #F2CA80; }
+  background-color: #BCBF56; }
 
 .bdNavAdmin {
-  background-color: #BCBF56; }
+  background-color: #F2CA80; }
 
 .bgBody {
   background-color: rgba(247, 253, 246, 0.5); }
@@ -7906,7 +7906,20 @@ a.text-color1:hover, a.text-color1:focus {
 .bgFooter {
   background-color: #CCD9D7; }
 
-.colorGreen {
-  color: #BCBF56; }
+.colorWrite {
+  color: #F2CA80; }
+
+.colorBlack {
+  color: #000 !important; }
+
+.btnSite {
+  color: #000000;
+  background-color: #F2CA80;
+  border-color: #f0b74e; }
+
+.btnSite:hover {
+  color: #000000;
+  background-color: rgba(242, 202, 128, 0.6);
+  border-color: #F2CA80; }
 
 /*# sourceMappingURL=style.css.map */

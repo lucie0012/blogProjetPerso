@@ -1,16 +1,16 @@
 <div class="container my-5">
-    <h1 class="colorGreen">Répertoire</h1>
+    <h1 class="colorWrite">Répertoire</h1>
     <div class="row mt-4">
-        <div class="col-md-10 mb-4">
+        <div class="col-md-9 mb-4">
             <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere
                 trecentis,
                 circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas
             </p>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
             {{#if isVerified}}
-            <a class="btn" type="button" data-toggle="modal" data-target="#modalPropoSite"
-                data-whatever="@getbootstrap"><i class="far fa-plus-square fa-2x"></i>Ajouter un site</a>
+            <a class="btn btnSite d-flex align-items-center mb-3" type="button" data-toggle="modal" data-target="#modalPropoSite"
+                data-whatever="@getbootstrap"><i class="far fa-plus-square fa-2x mx-2"></i>Proposer un site</a>
             {{/if}}
         </div>
     </div>
@@ -49,8 +49,10 @@
                         {{!-- bouton noter --}}
                         {{#if ../userVerified }}
                         {{!-- A REVOIR --}}
-                        <a class="btn d-flex flex-row-reverse" type="button" data-toggle="modal"
-                            data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</a>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btnSite mb-2 mr-2" type="button" data-toggle="modal"
+                                data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</button>
+                        </div>
                         {{/if}}
                         {{!-- bouton noter --}}
                     </div>
@@ -91,8 +93,8 @@
                                     </div>
                                     <div class="col-md-12 ">
                                         <div class="d-flex flex-row-reverse">
-                                            <button type="submit" class="btn">Poster</button>
-                                            <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                            <button type="submit" class="btn btnSite ">Poster</button>
+                                            <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +157,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit" class="btn">Rechercher</button>
+                <button type="submit" class="btn btnSite">Rechercher</button>
             </form>
         </div>
 
@@ -168,7 +170,7 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">Ajouter un site dans le répertoire</h5>
+            <div class="modal-header">Proposer un site à ajouter dans le répertoire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -184,8 +186,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="pseudoModalAddSite">Votre pseudo</label>
-                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite" value="{{ dbUserId.pseudo }}"
-                                    disabled="disabled">
+                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite"
+                                    value="{{ dbUserId.pseudo }}" disabled="disabled">
                             </div>
                             <div class="form-group">
                                 <label for="titleModalAddSite">Titre du site</label>
@@ -226,16 +228,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="descriptionModalAddSite">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite" required></textarea>
+                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite"
+                                    required></textarea>
                             </div>
 
-                                <div class="form-group row">
-                                    <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
-                                </div>
-                                <div class="form-group row">
-                                    <input type="file" class="form-control-file col-sm-12" id="editProfilPhoto"
-                                        name="image" value="{{ dbUserId.image }}">
-                                </div>
+                            <div class="form-group row">
+                                <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
+                            </div>
+                            <div class="form-group row">
+                                <input type="file" class="form-control-file col-sm-12" id="editProfilPhoto" name="image"
+                                    value="{{ dbUserId.image }}">
+                            </div>
 
                             {{!-- <div class="form-group">
                                 <label>
@@ -248,8 +251,8 @@
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Créer</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btnSite">Créer</button>
+                                <button type="button" class="btn btnSite mr-2 p-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
                     </div>

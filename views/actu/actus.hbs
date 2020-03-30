@@ -1,6 +1,6 @@
 {{!---------------- titre -----------------}}
 <div class="container my-5">
-    <h1 class="colorGreen">Mes articles</h1>
+    <h1 class="colorWrite">Mes articles</h1>
     {{!----------------/titre -----------------}}
 
     {{!----------------card actu --------------}}
@@ -12,11 +12,12 @@
                     <h5 class="card-title">{{ title }}</h5>
                     <p class="card-text">{{ truncate content 200 }}</p>
                 </div>
-                <a href="/actuSingle/{{ id }}" class="btn">Voir l'article</a>
                 <div class="card-body">
                     <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
                         alt="image de l'article">
                 </div>
+                <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button
+                        class="btn btnSite mb-3 mr-3">Voir l'article</button></a>
                 <div class="card-footer">
                     <small class="text-muted">Publié le
                         {{ moment createDate format="DD/MM/YYYY" }}</small>

@@ -7,18 +7,18 @@
 }
 
 .limitCard {
-    border-color: #BCBF56;
-    box-shadow: 10px 10px 5px rgba(188, 191, 86, 0.3);
+    border-color: #F2CA80;
+    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
     min-width: 340px;
     max-width: 340px;
 }
 
 .bgNav {
-    background-color: #F2CA80;
+    background-color: #BCBF56;
 }
 
 .bdNavAdmin {
-    background-color: #BCBF56;
+    background-color: #F2CA80;
 }
 
 .bgBody {
@@ -29,9 +29,22 @@
     background-color: #CCD9D7;
 }
 
-.colorGreen {
-    color: #BCBF56;
+.colorWrite {
+    color: #F2CA80;
 }
+
+.colorBlack {
+    color: $black !important
+}
+
+.btnSite {
+    color: #000000;
+    background-color: #F2CA80;
+    border-color: rgb(240, 183, 78); }
+    .btnSite:hover {
+      color: #000000;
+      background-color:  rgba(242, 202, 128, 0.6);
+      border-color: #F2CA80; }
 
 // //mise en forme des boutons
 // .btn-actu {

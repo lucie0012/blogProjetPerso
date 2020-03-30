@@ -1,5 +1,17 @@
-<div class="container my-5">
-    <h1 class="colorGreen"><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Eius populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere
+                trecentis,
+                circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas. Eius
+                populus ab incunabulis primis ad usque pueritiae tempus extremum, quod annis circumcluditur fere
+                trecentis,
+                circummurana pertulit bella, deinde aetatem ingressus adultam post multiplices bellorum aerumnas</p>
+        </div>
+    </div>
+</div>
+<div class="container mt-3 mb-5">
+    <h1 class="colorWrite"><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
     <div class="row">
         <div class="card-deck mt-4">
             {{#each (limitEach dbRepertoryVerified 3 ) }}
@@ -37,7 +49,7 @@
 
 
 <div class="container my-5">
-    <h1 class="colorGreen"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
+    <h1 class="colorWrite"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
     <div class="row">
         <div class="card-deck mt-4 ">
             {{#each (limitEach dbActu 3 ) }}
@@ -46,11 +58,12 @@
                     <h5 class="card-title mt-2">{{ title }}</h5>
                     <p class="card-text">{{ truncate content 200 }}</p>
                 </div>
-                <a href="/actuSingle/{{ id }}" class="btn">Voir l'article</a>
                 <div class="card-body">
                     <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
                         alt="image de l'article">
                 </div>
+                <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button class="btn btnSite mb-3 mr-3">Voir l'article</button></a>
+
                 <div class="card-footer">
                     <small class="text-muted">Publié le
                         {{ moment createDate format="DD/MM/YYYY" }}</small>

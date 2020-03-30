@@ -5,15 +5,19 @@
         <h2 class="mb-0">
             <div class="container">
                 <div class="row modal-body">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                         <div class="d-flex flex-row">
                             <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
                                 aria-expanded="false" aria-controls="collapseSix">
                                 Liste des sites de l'annuaire
                             </a>
-                            <a class="dropdown-item d-flex flex-row-reverse" type="button" data-toggle="modal"
-                                data-target="#modalCreateSite"><i class="fas fa-plus-circle fa-sm"
-                                    aria-hidden="true"></i>Ajouter</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="d-flex flex-row-reverse">
+                            <a class="dropdown-item btn btnSite d-flex flex-row-reverse justify-content-end align-items-center py-2"
+                                type="button" data-toggle="modal" data-target="#modalCreateSite"><i
+                                    class="fas fa-plus-circle fa-lg pl-2" aria-hidden="true"></i>Ajouter</a>
                         </div>
                     </div>
                 </div>
@@ -80,8 +84,8 @@
                                                 </div>
                                                 <div class="col-md-12 ">
                                                     <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn">Oui</button>
-                                                        <button type="button" class="btn p-2"
+                                                        <button type="submit" class="btn btnSite">Oui</button>
+                                                        <button type="button" class="btn btnSite p-2 mr-2"
                                                             data-dismiss="modal">Non</button>
                                                     </div>
                                                 </div>
@@ -118,19 +122,19 @@
                                                             height="100px">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="title">Titre du site</label>
-                                                        <input type="text" class="form-control" name="title"
+                                                        <label for="titleModalEditSite">Titre du site</label>
+                                                        <input type="text" class="form-control" name="title" id="titleModalEditSite"
                                                             value="{{ title }}" required>
                                                         {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="url">URL du site</label>
-                                                        <input type="text" class="form-control" name="url"
+                                                        <label for="urlModalEditSite">URL du site</label>
+                                                        <input type="text" class="form-control" name="url" id="urlModalEditSite"
                                                             value="{{ url }}" required>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="content">Contenu</label>
-                                                        <textarea type="text" class="form-control" name="content"
+                                                        <label for="contentModalEditSite">Contenu</label>
+                                                        <textarea type="text" class="form-control" name="content" id="contentModalEditSite"
                                                             rows="6" required> {{ content }}</textarea>
                                                     </div>
                                                     <div class="form-group">
@@ -183,8 +187,8 @@
                                                 </div>
                                                 <div class="col-md-12 ">
                                                     <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn">Modifier</button>
-                                                        <button type="button" class="btn p-2"
+                                                        <button type="submit" class="btn btnSite">Modifier</button>
+                                                        <button type="button" class="btn btnSite p-2 mr-2"
                                                             data-dismiss="modal">Annuler</button>
                                                     </div>
                                                 </div>
@@ -220,8 +224,8 @@
                                                 </div>
                                                 <div class="col-md-12 ">
                                                     <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn">Oui</button>
-                                                        <button type="button" class="btn p-2"
+                                                        <button type="submit" class="btn btnSite">Oui</button>
+                                                        <button type="button" class="btn btnSite p-2 mr-2"
                                                             data-dismiss="modal">Non</button>
                                                     </div>
                                                 </div>
@@ -262,16 +266,16 @@
                     <div class="row modal-body">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="title">Titre du site</label>
-                                <input type="text" class="form-control" name="title" required>
+                                <label for="titleModalCreateSite">Titre du site</label>
+                                <input type="text" class="form-control" name="title" id="titleModalCreateSite" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
-                                <label for="url">URL du site</label>
-                                <input type="text" class="form-control" name="url" required>
+                                <label for="urlModalCreateSite">URL du site</label>
+                                <input type="text" class="form-control" name="url" id="urlModalCreateSite" required>
                             </div>
                             <div class="form-group">
-                                <label required for="category">Catégorie</label>
+                                <label required>Catégorie</label>
                                 <label id="messageErrorAddSiteAdmin" class="text-danger d-none"></label>
                                 </br>
                                 <div class="form-check form-check-inline">
@@ -298,8 +302,8 @@
                                 {{!-- <input type="text" class="form-control" name="category" required> --}}
                             </div>
                             <div class="form-group">
-                                <label for="description">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" required></textarea>
+                                <label for="descriptionModalCreateSite">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" id="descriptionModalCreateSite" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>
@@ -312,8 +316,8 @@
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn">Créer</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btnSite">Créer</button>
+                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
                     </div>

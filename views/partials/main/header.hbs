@@ -6,17 +6,17 @@
         <ul class="nav justify-content-end" id="scrollup">
             {{#if isAdmin }}
             <li class="nav-item">
-                <a class="nav-link text-muted" href="/admin">Admin</a>
+                <a class="nav-link text-muted colorBlack" href="/admin">Admin</a>
             </li>
             {{/if}}
             <li class="nav-item">
-                <a class="nav-link text-muted" href="/about">A propos</a>
+                <a class="nav-link text-muted colorBlack" href="/about">A propos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="/contact">Contact</a>
+                <a class="nav-link text-muted colorBlack" href="/contact">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted dropdown-toggle dropdown-menu-right" data-toggle="dropdown" href="#"
+                <a class="nav-link text-muted dropdown-toggle dropdown-menu-right colorBlack" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     {{#if user}}
@@ -44,7 +44,7 @@
     <div>
         <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block"
             style="height : 150px" alt="Image du site">
-        <p class="text-center">Le blog sans allergènes qui répertorie les autres !!</p>
+        <p class="text-center colorBlack">Le blog sans allergènes qui répertorie les autres !!</p>
     </div>
     {{!------------ /Image logo + phrase d'accroche ------------------}}
 
@@ -59,13 +59,13 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="/">Accueil</a>
+                        <a class="nav-link colorBlack" href="/">Accueil</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="/repertory">Répertoire</a>
+                        <a class="nav-link colorBlack" href="/repertory">Répertoire</a>
                     </li>
                     <li class="nav-item mx-5">
-                        <a class="nav-link" href="/actus">Mes articles</a>
+                        <a class="nav-link colorBlack" href="/actus">Mes articles</a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title colorGreen" id="modalUserCreateLabel">Créer mon compte</h5>
+                    <h5 class="modal-title" id="modalUserCreateLabel">Créer mon compte</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -155,8 +155,8 @@
                             </div>
                             <div class="col-md-12 ">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn">Créer</button>
-                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btnSite">Créer</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title colorGreen" id="modalAuthentificationLabel">Me connecter</h5>
+                    <h5 class="modal-title" id="modalAuthentificationLabel">Me connecter</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -202,8 +202,8 @@
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn" onclick="connexionModal()">Me connecter</button>
-                                <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btnSite" onclick="connexionModal()">Me connecter</button>
+                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
                     </div>
@@ -253,7 +253,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title colorGreen" id="modalUserEditLabel">Modifier mon compte</h5>
+                    <h5 class="modal-title" id="modalUserEditLabel">Modifier mon compte</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -329,8 +329,8 @@
                             </div>
                             <div class="col-md-12 mt-1">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn">Modifier</button>
-                                    <button type="button" class="btn p-2" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btnSite">Modifier</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                                 </div>
                             </div>
                         </div>
