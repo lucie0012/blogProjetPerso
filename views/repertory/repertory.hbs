@@ -116,13 +116,13 @@
 
         <div class="col-md-3">
             {{!-- <form action="/repertoryFilter" method="POST"> --}}
-            <table class="table" id="groupCheckboxSearch">
+            <table class="table">
                 <thead>
                     <p>Trier par catégorie</p>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                        <th scope="row"> <input class="form-check-input" type="checkbox" name="categoryFilter"
                                 value="sansGluten" id="sansGluten">
                         </th>
                         <td> <label class="form-check-label" for="sansGluten">
@@ -130,7 +130,7 @@
                             </label></td>
                     </tr>
                     <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                        <th scope="row"> <input class="form-check-input" type="checkbox" name="categoryFilter"
                                 value="sansLactose" id="sansLactose">
                         </th>
                         <td> <label class="form-check-label" for="sansLactose">
@@ -138,7 +138,7 @@
                             </label></td>
                     </tr>
                     <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                        <th scope="row"> <input class="form-check-input" type="checkbox" name="categoryFilter"
                                 value="sansOeufs" id="sansOeufs">
                         </th>
                         <td> <label class="form-check-label" for="sansOeufs">
@@ -146,7 +146,7 @@
                             </label></td>
                     </tr>
                     <tr>
-                        <th scope="row"> <input class="form-check-input" type="checkbox" name="category"
+                        <th scope="row"> <input class="form-check-input" type="checkbox" name="categoryFilter"
                                 value="sansCaseine" id="sansCaseine">
                         </th>
                         <td> <label class="form-check-label" for="sansOeufs">
@@ -165,49 +165,6 @@
             {{!-- <button id="rechercher" type="submit" class="btn btnSite">Rechercher</button> --}}
             {{!-- </form> --}}
         </div>
-
-        <script>
-
-            $(document).ready(function () {
-                $("input[name='category']").click(function () {
-                    //console.log("coucou")
-
-                    var categories = [];
-
-                    $.each($("input[name='category']:checked"), function () {
-                        categories.push($(this).val());
-                    });
-
-                    $.ajax({
-                        url: '/repertoryFilter',
-                        type: 'POST',
-                        data: {
-                            category: categories
-                        },
-                        //dataType: 'json',
-                        success: function (data, json, statut) {
-                            //console.log("recherche OK")
-                            //console.log(data)
-                            //console.log(json)
-                            //const dbRepertory = data.dbRepertory;
-                            //console.log(dbRepertory)
-
-                            $("#recharger").html(data);
-
-                        },
-                        error: function (resultat, statut, erreur) {
-                            console.log(resultat);
-                            console.log(statut);
-                            console.log(erreur);
-
-                        }
-
-                    });
-
-                });
-            });
-
-        </script>
 
     </div>
 
@@ -313,7 +270,7 @@
 {{!------------------ /Modal proposition site pour répertoire --------------}}
 
 {{!-- SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
-{{!-- avec JQuery --}}
+{{!-- requête Ajax avec JQuery --}}
 <script>
 
     $("#scriptCheckboxUser").submit(function (event) {
@@ -336,3 +293,52 @@
 
 </script>
 {{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
+
+
+{{!-- SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}
+{{!-- requête Ajax avec JQuery --}}
+<script>
+
+    $(document).ready(function () {
+        $("input[name='categoryFilter']").click(function () {
+            //console.log("coucou")
+
+            var categories = [];
+
+            $.each($("input[name='categoryFilter']:checked"), function () {
+                categories.push($(this).val());
+            });
+
+            //console.log(categories)
+
+            $.ajax({
+                url: '/repertoryFilter',
+                type: 'POST',
+                data: {
+                    category: categories
+                },
+                //dataType: 'json',
+                success: function (data, json, statut) {
+                    //console.log("recherche OK")
+                    //console.log(data)
+                    //console.log(json)
+                    //const dbRepertory = data.dbRepertory;
+                    //console.log(dbRepertory)
+
+                    $("#recharger").html(data);
+
+                },
+                error: function (resultat, statut, erreur) {
+                    console.log(resultat);
+                    console.log(statut);
+                    console.log(erreur);
+
+                }
+
+            });
+
+        });
+    });
+
+</script>
+{{!-- /SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}

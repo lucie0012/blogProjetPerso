@@ -16,8 +16,8 @@
                 <a class="nav-link text-muted colorBlack" href="/contact">Contact</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted dropdown-toggle dropdown-menu-right colorBlack" data-toggle="dropdown" href="#"
-                    role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
+                <a class="nav-link text-muted dropdown-toggle dropdown-menu-right colorBlack" data-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="true" aria-expanded="false">Compte</a>
                 <div class="dropdown-menu dropdown-menu-right">
                     {{#if user}}
                     <button class="dropdown-item" type="submit" data-toggle="modal"
@@ -97,39 +97,46 @@
                     </button>
                 </div>
 
-                <form action="/userCreate" method="POST" enctype="multipart/form-data">
+                <form id="formCreateAccount" action="/userCreate" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row modal-body">
                             <div class="col-md-12">
+                                <label id="messageErrorCreateAccount" class="text-danger d-none"></label>
 
                                 <div class="form-group row">
                                     <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name" id="nameModalCreateAccount" required>
+                                        <input type="text" class="form-control" name="name" id="nameModalCreateAccount"
+                                            required>
                                     </div>
                                     {{!--required permet de forcer le remplissage de la zone de texte --}}
                                 </div>
                                 <div class="form-group row">
                                     <label for="pseudoModalCreateAccount" class="col-sm-5 col-form-label">Pseudo</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="pseudo" id="pseudoModalCreateAccount" required>
+                                        <input type="text" class="form-control" name="pseudo"
+                                            id="pseudoModalCreateAccount" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="emailModalCreateAccount" class="col-sm-5 col-form-label">Adresse email</label>
+                                    <label for="emailModalCreateAccount" class="col-sm-5 col-form-label">Adresse
+                                        email</label>
                                     <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="email" id="emailModalCreateAccount" required>
+                                        <input type="email" class="form-control" name="email"
+                                            id="emailModalCreateAccount" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="passwordModalCreateAccount" class="col-sm-5 col-form-label">Mot de passe</label>
+                                    <label for="passwordModalCreateAccount" class="col-sm-5 col-form-label">Mot de
+                                        passe</label>
                                     <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password" id="passwordModalCreateAccount"
-                                            required>
+                                        <input type="password" class="form-control" name="password"
+                                            id="passwordModalCreateAccount" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="confPasswordModalCreateAccount" class="col-sm-5 col-form-label">Confirmer le mot de
+                                    <label for="confPasswordModalCreateAccount"
+                                        class="col-sm-5 col-form-label">Confirmer le mot de
                                         passe</label>
                                     <div class="col-sm-7">
                                         <input type="password" class="form-control" name="confPassword"
@@ -137,15 +144,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row ">
-                                    <label for="createProfilPhotoModalCreateAccount" class="col-sm-12 col-form-label">Envoyer une photo de
+                                    <label for="createProfilPhotoModalCreateAccount"
+                                        class="col-sm-12 col-form-label">Envoyer une photo de
                                         profil</label>
                                 </div>
                                 <div class="form-group row">
-                                    <input type="file" class="form-control-file col-sm-12" id="createProfilPhotoModalCreateAccount"
-                                        name="image">
+                                    <input type="file" class="form-control-file col-sm-12"
+                                        id="createProfilPhotoModalCreateAccount" name="image">
                                 </div>
                                 <div class="form-group mt-4">
-                                    <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck" required>
+                                    <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck"
+                                        required>
                                     {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
                                     <label for="gridCheckConditionsModalCreateAccount">
                                         J'accepte les termes des conditions d’utilisation de ce site
@@ -155,8 +164,10 @@
                             </div>
                             <div class="col-md-12 ">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btnSite">Créer</button>
-                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                                    <button type="submit" onclick="functionComparePass()"
+                                        class="btn btnSite">Créer</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2"
+                                        data-dismiss="modal">Annuler</button>
                                 </div>
                             </div>
                         </div>
@@ -167,6 +178,7 @@
         </div>
     </div>
     {{!------------ /modal Création compte ------------------}}
+
 
     {{!------------ modal Connexion ------------------}}
     <div class="modal fade" id="modalAuthentification" tabindex="-1" role="dialog"
@@ -202,7 +214,8 @@
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn btnSite" onclick="connexionModal()">Me connecter</button>
+                                <button type="submit" class="btn btnSite" onclick="connexionModal()">Me
+                                    connecter</button>
                                 <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
@@ -214,37 +227,6 @@
         </div>
     </div>
     {{!------------ /modal Connexion ------------------}}
-
-    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
-    {{!-- Requête ajax avec Jquery --}}
-    <script>
-
-        function connexionModal() {
-            console.log("test");
-            $.ajax({
-                url: '/authentification',
-                type: 'POST',
-                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
-                dataType: 'json',
-                success: function (json, statut) {
-                    console.log(json.message);
-                    $("#messageErrorAuth").removeClass("d-none");
-                    $("#messageErrorAuth").text(json.message);
-
-                    if (json.noError) {
-                        window.location.replace("/");
-                    }
-                },
-                error: function (resultat, statut, erreur) {
-                    console.log(resultat);
-                    console.log(statut);
-                    console.log(erreur);
-                }
-            });
-        };
-
-    </script>
-    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
 
 
     {{!------------ modal Gestion compte ------------------}}
@@ -330,7 +312,8 @@
                             <div class="col-md-12 mt-1">
                                 <div class="d-flex flex-row-reverse">
                                     <button type="submit" class="btn btnSite">Modifier</button>
-                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2"
+                                        data-dismiss="modal">Annuler</button>
                                 </div>
                             </div>
                         </div>
@@ -369,5 +352,79 @@
         </div>
     </div>
     {{!------------ /modal Gestion compte  ------------------}}
+
+
+    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
+    {{!-- Requête ajax avec Jquery --}}
+
+    <script>
+
+        function connexionModal() {
+            //console.log("test");
+            $.ajax({
+                url: '/authentification',
+                type: 'POST',
+                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
+                dataType: 'json',
+                success: function (json, statut) {
+                    //console.log(json.message);
+                    $("#messageErrorAuth").removeClass("d-none");
+                    $("#messageErrorAuth").text(json.message);
+
+                    if (json.noError) {
+                        window.location.replace("/");
+                    }
+                },
+                error: function (resultat, statut, erreur) {
+                    console.log(resultat);
+                    console.log(statut);
+                    console.log(erreur);
+                }
+            });
+        };
+
+    </script>
+
+    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
+
+
+    {{!-- SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+    {{!-- Requête ajax avec Jquery --}}
+    ​
+    <script>
+        const formCreateAccount = document.getElementById('formCreateAccount')
+        const messageError = document.getElementById('messageErrorCreateAccount')
+        const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
+
+        functionComparePass = (functionComparePass) => {
+            const Pass = formCreateAccount.password.value
+            const confPass = formCreateAccount.confPassword.value
+            //console.log(Pass)
+            //console.log(confPass)
+
+            const similarePass = (Pass === confPass)
+
+            if (!similarePass) {
+                console.log('not similare pass')
+                messageError.classList.remove("d-none")
+                messageError.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+            } else if (!checkboxForm.checked) {
+                console.log('not checked')
+                messageError.classList.remove("d-none")
+                messageError.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+            } else if (similarePass) {
+                // rajouter aussi que checkbox doit être cochée
+                console.log('similare pass OK')
+                formCreateAccount.submit();
+            } else {
+                console.log('Erreur')
+            }
+
+            //console.log('compare password')
+        }
+    </script>
+
+    {{!-- /SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+
 
 </header>

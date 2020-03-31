@@ -314,6 +314,10 @@ module.exports = {
             console.log('user pas dans la DB');
             res.json({ message: "Email ou mot de passe incorrect." });
             // res.redirect('/')
+        } else if (dbUser.isBan) {
+            console.log('user banni');
+            res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions d'utilisation du site." });
+            // res.redirect('/')
         } else {
             const sess = req.session
             // console.log(req.body)

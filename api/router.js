@@ -23,7 +23,6 @@ const password = require('./controllers/password')
 const multer = require('../middleware/multer-config')
 const isAdmin = require('../middleware/isAdmin')
 const isVerified = require('../middleware/isVerified')
-// const preMulter = require('../middleware/preMulter')
 
 
 

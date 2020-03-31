@@ -107,10 +107,11 @@
                     </button>
                 </div>
 
-                <form action="/userCreate" method="POST" enctype="multipart/form-data">
+                <form id="formCreateAccount" action="/userCreate" method="POST" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row modal-body">
                             <div class="col-md-12">
+                                <label id="messageErrorCreateAccount" class="text-danger d-none"></label>
 
                                 <div class="form-group row">
                                     <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
@@ -173,7 +174,7 @@
                             </div>
                             <div class="col-md-12 ">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btnSite">Créer</button>
+                                    <button type="button" onclick="functionComparePass()" class="btn btnSite">Créer</button>
                                     <button type="button" class="btn btnSite p-2 mr-2"
                                         data-dismiss="modal">Annuler</button>
                                 </div>
@@ -234,37 +235,6 @@
         </div>
     </div>
     {{!------------ /modal Connexion ------------------}}
-
-    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
-    {{!-- Requête ajax avec Jquery --}}
-    <script>
-
-        function connexionModal() {
-            console.log("test");
-            $.ajax({
-                url: '/authentification',
-                type: 'POST',
-                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
-                dataType: 'json',
-                success: function (json, statut) {
-                    console.log(json.message);
-                    $("#messageErrorAuth").removeClass("d-none");
-                    $("#messageErrorAuth").text(json.message);
-
-                    if (json.noError) {
-                        window.location.replace("/");
-                    }
-                },
-                error: function (resultat, statut, erreur) {
-                    console.log(resultat);
-                    console.log(statut);
-                    console.log(erreur);
-                }
-            });
-        };
-
-    </script>
-    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
 
 
     {{!------------ modal Gestion compte ------------------}}
@@ -390,5 +360,75 @@
         </div>
     </div>
     {{!------------ /modal Gestion compte  ------------------}}
+
+
+    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
+    {{!-- Requête ajax avec Jquery --}}
+    <script>
+
+        function connexionModal() {
+            console.log("test");
+            $.ajax({
+                url: '/authentification',
+                type: 'POST',
+                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
+                dataType: 'json',
+                success: function (json, statut) {
+                    console.log(json.message);
+                    $("#messageErrorAuth").removeClass("d-none");
+                    $("#messageErrorAuth").text(json.message);
+
+                    if (json.noError) {
+                        window.location.replace("/");
+                    }
+                },
+                error: function (resultat, statut, erreur) {
+                    console.log(resultat);
+                    console.log(statut);
+                    console.log(erreur);
+                }
+            });
+        };
+
+    </script>
+    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
+
+    {{!-- SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+    {{!-- Requête ajax avec Jquery --}}
+    ​
+    <script>
+        const formCreateAccount = document.getElementById('formCreateAccount')
+        const messageError = document.getElementById('messageErrorCreateAccount')
+        const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
+
+        functionComparePass = (functionComparePass) => {
+            const Pass = formCreateAccount.password.value
+            const confPass = formCreateAccount.confPassword.value
+            //console.log(Pass)
+            //console.log(confPass)
+
+            const similarePass = (Pass === confPass)
+
+            if (!similarePass) {
+                console.log('not similare pass')
+                messageError.classList.remove("d-none")
+                messageError.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+            } else if (!checkboxForm.checked) {
+                console.log('not checked')
+                messageError.classList.remove("d-none")
+                messageError.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+            } else if (similarePass) {
+                // rajouter aussi que checkbox doit être cochée
+                console.log('similare pass OK')
+                formCreateAccount.submit();
+            } else {
+                console.log('Erreur')
+            }
+
+            //console.log('compare password')
+        }
+    </script>
+
+    {{!-- /SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
 
 </header>

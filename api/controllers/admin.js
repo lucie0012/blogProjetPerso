@@ -23,7 +23,13 @@ module.exports = {
         const dbRepertory = await repertoryCollection.find({})
         const dbNote = await noteCollection.find({})
 
-        // console.log(dbUser);
+        // // console.log(dbUser);
+        // console.log("1" + dbComment);
+        // console.log("2" + dbComment.articleId);
+        // const dbActuId = await actuCollection.find({_id : dbComment.articleId})
+
+        // console.log("3" + dbActuId);
+        
 
         res.render('admin/admin', {
             layout: 'adminMain',
