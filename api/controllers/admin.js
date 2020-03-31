@@ -125,6 +125,24 @@ module.exports = {
                     }
                 }
             )
+        } else if (req.body.role === 'user') {
+            userCollection.findOneAndUpdate(
+                { _id: req.params.id },
+                {
+                    fonction: "Utilisateur",
+                    isVerified: false,
+                    isAdmin: false,
+                    isBan: false
+                },
+                { multi: true },
+                (err) => {
+                    if (!err) {
+                        res.redirect('/admin')
+                    } else {
+                        res.rend(err)
+                    }
+                }
+            )
         }
     },
 

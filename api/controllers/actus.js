@@ -69,7 +69,11 @@ module.exports = {
     deleteOneActuSingle: async (req, res) => {
         // console.log(req.params.id);
         const dbActu = await actuCollection.findById(req.params.id);
+        const dbComment = await commentCollection.find({ articleId: req.params.id });
         const pathImage = path.resolve("public/ressources/images/" + dbActu.nameImage)
+
+        // console.log(dbComment);
+
         actuCollection.deleteOne(
             { _id: req.params.id },
             (err) => {
@@ -80,7 +84,19 @@ module.exports = {
                                 console.log(err);
                             } else {
                                 console.log("File delete");
-                                res.redirect('/admin')
+
+                                commentCollection.deleteMany(
+                                    { articleId: req.params.id },
+                                    (err) => {
+                                        if (err) {
+                                            res.send(err)
+                                            console.log('suppression pas OK');
+                                        } else {
+                                            res.redirect('/admin')
+                                            console.log('suppression comm OK');
+                                        }
+                                    })
+                                // res.redirect('/admin')
                             }
                         }
                     )
@@ -88,6 +104,18 @@ module.exports = {
                     res.send(err)
                 }
             })
+
+        // commentCollection.deleteOne(
+        //     { articleId: req.params.id },
+        //     (err) => {
+        //         if (err) {
+        //             res.send(err)
+        //             console.log('suppression pas OK');
+        //         } else {
+        //             res.redirect('/admin')
+        //             console.log('suppression comm OK');
+        //         }
+        //     })
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 

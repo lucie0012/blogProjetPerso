@@ -34,10 +34,10 @@
             <div class="list-group">
                 {{#each (reverse dbComment) }}
                 {{#if isVerified}}
-                <div class="list-group-item list-group-item-action">
+                <div class="list-group-item list-group-item-action mb-3">
                     <p class="mb-1"> {{ content }} </p>
                     <div class="d-flex w-100 justify-content-between">
-                        <small>{{ pseudoAuthor }}</small>
+                        <small>Ecrit par {{ pseudoAuthor }}</small>
                         <small>Posté le {{ moment createDate format="DD-MM-YY"}}</small>
                     </div>
                 </div>
