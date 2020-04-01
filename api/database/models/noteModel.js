@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const noteSchema = new mongoose.Schema({
 
-    pseudoAuthor: String,
     authorId: String,
     siteId : String,
     note : String,

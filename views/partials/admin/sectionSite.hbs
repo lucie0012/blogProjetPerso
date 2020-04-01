@@ -31,7 +31,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Pseudo</th>
+                            <th scope="col">Pseudo de l'auteur</th>
                             <th scope="col">Titre du site</th>
                             <th scope="col">URL</th>
                             <th scope="col">Outils</th>
@@ -40,9 +40,9 @@
                     <tbody>
                         {{#each dbRepertory }}
                         <tr>
-                            <td>{{ pseudo }}</td>
+                            <td>{{ pseudoAuthor }}</td>
                             <td>{{ title }}</td>
-                            <td><a href="{{ url }}">{{ url }}</a></td>
+                            <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
                             <td>
                                 <span>
                                     {{#unless isVerified}}

@@ -17,9 +17,7 @@ module.exports = {
  
         messageCollection.create(
             {
-                nameAuthor: req.body.name,
-                pseudoAuthor: req.body.pseudo,
-                emailAuthor: req.body.email,
+                authorId: req.session.userId,
                 subject: req.body.subject,
                 content: req.body.content,
             },

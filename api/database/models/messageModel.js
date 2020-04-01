@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 
 const messageSchema = new mongoose.Schema({
 
-    nameAuthor : String,
-    pseudoAuthor : String,
-    emailAuthor : String,
+    
+    authorId : String,
     subject : String,
     content : String,
     createDate : {

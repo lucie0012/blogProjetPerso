@@ -59,6 +59,13 @@ module.exports = {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbComment = await commentCollection.find({ articleId: req.params.id })
 
+        for (let i in dbComment) {
+            const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
+            dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
+
+            // console.log(i + "coucou 1 " + dbComment[i].pseudoAuthor)
+        }
+
 
         res.render('actu/actuSingle', { dbActu: dbActu, dbUserId: dbUserId, dbComment: dbComment })
     },
@@ -104,18 +111,6 @@ module.exports = {
                     res.send(err)
                 }
             })
-
-        // commentCollection.deleteOne(
-        //     { articleId: req.params.id },
-        //     (err) => {
-        //         if (err) {
-        //             res.send(err)
-        //             console.log('suppression pas OK');
-        //         } else {
-        //             res.redirect('/admin')
-        //             console.log('suppression comm OK');
-        //         }
-        //     })
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
@@ -181,7 +176,6 @@ module.exports = {
         commentCollection.create(
             {
                 content: req.body.content,
-                pseudoAuthor: req.session.pseudo,
                 authorId: req.session.userId,
                 articleId: req.params.id,
             },

@@ -34,10 +34,38 @@ module.exports = {
         //console.log("5 " + dbComment[0].titleArticle);
 
         for (let i in dbComment) {
-            const dbActuId = await actuCollection.findById(dbComment[i].articleId)
-            dbComment[i].titleArticle = dbActuId.title;
+            const dbActuIdarticleIdComment = await actuCollection.findById(dbComment[i].articleId)
+            const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
+            dbComment[i].titleArticle = dbActuIdarticleIdComment.title;
+            dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
 
-            console.log(i + "coucou " + dbComment[i].titleArticle)
+            // console.log(i + "coucou 1 " + dbComment[i].titleArticle)
+            // console.log(i + "coucou 2 " + dbComment[i].pseudoAuthor)
+        }
+
+        for (let i in dbRepertory) {
+            const dbUserIdauthorIdRepertory = await userCollection.findById(dbRepertory[i].authorId)
+            dbRepertory[i].pseudoAuthor = dbUserIdauthorIdRepertory.pseudo;
+
+            // console.log(i + "coucou 3 " + dbRepertory[i].pseudoAuthor)
+        }
+
+        for (let i in dbNote) {
+            const dbUserIdauthorIdNote = await userCollection.findById(dbNote[i].authorId)
+            const dbRepertoryIdsiteIdNote = await repertoryCollection.findById(dbNote[i].siteId)
+            dbNote[i].pseudoAuthor = dbUserIdauthorIdNote.pseudo;
+            dbNote[i].titleSite = dbRepertoryIdsiteIdNote.title;
+
+            // console.log(i + "coucou 4 " + dbNote[i].pseudoAuthor)
+            // console.log(i + "coucou 5 " + dbNote[i].titleSite)
+        }
+
+        for (let i in dbMessage) {
+            const dbUserIdauthorIdMessage = await userCollection.findById(dbMessage[i].authorId)
+            dbMessage[i].pseudoAuthor = dbUserIdauthorIdMessage.pseudo;
+            dbMessage[i].emailAuthor = dbUserIdauthorIdMessage.email;
+
+            // console.log(i + "coucou 6 " + dbMessage[i].pseudoAuthor)
         }
 
         res.render('admin/admin', {

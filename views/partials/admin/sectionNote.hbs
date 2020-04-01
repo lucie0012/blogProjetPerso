@@ -23,7 +23,8 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">Pseudo</th>
+                        <th scope="col">Pseudo de l'auteur</th>
+                        <th scope="col">Nom du site</th>
                         <th scope="col">Note</th>
                         <th scope="col">Commentaire</th>
                     </tr>
@@ -32,8 +33,9 @@
                     {{#each dbNote }}
                     <tr>
                         <td>{{ pseudoAuthor }}</td>
+                        <td>{{ titleSite }}</td>
                         <td>{{ note }}</td>
-                        <td>{{  comment }}</td>
+                        <td>{{ comment }}</td>
                         <td>
                             <span>
                                 {{#unless isVerified}}

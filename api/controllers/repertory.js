@@ -43,7 +43,7 @@ module.exports = {
                     url: req.body.url,
                     content: req.body.content,
                     category: req.body.category,
-                    pseudo: req.session.pseudo,
+                    authorId: req.session.userId,
                 },
                 (err, post) => {
                     res.redirect('back')
@@ -238,7 +238,6 @@ module.exports = {
             {
                 note: req.body.note,
                 comment: req.body.comment,
-                pseudoAuthor: req.session.pseudo,
                 authorId: req.session.userId,
                 siteId: req.params.id,
             },
@@ -250,9 +249,9 @@ module.exports = {
                     res.send(err)
                 }
             })
-        console.log(req.body)
-        console.log(req.params.id)
-        console.log(req.session);
+        // console.log(req.body)
+        // console.log(req.params.id)
+        // console.log(req.session);
 
     },
 

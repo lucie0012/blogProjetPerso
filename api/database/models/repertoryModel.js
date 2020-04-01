@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const repertorySchema = new mongoose.Schema({
 
-    pseudo : String,
+    authorId : String,
     title : String,
     image: {
         type: String,
