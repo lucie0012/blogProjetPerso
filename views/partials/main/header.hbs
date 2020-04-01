@@ -43,7 +43,7 @@
     {{!------------ Image logo + phrase d'accroche ------------------}}
     <div>
         <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block"
-            style="height : 150px" alt="Image du site">
+            style="height : 150px ; object-fit: contain" alt="Image du site">
         <p class="text-center colorBlack">Le blog sans allergènes qui répertorie les autres !!</p>
     </div>
     {{!------------ /Image logo + phrase d'accroche ------------------}}
@@ -149,7 +149,7 @@
                                         profil</label>
                                 </div>
                                 <div class="form-group row">
-                                    <input type="file" class="form-control-file col-sm-12"
+                                    <input type="file" accept="image/*" class="form-control-file col-sm-12"
                                         id="createProfilPhotoModalCreateAccount" name="image">
                                 </div>
                                 <div class="form-group mt-4">
@@ -297,7 +297,7 @@
 
                                 <div class="form-group row mt-4 ml-2">
                                     <img src="{{ dbUserId.image }}" alt="image profil utilisateur"
-                                        class="col-form-label" widht="100px" height="120px">
+                                        class="col-form-label" widht="100px" height="120px" style="object-fit: contain">
                                 </div>
                                 <div class="form-group row">
                                     <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
@@ -305,7 +305,7 @@
                                         profil</label>
                                 </div>
                                 <div class="form-group row">
-                                    <input type="file" class="form-control-file col-sm-12" id="editProfilPhoto"
+                                    <input type="file" accept="image/*" class="form-control-file col-sm-12" id="editProfilPhoto"
                                         name="image" value="{{ dbUserId.image }}">
                                 </div>
                             </div>
@@ -388,12 +388,11 @@
     {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
 
 
-    {{!-- SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
-    {{!-- Requête ajax avec Jquery --}}
+    {{!-- SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
     ​
     <script>
         const formCreateAccount = document.getElementById('formCreateAccount')
-        const messageError = document.getElementById('messageErrorCreateAccount')
+        const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount')
         const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
 
         functionComparePass = (functionComparePass) => {
@@ -406,14 +405,13 @@
 
             if (!similarePass) {
                 console.log('not similare pass')
-                messageError.classList.remove("d-none")
-                messageError.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+                messageErrorCreateAccount.classList.remove("d-none")
+                messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
             } else if (!checkboxForm.checked) {
                 console.log('not checked')
-                messageError.classList.remove("d-none")
-                messageError.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+                messageErrorCreateAccount.classList.remove("d-none")
+                messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
             } else if (similarePass) {
-                // rajouter aussi que checkbox doit être cochée
                 console.log('similare pass OK')
                 formCreateAccount.submit();
             } else {
@@ -424,7 +422,7 @@
         }
     </script>
 
-    {{!-- /SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+    {{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
 
 
 </header>

@@ -23,7 +23,8 @@
             <div class="card cardRepertory mb-5" style="max-width: 600px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{ image }}" class="card-img" alt="image du site">
+                        <img src="{{ image }}" class="card-img" height="140px" width="100px" style="object-fit: contain"
+                            alt="image du site">
                     </div>
                     <div class="col-md-8">
                         <div class="card-header">
@@ -43,19 +44,27 @@
                                 / Note : </small>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">{{ title }}</h5>
-                            <a href="{{ url }}">{{ url }}</a>
-                            <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex flex-column">
+                                        <h5 class="card-title">{{ title }}</h5>
+                                        <a href="{{ url }}" target="_blank">{{ url }}</a>
+                                        <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                                    </div>
+                                    {{!-- bouton noter --}}
+                                    {{#if ../userVerified }}
+                                    {{!-- A REVOIR --}}
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                        <button class="btn btnSite mt-3" type="button" data-toggle="modal"
+                                            data-target="#modalNoter{{_id}}"
+                                            data-whatever="@getbootstrap">Noter</button>
+                                    </div>
+                                    {{/if}}
+                                    {{!-- bouton noter --}}
+                                </div>
+                            </div>
                         </div>
-                        {{!-- bouton noter --}}
-                        {{#if ../userVerified }}
-                        {{!-- A REVOIR --}}
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btnSite mb-2 mr-2" type="button" data-toggle="modal"
-                                data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</button>
-                        </div>
-                        {{/if}}
-                        {{!-- bouton noter --}}
+
                     </div>
                 </div>
             </div>
@@ -149,7 +158,7 @@
                         <th scope="row"> <input class="form-check-input" type="checkbox" name="categoryFilter"
                                 value="sansCaseine" id="sansCaseine">
                         </th>
-                        <td> <label class="form-check-label" for="sansOeufs">
+                        <td> <label class="form-check-label" for="sansCaseine">
                                 Sans caséine
                             </label></td>
                     </tr>
@@ -189,6 +198,7 @@
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
+                            <label id="messageErrorCreateSiteUser" class="text-danger d-none"></label>
                             <div class="form-group">
                                 <label for="pseudoModalAddSite">Votre pseudo</label>
                                 <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite"
@@ -227,36 +237,23 @@
                                         id="inlineCheckbox4" name="category" value="sansCaseine">
                                     <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
                                 </div>
-
-                                {{!-- <label for="category">Catégorie</label>
-                                <input type="text" class="form-control" name="category" required> --}}
                             </div>
                             <div class="form-group">
                                 <label for="descriptionModalAddSite">Contenu</label>
                                 <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite"
                                     required></textarea>
                             </div>
-
                             <div class="form-group row">
                                 <label for="addSitePhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
                             </div>
                             <div class="form-group row">
-                                <input type="file" class="form-control-file col-sm-12" id="addSitePhoto" name="image"
-                                    value="{{ dbUserId.image }}">
+                                <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                    id="addSitePhotoUser" name="image">
                             </div>
-
-                            {{!-- <div class="form-group">
-                                <label>
-                                    <input type="file" name="image">
-                                    <span>
-                                        Envoyer une image
-                                    </span>
-                                </label>
-                            </div> --}}
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn btnSite">Créer</button>
+                                <button type="submit" id="buttonCreateSiteUser" class="btn btnSite">Créer</button>
                                 <button type="button" class="btn btnSite mr-2 p-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
@@ -269,10 +266,48 @@
 </div>
 {{!------------------ /Modal proposition site pour répertoire --------------}}
 
-{{!-- SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
-{{!-- requête Ajax avec JQuery --}}
+​
 <script>
 
+//{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
+    const messageErrorCreateSiteUser = document.getElementById('messageErrorCreateSiteUser')
+    const buttonCreateSiteUser = document.getElementById('buttonCreateSiteUser')
+
+    document.getElementById('addSitePhotoUser').onchange = function () {
+        let fileaddSiteUser = $("#addSitePhotoUser")[0];
+        let size = fileaddSiteUser.files[0].size;
+        //console.log(size)
+
+        if (size > 1000000) {
+            console.log('size not OK')
+            messageErrorCreateSiteUser.classList.remove("d-none")
+            messageErrorCreateSiteUser.textContent = "Votre fichier est trop volumineux. Veuillez rééssayer."
+            buttonCreateSiteUser.setAttribute("disabled", "");
+        } else if (size < 1000000) {
+            console.log('size OK')
+            //formCreateSite.submit();
+            messageErrorCreateSiteUser.classList.add("d-none")
+            buttonCreateSiteUser.removeAttribute("disabled");
+        } else {
+            console.log('Erreur')
+        }
+
+        //console.log('control size image')
+    }
+//{{!-- /SCRIPT CREATION SITE : message et éviter Multer envoi image --}}
+
+
+
+//{{!-- SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
+    $("input[name='category']").click(function () {
+        console.log("coucou")
+        $("#messageErrorAddSite").addClass("d-none");
+    });
+//{{!-- /SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
+
+
+
+//{{!-- SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
     $("#scriptCheckboxUser").submit(function (event) {
         //on vérifie que nos conditions d'envoi sont bonnes
         if (countCheckedJQuery() >= 1) {
@@ -290,15 +325,12 @@
         var checked = $(".groupCheckboxScript:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
         return checked.length;
     }
-
-</script>
-{{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
+//{{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
 
 
-{{!-- SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}
-{{!-- requête Ajax avec JQuery --}}
-<script>
 
+//{{!-- SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}
+//{{!-- requête Ajax avec JQuery --}}
     $(document).ready(function () {
         $("input[name='categoryFilter']").click(function () {
             //console.log("coucou")
@@ -339,6 +371,6 @@
 
         });
     });
+//{{!-- /SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}
 
 </script>
-{{!-- /SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}

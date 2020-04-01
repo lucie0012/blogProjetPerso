@@ -33,12 +33,18 @@
                         / Note : </small>
                 </div>
                 <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="100px" width="100px" alt="image du site">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ title }}</h5>
-                    <a href="{{ url }}">{{ url }}</a>
-                    <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 d-flex flex-column">
+                                <h5 class="card-title">{{ title }}</h5>
+                                <a href="{{ url }}" class="my-2">{{ url }}</a>
+                                <p class="card-text my-2">{{ truncate content 200 }}</p>
+                                <img src="{{ image }}" class="rounded float-left" height="120px" width="100px"
+                                    style="object-fit: contain" alt="image du site">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 {{!-- <a href="#" class="btn d-flex flex-row-reverse">Noter</a> --}}
             </div>
@@ -55,15 +61,21 @@
             {{#each (limitEach dbActu 3 ) }}
             <div class="card limitCard ml-3">
                 <div class="card-body">
-                    <h5 class="card-title mt-2">{{ title }}</h5>
-                    <p class="card-text">{{ truncate content 200 }}</p>
-                </div>
-                <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
-                        alt="image de l'article">
-                </div>
-                <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button class="btn btnSite mb-3 mr-3">Voir l'article</button></a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 d-flex flex-column">
+                                <h5 class="card-title mt-2">{{ title }}</h5>
+                                <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                                <img src="{{ image }}" class="rounded float-left mt-2" height="200px" width="180px"
+                                    style="object-fit: contain" alt="image de l'article">
+                                <a href="/actuSingle/{{ id }}"
+                                    class="d-flex justify-content-end text-decoration-none mt-2"><button
+                                        class="btn btnSite mt-3">Voir l'article</button></a>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
                 <div class="card-footer">
                     <small class="text-muted">Publié le
                         {{ moment createDate format="DD/MM/YYYY" }}</small>

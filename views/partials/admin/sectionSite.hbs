@@ -119,7 +119,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <img src="{{ image }}" alt="image site" widht="100px"
-                                                            height="100px">
+                                                            height="100px" style="object-fit: contain">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="titleModalEditSite{{_id}}">Titre du site</label>
@@ -179,7 +179,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label>
-                                                            <input type="file" name="image">
+                                                            <input type="file" name="image" accept="image/*">
                                                             <span>
                                                                 Envoyer une nouvelle image
                                                             </span>
@@ -266,6 +266,7 @@
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
+                            <label id="messageErrorCreateSiteAdmin" class="text-danger d-none"></label>
                             <div class="form-group">
                                 <label for="titleModalCreateSite">Titre du site</label>
                                 <input type="text" class="form-control" name="title" id="titleModalCreateSite" required>
@@ -307,18 +308,26 @@
                                 <textarea type="text" class="form-control" name="content"
                                     id="descriptionModalCreateSite" required></textarea>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group row">
+                                <label for="addSitePhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
+                            </div>
+                            <div class="form-group row">
+                                <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                    id="addSitePhotoAdmin" name="image">
+                            </div>
+
+                            {{!-- <div class="form-group">
                                 <label>
-                                    <input type="file" name="image">
+                                    <input type="file" name="image" accept="image/*">
                                     <span>
                                         Envoyer une image
                                     </span>
                                 </label>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn btnSite">Créer</button>
+                                <button type="submit" id="buttonCreateSiteAdmin" class="btn btnSite">Créer</button>
                                 <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>
@@ -332,10 +341,10 @@
 {{!------------------ /Modal création site pour répertoire --------------}}
 
 
-{{!-- SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
-{{!-- avec JQuery --}}
-<script>
 
+<script>
+//{{!-- SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
+//{{!-- avec JQuery --}}
     $("#scriptCheckboxAdmin").submit(function (event) {
         //on vérifie que nos conditions d'envoi sont bonnes
         if (countCheckedJQuery() >= 1) {
@@ -353,6 +362,34 @@
         var checked = $(".groupCheckboxScriptAdmin:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
         return checked.length;
     }
+//{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
+
+
+//{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
+    const messageErrorCreateSiteAdmin = document.getElementById('messageErrorCreateSiteAdmin')
+    const buttonCreateSiteAdmin = document.getElementById('buttonCreateSiteAdmin')
+
+    document.getElementById('addSitePhotoAdmin').onchange = function () {
+        let fileaddSiteAdmin = $("#addSitePhotoAdmin")[0];
+        let size = fileaddSiteAdmin.files[0].size;
+        //console.log(size)
+
+        if (size > 1000000) {
+            console.log('size not OK')
+            messageErrorCreateSiteAdmin.classList.remove("d-none")
+            messageErrorCreateSiteAdmin.textContent = "Votre fichier est trop volumineux. Veuillez rééssayer."
+            buttonCreateSiteAdmin.setAttribute("disabled", "");
+        } else if (size < 1000000) {
+            console.log('size OK')
+            //formCreateSite.submit();
+            messageErrorCreateSiteAdmin.classList.add("d-none")
+            buttonCreateSiteAdmin.removeAttribute("disabled");
+        } else {
+            console.log('Erreur')
+        }
+
+        //console.log('control size image')
+    }
+//{{!-- /SCRIPT CREATION SITE : message et éviter Multer envoi image --}}
 
 </script>
-{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
