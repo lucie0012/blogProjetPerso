@@ -23,13 +23,22 @@ module.exports = {
         const dbRepertory = await repertoryCollection.find({})
         const dbNote = await noteCollection.find({})
 
-        // // console.log(dbUser);
-        // console.log("1" + dbComment);
-        // console.log("2" + dbComment.articleId);
-        // const dbActuId = await actuCollection.find({_id : dbComment.articleId})
+        // console.log(dbUser);
 
-        // console.log("3" + dbActuId);
-        
+        //console.log("1 " + dbComment[0]);
+        //console.log("2 " + dbComment[0].articleId);
+        //const dbActuId = await actuCollection.findById(dbComment[0].articleId)
+        //console.log("3 " + dbActuId);
+        //console.log("4 " + dbActuId.title);
+        //dbComment[0].titleArticle = dbActuId.title;
+        //console.log("5 " + dbComment[0].titleArticle);
+
+        for (let i in dbComment) {
+            const dbActuId = await actuCollection.findById(dbComment[i].articleId)
+            dbComment[i].titleArticle = dbActuId.title;
+
+            console.log(i + "coucou " + dbComment[i].titleArticle)
+        }
 
         res.render('admin/admin', {
             layout: 'adminMain',
