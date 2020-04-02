@@ -39,8 +39,8 @@ module.exports = {
                 const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
                 dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
             } else if (dbComment[i].authorId == null) {
-                const dbActuIdarticleIdComment = await actuCollection.findById(dbComment[i].articleId)
                 dbComment[i].pseudoAuthor = undefined;
+                const dbActuIdarticleIdComment = await actuCollection.findById(dbComment[i].articleId)
                 dbComment[i].titleArticle = dbActuIdarticleIdComment.title;
             } else if (dbComment[i].articleId == null & dbComment[i].authorId == null) {
                 dbComment[i].titleArticle = undefined;

@@ -164,7 +164,7 @@
                             </div>
                             <div class="col-md-12 ">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" onclick="functionComparePass()"
+                                    <button type="submit"  id="buttonCreateUser"
                                         class="btn btnSite">Créer</button>
                                     <button type="button" class="btn btnSite p-2 mr-2"
                                         data-dismiss="modal">Annuler</button>
@@ -386,12 +386,13 @@
 
 
     //{{!-- SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
-    
-    const formCreateAccount = document.getElementById('formCreateAccount')
-    const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount')
-    const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
 
-    functionComparePass = (functionComparePass) => {
+    const formCreateAccount = document.getElementById('formCreateAccount');
+    const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount');
+    const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount');
+    const buttonCreateUser = document.getElementById('buttonCreateUser');
+
+    buttonCreateUser.addEventListener('click', function (event) {
         const Pass = formCreateAccount.password.value
         const confPass = formCreateAccount.confPassword.value
         //console.log(Pass)
@@ -403,10 +404,37 @@
             console.log('not similare pass')
             messageErrorCreateAccount.classList.remove("d-none")
             messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+            event.preventDefault();
         } else if (!checkboxForm.checked) {
             console.log('not checked')
             messageErrorCreateAccount.classList.remove("d-none")
             messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+            event.preventDefault();
+        } else if (similarePass) {
+            console.log('similare pass OK')
+        } else {
+            console.log('Erreur')
+        }
+    });
+
+    /*functionComparePass = (functionComparePass) => {
+        const Pass = formCreateAccount.password.value
+        const confPass = formCreateAccount.confPassword.value
+        //console.log(Pass)
+        //console.log(confPass)
+
+        const similarePass = (Pass === confPass)
+
+        if (!similarePass) {
+            console.log('not similare pass')
+            messageErrorCreateAccount.classList.remove("d-none")
+            messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+            buttonCreateUser.setAttribute("disabled", "");
+        } else if (!checkboxForm.checked) {
+            console.log('not checked')
+            messageErrorCreateAccount.classList.remove("d-none")
+            messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+            buttonCreateUser.setAttribute("disabled", "");
         } else if (similarePass) {
             console.log('similare pass OK')
             formCreateAccount.submit();
@@ -415,7 +443,9 @@
         }
 
         //console.log('compare password')
-    }
+
+        // ATTENTION : met le message au premier clic sur créer mais envoi quand même au second click
+    }*/
     //{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
 
 </script>
