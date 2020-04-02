@@ -85,9 +85,9 @@ app.use(expressSession({
         { mongooseConnection: mongoose.connection }
     ),
     cookie: {
-        maxAge: 60000,
+        maxAge: 900000,
+        // correspond à 15mn
     }
-    // expires: new Date(Date.now() + (3600000))
 }));
 
 app.use('*', async (req, res, next) => {
@@ -123,8 +123,8 @@ mongoose.connect(urlDB, {
     useFindAndModify: false,
     useCreateIndex: true
 })
-.then(() => console.log('Connecté à MongoDb Cloud'))
-.catch((err) => console.log(err))
+    .then(() => console.log('Connecté à MongoDb Cloud'))
+    .catch((err) => console.log(err))
 
 
 /*
