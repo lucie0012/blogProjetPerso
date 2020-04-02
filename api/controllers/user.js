@@ -43,7 +43,7 @@ module.exports = {
         host = req.get('host')  // adresse du site hébergeant l'envoi du mail de verif (req.get est une fonction avec en paramètre ici 'host' (vu par une console log de "req.get"))
         link = "http://" + req.get('host') + "/verifyMail/" + rand  // construction du lien (qui servira de lien de validation dans le mail) avec l'adresse du site et le chiffre random
         mailOptions = {
-            from: 'blogSansAllergenes@gmail.com', // adresse du mail qui envoi le lien de verif
+            from: config.nodemailer.email, // adresse du mail qui envoi le lien de verif
             to: req.body.email, // adresse de la personne à qui envoyer (celle de l'utilisateur qui s'inscrit)
             subject: 'Merci de confirmer votre adresse email', // sujet du mail de verif
             rand: rand, // nombre random généré à l'envoi du mail

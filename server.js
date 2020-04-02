@@ -37,7 +37,7 @@ app.use('/public', express.static('public'));
 /*
  * Method-Override (pour pouvoir indiquer un delete via une pethode POST dans le code HTML)
  ******************************/
-app.use(methodOverride('_method'));
+app.use(methodOverride(config.methodOverride.value));
 
 
 /*
@@ -84,6 +84,9 @@ app.use(expressSession({
     store: new mongoStore(
         { mongooseConnection: mongoose.connection }
     ),
+    cookie: {
+        maxAge: 60000,
+    }
     // expires: new Date(Date.now() + (3600000))
 }));
 

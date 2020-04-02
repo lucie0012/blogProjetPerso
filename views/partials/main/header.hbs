@@ -43,7 +43,7 @@
     {{!------------ Image logo + phrase d'accroche ------------------}}
     <div>
         <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block"
-            style="height : 150px ; object-fit: contain" alt="Image du site">
+            style="height : 150px ; object-fit: contain" alt="Image logo du site">
         <p class="text-center colorBlack">Le blog sans allergènes qui répertorie les autres !!</p>
     </div>
     {{!------------ /Image logo + phrase d'accroche ------------------}}
@@ -75,12 +75,12 @@
 
 
     {{!------------ barre recherche ------------------}}
-    <div class="container d-flex justify-content-center mb-3">
+    {{!-- <div class="container d-flex justify-content-center mb-3">
         <form class="form-inline">
             <input class="form-control form-control-sm" type="search" placeholder="Rechercher" aria-label="Search">
             <button class="btn btn-light my-2 my-sm-0 btn-sm" type="submit"><i class="fas fa-search"></i></button>
         </form>
-    </div>
+    </div> --}}
     {{!------------ /barre recherche ------------------}}
 
 
@@ -296,7 +296,7 @@
                                 </div> --}}
 
                                 <div class="form-group row mt-4 ml-2">
-                                    <img src="{{ dbUserId.image }}" alt="image profil utilisateur"
+                                    <img src="{{ dbUserId.image }}" alt="image de profil"
                                         class="col-form-label" widht="100px" height="120px" style="object-fit: contain">
                                 </div>
                                 <div class="form-group row">

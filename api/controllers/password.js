@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
     auth: {
         // définission des données d'authentification
         user: config.nodemailer.email,
-        pass: config.nodemailer.password
+        pass: config.nodemailer.password,
     },
     tls: {
         rejectUnauthorized: false,  //définit des options TLSSocket node.js supplémentaires à transmettre au constructeur de socket
@@ -45,7 +45,7 @@ module.exports = {
         hostForgotPass = req.get('host')  // adresse du site hébergeant l'envoi du mail de verif (req.get est une fonction avec en paramètre ici 'host' (vu par une console log de "req.get"))
         linkForgotPass = "http://" + req.get('host') + "/resetPassword/" + randForgotPass  // construction du lien (qui servira de lien de validation dans le mail) avec l'adresse du site et le chiffre random
         mailOptionsForgotPass = {
-            from: 'blogSansAllergenes@gmail.com', // adresse du mail qui envoi le lien de verif
+            from: config.nodemailer.email, // adresse du mail qui envoi le lien de verif
             to: req.body.email, // adresse de la personne à qui envoyer (celle de l'utilisateur qui s'inscrit)
             subject: 'Votre demande de réinitialisation de mot de passe', // sujet du mail de verif
             randForgotPass: randForgotPass, // nombre random généré à l'envoi du mail
@@ -125,7 +125,7 @@ module.exports = {
         // Nodemailer config et affectation des constantes declarées plus haut
         linkResetPass = "http://" + req.get('host')
         mailOptionsResetPass = {
-            from: 'blogSansAllergenes@gmail.com', // adresse du mail qui envoi le lien de verif
+            from: config.nodemailer.email, // adresse du mail qui envoi le lien de verif
             to: user.email, // adresse de la personne à qui envoyer (celle de l'utilisateur qui s'inscrit)
             subject: 'Confirmation de réinitialisation de mot de passe', // sujet du mail de verif
             html: "Bonjour.<br> Votre mot de passe a bien été réinitialisé.<br><a href=" + linkResetPass + ">Revenir sur le site et se connecter</a> <br>L'équipe Blog Sans Allergenes",  // contenu du mail

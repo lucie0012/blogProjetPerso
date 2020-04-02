@@ -111,7 +111,7 @@
                             <div class="row modal-body">
                               <div class="col-md-12">
                                 <div class="form-group">
-                                  <img src="{{ image }}" alt="image user" widht="100px" height="100px" style="object-fit: contain">
+                                  <img src="{{ image }}" alt="image de profil de l'utilisateur" widht="100px" height="100px" style="object-fit: contain">
                                 </div>
                                 <div class="form-group">
                                   <p>Nom d'utilisateur : {{ name }}</p>
@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="form-group">
                                   <label>Modifier la fonction de l'utilisateur:</label>
-                                  <select name="role" required>
+                                  <select class="form-control" name="role" required>
                                     <option value="">Rôle utilisateur</option>
                                     <option value="isAdmin">Administrateur</option>
                                     <option value="isVerified">Vérifié</option>
