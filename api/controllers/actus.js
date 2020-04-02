@@ -60,10 +60,14 @@ module.exports = {
         const dbComment = await commentCollection.find({ articleId: req.params.id })
 
         for (let i in dbComment) {
+            if (dbComment[i].authorId == null) {
+                dbComment[i].pseudoAuthor = undefined;
+            } else {
             const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
             dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
 
             // console.log(i + "coucou 1 " + dbComment[i].pseudoAuthor)
+            }
         }
 
 

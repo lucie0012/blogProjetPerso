@@ -86,7 +86,7 @@ app.use(expressSession({
     ),
     cookie: {
         maxAge: 900000,
-        // correspond à 15mn
+        // correspond à 15mn inactif
     }
 }));
 
