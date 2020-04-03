@@ -6,6 +6,11 @@
     right:-60px;
 }
 
+.scrollup:hover {
+    transition:0.8s;
+    transform: scale(1.4, 1.4);
+}
+
 
 .limitCard {
     border-color: #F2CA80;

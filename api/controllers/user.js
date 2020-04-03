@@ -36,7 +36,7 @@ let rand, mailOptions, host, link    //création de variable sans affectation (p
 module.exports = {
 
     /**************Création compte et envoi mail réinitialisation mot de passe*************/
-    postUserCreate: (req, res) => {
+    postUserCreate: async (req, res) => {
 
         // Nodemailer config et affectation des constantes declarées plus haut
         rand = Math.floor((Math.random() * 100) + 62)   //créer un chiffre random qui servira d'ID
@@ -54,16 +54,21 @@ module.exports = {
         // console.log("host :" + host);   //donne : "localhost:5000"
         // console.log("mailOptions.to : " + mailOptions.to);  //donne l'adresse mail renseigné lors de la création du compte
 
-
-        // console.log(req.body);
+        console.log(req.file);
+        console.log(req.body);
         const Pass = req.body.password
         const confPass = req.body.confPassword
         // console.log(Pass + ' ' + confPass);
 
-        if (Pass !== confPass) {
+        const user = await userCollection.findOne({ email: req.body.email }) 
+
+        if(user) {
+            console.log('email déjà dans BDD');
+            res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
+        } else if (Pass !== confPass) {
             //comparaison des mots de passe
-            res.redirect('/')
-            // res.render('user/userCreate')
+            res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
+            //res.redirect('/')
         } else {
             if (!req.file) {
                 userCollection.create(
@@ -87,7 +92,9 @@ module.exports = {
                                     next()
                                 }
                             }),
-                                res.redirect('/')
+                                // res.redirect('/')
+                                res.json({ noError: true });
+                                //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vient de vous être envoyé." });
                         }
                     })
 
@@ -115,7 +122,9 @@ module.exports = {
                                     next()
                                 }
                             }),
-                                res.redirect('/')
+                                // res.redirect('/')
+                                res.json({ noError: true });
+                                //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vous a été envoyé." });
                         }
                     })
             }

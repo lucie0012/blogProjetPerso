@@ -7888,6 +7888,10 @@ a.text-color1:hover, a.text-color1:focus {
   top: 90vh;
   right: -60px; }
 
+.scrollup:hover {
+  transition: 0.8s;
+  transform: scale(1.4, 1.4); }
+
 .limitCard {
   border-color: #F2CA80;
   box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);

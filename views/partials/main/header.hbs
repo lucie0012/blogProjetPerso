@@ -41,8 +41,9 @@
 
     {{!------------ Image logo + phrase d'accroche ------------------}}
     <div>
-        <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block rounded-circle mb-1"
-            style="height : 150px ; object-fit: contain" alt="Image logo du site">
+        <img src="/public/ressources/images/imageLogo.jpeg"
+            class="img-fluid rounded mx-auto d-block rounded-circle mb-1" style="height : 150px ; object-fit: contain"
+            alt="Image logo du site">
         <p class="text-center colorBlack">Le blog sans allergènes qui répertorie les autres !!</p>
     </div>
     {{!------------ /Image logo + phrase d'accroche ------------------}}
@@ -96,7 +97,8 @@
                     </button>
                 </div>
 
-                <form id="formCreateAccount" action="/userCreate" method="POST" enctype="multipart/form-data">
+                <form id="formCreateAccount" enctype="multipart/form-data">
+                    {{!--  action="/userCreate"  method="POST" => plus nécessaire avec requête AJAX--}}
                     <div class="container">
                         <div class="row modal-body">
                             <div class="col-md-12">
@@ -105,15 +107,15 @@
                                 <div class="form-group row">
                                     <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="name" id="nameModalCreateAccount"
-                                            required>
+                                        <input type="text" class="form-control" name="nameModalCreateAccount"
+                                            id="nameModalCreateAccount" required>
                                     </div>
                                     {{!--required permet de forcer le remplissage de la zone de texte --}}
                                 </div>
                                 <div class="form-group row">
                                     <label for="pseudoModalCreateAccount" class="col-sm-5 col-form-label">Pseudo</label>
                                     <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="pseudo"
+                                        <input type="text" class="form-control" name="pseudoModalCreateAccount"
                                             id="pseudoModalCreateAccount" required>
                                     </div>
                                 </div>
@@ -121,7 +123,7 @@
                                     <label for="emailModalCreateAccount" class="col-sm-5 col-form-label">Adresse
                                         email</label>
                                     <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="email"
+                                        <input type="email" class="form-control" name="emailModalCreateAccount"
                                             id="emailModalCreateAccount" required>
                                     </div>
                                 </div>
@@ -129,7 +131,7 @@
                                     <label for="passwordModalCreateAccount" class="col-sm-5 col-form-label">Mot de
                                         passe</label>
                                     <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="password"
+                                        <input type="password" class="form-control" name="passwordModalCreateAccount"
                                             id="passwordModalCreateAccount" required>
                                     </div>
                                 </div>
@@ -138,8 +140,9 @@
                                         class="col-sm-5 col-form-label">Confirmer le mot de
                                         passe</label>
                                     <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="confPassword"
-                                            id="confPasswordModalCreateAccount" required>
+                                        <input type="password" class="form-control"
+                                            name="confPasswordModalCreateAccount" id="confPasswordModalCreateAccount"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row ">
@@ -149,7 +152,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <input type="file" accept="image/*" class="form-control-file col-sm-12"
-                                        id="createProfilPhotoModalCreateAccount" name="image">
+                                        id="createProfilPhotoModalCreateAccount" name="imageModalCreateAccount">
                                 </div>
                                 <div class="form-group mt-4">
                                     <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck"
@@ -391,8 +394,8 @@
     const buttonCreateUser = document.getElementById('buttonCreateUser');
 
     buttonCreateUser.addEventListener('click', function (event) {
-        const Pass = formCreateAccount.password.value
-        const confPass = formCreateAccount.confPassword.value
+        const Pass = formCreateAccount.passwordModalCreateAccount.value
+        const confPass = formCreateAccount.confPasswordModalCreateAccount.value
         //console.log(Pass)
         //console.log(confPass)
 
@@ -410,10 +413,58 @@
             event.preventDefault();
         } else if (similarePass) {
             console.log('similare pass OK')
+            event.preventDefault();
+            submitModalCreateUser()
         } else {
             console.log('Erreur')
         }
     });
+
+    function submitModalCreateUser() {
+        console.log("coucou")
+
+        //console.log($('input[name=imageModalCreateAccount]')[0].files[0])
+
+        //var file = new FormData();
+        //file.append('image', $('input[name=imageModalCreateAccount]')[0].files[0]);
+
+        //console.log("file " + file)
+
+        $.ajax({
+            url: '/userCreate',
+            type: 'POST',
+            data: {
+                name: $("input[name=nameModalCreateAccount]").val(),
+                pseudo: $("input[name=pseudoModalCreateAccount]").val(),
+                email: $("input[name=emailModalCreateAccount]").val(),
+                password: $("input[name=passwordModalCreateAccount]").val(),
+                confPassword: $("input[name=confPasswordModalCreateAccount]").val(),
+                //file,
+            },
+            //dataType: 'json',
+            //contentType: "multipart/form-data",
+            //contentType: false,
+            //processData: false,
+            //mimeType: 'multipart/form-data',
+            success: function (json, statut) {
+                console.log("test")
+                //console.log(json.message);
+                //console.log(json.noError)
+                $("#messageErrorCreateAccount").removeClass("d-none");
+                $("#messageErrorCreateAccount").text(json.message);
+
+                if (json.noError) {
+                    window.location.replace("/");
+                }
+            },
+            error: function (resultat, statut, erreur) {
+                console.log(resultat);
+                console.log(statut);
+                console.log(erreur);
+            }
+        });
+    }
+
 
     /*functionComparePass = (functionComparePass) => {
         const Pass = formCreateAccount.password.value
@@ -444,6 +495,6 @@
 
         // ATTENTION : met le message au premier clic sur créer mais envoi quand même au second click
     }*/
-    //{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
+//{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
 
 </script>
