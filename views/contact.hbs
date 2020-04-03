@@ -1,71 +1,77 @@
 <div class="container text-center mb-5">
-    <h1 class="mt-5 colorWrite">Contact</h1>
-    <div class="row my-4">
-        <div class="col-md-12">
-            <table class="table-sm table-responsive d-flex justify-content-center">
-                <tr>
-                    <th scope="col"><a href="#"><i class="fab fa-facebook-square fa-3x mx-1"
-                                style="color: #3b5999"></i></a></th>
-                    <th scope="col"><a href="#"><i class="fab fa-twitter-square fa-3x mx-1"
-                                style="color: #55acee"></i></a></th>
-                    <th scope="col"><a href="#"><i class="fab fa-instagram fa-3x mx-1" style="color: #e4405f"></i></a>
-                    </th>
-                    <th scope="col"><a href="#"><i class="fab fa-youtube-square fa-3x mx-1"
-                                style="color: #cd201f"></i></a></th>
-                </tr>
-            </table>
+    <div class="row">
+        <div class="col-md-9">
+            {{#if needAlert }}
+            {{#if isError  }}
+            <label class="text-danger">Votre message n'a pas pu être envoyé. Veuillez réessayer plus tard.</label>
+            {{/if}}
+            {{#unless isError  }}
+            <label class="text-success">Votre message a bien été envoyé.</label>
+            {{/unless}}
+            {{/if}}
+            <div class="container">
+                <div class="row d-flex flex-column justify-content-center">
+                    <h1 class="my-5 colorWrite title">Contact</h1>
+                    <form action="/contact" method="POST">
+                        <div class="form-row mb-2">
+                            <div class="form-group col-md-6 pr-5">
+                                <label for="nomContact" class="d-flex justify-content-start">Votre
+                                    nom</label>
+                                <input type="text" id="nomContact" class="form-control" placeholder="Votre nom*"
+                                    name="nameContact" value="{{ dbUserId.name }}" {{#if user}} disabled="disabled"
+                                    {{/if}} required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="pseudoContactl" class="d-flex justify-content-start">Votre
+                                    pseudo</label>
+                                <input type="text" id="pseudoContact" class="form-control" placeholder="Votre pseudo*"
+                                    name="pseudo" value="{{ dbUserId.pseudo }}" {{#if user}} disabled="disabled" {{/if}}
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailContact" class="d-flex justify-content-start">Votre
+                                email</label>
+                            <input type="email" id="emailContact" class="form-control" placeholder="Votre email*"
+                                name="emailContact" value="{{ dbUserId.email }}" required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="sujetContact" class="d-flex justify-content-start">Votre
+                                sujet</label>
+                            <input type="text" id="sujetContact" class="form-control" placeholder="Sujet*"
+                                name="subject" required>
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="messageContact" class="d-flex justify-content-start">Votre
+                                message</label>
+                            <textarea id="messageContact" class="form-control" rows="5" placeholder="Votre message*"
+                                name="content" required></textarea>
+                        </div>
+                        <button id="envoyer" type="submit" class="btn btnSite mt-2">Envoyer</button>
+                    </form>
+                </div>
+            </div>
         </div>
+
+        <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mt-4">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <ul class="list-unstyled">
+                        <li class="mb-4" scope="col"><a href="#"><i class="fab fa-facebook-square fa-3x mx-1 network"
+                                    style="color: #3b5999"></i></a></li>
+                        <li class="mb-4" scope="col"><a href="#"><i class="fab fa-twitter-square fa-3x mx-1 network"
+                                    style="color: #55acee"></i></a></li>
+                        <li class="mb-4" scope="col"><a href="#"><i class="fab fa-instagram fa-3x mx-1 network"
+                                    style="color: #e4405f"></i></a>
+                        </li>
+                        <li class="mb-4" scope="col"><a href="#"><i class="fab fa-youtube-square fa-3x mx-1 network"
+                                    style="color: #cd201f"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
-    {{#if needAlert }}
-    {{#if isError  }}
-    <label class="text-danger">Votre message n'a pas pu être envoyé. Veuillez réessayer plus tard.</label>
-    {{/if}}
-    {{#unless isError  }}
-    <labe class="text-success">Votre message a bien été envoyé.</label>
-        {{/unless}}
-        {{/if}}
-        <div class="row d-flex justify-content-center">
-            <form action="/contact" method="POST">
-                <div class="form-group row">
-                    <label for="nomContact" class="col-sm-4 col-form-label">Votre nom</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="nomContact" class="form-control" placeholder="Votre nom*"
-                            name="nameContact" value="{{ dbUserId.name }}" {{#if user}} disabled="disabled" {{/if}}
-                            required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="pseudoContactl" class="col-sm-4 col-form-label">Votre pseudo</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="pseudoContact" class="form-control" placeholder="Votre pseudo*"
-                            name="pseudo" value="{{ dbUserId.pseudo }}" {{#if user}} disabled="disabled" {{/if}}
-                            required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="emailContact" class="col-sm-4 col-form-label">Votre email</label>
-                    <div class="col-sm-8">
-                        <input type="email" id="emailContact" class="form-control" placeholder="Votre email*"
-                            name="emailContact" value="{{ dbUserId.email }}" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="sujetContact" class="col-sm-4 col-form-label">Votre sujet</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="sujetContact" class="form-control" placeholder="Sujet*" name="subject"
-                            required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="messageContact" class="col-sm-4 col-form-label">Votre message</label>
-                    <div class="col-sm-8">
-                        <textarea id="messageContact" class="form-control" rows="5" placeholder="Votre message*"
-                            name="content" required></textarea>
-                    </div>
-                </div>
-                <button id="envoyer" type="submit" class="btn btnSite mt-2">Envoyer</button>
-            </form>
-        </div>
 </div>
 
 {{!-- <script>

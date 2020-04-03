@@ -11,7 +11,7 @@
     </div>
 </div>
 <div class="container mt-3 mb-5">
-    <h1 class="colorWrite"><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
+    <h1 class="colorWrite title text-center"><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
     <div class="row">
         <div class="card-deck mt-4">
             {{#each (limitEach dbRepertoryVerified 3 ) }}
@@ -53,23 +53,22 @@
     </div>
 </div>
 
-<div class="container-fluid py-5 bgNav w-100">
-    <div class="row d-flex flex-row justify-content-center">
-    <i class="fas fa-cookie-bite fa-2x"></i>
-    <i class="fas fa-cookie-bite fa-2x"></i>
-    <i class="fas fa-cookie-bite fa-2x"></i>
-    <p class="font-weight-bolder h3 text-white px-3">
-        Manger sans ALLERGENES n'ai pas manger sans GOURMANDISES ... au contraire !!!
-    </p>
-    <i class="fas fa-cookie-bite fa-2x"></i>
-    <i class="fas fa-cookie-bite fa-2x"></i>
-    <i class="fas fa-cookie-bite fa-2x"></i>
+<div class="container-fluid py-4 bgNavAdmin w-100">
+    <div class="row d-flex flex-row justify-content-center align-items-center">
+        <i class="fas fa-cookie-bite fa-2x" style="color: #84563C"></i>
+        <i class="fas fa-cookie-bite fa-2x" style="color: #84563C"></i>
+        <i class="fas fa-cookie-bite fa-2x" style="color: #84563C"></i>
+        <p class="font-weight-bolder h3 text-white px-4">
+            Manger sans ALLERGENES n'est pas manger sans GOURMANDISES !!!
+        </p>
+        <img src="/public/ressources/images/imgDivBackgroundHome.jpeg" alt="photo d'un repas entre amis"
+            class="rounded-circle" width="250px">
     </div>
 </div>
 
 
 <div class="container my-5">
-    <h1 class="colorWrite"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
+    <h1 class="colorWrite title text-center"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
     <div class="row">
         <div class="card-deck mt-4">
             {{#each (limitEach dbActu 3 ) }}

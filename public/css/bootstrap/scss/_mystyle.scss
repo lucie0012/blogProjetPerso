@@ -6,6 +6,7 @@
     right:-60px;
 }
 
+
 .limitCard {
     border-color: #F2CA80;
     box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
@@ -22,12 +23,8 @@
     background-color: #BCBF56;
 }
 
-.bdNavAdmin {
+.bgNavAdmin {
     background-color: #F2CA80;
-}
-
-.bgBody {
-    background-color: rgba(247, 253, 246, 0.5);
 }
 
 .bgFooter {
@@ -42,6 +39,16 @@
     color: $white !important
 }
 
+.title {
+    border-color: rgb(240, 183, 78);
+    transition:0.8s;
+}
+    
+.title:hover {
+    transition:0.8s;
+    transform: scale(1.1, 1.1);
+}
+
 .btnSite {
     color: #000000;
     background-color: #F2CA80;
@@ -50,6 +57,32 @@
       color: #000000;
       background-color:  rgba(242, 202, 128, 0.6);
       border-color: #F2CA80; }
+
+.btnRepertoryAdd {
+    background-color: #F2CA80;
+    color: #000000;
+    border-color: rgb(240, 183, 78);
+    transition:0.8s;
+    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.5) ;
+}
+    
+.btnRepertoryAdd:hover {
+    box-shadow: 20px 20px 10px rgba(242, 202, 128, 0.3);
+    transition:0.8s;
+    transform: scale(1.2, 1.2);
+}
+
+.network {
+    border-color: rgb(48, 152, 217);
+    transition:0.8s;
+    box-shadow: 10px 10px 5px rgba(48, 152, 217, 0.5) ;
+}
+
+.network:hover {
+    box-shadow: 20px 20px 10px rgba(48, 152, 217, 0.3);
+    transition:0.8s;
+    transform: scale(1.8, 1.8);
+}
 
 // //mise en forme des boutons
 // .btn-actu {
