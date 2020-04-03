@@ -98,7 +98,7 @@
                 </div>
 
                 <form id="formCreateAccount" enctype="multipart/form-data">
-                    {{!--  action="/userCreate"  method="POST" => plus nécessaire avec requête AJAX--}}
+                    {{!-- <form id="formCreateAccount" action="/userCreate"  method="POST" enctype="multipart/form-data"> => plus nécessaire avec requête AJAX--}}
                     <div class="container">
                         <div class="row modal-body">
                             <div class="col-md-12">
@@ -386,7 +386,7 @@
     //{{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
 
 
-    //{{!-- SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
+    //{{!-- SCRIPT CREATION COMPTE : message et éviter Multer envoi image quand mdp différent et quand email déjà dans BDD --}}
 
     const formCreateAccount = document.getElementById('formCreateAccount');
     const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount');
@@ -401,60 +401,99 @@
 
         const similarePass = (Pass === confPass)
 
+        if ($('input[name=nameModalCreateAccount]').val().length === 0)
+            return;
+        // "return" : permet de quitter la fonction "click" (et donc de ne plus bloquer l'envoi du form) 
+        // et donc de laisser la main au formulaire qui va actionner l'envoi
+        // qui ne sera pas effectué car le required de l'input est invalide
+
+        if ($('input[name=pseudoModalCreateAccount]').val().length === 0)
+            return;
+
+        if ($('input[name=emailModalCreateAccount]').val().length === 0)
+            return;
+
+        if ($('input[name=passwordModalCreateAccount]').val().length === 0)
+            return;
+
+        if ($('input[name=confPasswordModalCreateAccount]').val().length === 0)
+            return;
+
+        event.preventDefault();
+
         if (!similarePass) {
             console.log('not similare pass')
             messageErrorCreateAccount.classList.remove("d-none")
             messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
-            event.preventDefault();
-        } else if (!checkboxForm.checked) {
+            // bloque l'évenement : qui ici est le click sur le bouton submit
+            return;
+        }
+
+        if (!checkboxForm.checked) {
             console.log('not checked')
             messageErrorCreateAccount.classList.remove("d-none")
             messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
-            event.preventDefault();
-        } else if (similarePass) {
-            console.log('similare pass OK')
-            event.preventDefault();
-            submitModalCreateUser()
-        } else {
-            console.log('Erreur')
+            return;
         }
+
+        console.log('similare pass OK et checkbox OK')
+
+        submitModalCreateUser()
+
     });
 
     function submitModalCreateUser() {
-        console.log("coucou")
-
-        //console.log($('input[name=imageModalCreateAccount]')[0].files[0])
-
-        //var file = new FormData();
-        //file.append('image', $('input[name=imageModalCreateAccount]')[0].files[0]);
-
-        //console.log("file " + file)
+        //console.log("coucou")
 
         $.ajax({
-            url: '/userCreate',
+            url: '/checkMail',
             type: 'POST',
             data: {
-                name: $("input[name=nameModalCreateAccount]").val(),
-                pseudo: $("input[name=pseudoModalCreateAccount]").val(),
-                email: $("input[name=emailModalCreateAccount]").val(),
-                password: $("input[name=passwordModalCreateAccount]").val(),
-                confPassword: $("input[name=confPasswordModalCreateAccount]").val(),
-                //file,
+                email: $("input[name=emailModalCreateAccount]").val()
             },
-            //dataType: 'json',
-            //contentType: "multipart/form-data",
-            //contentType: false,
-            //processData: false,
-            //mimeType: 'multipart/form-data',
             success: function (json, statut) {
-                console.log("test")
-                //console.log(json.message);
-                //console.log(json.noError)
-                $("#messageErrorCreateAccount").removeClass("d-none");
-                $("#messageErrorCreateAccount").text(json.message);
+                //console.log("test")
+                //console.log(json)
 
-                if (json.noError) {
-                    window.location.replace("/");
+                if (json.emailExist) {
+                    $("#messageErrorCreateAccount").removeClass("d-none");
+                    $("#messageErrorCreateAccount").text("Cette email est déjà enregistré. Connectez-vous.");
+                } else {
+                    //console.log($('input[name=imageModalCreateAccount]')[0].files[0])
+
+                    const formData = new FormData();
+                    // objet formulaire contenant les données de mon formulaire
+                    formData.append('image', $('input[name=imageModalCreateAccount]')[0].files[0]);
+                    formData.append('name', $("input[name=nameModalCreateAccount]").val());
+                    formData.append('pseudo', $("input[name=pseudoModalCreateAccount]").val());
+                    formData.append('email', $("input[name=emailModalCreateAccount]").val());
+                    formData.append('password', $("input[name=passwordModalCreateAccount]").val());
+                    formData.append('confPassword', $("input[name=confPasswordModalCreateAccount]").val());
+
+                    $.ajax({
+                        url: '/userCreate',
+                        type: 'POST',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function (json, statut) {
+                            //console.log("test")
+                            //console.log(json.message);
+                            //console.log(json.noError)
+                            $("#messageErrorCreateAccount").removeClass("d-none");
+                            $("#messageErrorCreateAccount").text(json.message);
+
+                            if (json.noError) {
+                                window.location.replace("/");
+                            }
+
+                        },
+                        error: function (resultat, statut, erreur) {
+                            console.log(resultat);
+                            console.log(statut);
+                            console.log(erreur);
+                        }
+                    });
                 }
             },
             error: function (resultat, statut, erreur) {
@@ -464,37 +503,6 @@
             }
         });
     }
-
-
-    /*functionComparePass = (functionComparePass) => {
-        const Pass = formCreateAccount.password.value
-        const confPass = formCreateAccount.confPassword.value
-        //console.log(Pass)
-        //console.log(confPass)
-
-        const similarePass = (Pass === confPass)
-
-        if (!similarePass) {
-            console.log('not similare pass')
-            messageErrorCreateAccount.classList.remove("d-none")
-            messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
-            buttonCreateUser.setAttribute("disabled", "");
-        } else if (!checkboxForm.checked) {
-            console.log('not checked')
-            messageErrorCreateAccount.classList.remove("d-none")
-            messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
-            buttonCreateUser.setAttribute("disabled", "");
-        } else if (similarePass) {
-            console.log('similare pass OK')
-            formCreateAccount.submit();
-        } else {
-            console.log('Erreur')
-        }
-
-        //console.log('compare password')
-
-        // ATTENTION : met le message au premier clic sur créer mais envoi quand même au second click
-    }*/
-//{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image --}}
+//{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image quand mdp différent et quand email déjà dans BDD--}}
 
 </script>

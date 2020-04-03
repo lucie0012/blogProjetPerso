@@ -126,6 +126,10 @@ router.route('/about')
 router.route('/userCreate')
     .post(multer, user.postUserCreate)
 
+// Check mail avant Création de compte (pour doublon)
+router.route('/checkMail')
+    .post(user.checkMail)
+
 // Vérification mail via nodemailer
 router.route('/verifyMail/:id') //lien créé dans user.js dans la config nodemailer du postUserCreate (id : correspond au chiffre random)
     .get(user.getVerifyMail)

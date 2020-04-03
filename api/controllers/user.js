@@ -36,6 +36,21 @@ let rand, mailOptions, host, link    //création de variable sans affectation (p
 module.exports = {
 
     /**************Création compte et envoi mail réinitialisation mot de passe*************/
+    checkMail: async (req, res) => {
+        const user = await userCollection.findOne({ email: req.body.email });
+        let emailExist = false;
+
+        if (user) {
+            console.log('email déjà dans BDD');
+            emailExist = true;
+        }
+
+        res.json({
+            emailExist: emailExist,
+        });
+    },
+
+    /**************Création compte et envoi mail réinitialisation mot de passe*************/
     postUserCreate: async (req, res) => {
 
         // Nodemailer config et affectation des constantes declarées plus haut
@@ -54,19 +69,38 @@ module.exports = {
         // console.log("host :" + host);   //donne : "localhost:5000"
         // console.log("mailOptions.to : " + mailOptions.to);  //donne l'adresse mail renseigné lors de la création du compte
 
-        console.log(req.file);
-        console.log(req.body);
+        //console.log(req.file);
+        //console.log(req.body);
         const Pass = req.body.password
         const confPass = req.body.confPassword
         // console.log(Pass + ' ' + confPass);
 
-        const user = await userCollection.findOne({ email: req.body.email }) 
+        const user = await userCollection.findOne({ email: req.body.email })
 
-        if(user) {
-            console.log('email déjà dans BDD');
+        if (user) {
+            const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
+            //console.log('email déjà dans BDD');
+            fs.unlink(pathImage,
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('img delete');
+                    }
+                })
+            //console.log("coucou");
             res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
         } else if (Pass !== confPass) {
             //comparaison des mots de passe
+            const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
+            fs.unlink(pathImage,
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('img delete');
+                    }
+                })
             res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
             //res.redirect('/')
         } else {
@@ -94,7 +128,7 @@ module.exports = {
                             }),
                                 // res.redirect('/')
                                 res.json({ noError: true });
-                                //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vient de vous être envoyé." });
+                            //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vient de vous être envoyé." });
                         }
                     })
 
@@ -124,10 +158,12 @@ module.exports = {
                             }),
                                 // res.redirect('/')
                                 res.json({ noError: true });
-                                //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vous a été envoyé." });
+                            //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vous a été envoyé." });
                         }
                     })
             }
+            //console.log(req.body);
+
         }
     },
 
