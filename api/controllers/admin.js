@@ -148,6 +148,8 @@ module.exports = {
     putlistUser: (req, res) => {
         // console.log(req.body.role);
         // console.log(req.params.id);
+        // console.log(req.body);
+
         if (req.body.role === 'isAdmin') {
             // "role" est le name du "select" dans la page admin
             userCollection.findOneAndUpdate(

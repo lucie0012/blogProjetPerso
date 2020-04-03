@@ -91,20 +91,18 @@ app.use(expressSession({
 }));
 
 app.use('*', async (req, res, next) => {
-    res.locals.id = req.session.userId
-    res.locals.user = req.session.status
-    // // le req.session.status et donc le dbUser.status est toujours "user" dès lors qu'il a un compte
-    // // donc res.locals.user signifie que la personne a un compte et est connecté (et donc #if user verifie cette condition là)
-    res.locals.userSess = req.session
-    res.locals.isAdmin = req.session.isAdmin
-    res.locals.isModo = req.session.isModo
-    res.locals.isVerified = req.session.isVerified
-    res.locals.isBan = req.session.isBan
-    // res.locals.pseudo = req.session.pseudo
-    // res.locals.fonction = req.session.fonction
-    // res.locals.name = req.session.name
+    if (req.session) {
+        res.locals.id = req.session.userId
+        res.locals.user = req.session.status
+        // // le req.session.status et donc le dbUser.status est toujours "user" dès lors qu'il a un compte
+        // // donc res.locals.user signifie que la personne a un compte et est connecté (et donc #if user verifie cette condition là)
+        res.locals.isAdmin = req.session.isAdmin
+        res.locals.isModo = req.session.isModo
+        res.locals.isVerified = req.session.isVerified
+        res.locals.isBan = req.session.isBan
+    }
+    //console.log(req.session);
 
-    // console.log(res.locals.userSess);  
     next()
 })
 

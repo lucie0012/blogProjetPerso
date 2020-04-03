@@ -59,7 +59,7 @@ module.exports = {
                         url: req.body.url,
                         content: req.body.content,
                         category: req.body.category,
-                        pseudo: req.session.pseudo,
+                        authorId: req.session.userId,
                         image: `/public/ressources/images/${req.file.filename}`,
                         nameImage: req.file.filename
                     },

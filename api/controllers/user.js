@@ -331,10 +331,6 @@ module.exports = {
                 } else {
                     sess.userId = dbUser._id
                     sess.status = dbUser.status
-                    sess.name = dbUser.name
-                    sess.pseudo = dbUser.pseudo
-                    sess.email = dbUser.email
-                    sess.fonction = dbUser.fonction
                     sess.isVerified = dbUser.isVerified
                     sess.isAdmin = dbUser.isAdmin
                     sess.isModo = dbUser.isModo
