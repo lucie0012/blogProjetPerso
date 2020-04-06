@@ -62,22 +62,38 @@ module.exports = {
         const user = await userCollection.findOne({ email })
         // console.log(user);
 
+        let errorUserNotExist = false;
+        let needAlertSend = false;
+
         if (!user) {
             console.log('user pas dans la DB');
-            // res.json({ message: "Vous n'avez pas de compte." });
-            res.redirect('/')
-            // faire un res.render avec le retour d'une variable pour afficher le message (comme dans contact)
+            errorUserNotExist = true;
+            //res.redirect('/')
+            res.render('user/forgotPassword', {
+                errorUserNotExist: errorUserNotExist,
+            })
         } else {
+            needAlertSend = true;
+            let isError;
             transporter.sendMail(mailOptionsForgotPass, (err, res, next) => { // utilisation de la constante transporter et de la fonction d'envoi de mail avec en paramètre les options mail prédéfini (afin de les envoyer dans le mail (ne le sont qu'au 1er clic))
                 if (err) {
+                    isError = true;
                     console.error("ERREUR :" + err);
-                    res.render("error")
+                    res.render('user/forgotPassword', {
+                        needAlertSend: needAlertSend,
+                        isError: isError
+                    })
                 } else {
                     console.log('Message envoyé');
                     next()
                 }
             }),
-                res.redirect('/')
+            isError = false;
+            //console.log(isError);
+            res.render('user/forgotPassword', {
+                needAlertSend: needAlertSend,
+                isError: isError
+            })
         }
         // res.redirect('/')
     },
@@ -135,12 +151,19 @@ module.exports = {
         const confPass = req.body.confNewPassword
         // console.log(Pass + ' ' + confPass);
 
+        let errorPass = false;
+        let needAlertSend = false;
+
         if (Pass !== confPass) {
-        //comparaison des mots de passe
-            // console.log("mdp différent");
-            res.render('user/resetPassword')
-            // AFFICHER MESSAGE COMME CONTACT
+            //comparaison des mots de passe
+            errorPass = true;
+            console.log("mdp différent");
+            res.render('user/resetPassword', {
+                errorPass: errorPass
+            })
         } else {
+            needAlertSend = true;
+            let isError;
             // console.log("mdp OK");
             const PassCrypt = bcrypt.hashSync(Pass, 12);
 
@@ -151,22 +174,33 @@ module.exports = {
                 },
                 (err, post) => {
                     if (err) {
+                        isError = true;
                         console.log("ERREUR : " + err);
-                        res.render('user/resetPassword')
-                        // ET METTRE MESSAGE TYPE PAGE CONTACT
+                        res.render('user/resetPassword', {
+                            needAlertSend: needAlertSend,
+                            isError: isError
+                        })
                     } else {
                         // Envoi mail confirmation changement mdp NODEMAILER     
                         transporter.sendMail(mailOptionsResetPass, (err, res, next) => { // utilisation de la constante transporter et de la fonction d'envoi de mail avec en paramètre les options mail prédéfini (afin de les envoyer dans le mail (ne le sont qu'au 1er clic))
                             if (err) {
+                                isError = true;
                                 console.error("ERREUR :" + err);
-                                res.render("error")
+                                res.render("user/resetPassword", {
+                                    needAlertSend: needAlertSend,
+                                    isError: isError
+                                })
                             } else {
                                 console.log('Message envoyé');
                                 next()
                             }
                         }),
-                            res.render('user/resetPassword')
-                        // ET METTRE MESSAGE TYPE PAGE CONTACT (disant OK mail vous est envoyé, retour page accueil pour vous connecter)
+                        isError = false;
+                        console.log(isError);
+                        res.render('user/resetPassword', {
+                            needAlertSend: needAlertSend,
+                            isError: isError
+                        })
                     }
                 })
         }

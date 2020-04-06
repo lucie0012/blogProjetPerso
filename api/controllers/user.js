@@ -127,7 +127,10 @@ module.exports = {
                                 }
                             }),
                                 // res.redirect('/')
-                                res.json({ noError: true });
+                                res.json({
+                                    noError: true,
+                                    message: "Votre création de compte est réussie. Un email pour confirmer votre compte vous a été envoyé."
+                                });
                             //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vient de vous être envoyé." });
                         }
                     })
@@ -157,7 +160,10 @@ module.exports = {
                                 }
                             }),
                                 // res.redirect('/')
-                                res.json({ noError: true });
+                                res.json({
+                                    noError: true,
+                                    message: "Votre création de compte est réussie. Un email pour confirmer votre compte vous a été envoyé."
+                                });
                             //res.json({ message: "Votre création de compte est réussie. Un email de confirmation de votre compte vous a été envoyé." });
                         }
                     })

@@ -484,7 +484,8 @@
                             $("#messageErrorCreateAccount").text(json.message);
 
                             if (json.noError) {
-                                window.location.replace("/");
+                                //window.location.replace("/");
+                                setTimeout(function(){ window.location.replace("/"); }, 2000);
                             }
 
                         },
