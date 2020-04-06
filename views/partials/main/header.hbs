@@ -159,7 +159,7 @@
                                         required>
                                     {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
                                     <label for="gridCheckConditionsModalCreateAccount">
-                                        J'accepte les termes des conditions d’utilisation de ce site
+                                        J'accepte les termes des conditions générales d’utilisation de ce site
                                     </label>
                                 </div>
 
@@ -336,23 +336,58 @@
                 {{!------------ /bouton vérification compte  ------------------}}
 
                 {{!------------ bouton suppression compte  ------------------}}
-                <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                {{!-- <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data"> --}}
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex flex-row">
-                                    <button type="submit" class="btn">*Supprimer mon compte*</button>
+                                    <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                        data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mon compte*</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                {{!-- </form> --}}
                 {{!------------ /bouton suppression compte  ------------------}}
 
             </div>
         </div>
     </div>
     {{!------------ /modal Gestion compte  ------------------}}
+
+    {{!------------------ Modal confirmation suppression compte-------------------}}
+    <div class="modal fade" id="modalConfirmSuppAccount{{ _id }}" tabindex="-1" role="dialog"
+        aria-labelledby="#modalConfirmSuppAccountLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row modal-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p>{{ dbUserId.pseudo}} confirmez-vous la suppression de votre compte ?</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn btnSite">Oui</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Non</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {{!--------------------- /Modal confirmation suppression compte-------------------}}
 
 </header>
 
@@ -432,7 +467,7 @@
         if (!checkboxForm.checked) {
             console.log('not checked')
             messageErrorCreateAccount.classList.remove("d-none")
-            messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
+            messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions générales d'utilisations du site. Veuillez cocher la case."
             return;
         }
 
@@ -485,7 +520,7 @@
 
                             if (json.noError) {
                                 //window.location.replace("/");
-                                setTimeout(function(){ window.location.replace("/"); }, 2000);
+                                setTimeout(function () { window.location.replace("/"); }, 2000);
                             }
 
                         },

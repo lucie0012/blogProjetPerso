@@ -17,5 +17,18 @@ module.exports = {
             dbUserId: dbUserId,
             dbRepertoryVerified: dbRepertoryVerified
         })
-    }
+    },
+
+
+    /**************Affichage page conditions générales utilisation***************/
+    getTermsOfService: (req, res) => {
+        res.render('termsOfService')
+    },
+
+
+    /**************Affichage page mentions légales***************/
+    getLegalNotice: (req, res) => {
+        res.render('legalNotice')
+    },
+
 }

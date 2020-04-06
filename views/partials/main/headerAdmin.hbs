@@ -41,8 +41,9 @@
 
     {{!------------ Image logo + phrase d'accroche ------------------}}
     <div>
-        <img src="/public/ressources/images/imageLogo.jpeg" class="img-fluid rounded mx-auto d-block rounded-circle mb-1"
-            style="height : 150px; object-fit: contain" alt="Image logo du site">
+        <img src="/public/ressources/images/imageLogo.jpeg"
+            class="img-fluid rounded mx-auto d-block rounded-circle mb-1" style="height : 150px; object-fit: contain"
+            alt="Image logo du site">
         <p class="text-center colorBlack">Le blog sans allergènes qui répertorie les autres !!</p>
     </div>
     {{!------------ /Image logo + phrase d'accroche ------------------}}
@@ -166,14 +167,15 @@
                                         required>
                                     {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
                                     <label for="gridCheckConditionsModalCreateAccount">
-                                        J'accepte les termes des conditions d’utilisation de ce site
+                                        J'accepte les termes des conditions générales d’utilisation de ce site
                                     </label>
                                 </div>
 
                             </div>
                             <div class="col-md-12 ">
                                 <div class="d-flex flex-row-reverse">
-                                    <button type="submit" onclick="functionComparePass()" class="btn btnSite">Créer</button>
+                                    <button type="submit" onclick="functionComparePass()"
+                                        class="btn btnSite">Créer</button>
                                     <button type="button" class="btn btnSite p-2 mr-2"
                                         data-dismiss="modal">Annuler</button>
                                 </div>
@@ -303,8 +305,8 @@
                                 </div> --}}
 
                                 <div class="form-group row mt-4 ml-2">
-                                    <img src="{{ dbUserId.image }}" alt="image de profil"
-                                        class="col-form-label" widht="100px" height="120px" style="object-fit: contain">
+                                    <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label"
+                                        widht="100px" height="120px" style="object-fit: contain">
                                 </div>
                                 <div class="form-group row">
                                     <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
@@ -312,8 +314,8 @@
                                         profil</label>
                                 </div>
                                 <div class="form-group row">
-                                    <input type="file" accept="image/*" class="form-control-file col-sm-12" id="editProfilPhoto"
-                                        name="image" value="{{ dbUserId.image }}">
+                                    <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                        id="editProfilPhoto" name="image" value="{{ dbUserId.image }}">
                                 </div>
                             </div>
                             <div class="col-md-12 mt-1">
@@ -347,7 +349,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex flex-row">
-                                    <button type="submit" class="btn">*Supprimer mon compte*</button>
+                                    <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                        data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mon compte*</button>
                                 </div>
                             </div>
                         </div>
@@ -360,73 +363,105 @@
     </div>
     {{!------------ /modal Gestion compte  ------------------}}
 
+    {{!------------------ Modal confirmation suppression compte-------------------}}
+    <div class="modal fade" id="modalConfirmSuppAccount{{ _id }}" tabindex="-1" role="dialog"
+        aria-labelledby="#modalConfirmSuppAccountLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-    {{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
-    {{!-- Requête ajax avec Jquery --}}
-    <script>
+                <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row modal-body">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p>{{ dbUserId.pseudo}} confirmez-vous la suppression de votre compte ?</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="d-flex flex-row-reverse">
+                                    <button type="submit" class="btn btnSite">Oui</button>
+                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Non</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-        function connexionModal() {
-            console.log("test");
-            $.ajax({
-                url: '/authentification',
-                type: 'POST',
-                data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
-                dataType: 'json',
-                success: function (json, statut) {
-                    console.log(json.message);
-                    $("#messageErrorAuth").removeClass("d-none");
-                    $("#messageErrorAuth").text(json.message);
-
-                    if (json.noError) {
-                        window.location.replace("/");
-                    }
-                },
-                error: function (resultat, statut, erreur) {
-                    console.log(resultat);
-                    console.log(statut);
-                    console.log(erreur);
-                }
-            });
-        };
-
-    </script>
-    {{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
-    
-
-    {{!-- SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
-    ​
-    <script>
-        const formCreateAccount = document.getElementById('formCreateAccount')
-        const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount')
-        const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
-
-        functionComparePass = (functionComparePass) => {
-            const Pass = formCreateAccount.password.value
-            const confPass = formCreateAccount.confPassword.value
-            //console.log(Pass)
-            //console.log(confPass)
-
-            const similarePass = (Pass === confPass)
-
-            if (!similarePass) {
-                console.log('not similare pass')
-                messageErrorCreateAccount.classList.remove("d-none")
-                messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
-            } else if (!checkboxForm.checked) {
-                console.log('not checked')
-                messageErrorCreateAccount.classList.remove("d-none")
-                messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions d'utilisations du site. Veuillez cocher la case."
-            } else if (similarePass) {
-                console.log('similare pass OK')
-                formCreateAccount.submit();
-            } else {
-                console.log('Erreur')
-            }
-
-            //console.log('compare password')
-        }
-    </script>
-
-    {{!-- /SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+            </div>
+        </div>
+    </div>
+    {{!--------------------- /Modal confirmation suppression compte-------------------}}
 
 </header>
+
+
+<script>
+    //{{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
+    //{{!-- Requête ajax avec Jquery --}}
+
+    function connexionModal() {
+        console.log("test");
+        $.ajax({
+            url: '/authentification',
+            type: 'POST',
+            data: { email: $("input[name=emailAuth]").val(), password: $("input[name=passwordAuth]").val() },
+            dataType: 'json',
+            success: function (json, statut) {
+                console.log(json.message);
+                $("#messageErrorAuth").removeClass("d-none");
+                $("#messageErrorAuth").text(json.message);
+
+                if (json.noError) {
+                    window.location.replace("/");
+                }
+            },
+            error: function (resultat, statut, erreur) {
+                console.log(resultat);
+                console.log(statut);
+                console.log(erreur);
+            }
+        });
+    };
+
+    //{!-- /SCRIPT MESSAGE MODAL CONNEXION --}}
+
+
+    //{{!-- SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+
+    const formCreateAccount = document.getElementById('formCreateAccount')
+    const messageErrorCreateAccount = document.getElementById('messageErrorCreateAccount')
+    const checkboxForm = document.getElementById('gridCheckConditionsModalCreateAccount')
+
+    functionComparePass = (functionComparePass) => {
+        const Pass = formCreateAccount.password.value
+        const confPass = formCreateAccount.confPassword.value
+        //console.log(Pass)
+        //console.log(confPass)
+
+        const similarePass = (Pass === confPass)
+
+        if (!similarePass) {
+            console.log('not similare pass')
+            messageErrorCreateAccount.classList.remove("d-none")
+            messageErrorCreateAccount.textContent = "Vos mots de passe sont différents. Veuillez rééssayer."
+        } else if (!checkboxForm.checked) {
+            console.log('not checked')
+            messageErrorCreateAccount.classList.remove("d-none")
+            messageErrorCreateAccount.textContent = "Vous n'avez pas accepté les conditions générales d'utilisations du site. Veuillez cocher la case."
+        } else if (similarePass) {
+            console.log('similare pass OK')
+            formCreateAccount.submit();
+        } else {
+            console.log('Erreur')
+        }
+
+        //console.log('compare password')
+    }
+
+    //{{!-- /SCRIPT CREATION COMPTE message et éviter Multer envoi image --}}
+</script>

@@ -35,6 +35,18 @@ router.route('/')
 
 
 /*
+ * Footer
+ ***********/ 
+// Affichage page conditions générales d'utilisations
+router.route('/termsOfService')
+    .get(home.getTermsOfService)
+// Affichage page mentions légales
+router.route('/legalNotice')
+    .get(home.getLegalNotice)
+
+
+
+/*
  * Actus
  ***********/
 // Affichage des actus et création d'actu
