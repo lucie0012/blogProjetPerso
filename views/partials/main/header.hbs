@@ -1,6 +1,13 @@
-{{!------------ nav 1 ------------------}}
+{{!-- 
+Header du site
+
+Note : 
+Barre de recherche : à rendre fonctionnel
+ --}}
+
 <header class="d-table-row bgNav w-100">
 
+    {{!------------ nav 1 ------------------}}
     <div>
         <ul class="nav justify-content-end" id="scrollup">
             {{#if isAdmin }}
@@ -35,7 +42,6 @@
             </li>
         </ul>
     </div>
-
     {{!------------ /nav 1 ------------------}}
 
 
@@ -86,307 +92,21 @@
 
 
     {{!------------ modal Création compte ------------------}}
-    <div class="modal fade" id="modalUserCreate" tabindex="-1" role="dialog" aria-labelledby="#modalUserCreateLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalUserCreateLabel">Créer mon compte</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form id="formCreateAccount" enctype="multipart/form-data">
-                    {{!-- <form id="formCreateAccount" action="/userCreate"  method="POST" enctype="multipart/form-data"> => plus nécessaire avec requête AJAX--}}
-                    <div class="container">
-                        <div class="row modal-body">
-                            <div class="col-md-12">
-                                <label id="messageErrorCreateAccount" class="text-danger d-none"></label>
-
-                                <div class="form-group row">
-                                    <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="nameModalCreateAccount"
-                                            id="nameModalCreateAccount" required>
-                                    </div>
-                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
-                                </div>
-                                <div class="form-group row">
-                                    <label for="pseudoModalCreateAccount" class="col-sm-5 col-form-label">Pseudo</label>
-                                    <div class="col-sm-7">
-                                        <input type="text" class="form-control" name="pseudoModalCreateAccount"
-                                            id="pseudoModalCreateAccount" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="emailModalCreateAccount" class="col-sm-5 col-form-label">Adresse
-                                        email</label>
-                                    <div class="col-sm-7">
-                                        <input type="email" class="form-control" name="emailModalCreateAccount"
-                                            id="emailModalCreateAccount" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="passwordModalCreateAccount" class="col-sm-5 col-form-label">Mot de
-                                        passe</label>
-                                    <div class="col-sm-7">
-                                        <input type="password" class="form-control" name="passwordModalCreateAccount"
-                                            id="passwordModalCreateAccount" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="confPasswordModalCreateAccount"
-                                        class="col-sm-5 col-form-label">Confirmer le mot de
-                                        passe</label>
-                                    <div class="col-sm-7">
-                                        <input type="password" class="form-control"
-                                            name="confPasswordModalCreateAccount" id="confPasswordModalCreateAccount"
-                                            required>
-                                    </div>
-                                </div>
-                                <div class="form-group row ">
-                                    <label for="createProfilPhotoModalCreateAccount"
-                                        class="col-sm-12 col-form-label">Envoyer une photo de
-                                        profil</label>
-                                </div>
-                                <div class="form-group row">
-                                    <input type="file" accept="image/*" class="form-control-file col-sm-12"
-                                        id="createProfilPhotoModalCreateAccount" name="imageModalCreateAccount">
-                                </div>
-                                <div class="form-group mt-4">
-                                    <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck"
-                                        required>
-                                    {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
-                                    <label for="gridCheckConditionsModalCreateAccount">
-                                        J'accepte les termes des conditions générales d’utilisation de ce site
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div class="col-md-12 ">
-                                <div class="d-flex flex-row-reverse">
-                                    <button type="submit" id="buttonCreateUser" class="btn btnSite">Créer</button>
-                                    <button type="button" class="btn btnSite p-2 mr-2"
-                                        data-dismiss="modal">Annuler</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
+    {{> modal/modalHeaderCreateAccount}}
     {{!------------ /modal Création compte ------------------}}
 
 
     {{!------------ modal Connexion ------------------}}
-    <div class="modal fade" id="modalAuthentification" tabindex="-1" role="dialog"
-        aria-labelledby="#modalAuthentificationLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAuthentificationLabel">Me connecter</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                {{!-- <form action="/authentification" method="POST"> --}}
-                <div class="container">
-                    <div class="row modal-body">
-                        <div class="col-md-12">
-                            <label id="messageErrorAuth" class="text-danger d-none"></label>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="emailAuth" placeholder="Votre email *"
-                                    value="" required />
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="passwordAuth"
-                                    placeholder="Votre mot de passe *" value="" required />
-                            </div>
-                            {{!-- <div class="checkbox">
-                                <label> <input type="checkbox"> Se rappeler de moi. </label>
-                            </div> --}}
-                            <div class="form-group">
-                                <a href="/forgotPassword" class="ForgetPwd">Mot de passe oublié</a>
-                            </div>
-                        </div>
-                        <div class="col-md-12 ">
-                            <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn btnSite" onclick="connexionModal()">Me
-                                    connecter</button>
-                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{!-- </form> --}}
-
-            </div>
-        </div>
-    </div>
+    {{> modal/modalHeaderConnexion}}
     {{!------------ /modal Connexion ------------------}}
 
 
     {{!------------ modal Gestion compte ------------------}}
-    <div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog"
-        aria-labelledby="#modalUserEditLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalUserEditLabel">Modifier mon compte</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="/userEdit/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
-                    <div class="container">
-                        <div class="row modal-body">
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <label for="nameModalEditAccount" class="col-sm-4 col-form-label">Nom</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="name" id="nameModalEditAccount"
-                                            value="{{ dbUserId.name }}">
-                                    </div>
-                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
-                                </div>
-                                <div class="form-group row">
-                                    <label for="pseudoModalEditAccount" class="col-sm-4 col-form-label">Pseudo</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" name="pseudo"
-                                            id="pseudoModalEditAccount" value="{{ dbUserId.pseudo }}">
-                                    </div>
-                                    {{!--required permet de forcer le remplissage de la zone de texte --}}
-                                </div>
-                                <div class="form-group row">
-                                    <label for="emailModalEditAccount" class="col-sm-4 col-form-label">Adresse
-                                        Email</label>
-                                    <div class="col-sm-8">
-                                        <input type="email" class="form-control" name="email" id="emailModalEditAccount"
-                                            value="{{ dbUserId.email }}">
-                                    </div>
-                                </div>
-
-                                {{!-- <div class="form-group row">
-                                    <label for="passwordOldModalEditAccount" class="col-sm-4 col-form-label">Ancien mot
-                                        de passe</label>
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" name="passwordOldEditAccount"
-                                            id="passwordOldModalEditAccount">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="passwordNewModalEditAccount" class="col-sm-4 col-form-label">Nouveau mot
-                                        de passe</label>
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" name="passwordNewEditAccount"
-                                            id="passwordNewModalEditAccount">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="conf-passwordNewModalEditAccount"
-                                        class="col-sm-4 col-form-label">Confirmer le nouveau mot de passe</label>
-                                    <div class="col-sm-8">
-                                        <input type="password" class="form-control" name="confPasswordNewEditAccount"
-                                            id="confPasswordNewModalEditAccount">
-                                    </div>
-                                </div> --}}
-
-                                <div class="form-group row mt-4 ml-2">
-                                    <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label"
-                                        widht="100px" height="120px" style="object-fit: contain">
-                                </div>
-                                <div class="form-group row">
-                                    <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
-                                        photo de
-                                        profil</label>
-                                </div>
-                                <div class="form-group row">
-                                    <input type="file" accept="image/*" class="form-control-file col-sm-12"
-                                        id="editProfilPhoto" name="image" value="{{ dbUserId.image }}">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-1">
-                                <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btnSite">Modifier</button>
-                                    <button type="button" class="btn btnSite p-2 mr-2"
-                                        data-dismiss="modal">Annuler</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                {{!------------ bouton vérification compte  ------------------}}
-                {{!-- <form action="#" method="POST"> --}}
-                {{!-- <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="btn">*Vérifier mon compte*</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-                {{!-- </form> --}}
-                {{!------------ /bouton vérification compte  ------------------}}
-
-                {{!------------ bouton suppression compte  ------------------}}
-                {{!-- <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data"> --}}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="d-flex flex-row">
-                                    <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
-                                        data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mon compte*</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {{!-- </form> --}}
-                {{!------------ /bouton suppression compte  ------------------}}
-
-            </div>
-        </div>
-    </div>
+    {{> modal/modalHeaderPutAccount}}
     {{!------------ /modal Gestion compte  ------------------}}
 
     {{!------------------ Modal confirmation suppression compte-------------------}}
-    <div class="modal fade" id="modalConfirmSuppAccount{{ _id }}" tabindex="-1" role="dialog"
-        aria-labelledby="#modalConfirmSuppAccountLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
-                    <div class="container">
-                        <div class="row modal-body">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <p>{{ dbUserId.pseudo}} confirmez-vous la suppression de votre compte ?</p>
-                                </div>
-                            </div>
-                            <div class="col-md-12 ">
-                                <div class="d-flex flex-row-reverse">
-                                    <button type="submit" class="btn btnSite">Oui</button>
-                                    <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Non</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
+    {{> modal/modalHeaderConfirmDeleteUser}}
     {{!--------------------- /Modal confirmation suppression compte-------------------}}
 
 </header>
@@ -515,6 +235,7 @@
                             //console.log("test")
                             //console.log(json.message);
                             //console.log(json.noError)
+                            $("#messageErrorCreateAccount").removeClass("text-danger").addClass("text-success");
                             $("#messageErrorCreateAccount").removeClass("d-none");
                             $("#messageErrorCreateAccount").text(json.message);
 

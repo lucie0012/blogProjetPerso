@@ -1,3 +1,12 @@
+{{!-- 
+Page Accueil
+
+Note : 
+indications "note" à remettre dans "small" de la card dès que fonctionnalité en place
+bouton "noter" à remettre dès que fonctionnalité en place
+ --}}
+
+{{!-- Descriptif du site --}}
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
@@ -10,9 +19,19 @@
         </div>
     </div>
 </div>
+{{!-- /Descriptif du site --}}
+
+{{!-- Section cards du répertoire --}}
 <div class="container mt-3 mb-5">
-    <h1 class="colorWrite title text-center"><a href="/repertory" class="text-reset"> Les derniers sites du répertoire</a></h1>
+
+    {{!-- Titre section cards du répertoire --}}
+    <h1 class="colorWrite title text-center"><a href="/repertory" class="text-reset"> Les derniers sites du
+            répertoire</a></h1>
+    {{!-- /Titre section cards du répertoire --}}
+
     <div class="row">
+
+        {{!-- Cards du répertoire --}}
         <div class="card-deck mt-4">
             {{#each (limitEach dbRepertoryVerified 3 ) }}
             <div class="card limitCard ml-3">
@@ -31,7 +50,7 @@
                         Sans caséine
                         {{/contains }}
                         {{!-- / Note :  --}}
-                        </small>
+                    </small>
                 </div>
                 <div class="card-body">
                     <div class="container">
@@ -51,9 +70,13 @@
             </div>
             {{/each }}
         </div>
+        {{!-- /Cards du répertoire --}}
+
     </div>
 </div>
+{{!-- /Section cards du répertoire --}}
 
+{{!-- Div de séparation avec slogan --}}
 <div class="container-fluid py-4 bgNavAdmin w-100">
     <div class="row d-flex flex-row justify-content-center align-items-center">
         <i class="fas fa-cookie-bite fa-2x mb-2" style="color: #84563C"></i>
@@ -66,11 +89,19 @@
             class="rounded-circle mt-2" width="250px">
     </div>
 </div>
+{{!-- /Div de séparation avec slogan --}}
 
 
+{{!-- Section cards des articles --}}
 <div class="container my-5">
+
+    {{!-- Titre section cards des articles --}}
     <h1 class="colorWrite title text-center"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
+    {{!-- /Titre section cards des articles --}}
+
     <div class="row">
+
+        {{!-- Cards des articles --}}
         <div class="card-deck mt-4">
             {{#each (limitEach dbActu 3 ) }}
             <div class="card limitCard ml-3">
@@ -97,5 +128,8 @@
             </div>
             {{/each }}
         </div>
+        {{!-- /Cards des articles --}}
+        
     </div>
 </div>
+{{!-- /Section cards des articles --}}

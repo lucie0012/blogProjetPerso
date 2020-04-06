@@ -1,0 +1,100 @@
+{{!-- 
+Modal de la page répertoire pour proposer un site à l'ajout
+ --}}
+
+{{!----------------------- Modal proposition site pour répertoire -----------------------}}
+<div class="modal fade" id="modalPropoSite" tabindex="-1" role="dialog" aria-labelledby="#modalPropoSite"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">Proposer un site à ajouter dans le répertoire</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{!-- Formulaire d'envoi --}}
+            <form action="/repertory" method="POST" enctype="multipart/form-data" name="scriptCheckbox"
+                id="scriptCheckboxUser">
+                {{!-- "form" : correspond au chemin indiqué dans le router.route dans lequel on fera un .post --}}
+                {{!-- "method" : correspond à la methode utilisée : ici POST --}}
+                {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+
+                            {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+                            <label id="messageErrorCreateSiteUser" class="text-danger d-none"></label>
+                            {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+
+                            <div class="form-group">
+                                <label for="pseudoModalAddSite">Votre pseudo</label>
+                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite"
+                                    value="{{ dbUserId.pseudo }}" disabled="disabled">
+                            </div>
+                            <div class="form-group">
+                                <label for="titleModalAddSite">Titre du site</label>
+                                <input type="text" class="form-control" name="title" id="titleModalAddSite" required>
+                                {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="urlModalAddSite">URL du site</label>
+                                <input type="url" class="form-control" name="url" id="urlModalAddSite" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Catégorie</label>
+
+                                {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+                                <label id="messageErrorAddSite" class="text-danger d-none"></label>
+                                {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+
+                                </br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox1" name="category" value="sansGluten">
+                                    <label class="form-check-label " for="inlineCheckbox1">Sans gluten</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox2" name="category" value="sansLactose">
+                                    <label class="form-check-label" for="inlineCheckbox2">Sans lactose</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox3" name="category" value="sansOeufs">
+                                    <label class="form-check-label" for="inlineCheckbox3">Sans oeufs</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input groupCheckboxScript" type="checkbox"
+                                        id="inlineCheckbox4" name="category" value="sansCaseine">
+                                    <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionModalAddSite">Contenu</label>
+                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite"
+                                    required></textarea>
+                            </div>
+                            <div class="form-group row">
+                                <label for="addSitePhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
+                            </div>
+                            <div class="form-group row">
+                                <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                    id="addSitePhotoUser" name="image">
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" id="buttonCreateSiteUser" class="btn btnSite">Créer</button>
+                                <button type="button" class="btn btnSite mr-2 p-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{!-- /Formulaire d'envoi --}}
+
+        </div>
+    </div>
+</div>
+{{!------------------ /Modal proposition site pour répertoire --------------}}

@@ -1,30 +1,49 @@
-{{!---------------- titre -----------------}}
+{{!-- 
+Page articles
+ --}}
+
 <div class="container my-5">
+
+    {{!---------------- titre -----------------}}
     <h1 class="colorWrite title text-center">Mes articles</h1>
     {{!----------------/titre -----------------}}
 
-    {{!----------------card actu --------------}}
     <div class="row">
+
+        {{!----------------cards des articles --------------}}
         <div class="card-deck">
             {{#each (reverse dbActu) }}
             <div class="card limitCard mt-4 ml-3">
+                {{!-- titre et contenu --}}
                 <div class="card-body">
                     <h5 class="card-title">{{ title }}</h5>
                     <p class="card-text">{{ truncate content 200 }}</p>
                 </div>
+                {{!-- /titre et contenu --}}
+
+                {{!-- image --}}
                 <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="200px" width="180px" style="object-fit: contain"
-                        alt="image de l'article">
+                    <img src="{{ image }}" class="rounded float-left" height="200px" width="180px"
+                        style="object-fit: contain" alt="image de l'article">
                 </div>
+                {{!-- /image --}}
+
+                {{!-- bouton --}}
                 <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button
                         class="btn btnSite mb-3 mr-3">Voir l'article</button></a>
+                {{!-- /bouton --}}
+
+                {{!-- infos --}}
                 <div class="card-footer">
                     <small class="text-muted">Publié le
                         {{ moment createDate format="DD/MM/YYYY" }}</small>
                 </div>
+                {{!-- /infos --}}
+
             </div>
             {{/each }}
         </div>
+        {{!----------------/cards des articles -------------}}
+
     </div>
 </div>
-{{!----------------/card actu -------------}}

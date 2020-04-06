@@ -1,0 +1,57 @@
+{{!-- 
+Modal de la page répertoire pour déposer une note/un commentaire 
+
+Note :
+fonction désactivée pour le moment : à remettre dès que fonctionnalité en place 
+ --}}
+
+{{!-------------- Modal noter site/répertoire -------------------}}
+<div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog" aria-labelledby="#modalNoterLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNoterLabel">Ajouter une note</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{!-- Formulaire d'envoi --}}
+            <form action="/note/{{ _id }}" method="POST">
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pseudoComment{{_id}}" class="col-form-label">Votre pseudo :
+                                </label>
+                                <input class="form-control" id="pseudoComment{{_id}}" type="text" name="pseudo"
+                                    value="{{ ../dbUserId.pseudo }}" disabled="disabled">
+                                {{!-- pour "sortir" du each et obtenir d'autres infos de bdd il faut utiliser : "../" : (changing the context handlebars) --}}
+                            </div>
+                            <div class="form-group">
+                                <label for="noteSite{{_id}}" class="col-form-label">Votre note : </label>
+                                <input class="form-control" id="noteSite{{_id}}" type="text" name="note" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="commentNote{{_id}}" class="col-form-label">Votre commentaire :
+                                </label>
+                                <textarea class="form-control" id="commentNote{{_id}}" type="text" name="comment"
+                                    required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn btnSite ">Poster</button>
+                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{!-- /Formulaire d'envoi --}}
+
+        </div>
+    </div>
+</div>
+{{!-------------------- /Modal noter site/répertoire --------------------}}

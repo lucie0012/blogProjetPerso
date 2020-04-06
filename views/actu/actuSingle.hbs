@@ -1,29 +1,41 @@
+{{!-- 
+Page article seul
+ --}}
+
 <div class="container my-5">
     <div class="row">
         <div class="col-md-12 mb-4 text-center">
+
             {{!----------------titre -----------------}}
             <h1 class="colorWrite title">{{ dbActu.title }} </h1>
             {{!----------------/titre -----------------}}
         </div>
 
-        {{!----------------actualité -----------------}}
+        {{!----------------article -----------------}}
+        {{!-- Contenu --}}
         <div class="col-md-12 mb-4 text-center">
             <p>
                 {{ dbActu.content }}
             </p>
         </div>
+        {{!-- /Contenu --}}
+
+        {{!-- Image --}}
         <div class="col-md-12 mb-5 text-center">
-            <img src="{{ dbActu.image }}" alt="image de l'article" widht="200px" height="200px" style="object-fit: contain">
+            <img src="{{ dbActu.image }}" alt="image de l'article" widht="200px" height="200px"
+                style="object-fit: contain">
         </div>
+        {{!-- /Image --}}
+
         <div class="col-md-12 d-flex flex-row-reverse">
             {{!-- bouton commenter --}}
             {{#if isVerified}}
-            <button class="btn btnSite" data-toggle="modal" data-target="#modalCommenter{{_id}}" data-whatever="@getbootstrap"
-                type="submit">Commenter</button>
+            <button class="btn btnSite" data-toggle="modal" data-target="#modalCommenter{{_id}}"
+                data-whatever="@getbootstrap" type="submit">Commenter</button>
             {{/if}}
-            {{!-- bouton commenter --}}
+            {{!-- /bouton commenter --}}
         </div>
-        {{!----------------/actualité -----------------}}
+        {{!----------------/article -----------------}}
     </div>
 </div>
 
@@ -49,44 +61,7 @@
 </div>
 {{!-- /Zone commentaire --}}
 
+
 {{!-- Modal commenter actualité --}}
-<div class="modal fade" id="modalCommenter{{_id}}" tabindex="-1" role="dialog" aria-labelledby="#modalCommenterLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalCommenterLabel">Ajouter un commentaire</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <form action="/commentaireActu/{{ dbActu._id }}" method="POST">
-                <div class="container">
-                    <div class="row modal-body">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="pseudoComment" class="col-form-label">Votre pseudo : </label>
-                                <input class="form-control" id="pseudoComment" type="text" name="pseudo"
-                                    value="{{ dbUserId.pseudo }}" disabled="disabled">
-                            </div>
-                            <div class="form-group">
-                                <label for="commentActu" class="col-form-label">Votre commentaire : </label>
-                                <textarea class="form-control" id="commentActu" type="text" name="content"
-                                    required></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12 ">
-                            <div class="d-flex flex-row-reverse">
-                                <button type="submit" class="btn btnSite">Poster</button>
-                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>
+{{> modal/modalActuSingleComment}}
 {{!-- /Modal commenter actualité --}}

@@ -1,0 +1,60 @@
+{{!-- 
+Modal du Header pour se connecter
+
+
+INFOS : 
+script associé (page header)
+--}}
+
+{{!------------ modal Connexion ------------------}}
+<div class="modal fade" id="modalAuthentification" tabindex="-1" role="dialog"
+    aria-labelledby="#modalAuthentificationLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="modalAuthentificationLabel">Me connecter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{!-- <form action="/authentification" method="POST"> --}}
+            <div class="container">
+                <div class="row modal-body">
+                    <div class="col-md-12">
+
+                        {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+                        <label id="messageErrorAuth" class="text-danger d-none"></label>
+                        {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="emailAuth" placeholder="Votre email *"
+                                value="" required />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="passwordAuth"
+                                placeholder="Votre mot de passe *" value="" required />
+                        </div>
+                        {{!-- <div class="checkbox">
+                                <label> <input type="checkbox"> Se rappeler de moi. </label>
+                            </div> --}}
+                        <div class="form-group">
+                            <a href="/forgotPassword" class="ForgetPwd">Mot de passe oublié</a>
+                        </div>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="d-flex flex-row-reverse">
+                            <button type="submit" class="btn btnSite" onclick="connexionModal()">Me
+                                connecter</button>
+                            <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- </form> --}}
+
+        </div>
+    </div>
+</div>
+{{!------------ /modal Connexion ------------------}}

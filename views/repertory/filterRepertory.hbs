@@ -1,7 +1,19 @@
+{{!-- 
+Page filtre répertoire (affiché lors d'un filtrage)
 
+Note :
+indications "note" à remettre dans "small" de la card dès que fonctionnalité en place
+bouton "noter" à remettre dès que fonctionnalité en place
+trie par popularité (selon les notes) à remettre dès que fonctionnalité en place
+ --}}
+
+{{!-- Zone affichage message d'alerte aux utilisateurs --}}
 {{#if isEmpty}}
 <label class="text-danger">Aucun résultats pour cette recherche.</label>
 {{/if}}
+{{!-- Zone affichage message d'alerte aux utilisateurs --}}
+
+{{!-- Cards du répertoire --}}
 {{#each dbRepertory }}
 {{#if isVerified}}
 <div class="card cardRepertory mb-5" style="max-width: 600px;">
@@ -26,7 +38,7 @@
                     Sans caséine
                     {{/contains }}
                     {{!-- / Note :  --}}
-                    </small>
+                </small>
             </div>
             <div class="card-body">
                 <div class="container">
@@ -38,11 +50,10 @@
                         </div>
                         {{!-- bouton noter --}}
                         {{#if ../userVerified }}
-                        {{!-- A REVOIR --}}
-                        <div class="col-md-12 d-flex justify-content-end">
+                        {{!-- <div class="col-md-12 d-flex justify-content-end">
                             <button class="btn btnSite mt-3" type="button" data-toggle="modal"
                                 data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</button>
-                        </div>
+                        </div> --}}
                         {{/if}}
                         {{!-- bouton noter --}}
                     </div>
@@ -99,6 +110,8 @@
         </div>
     </div>
 </div>
-{{!-------------------- /Modal noter site/répertoire --------------------}}
+{{!-------------- /Modal noter site/répertoire -------------------}}
+
 {{/if}}
 {{/each }}
+{{!-- /Cards du répertoire --}}

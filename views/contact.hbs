@@ -1,9 +1,18 @@
+{{!-- 
+Page contact
+ --}}
 <div class="container text-center mb-5">
     <div class="row">
+        {{!-- Colonne du formulaure contact --}}
         <div class="col-md-9">
             <div class="container">
                 <div class="row d-flex flex-column justify-content-center">
+
+                    {{!-- Titre --}}
                     <h1 class="my-5 colorWrite title">Contact</h1>
+                    {{!-- /Titre --}}
+
+                    {{!-- Zone affichage message d'alerte aux utilisateurs --}}
                     {{#if needAlert }}
                     {{#if isError  }}
                     <label class="text-danger h3 mb-5">Votre message n'a pas pu être envoyé. Veuillez réessayer plus
@@ -13,6 +22,9 @@
                     <label class="text-success h3 mb-5">Votre message a bien été envoyé.</label>
                     {{/unless}}
                     {{/if}}
+                    {{!-- /Zone affichage message d'alerte aux utilisateurs --}}
+
+                    {{!-- Formulaire de contact --}}
                     <form action="/contact" method="POST">
                         <div class="form-row mb-2">
                             <div class="form-group col-md-6 pr-5">
@@ -50,10 +62,14 @@
                         </div>
                         <button id="envoyer" type="submit" class="btn btnSite mt-2">Envoyer</button>
                     </form>
+                    {{!-- /Formulaire de contact --}}
+
                 </div>
             </div>
         </div>
+        {{!-- /Colonne du formulaure contact --}}
 
+        {{!-- Colonne des Réseaux sociaux --}}
         <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mt-4">
             <div class="container">
                 <div class="row d-flex justify-content-center">
@@ -71,45 +87,7 @@
                 </div>
             </div>
         </div>
+        {{!-- /Colonne des Réseaux sociaux --}}
 
     </div>
 </div>
-
-{{!-- <script>
-    $(document).ready(function () {
-        // Get value on button click and show alert
-        $("#myBtn").click(function () {
-            var str = $("#myInput").val();
-            alert(str);
-        });
-    });
-</script> --}}
-
-{{!-- <script>
-
-    $("#envoyer").click(function () {
-        $.ajax({
-            url: '/contact',
-            type: 'POST',
-            data: { name: $("input[name=nameContact]").val() },
-            dataType: 'json',
-            success: function (json, statut) {
-                $("input[name=emailContact]").val(json.username);
-
-                if (json.test) {
-                    window.location.replace("/");
-                }
-
-            },
-            error: function (resultat, statut, erreur) {
-                console.log(resultat);
-                console.log(statut);
-                console.log(erreur);
-
-            }
-
-        });
-
-    });
-
-</script> --}}

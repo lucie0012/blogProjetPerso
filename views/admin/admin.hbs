@@ -1,5 +1,14 @@
+{{!-- 
+Page admin
+
+Note : 
+Fonctionnalité d'envoi de message à faire ??
+ --}}
+
 <div class="container-fluid h-100 my-5">
   <div class="row h-100">
+
+    {{!-- Nav admin verticale --}}
     <aside class="col-12 col-md-1 p-0 bgFooter">
       <nav class="navbar navbar-expand flex-md-column flex-row align-items-start">
         <div class="collapse navbar-collapse">
@@ -57,7 +66,9 @@
         </div>
       </nav>
     </aside>
+    {{!-- Nav admin verticale --}}
 
+    {{!-- Zone collapse admin --}}
     <main class="col-md-11">
       <div class="text-center mb-5">
         <h1 class="colorWrite">Admin</h1>
@@ -66,39 +77,31 @@
       <div class="col-md-11">
         <div class="accordion mr-5" id="accordionExample">
 
-          {{!------------------------------------------------------------- UTILISATEURS-----------------------------------------------------------}}
-
+          {{!----------------------------------- UTILISATEURS --------------------------------------}}
           {{> admin/sectionUser }}
 
-          {{!------------------------------------------------------------- ARTICLES-----------------------------------------------------------}}
-
+          {{!----------------------------------- ARTICLES --------------------------------------}}
           {{> admin/sectionActu }}
 
-          {{!------------------------------------------------------------- MESSAGES-----------------------------------------------------------}}
-
+          {{!----------------------------------- MESSAGES --------------------------------------}}
           {{> admin/sectionMessage }}
 
-          {{!------------------------------------------------------------- COMMENTAIRES-----------------------------------------------------------}}
-
+          {{!----------------------------------- COMMENTAIRES --------------------------------------}}
           {{> admin/sectionComm }}
 
-          {{!------------------------------------------------------------- NOTES/COMMENTAIRE-----------------------------------------------------------}}
-
+          {{!----------------------------------- NOTES/COMMENTAIRE --------------------------------------}}
           {{> admin/sectionNote }}
 
-          {{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
-
+          {{!----------------------------------- SITES REPERTORY --------------------------------------}}
           {{> admin/sectionSite }}
 
         </div>
-        <!-- Insérez ici le contenu principal du site ou de l'application -->
       </div>
     </main>
+    {{!-- Zone collapse admin --}}
+
   </div>
 </div>
-
-
-
 
 {{!-- Modal envoi message --}}
 {{!-- <div class="modal fade" id="modalCreateMessage" tabindex="-1" role="dialog" aria-labelledby="#modalCreateMessage"

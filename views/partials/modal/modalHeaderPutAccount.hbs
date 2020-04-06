@@ -1,0 +1,134 @@
+{{!-- 
+Modal du Header pour modifier le compte par l'utilisateur
+
+Note :
+Modification de mot de passe à faire
+Vérification de compte via le bouton à faire
+ --}}
+
+{{!------------ modal Gestion compte ------------------}}
+<div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog" aria-labelledby="#modalUserEditLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUserEditLabel">Modifier mon compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{!-- Formulaire d'édition --}}
+            <form action="/userEdit/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label for="nameModalEditAccount" class="col-sm-4 col-form-label">Nom</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="name" id="nameModalEditAccount"
+                                        value="{{ dbUserId.name }}">
+                                </div>
+                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group row">
+                                <label for="pseudoModalEditAccount" class="col-sm-4 col-form-label">Pseudo</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="pseudo" id="pseudoModalEditAccount"
+                                        value="{{ dbUserId.pseudo }}">
+                                </div>
+                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group row">
+                                <label for="emailModalEditAccount" class="col-sm-4 col-form-label">Adresse
+                                    Email</label>
+                                <div class="col-sm-8">
+                                    <input type="email" class="form-control" name="email" id="emailModalEditAccount"
+                                        value="{{ dbUserId.email }}">
+                                </div>
+                            </div>
+
+                            {{!-- <div class="form-group row">
+                                    <label for="passwordOldModalEditAccount" class="col-sm-4 col-form-label">Ancien mot
+                                        de passe</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" name="passwordOldEditAccount"
+                                            id="passwordOldModalEditAccount">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="passwordNewModalEditAccount" class="col-sm-4 col-form-label">Nouveau mot
+                                        de passe</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" name="passwordNewEditAccount"
+                                            id="passwordNewModalEditAccount">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="conf-passwordNewModalEditAccount"
+                                        class="col-sm-4 col-form-label">Confirmer le nouveau mot de passe</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" name="confPasswordNewEditAccount"
+                                            id="confPasswordNewModalEditAccount">
+                                    </div>
+                                </div> --}}
+
+                            <div class="form-group row mt-4 ml-2">
+                                <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label"
+                                    widht="100px" height="120px" style="object-fit: contain">
+                            </div>
+                            <div class="form-group row">
+                                <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
+                                    photo de
+                                    profil</label>
+                            </div>
+                            <div class="form-group row">
+                                <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                    id="editProfilPhoto" name="image" value="{{ dbUserId.image }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-1">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" class="btn btnSite">Modifier</button>
+                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{!-- Formulaire d'édition --}}
+
+
+            {{!------------ bouton vérification compte  ------------------}}
+            {{!-- <form action="#" method="POST"> --}}
+            {{!-- <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Vérifier mon compte*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+            {{!-- </form> --}}
+            {{!------------ /bouton vérification compte  ------------------}}
+
+            {{!------------ bouton suppression compte  ------------------}}
+            {{!-- <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data"> --}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row">
+                            <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mon compte*</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- </form> --}}
+            {{!------------ /bouton suppression compte  ------------------}}
+
+        </div>
+    </div>
+</div>
+{{!------------ /modal Gestion compte  ------------------}}

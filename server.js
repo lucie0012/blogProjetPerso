@@ -77,8 +77,8 @@ Handlebars.registerHelper('reverse', function (arr) {
  * Express session
  ******************************/
 app.use(expressSession({
-    secret: 'securite',
-    name: 'cookie',
+    secret: config.expressSession.secret,
+    name: config.expressSession.name,
     saveUninitialized: true,
     resave: false,
     store: new mongoStore(

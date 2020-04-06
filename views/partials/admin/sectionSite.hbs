@@ -1,5 +1,8 @@
-{{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
+{{!-- 
+Section répertoire de la page admin avec ces modals liés
+ --}}
 
+{{!------------------------------------------------------------- SITES REPERTORY-----------------------------------------------------------}}
 <div class="card">
     <div class="card-header" id="headingSix">
         <h2 class="mb-0">
@@ -266,7 +269,11 @@
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
+
+                            {{!-- Zone affichage message d'alerte aux utilisateurs --}}
                             <label id="messageErrorCreateSiteAdmin" class="text-danger d-none"></label>
+                            {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+
                             <div class="form-group">
                                 <label for="titleModalCreateSite">Titre du site</label>
                                 <input type="text" class="form-control" name="title" id="titleModalCreateSite" required>
@@ -300,8 +307,6 @@
                                         id="inlineCheckbox4" name="category" value="sansCaseine">
                                     <label class="form-check-label" for="inlineCheckbox4">Sans caséine</label>
                                 </div>
-
-                                {{!-- <input type="text" class="form-control" name="category" required> --}}
                             </div>
                             <div class="form-group">
                                 <label for="descriptionModalCreateSite">Contenu</label>
@@ -315,15 +320,6 @@
                                 <input type="file" accept="image/*" class="form-control-file col-sm-12"
                                     id="addSitePhotoAdmin" name="image">
                             </div>
-
-                            {{!-- <div class="form-group">
-                                <label>
-                                    <input type="file" name="image" accept="image/*">
-                                    <span>
-                                        Envoyer une image
-                                    </span>
-                                </label>
-                            </div> --}}
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
@@ -343,8 +339,8 @@
 
 
 <script>
-//{{!-- SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
-//{{!-- avec JQuery --}}
+    //{{!-- SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
+    //{{!-- avec JQuery --}}
     $("#scriptCheckboxAdmin").submit(function (event) {
         //on vérifie que nos conditions d'envoi sont bonnes
         if (countCheckedJQuery() >= 1) {
@@ -362,10 +358,10 @@
         var checked = $(".groupCheckboxScriptAdmin:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
         return checked.length;
     }
-//{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
+    //{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
 
 
-//{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
+    //{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
     const messageErrorCreateSiteAdmin = document.getElementById('messageErrorCreateSiteAdmin')
     const buttonCreateSiteAdmin = document.getElementById('buttonCreateSiteAdmin')
 
@@ -391,5 +387,4 @@
         //console.log('control size image')
     }
 //{{!-- /SCRIPT CREATION SITE : message et éviter Multer envoi image --}}
-
 </script>

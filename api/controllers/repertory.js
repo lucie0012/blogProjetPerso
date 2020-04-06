@@ -14,7 +14,7 @@ module.exports = {
     getRepertory: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbRepertory = await (await repertoryCollection.find({})).reverse()    //double await suite au ".reverse()"
-        // console.log(dbUserId);
+        //console.log(dbUserId);
         // console.log(dbUserId.isVerified);
 
         let userVerified = dbUserId != null ? dbUserId.isVerified : false;
@@ -298,6 +298,10 @@ module.exports = {
         // const dbUserId = await userCollection.findById(req.session.userId)
         // // console.log(req.body.category);
 
+        // let userVerified = dbUserId != null ? dbUserId.isVerified : false;
+        // // condition ternaire
+        // // console.log(userVerified);
+
         // const search = req.body.category;
         // // console.log(search);
 
@@ -317,6 +321,7 @@ module.exports = {
 
         // res.render('repertory/filterRepertory', {
         //     layout: '',
+        //     userVerified: userVerified,
         //     dbRepertory: dbRepertoryFilter,
         //     dbUserId: dbUserId,
         //     isEmpty: isEmpty
@@ -333,6 +338,11 @@ module.exports = {
         // // console.log(req.body.category);
 
         // const dbUserId = await userCollection.findById(req.session.userId)
+
+        // let userVerified = dbUserId != null ? dbUserId.isVerified : false;
+        // // condition ternaire
+        // // console.log(userVerified);
+
         // const search = req.body.category;
         // // const dbRepertory = await repertoryCollection.find({})
 
@@ -357,6 +367,7 @@ module.exports = {
 
         // res.render('repertory/filterRepertory', {
         //     layout: '',
+        //     userVerified: userVerified,
         //     dbRepertory: dbRepertoryFilter,
         //     dbUserId: dbUserId,
         //     isEmpty: isEmpty
@@ -367,6 +378,10 @@ module.exports = {
 
         const dbUserId = await userCollection.findById(req.session.userId)
         // console.log(req.body.category);
+
+        let userVerified = dbUserId != null ? dbUserId.isVerified : false;
+        // condition ternaire
+        // console.log(userVerified);
 
         const search = req.body.category;
         // console.log(search);
@@ -389,6 +404,7 @@ module.exports = {
 
         res.render('repertory/filterRepertory', {
             layout: '',
+            userVerified: userVerified,
             dbRepertory: dbRepertoryFilter,
             dbUserId: dbUserId,
             isEmpty: isEmpty
@@ -400,6 +416,10 @@ module.exports = {
 
         // const search = req.body.category;
         // const dbRepertory = await repertoryCollection.find({})
+
+        // let userVerified = dbUserId != null ? dbUserId.isVerified : false;
+        // // condition ternaire
+        // // console.log(userVerified);
 
         // let dbRepertoryFilter;
         // if (Array.isArray(search)) {

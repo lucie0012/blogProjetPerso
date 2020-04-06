@@ -1,3 +1,7 @@
+/*
+ * Middleware isAdmin
+ **************************/
+
 const userCollection = require('../api/database/models/userModel');
 
 module.exports = (req, res, next) => {

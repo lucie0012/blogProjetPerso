@@ -1,0 +1,104 @@
+{{!-- 
+Modal du Header pour créer le compte par l'utilisateur
+
+INFOS : 
+script associé (page header)
+ --}}
+
+{{!------------ modal Création compte ------------------}}
+<div class="modal fade" id="modalUserCreate" tabindex="-1" role="dialog" aria-labelledby="#modalUserCreateLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUserCreateLabel">Créer mon compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{!-- Formulaire d'envoi --}}
+            <form id="formCreateAccount" enctype="multipart/form-data">
+                {{!-- <form id="formCreateAccount" action="/userCreate"  method="POST" enctype="multipart/form-data"> => plus nécessaire avec requête AJAX--}}
+                <div class="container">
+                    <div class="row modal-body">
+                        <div class="col-md-12">
+
+                            {{!-- Zone affichage message d'alerte aux utilisateurs --}}
+                            <label id="messageErrorCreateAccount" class="text-danger d-none"></label>
+                            {{!-- /Zone affichage message d'alerte aux utilisateurs --}}
+
+                            <div class="form-group row">
+                                <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="nameModalCreateAccount"
+                                        id="nameModalCreateAccount" required>
+                                </div>
+                                {{!--required permet de forcer le remplissage de la zone de texte --}}
+                            </div>
+                            <div class="form-group row">
+                                <label for="pseudoModalCreateAccount" class="col-sm-5 col-form-label">Pseudo</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="pseudoModalCreateAccount"
+                                        id="pseudoModalCreateAccount" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="emailModalCreateAccount" class="col-sm-5 col-form-label">Adresse
+                                    email</label>
+                                <div class="col-sm-7">
+                                    <input type="email" class="form-control" name="emailModalCreateAccount"
+                                        id="emailModalCreateAccount" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="passwordModalCreateAccount" class="col-sm-5 col-form-label">Mot de
+                                    passe</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" name="passwordModalCreateAccount"
+                                        id="passwordModalCreateAccount" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="confPasswordModalCreateAccount" class="col-sm-5 col-form-label">Confirmer le
+                                    mot de
+                                    passe</label>
+                                <div class="col-sm-7">
+                                    <input type="password" class="form-control" name="confPasswordModalCreateAccount"
+                                        id="confPasswordModalCreateAccount" required>
+                                </div>
+                            </div>
+                            <div class="form-group row ">
+                                <label for="createProfilPhotoModalCreateAccount"
+                                    class="col-sm-12 col-form-label">Envoyer une photo de
+                                    profil</label>
+                            </div>
+                            <div class="form-group row">
+                                <input type="file" accept="image/*" class="form-control-file col-sm-12"
+                                    id="createProfilPhotoModalCreateAccount" name="imageModalCreateAccount">
+                            </div>
+                            <div class="form-group mt-4">
+                                <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck"
+                                    required>
+                                {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
+                                <label for="gridCheckConditionsModalCreateAccount">
+                                    J'accepte les termes des conditions générales d’utilisation de ce site
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="d-flex flex-row-reverse">
+                                <button type="submit" id="buttonCreateUser" class="btn btnSite">Créer</button>
+                                <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{!-- /Formulaire d'envoi --}}
+
+        </div>
+    </div>
+</div>
+{{!------------ /modal Création compte ------------------}}
