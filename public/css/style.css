@@ -7957,4 +7957,21 @@ a.text-color1:hover, a.text-color1:focus {
   transition: 0.8s;
   transform: scale(1.8, 1.8); }
 
+@media (max-width: 850px) {
+  .table thead {
+    display: none; }
+
+  .table tr {
+    display: block;
+    margin-bottom: 40px; }
+
+  .table td {
+    display: block;
+    text-align: right; }
+
+  .table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold; } }
+
 /*# sourceMappingURL=style.css.map */

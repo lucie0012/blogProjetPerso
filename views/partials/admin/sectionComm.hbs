@@ -21,24 +21,24 @@ Section commentaires de la page admin avec ces modals liés
         </h2>
     </div>
     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="table-responsive">
 
-            <table class="table table-striped">
+            <table class="table table-striped eclass="event-Pseudo"">
                 <thead>
                     <tr>
-                        <th scope="col">Pseudo de l'auteur</th>
-                        <th scope="col">Titre de l'article</th>
-                        <th scope="col">Commentaire</th>
-                        <th scope="col">Outils</th>
+                        <th class="event-Pseudo de l'auteur">Pseudo de l'auteur</th>
+                        <th class="event-Titre de l'article">Titre de l'article</th>
+                        <th class="event-Commentaire">Commentaire</th>
+                        <th class="event-Outils">Outils</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each dbComment}}
                     <tr>
-                        <td>{{ pseudoAuthor }}</td>
-                        <td>{{ titleArticle }}</td>
-                        <td>{{ content }}</td>
-                        <td>
+                        <td data-label="Pseudo de l'auteur">{{ pseudoAuthor }}</td>
+                        <td data-label="Titre de l'article">{{ titleArticle }}</td>
+                        <td data-label="Commentaire">{{ content }}</td>
+                        <td data-label="Outils">
                             <span>
                                 {{#unless isVerified}}
                                 <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"

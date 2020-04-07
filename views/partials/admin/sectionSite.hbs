@@ -28,225 +28,221 @@ Section répertoire de la page admin avec ces modals liés
         </h2>
     </div>
     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="table-responsive">
 
-            <div class="table-responsive-sm">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Pseudo de l'auteur</th>
-                            <th scope="col">Titre du site</th>
-                            <th scope="col">URL</th>
-                            <th scope="col">Outils</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each dbRepertory }}
-                        <tr>
-                            <td>{{ pseudoAuthor }}</td>
-                            <td>{{ title }}</td>
-                            <td><a href="{{ url }}" target="_blank">{{ url }}</a></td>
-                            <td>
-                                <span>
-                                    {{#unless isVerified}}
-                                    <button class="btn btn-default border border-dark" aria-label="Valider"
-                                        type="submit" data-toggle="modal" data-target="#modalConfirmValidSite{{ _id }}">
-                                        <i class="far fa-check-circle" aria-hidden="true"></i>
-                                    </button>
-                                    {{/unless}}
-                                    <button class="btn btn-primary" aria-label="Editer" type="submit"
-                                        data-toggle="modal" data-target="#modalEditSite{{_id}}">
-                                        <i class="far fa-edit" aria-hidden="true"></i>
-                                    </button>
-                                    <button class="btn btn-danger" aria-label="Supprimer" type="submit"
-                                        data-toggle="modal" data-target="#modalConfirmSuppSite{{ _id }}">
-                                        <i class="fa fa-trash-alt" aria-hidden="true"></i>
-                                    </button>
-                                </span>
-                            </td>
-                        </tr>
+            <table class="table table-striped events-table">
+                <thead>
+                    <tr>
+                        <th class="event-Pseudo de l'auteur">Pseudo de l'auteur</th>
+                        <th class="event-Titre du site">Titre du site</th>
+                        <th class="event-URL">URL</th>
+                        <th class="event-Outils">Outils</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each dbRepertory }}
+                    <tr>
+                        <td data-label="Pseudo de l'auteur">{{ pseudoAuthor }}</td>
+                        <td data-label="Titre du site">{{ title }}</td>
+                        <td data-label="URL"><a href="{{ url }}" target="_blank">{{ url }}</a></td>
+                        <td data-label="Outils">
+                            <span>
+                                {{#unless isVerified}}
+                                <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
+                                    data-toggle="modal" data-target="#modalConfirmValidSite{{ _id }}">
+                                    <i class="far fa-check-circle" aria-hidden="true"></i>
+                                </button>
+                                {{/unless}}
+                                <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
+                                    data-target="#modalEditSite{{_id}}">
+                                    <i class="far fa-edit" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
+                                    data-target="#modalConfirmSuppSite{{ _id }}">
+                                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </td>
+                    </tr>
 
-                        {{!------------------ Modal confirmation validation site répertoire -------------------}}
-                        <div class="modal fade" id="modalConfirmValidSite{{ _id }}" tabindex="-1" role="dialog"
-                            aria-labelledby="#modalConfirmValidSiteLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                    {{!------------------ Modal confirmation validation site répertoire -------------------}}
+                    <div class="modal fade" id="modalConfirmValidSite{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmValidSiteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-                                    <form action="/repertoryValid/{{ _id }}/?_method=PUT" method="POST">
-                                        <div class="container">
-                                            <div class="row modal-body">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <p>Confirmez-vous l'ajout du site "{{ title }}" ?</p>
-                                                    </div>
+                                <form action="/repertoryValid/{{ _id }}/?_method=PUT" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous l'ajout du site "{{ title }}" ?</p>
                                                 </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn btnSite">Oui</button>
-                                                        <button type="button" class="btn btnSite p-2 mr-2"
-                                                            data-dismiss="modal">Non</button>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn btnSite">Oui</button>
+                                                    <button type="button" class="btn btnSite p-2 mr-2"
+                                                        data-dismiss="modal">Non</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
 
-                                </div>
                             </div>
                         </div>
-                        {{!--------------------- /Modal confirmation validation site répertoire -------------------}}
+                    </div>
+                    {{!--------------------- /Modal confirmation validation site répertoire -------------------}}
 
 
-                        {{!----------------------- Modal édition site/répertoire -----------------------}}
-                        <div class="modal fade" id="modalEditSite{{_id}}" tabindex="-1" role="dialog"
-                            aria-labelledby="#modalEditSite" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                    {{!----------------------- Modal édition site/répertoire -----------------------}}
+                    <div class="modal fade" id="modalEditSite{{_id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalEditSite" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalEditArticleLabel">Créer un article</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-                                    <form action="/repertory/{{ _id }}/?_method=PUT" method="POST"
-                                        enctype="multipart/form-data">
-                                        {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
-                                        <div class="container">
-                                            <div class="row modal-body">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <img src="{{ image }}" alt="image ou logo du site" widht="100px"
-                                                            height="100px" style="object-fit: contain">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="titleModalEditSite{{_id}}">Titre du site</label>
-                                                        <input type="text" class="form-control" name="title"
-                                                            id="titleModalEditSite{{_id}}" value="{{ title }}" required>
-                                                        {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="urlModalEditSite{{_id}}">URL du site</label>
-                                                        <input type="url" class="form-control" name="url"
-                                                            id="urlModalEditSite{{_id}}" value="{{ url }}" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="contentModalEditSite{{_id}}">Contenu</label>
-                                                        <textarea type="text" class="form-control" name="content"
-                                                            id="contentModalEditSite{{_id}}" rows="6"
-                                                            required> {{ content }}</textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="category">Catégorie</label>
-                                                        </br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="inlineCheckbox1{{_id}}" name="category"
-                                                                value="sansGluten" {{#contains category "sansGluten" }}
-                                                                checked {{/contains }}>
-                                                            <label class="form-check-label" for="inlineCheckbox1">Sans
-                                                                gluten</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="inlineCheckbox2{{_id}}" name="category"
-                                                                value="sansLactose"
-                                                                {{#contains category "sansLactose" }} checked
-                                                                {{/contains }}>
-                                                            <label class="form-check-label" for="inlineCheckbox2">Sans
-                                                                lactose</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="inlineCheckbox3{{_id}}" name="category"
-                                                                value="sansOeufs" {{#contains category "sansOeufs" }}
-                                                                checked {{/contains }}>
-                                                            <label class="form-check-label" for="inlineCheckbox3">Sans
-                                                                oeufs</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="inlineCheckbox4{{_id}}" name="category"
-                                                                value="sansCaseine"
-                                                                {{#contains category "sansCaseine" }} checked
-                                                                {{/contains }}>
-                                                            <label class="form-check-label" for="inlineCheckbox4">Sans
-                                                                caséine</label>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>
-                                                            <input type="file" name="image" accept="image/*">
-                                                            <span>
-                                                                Envoyer une nouvelle image
-                                                            </span>
-                                                        </label>
-                                                    </div>
+                                <form action="/repertory/{{ _id }}/?_method=PUT" method="POST"
+                                    enctype="multipart/form-data">
+                                    {{!-- "enctype="multipart/form-data"" : ne le mettre que si gestion de file (sinon bloque la réception de req.body) --}}
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <img src="{{ image }}" alt="image ou logo du site" widht="100px"
+                                                        height="100px" style="object-fit: contain">
                                                 </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn btnSite">Modifier</button>
-                                                        <button type="button" class="btn btnSite p-2 mr-2"
-                                                            data-dismiss="modal">Annuler</button>
+                                                <div class="form-group">
+                                                    <label for="titleModalEditSite{{_id}}">Titre du site</label>
+                                                    <input type="text" class="form-control" name="title"
+                                                        id="titleModalEditSite{{_id}}" value="{{ title }}" required>
+                                                    {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="urlModalEditSite{{_id}}">URL du site</label>
+                                                    <input type="url" class="form-control" name="url"
+                                                        id="urlModalEditSite{{_id}}" value="{{ url }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contentModalEditSite{{_id}}">Contenu</label>
+                                                    <textarea type="text" class="form-control" name="content"
+                                                        id="contentModalEditSite{{_id}}" rows="6"
+                                                        required> {{ content }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="category">Catégorie</label>
+                                                    </br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="inlineCheckbox1{{_id}}" name="category"
+                                                            value="sansGluten" {{#contains category "sansGluten" }}
+                                                            checked {{/contains }}>
+                                                        <label class="form-check-label" for="inlineCheckbox1">Sans
+                                                            gluten</label>
                                                     </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="inlineCheckbox2{{_id}}" name="category"
+                                                            value="sansLactose" {{#contains category "sansLactose" }}
+                                                            checked {{/contains }}>
+                                                        <label class="form-check-label" for="inlineCheckbox2">Sans
+                                                            lactose</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="inlineCheckbox3{{_id}}" name="category"
+                                                            value="sansOeufs" {{#contains category "sansOeufs" }}
+                                                            checked {{/contains }}>
+                                                        <label class="form-check-label" for="inlineCheckbox3">Sans
+                                                            oeufs</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="inlineCheckbox4{{_id}}" name="category"
+                                                            value="sansCaseine" {{#contains category "sansCaseine" }}
+                                                            checked {{/contains }}>
+                                                        <label class="form-check-label" for="inlineCheckbox4">Sans
+                                                            caséine</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>
+                                                        <input type="file" name="image" accept="image/*">
+                                                        <span>
+                                                            Envoyer une nouvelle image
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn btnSite">Modifier</button>
+                                                    <button type="button" class="btn btnSite p-2 mr-2"
+                                                        data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
 
-                                </div>
                             </div>
                         </div>
-                        {{!------------------ /Modal édition site/répertoire --------------}}
+                    </div>
+                    {{!------------------ /Modal édition site/répertoire --------------}}
 
 
 
-                        {{!------------------ Modal confirmation suppression site/répertoire -------------------}}
-                        <div class="modal fade" id="modalConfirmSuppSite{{ _id }}" tabindex="-1" role="dialog"
-                            aria-labelledby="#modalConfirmSuppSiteLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                    {{!------------------ Modal confirmation suppression site/répertoire -------------------}}
+                    <div class="modal fade" id="modalConfirmSuppSite{{ _id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="#modalConfirmSuppSiteLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
-                                    <form action="/repertory/{{ _id }}/?_method=delete" method="POST">
-                                        <div class="container">
-                                            <div class="row modal-body">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <p>Confirmez-vous la suppression du site "{{ title }}" ?</p>
-                                                    </div>
+                                <form action="/repertory/{{ _id }}/?_method=delete" method="POST">
+                                    <div class="container">
+                                        <div class="row modal-body">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <p>Confirmez-vous la suppression du site "{{ title }}" ?</p>
                                                 </div>
-                                                <div class="col-md-12 ">
-                                                    <div class="d-flex flex-row-reverse">
-                                                        <button type="submit" class="btn btnSite">Oui</button>
-                                                        <button type="button" class="btn btnSite p-2 mr-2"
-                                                            data-dismiss="modal">Non</button>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <div class="d-flex flex-row-reverse">
+                                                    <button type="submit" class="btn btnSite">Oui</button>
+                                                    <button type="button" class="btn btnSite p-2 mr-2"
+                                                        data-dismiss="modal">Non</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
 
-                                </div>
                             </div>
                         </div>
-                        {{!--------------------- /Modal confirmation suppression site/répertoire -------------------}}
+                    </div>
+                    {{!--------------------- /Modal confirmation suppression site/répertoire -------------------}}
 
-                        {{/each}}
+                    {{/each}}
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -341,27 +337,30 @@ Section répertoire de la page admin avec ces modals liés
 <script>
     //{{!-- SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
     //{{!-- avec JQuery --}}
-    $("#scriptCheckboxAdmin").submit(function (event) {
-        //on vérifie que nos conditions d'envoi sont bonnes
-        if (countCheckedJQuery() >= 1) {
-            console.log("submitted !");
-        } else {
-            //on empêche le questionnaire de s'envoyer
-            event.preventDefault();
-            $("#messageErrorAddSiteAdmin").removeClass("d-none");
-            $("#messageErrorAddSiteAdmin").text("Veuillez cocher au moins une case");
-            console.log("unsubmit");
-        }
-    });
+    $(document).ready(function () {
+        $("#scriptCheckboxAdmin").submit(function (event) {
+            //on vérifie que nos conditions d'envoi sont bonnes
+            if (countCheckedJQuery() >= 1) {
+                console.log("submitted !");
+            } else {
+                //on empêche le questionnaire de s'envoyer
+                event.preventDefault();
+                $("#messageErrorAddSiteAdmin").removeClass("d-none");
+                $("#messageErrorAddSiteAdmin").text("Veuillez cocher au moins une case");
+                console.log("unsubmit");
+            }
+        });
 
-    function countCheckedJQuery() {
-        var checked = $(".groupCheckboxScriptAdmin:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
-        return checked.length;
-    }
+        function countCheckedJQuery() {
+            var checked = $(".groupCheckboxScriptAdmin:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
+            return checked.length;
+        }
+    })
     //{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
 
 
     //{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
+    //DOM
     const messageErrorCreateSiteAdmin = document.getElementById('messageErrorCreateSiteAdmin')
     const buttonCreateSiteAdmin = document.getElementById('buttonCreateSiteAdmin')
 

@@ -26,7 +26,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         {{!-- Bouton vers modal proposition site à l'ajout --}}
         <div class="col-md-3">
             {{#if isVerified}}
-            <a class="btn btnRepertoryAdd d-flex align-items-center mb-3" type="button" data-toggle="modal"
+            <a class="btn btnRepertoryAdd d-flex align-items-center mb-4" type="button" data-toggle="modal"
                 data-target="#modalPropoSite" data-whatever="@getbootstrap"><i
                     class="far fa-plus-square fa-2x mx-2"></i>Proposer un site</a>
             {{/if}}
@@ -95,7 +95,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             </div>
 
             {{!-------------- Modal noter site/répertoire -------------------}}
-             <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog"
+            <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog"
                 aria-labelledby="#modalNoterLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -157,7 +157,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             {{!-- <form action="/repertoryFilter" method="POST"> --}}
             {{!-- /ANCIEN FORMULAIRE --}}
 
-            <table class="table">
+            <table class="table ml-2">
                 <thead>
                     <p>Trier par catégorie</p>
                 </thead>
@@ -219,6 +219,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 <script>
 
     //{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
+    //DOM
     const messageErrorCreateSiteUser = document.getElementById('messageErrorCreateSiteUser')
     const buttonCreateSiteUser = document.getElementById('buttonCreateSiteUser')
 
@@ -246,34 +247,39 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
     //{{!-- /SCRIPT CREATION SITE : message et éviter Multer envoi image --}}
 
 
-
     //{{!-- SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
-    $("input[name='category']").click(function () {
-        //console.log("coucou")
-        $("#messageErrorAddSite").addClass("d-none");
-    });
+    //JQUERY
+    $(document).ready(function () {
+        $("input[name='category']").click(function () {
+            //console.log("coucou")
+            $("#messageErrorAddSite").addClass("d-none");
+        });
+    })
     //{{!-- /SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
 
 
 
     //{{!-- SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
-    $("#scriptCheckboxUser").submit(function (event) {
-        //on vérifie que nos conditions d'envoi sont bonnes
-        if (countCheckedJQuery() >= 1) {
-            console.log("submitted !");
-        } else {
-            //on empêche le questionnaire de s'envoyer
-            event.preventDefault();
-            $("#messageErrorAddSite").removeClass("d-none");
-            $("#messageErrorAddSite").text("Veuillez cocher au moins une case");
-            console.log("unsubmit");
-        }
-    });
+    //JQUERY
+    $(document).ready(function () {
+        $("#scriptCheckboxUser").submit(function (event) {
+            //on vérifie que nos conditions d'envoi sont bonnes
+            if (countCheckedJQuery() >= 1) {
+                console.log("submitted !");
+            } else {
+                //on empêche le questionnaire de s'envoyer
+                event.preventDefault();
+                $("#messageErrorAddSite").removeClass("d-none");
+                $("#messageErrorAddSite").text("Veuillez cocher au moins une case");
+                console.log("unsubmit");
+            }
+        });
 
-    function countCheckedJQuery() {
-        var checked = $(".groupCheckboxScript:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
-        return checked.length;
-    }
+        function countCheckedJQuery() {
+            var checked = $(".groupCheckboxScript:checked");//sélectionne tous les éléments de classe "groupcheckbox" qui sont sélectionné
+            return checked.length;
+        }
+    })
     //{{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
 
 

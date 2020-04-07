@@ -21,26 +21,26 @@ Section message de la page admin avec ces modals liés
         </h2>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-        <div class="card-body">
+        <div class="table-responsive">
 
-            <table class="table table-striped">
+            <table class="table table-striped events-table">
                 <thead>
                     <tr>
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Sujet</th>
-                        <th scope="col">Message</th>
-                        <th scope="col">Outils</th>
+                        <th class="event-Pseudo">Pseudo</th>
+                        <th class="event-Email">Email</th>
+                        <th class="event-Sujet">Sujet</th>
+                        <th class="event-Message">Message</th>
+                        <th class="event-Outils">Outils</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each dbMessage}}
                     <tr>
-                        <td>{{ pseudoAuthor }}</td>
-                        <td>{{ emailAuthor}}</td>
-                        <td>{{ subject }}</td>
-                        <td>{{ content }}</td>
-                        <td>
+                        <td data-label="Pseudo">{{ pseudoAuthor }}</td>
+                        <td data-label="Email">{{ emailAuthor}}</td>
+                        <td data-label="Sujet">{{ subject }}</td>
+                        <td data-label="Message">{{ content }}</td>
+                        <td data-label="Outils">
                             <span>
                                 <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
                                     data-target="#modalConfirmSuppMessage{{ _id }}">
@@ -66,7 +66,8 @@ Section message de la page admin avec ces modals liés
                                         <div class="row modal-body">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <p>Confirmez-vous la suppression du message de "{{ pseudoAuthor }}"
+                                                    <p>Confirmez-vous la suppression du message de
+                                                        "{{ pseudoAuthor }}"
                                                         ?</p>
                                                 </div>
                                             </div>
