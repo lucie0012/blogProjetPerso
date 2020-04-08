@@ -31,22 +31,20 @@ Page contact
                                 <label for="nomContact" class="d-flex justify-content-start">Votre
                                     nom</label>
                                 <input type="text" id="nomContact" class="form-control" placeholder="Votre nom*"
-                                    name="nameContact" value="{{ dbUserId.name }}" {{#if user}} disabled="disabled"
-                                    {{/if}} required>
+                                    name="name" value="{{ dbUserId.name }}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="pseudoContactl" class="d-flex justify-content-start">Votre
                                     pseudo</label>
                                 <input type="text" id="pseudoContact" class="form-control" placeholder="Votre pseudo*"
-                                    name="pseudo" value="{{ dbUserId.pseudo }}" {{#if user}} disabled="disabled" {{/if}}
-                                    required>
+                                    name="pseudo" value="{{ dbUserId.pseudo }}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="emailContact" class="d-flex justify-content-start">Votre
                                 email</label>
                             <input type="email" id="emailContact" class="form-control" placeholder="Votre email*"
-                                name="emailContact" value="{{ dbUserId.email }}" required>
+                                name="email" value="{{ dbUserId.email }}" required>
                         </div>
                         <div class="form-group mt-4">
                             <label for="sujetContact" class="d-flex justify-content-start">Votre

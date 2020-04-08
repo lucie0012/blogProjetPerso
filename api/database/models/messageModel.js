@@ -4,6 +4,9 @@ const messageSchema = new mongoose.Schema({
 
     
     authorId : String,
+    pseudoAuthor : String,
+    nameAuthor : String,
+    emailAuthor : String,
     subject : String,
     content : String,
     createDate : {

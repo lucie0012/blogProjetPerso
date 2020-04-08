@@ -91,17 +91,17 @@ module.exports = {
             // console.log(i + "coucou 5 " + dbNote[i].titleSite)
         }
 
-        for (let i in dbMessage) {
-            if (dbMessage[i].authorId == null) {
-                dbMessage[i].pseudoAuthor = undefined;
-                dbMessage[i].emailAuthor = undefined;
-            } else {
-                const dbUserIdauthorIdMessage = await userCollection.findById(dbMessage[i].authorId)
-                dbMessage[i].pseudoAuthor = dbUserIdauthorIdMessage.pseudo;
-                dbMessage[i].emailAuthor = dbUserIdauthorIdMessage.email;
-            }
-            // console.log(i + "coucou 6 " + dbMessage[i].pseudoAuthor)
-        }
+        // for (let i in dbMessage) {
+        //     if (dbMessage[i].authorId == null) {
+        //         dbMessage[i].pseudoAuthor = undefined;
+        //         dbMessage[i].emailAuthor = undefined;
+        //     } else {
+        //         const dbUserIdauthorIdMessage = await userCollection.findById(dbMessage[i].authorId)
+        //         dbMessage[i].pseudoAuthor = dbUserIdauthorIdMessage.pseudo;
+        //         dbMessage[i].emailAuthor = dbUserIdauthorIdMessage.email;
+        //     }
+        //     // console.log(i + "coucou 6 " + dbMessage[i].pseudoAuthor)
+        // }
 
         res.render('admin/admin', {
             layout: 'adminMain',
