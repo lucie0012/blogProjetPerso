@@ -197,7 +197,11 @@ router.route('/verifiedUser/:id')
 router.route('/adminUserEdit/:id')
     .get(isAdmin, admin.getUserEdit)
     .put(isAdmin, admin.putlistUser)
-    .delete(isAdmin, admin.deleteOneUserAdmin)
+// .delete(isAdmin, admin.deleteOneUserAdmin)
+
+router.route('/adminUserEditDelete/:id')
+    .put(isAdmin, admin.putUserEditDelete)
+
 
 
 module.exports = router

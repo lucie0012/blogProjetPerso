@@ -61,7 +61,7 @@ module.exports = {
 
         for (let i in dbComment) {
             if (dbComment[i].authorId == null) {
-                dbComment[i].pseudoAuthor = undefined;
+                dbComment[i].pseudoAuthor = "anonyme";
             } else {
             const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
             dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;

@@ -75,7 +75,7 @@ Section utilisateur de la page admin avec ces modals liés
                     <div class="row modal-body">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <p>Confirmez-vous la vérification de "{{ pseudo }}" ?</p>
+                          <p>Confirmez-vous la vérification du compte de "{{ pseudo }}" ?</p>
                         </div>
                       </div>
                       <div class="col-md-12 ">
@@ -162,12 +162,12 @@ Section utilisateur de la page admin avec ces modals liés
                 </div>
 
                 {{!-- Formulaire --}}
-                <form action="/adminUserEdit/{{ _id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+                <form action="/adminUserEditDelete/{{ _id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
                   <div class="container">
                     <div class="row modal-body">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <p>Confirmez-vous la suppression de "{{ pseudo }}" ?</p>
+                          <p>Confirmez-vous la suppression du compte de "{{ pseudo }}" ?</p>
                         </div>
                       </div>
                       <div class="col-md-12 ">

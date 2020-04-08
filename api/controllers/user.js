@@ -1,4 +1,9 @@
 const userCollection = require('../database/models/userModel');
+const messageCollection = require('../database/models/messageModel');
+const commentCollection = require('../database/models/commentModel');
+const repertoryCollection = require('../database/models/repertoryModel');
+const noteCollection = require('../database/models/noteModel');
+
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs');
@@ -304,30 +309,84 @@ module.exports = {
         const typeDefault = false;
         const deleteDate = new Date()
 
-            userCollection.findOneAndUpdate(
-                { _id: req.params.id },
-                {
-                    fonction : "Utilisateur supprimé",
-                    isDelete : isDelete,
-                    isAdmin : typeDefault,
-                    isVerified : typeDefault,
-                    isBan : typeDefault,
-                    deleteDate : deleteDate
-                },
-                { multi: true },
-                (err) => {
-                    if (!err) {
-                        console.log("User status delete");
-                        req.session.destroy(() => {
-                            res.clearCookie('clear cookie OK et déco ok');
-                            res.redirect('/')
-                        })
-                        // res.redirect('/')
-                        // res.render('home')
-                    } else {
-                        console.log(err);
-                    }
-                })
+        userCollection.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                fonction: "Utilisateur supprimé",
+                isDelete: isDelete,
+                isAdmin: typeDefault,
+                isVerified: typeDefault,
+                isBan: typeDefault,
+                deleteDate: deleteDate
+            },
+            { multi: true },
+            (err) => {
+                if (!err) {
+                    console.log("User status delete");
+                    req.session.destroy(() => {
+                        res.clearCookie('clear cookie OK et déco ok');
+                        res.redirect('/')
+                    })
+                    commentCollection.updateMany(
+                        { authorId: req.params.id },
+                        {
+                            authorId: null
+                        },
+                        { multi: true },
+                        (err) => {
+                            if (!err) {
+                                console.log("update authorId comment ok");
+                            } else {
+                                res.rend(err)
+                            }
+                        }
+                    )
+                    messageCollection.updateMany(
+                        { authorId: req.params.id },
+                        {
+                            authorId: null
+                        },
+                        { multi: true },
+                        (err) => {
+                            if (!err) {
+                                console.log("update authorId message ok");
+                            } else {
+                                res.rend(err)
+                            }
+                        }
+                    )
+                    noteCollection.updateMany(
+                        { authorId: req.params.id },
+                        {
+                            authorId: null
+                        },
+                        { multi: true },
+                        (err) => {
+                            if (!err) {
+                                console.log("update authorId note ok");
+                            } else {
+                                res.rend(err)
+                            }
+                        }
+                    )
+                    repertoryCollection.updateMany(
+                        { authorId: req.params.id },
+                        {
+                            authorId: null
+                        },
+                        { multi: true },
+                        (err) => {
+                            if (!err) {
+                                console.log("update authorId repertory ok");
+                            } else {
+                                res.rend(err)
+                            }
+                        }
+                    )
+                } else {
+                    console.log(err);
+                }
+            })
 
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
@@ -348,6 +407,10 @@ module.exports = {
         } else if (dbUser.isBan) {
             console.log('user banni');
             res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions générales d'utilisation du site." });
+            // res.redirect('/')
+        } else if (dbUser.isDelete) {
+            console.log('user delete');
+            res.json({ message: "Ce compte est supprimé. Veuillez créer un nouveau compte." });
             // res.redirect('/')
         } else {
             const sess = req.session
