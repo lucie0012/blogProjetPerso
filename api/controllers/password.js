@@ -196,7 +196,7 @@ module.exports = {
                             }
                         }),
                         isError = false;
-                        console.log(isError);
+                        // console.log(isError);
                         res.render('user/resetPassword', {
                             needAlertSend: needAlertSend,
                             isError: isError

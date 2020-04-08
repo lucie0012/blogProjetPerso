@@ -357,6 +357,17 @@ Section répertoire de la page admin avec ces modals liés
         }
     })
     //{{!-- /SCRIPT CHECKBOX REQUIRE MODAL CREATION SITE ADMIN --}}
+    
+
+    //{{!-- SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
+    //JQUERY
+    $(document).ready(function () {
+        $("input[name='category']").click(function () {
+            //console.log("coucou")
+            $("#messageErrorAddSiteAdmin").addClass("d-none");
+        });
+    })
+    //{{!-- /SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
 
 
     //{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
