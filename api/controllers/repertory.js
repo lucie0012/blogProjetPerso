@@ -206,7 +206,18 @@ module.exports = {
                         res.send(err)
                     } else {
                         console.log("Site delete");
-                        res.redirect('/admin')
+                        noteCollection.deleteMany(
+                            { siteId: req.params.id },
+                            (err) => {
+                                if (err) {
+                                    res.send(err)
+                                    console.log('suppression pas OK');
+                                } else {
+                                    res.redirect('/admin')
+                                    console.log('suppression note/comm OK');
+                                }
+                            })
+                        // res.redirect('/admin')
                     }
                 })
         } else {
@@ -222,7 +233,18 @@ module.exports = {
                                     console.log(err);
                                 } else {
                                     console.log("Site and File delete");
-                                    res.redirect('/admin')
+                                    noteCollection.deleteMany(
+                                        { siteId: req.params.id },
+                                        (err) => {
+                                            if (err) {
+                                                res.send(err)
+                                                console.log('suppression pas OK');
+                                            } else {
+                                                res.redirect('/admin')
+                                                console.log('suppression note/comm OK');
+                                            }
+                                        })
+                                    // res.redirect('/admin')
                                 }
                             }
                         )

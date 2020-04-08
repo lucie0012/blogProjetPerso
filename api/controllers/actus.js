@@ -80,7 +80,6 @@ module.exports = {
     deleteOneActuSingle: async (req, res) => {
         // console.log(req.params.id);
         const dbActu = await actuCollection.findById(req.params.id);
-        const dbComment = await commentCollection.find({ articleId: req.params.id });
         const pathImage = path.resolve("public/ressources/images/" + dbActu.nameImage)
 
         // console.log(dbComment);
