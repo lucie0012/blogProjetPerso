@@ -296,23 +296,28 @@ module.exports = {
         }
     },
 
-    /**************Suppression compte***************/
-    deleteOneUser: async (req, res) => {
+    /**************Suppression compte par utilisateur : modification des statuts user : notamment en isDelete : true***************/
+    putUserEditDelete: async (req, res) => {
         // console.log(req.params.id);
-        const dbUser = await userCollection.findById(req.params.id);
-        const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
-        // console.log(dbUser);
-        // console.log(dbUser.nameImage);
 
+        const isDelete = true;
+        const typeDefault = false;
+        const deleteDate = new Date()
 
-        if (dbUser.nameImage == null) {
-            // mettre undefined plutôt ??
-            console.log("pas d'image");
-            userCollection.deleteOne(
+            userCollection.findOneAndUpdate(
                 { _id: req.params.id },
+                {
+                    fonction : "Utilisateur supprimé",
+                    isDelete : isDelete,
+                    isAdmin : typeDefault,
+                    isVerified : typeDefault,
+                    isBan : typeDefault,
+                    deleteDate : deleteDate
+                },
+                { multi: true },
                 (err) => {
                     if (!err) {
-                        console.log("User delete");
+                        console.log("User status delete");
                         req.session.destroy(() => {
                             res.clearCookie('clear cookie OK et déco ok');
                             res.redirect('/')
@@ -323,31 +328,6 @@ module.exports = {
                         console.log(err);
                     }
                 })
-        } else {
-            userCollection.deleteOne(
-                { _id: req.params.id },
-                (err) => {
-                    if (!err) {
-                        fs.unlink(pathImage,
-                            (err) => {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    console.log("User and File delete et déco ok");
-                                    req.session.destroy(() => {
-                                        res.clearCookie('clear cookie OK');
-                                        res.redirect('/')
-                                    })
-                                    // res.redirect('/')
-                                    // res.render('home')
-                                }
-                            }
-                        )
-                    } else {
-                        res.send(err)
-                    }
-                })
-        }
 
     },
     // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
@@ -367,7 +347,7 @@ module.exports = {
             // res.redirect('/')
         } else if (dbUser.isBan) {
             console.log('user banni');
-            res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions d'utilisation du site." });
+            res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions générales d'utilisation du site." });
             // res.redirect('/')
         } else {
             const sess = req.session
@@ -400,6 +380,63 @@ module.exports = {
             res.clearCookie('clear cookie OK');
             res.redirect('/')
         })
-    }
+    },
+
+
+    // /**************Suppression compte***************/
+    // deleteOneUser: async (req, res) => {
+    //     // console.log(req.params.id);
+    //     const dbUser = await userCollection.findById(req.params.id);
+    //     const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
+    //     // console.log(dbUser);
+    //     // console.log(dbUser.nameImage);
+
+
+    //     if (dbUser.nameImage == null) {
+    //         // mettre undefined plutôt ??
+    //         console.log("pas d'image");
+    //         userCollection.deleteOne(
+    //             { _id: req.params.id },
+    //             (err) => {
+    //                 if (!err) {
+    //                     console.log("User delete");
+    //                     req.session.destroy(() => {
+    //                         res.clearCookie('clear cookie OK et déco ok');
+    //                         res.redirect('/')
+    //                     })
+    //                     // res.redirect('/')
+    //                     // res.render('home')
+    //                 } else {
+    //                     console.log(err);
+    //                 }
+    //             })
+    //     } else {
+    //         userCollection.deleteOne(
+    //             { _id: req.params.id },
+    //             (err) => {
+    //                 if (!err) {
+    //                     fs.unlink(pathImage,
+    //                         (err) => {
+    //                             if (err) {
+    //                                 console.log(err);
+    //                             } else {
+    //                                 console.log("User and File delete et déco ok");
+    //                                 req.session.destroy(() => {
+    //                                     res.clearCookie('clear cookie OK');
+    //                                     res.redirect('/')
+    //                                 })
+    //                                 // res.redirect('/')
+    //                                 // res.render('home')
+    //                             }
+    //                         }
+    //                     )
+    //                 } else {
+    //                     res.send(err)
+    //                 }
+    //             })
+    //     }
+
+    // },
+    // // ATTENTION bien penser à mettre un form method POST et en action l'url puis "/?_method=delete" avec autour du bouton qui est en type submit
 
 }

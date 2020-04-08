@@ -36,7 +36,7 @@ router.route('/')
 
 /*
  * Footer
- ***********/ 
+ ***********/
 // Affichage page conditions générales d'utilisations
 router.route('/termsOfService')
     .get(home.getTermsOfService)
@@ -153,10 +153,15 @@ router.route('/verifyMail')
 router.route('/authentification')
     .post(user.postUserAuth)
 
-// Gestion compte (édition et suppression)
+// Gestion compte : modification et suppression
 router.route('/userEdit/:id')
     .put(multer, user.putUserEdit)
-    .delete(user.deleteOneUser)
+// .delete(user.deleteOneUser)
+
+// Suppression compte : modification des status pour conservation données après suppression compte (à conserver le temps demandé par rgpd?)
+router.route('/userEditDelete/:id')
+    .put(user.putUserEditDelete)
+
 
 // Déconnexion
 router.route('/userLogOut')

@@ -49,6 +49,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    isDelete: {
+        type: Boolean,
+        default: false,
+    },
+    deleteDate: Date
 })
 
 userSchema.pre('save', function (next) {

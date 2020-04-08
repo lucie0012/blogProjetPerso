@@ -14,7 +14,7 @@ Modal du Header pour confirmer la suppression du compte
             </div>
 
             {{!-- Formulaire de suppression --}}
-            <form action="/userEdit/{{ dbUserId._id }}/?_method=delete" method="POST" enctype="multipart/form-data">
+            <form action="/userEditDelete/{{ dbUserId._id }}/?_method=PUT" method="POST" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row modal-body">
                         <div class="col-md-12">
