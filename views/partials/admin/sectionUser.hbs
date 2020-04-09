@@ -20,7 +20,7 @@ Section utilisateur de la page admin avec ces modals liés
     </h2>
   </div>
   <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionAdmin">
-    <div class="tableclass="event-URL"">
+    <div class="tableclass=" event-URL"">
 
       <table class="table table-striped events-table">
         <thead>
@@ -40,11 +40,14 @@ Section utilisateur de la page admin avec ces modals liés
             <td data-label="Outils">
               <span>
                 {{#unless isVerified}}
+                {{#unless isDelete}}
                 <button class="btn btn-default border border-dark" aria-label="Valider" type="submit"
                   data-toggle="modal" data-target="#modalConfirmValidUser{{ _id }}">
                   <i class="far fa-check-circle" aria-hidden="true"></i>
                 </button>
                 {{/unless}}
+                {{/unless}}
+                {{#unless isDelete}}
                 <button class="btn btn-primary" aria-label="Editer" type="submit" data-toggle="modal"
                   data-target="#modalEditUser{{_id}}">
                   <i class="far fa-edit" aria-hidden="true"></i>
@@ -52,6 +55,11 @@ Section utilisateur de la page admin avec ces modals liés
                 <button class="btn btn-danger" aria-label="Supprimer" type="submit" data-toggle="modal"
                   data-target="#modalConfirmSuppUser{{ _id }}">
                   <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                </button>
+                {{/unless}}
+                <button class="btn btn-danger" aria-label="Supprimer définitivement" type="submit" data-toggle="modal"
+                  data-target="#modalConfirmSuppBddUser{{ _id }}">
+                  <i class="fas fa-user-slash"></i>
                 </button>
               </span>
             </td>
@@ -150,7 +158,7 @@ Section utilisateur de la page admin avec ces modals liés
           {{!------------------------ /Modal édition utilisateur -------------------------------}}
 
 
-          {{!------------------ Modal confirmation suppression utilisateur-------------------}}
+          {{!------------------ Modal confirmation suppression utilisateur (compte reste en BDD - status isDelete attribué) -------------------}}
           <div class="modal fade" id="modalConfirmSuppUser{{ _id }}" tabindex="-1" role="dialog"
             aria-labelledby="#modalConfirmSuppUserLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -184,7 +192,45 @@ Section utilisateur de la page admin avec ces modals liés
               </div>
             </div>
           </div>
-          {{!--------------------- /Modal confirmation suppression utilisateur-------------------}}
+          {{!--------------------- /Modal confirmation suppression utilisateur (compte reste en BDD - status isDelete attribué) -------------------}}
+
+
+          {{!------------------ Modal confirmation suppression utilisateur définitive et BDD -------------------}}
+          <div class="modal fade" id="modalConfirmSuppBddUser{{ _id }}" tabindex="-1" role="dialog"
+            aria-labelledby="#modalConfirmSuppBddUserLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                {{!-- Formulaire --}}
+                <form action="/adminUserEdit/{{ _id }}/?_method=DELETE" method="POST" enctype="multipart/form-data">
+                  <div class="container">
+                    <div class="row modal-body">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <p>Confirmez-vous la suppression définitive et totale (de la BDD) du compte de "{{ pseudo }}"
+                            ?</p>
+                        </div>
+                      </div>
+                      <div class="col-md-12 ">
+                        <div class="d-flex flex-row-reverse">
+                          <button type="submit" class="btn btnSite">Oui</button>
+                          <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Non</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                {{!-- /Formulaire --}}
+
+              </div>
+            </div>
+          </div>
+          {{!--------------------- /Modal confirmation suppression utilisateur définitive et BDD -------------------}}
 
           {{/each}}
         </tbody>

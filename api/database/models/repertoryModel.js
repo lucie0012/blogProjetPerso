@@ -6,7 +6,7 @@ const repertorySchema = new mongoose.Schema({
     title : String,
     image: {
         type: String,
-        default: "/public/ressources/images/siteDefaultImage.jpeg"
+        default: "/public/ressources/images/default/siteDefaultImage.jpeg"
     },
     nameImage : String,
     content : String,

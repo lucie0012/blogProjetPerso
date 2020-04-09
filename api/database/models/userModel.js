@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: "/public/ressources/images/profilDefaultImage.jpg"
+        default: "/public/ressources/images/default/profilDefaultImage.jpg"
     },
     nameImage : String,
     createDate : {

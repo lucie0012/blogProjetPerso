@@ -226,7 +226,7 @@ module.exports = {
         }
     },
 
-    /**************Suppression compte par admin : modification des statuts user : notamment en isDelete : true***************/
+    /**************Suppression compte par admin : modification des statuts user : notamment en isDelete : true  (compte reste en BDD - status isDelete attribué)***************/
     putUserEditDelete: async (req, res) => {
 
         // console.log(req.params.id);
@@ -313,49 +313,129 @@ module.exports = {
             })
     },
 
-    // /**************Suppression utilisateur pour admin***************/
-    // deleteOneUserAdmin: async (req, res) => {
+    /**************Suppression utilisateur pour admin (définitive et BDD) ***************/
+    deleteOneUserAdmin: async (req, res) => {
 
-    //     // console.log(req.params.id);
-    //     const dbUser = await userCollection.findById(req.params.id);
-    //     const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
-    //     // console.log(dbUser);
-    //     // console.log(dbUser.nameImage);
+        // console.log(req.params.id);
+        const dbUser = await userCollection.findById(req.params.id);
+        const pathImage = path.resolve("public/ressources/images/" + dbUser.nameImage)
+        // console.log(dbUser);
+        // console.log(dbUser.nameImage);
 
-    //     if (dbUser.nameImage == null) {
-    //         // mettre undefined plutôt ??
-    //         console.log("pas d'image");
-    //         userCollection.deleteOne(
-    //             { _id: req.params.id },
-    //             (err) => {
-    //                 if (!err) {
-    //                     console.log("User delete");
-    //                     res.redirect('/admin')
-    //                     // res.render('admin')
-    //                 } else {
-    //                     console.log(err);
-    //                 }
-    //             })
-    //     } else {
-    //         userCollection.deleteOne(
-    //             { _id: req.params.id },
-    //             (err) => {
-    //                 if (!err) {
-    //                     fs.unlink(pathImage,
-    //                         (err) => {
-    //                             if (err) {
-    //                                 console.log(err);
-    //                             } else {
-    //                                 console.log("User and File delete");
-    //                                 res.redirect('/admin')
-    //                                 // res.render('admin')
-    //                             }
-    //                         }
-    //                     )
-    //                 } else {
-    //                     res.send(err)
-    //                 }
-    //             })
-    //     }
-    // }
+        if (dbUser.nameImage == null) {
+            // mettre undefined plutôt ??
+            console.log("pas d'image");
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        console.log("User delete");
+                        res.redirect('/admin')
+
+                        commentCollection.deleteMany(
+                            { authorId: req.params.id },
+                            (err) => {
+                                if (!err) {
+                                    console.log("delete authorId comment ok");
+                                } else {
+                                    res.rend(err)
+                                }
+                            }
+                        )
+                        messageCollection.deleteMany(
+                            { authorId: req.params.id },
+                            (err) => {
+                                if (!err) {
+                                    console.log("delete authorId message ok");
+                                } else {
+                                    res.rend(err)
+                                }
+                            }
+                        )
+                        noteCollection.deleteMany(
+                            { authorId: req.params.id },
+                            (err) => {
+                                if (!err) {
+                                    console.log("delete authorId note ok");
+                                } else {
+                                    res.rend(err)
+                                }
+                            }
+                        )
+                        repertoryCollection.deleteMany(
+                            { authorId: req.params.id },
+                            (err) => {
+                                if (!err) {
+                                    console.log("delete authorId repertory ok");
+                                } else {
+                                    res.rend(err)
+                                }
+                            }
+                        )
+                    } else {
+                        console.log(err);
+                    }
+                })
+        } else {
+            userCollection.deleteOne(
+                { _id: req.params.id },
+                (err) => {
+                    if (!err) {
+                        fs.unlink(pathImage,
+                            (err) => {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log("User and File delete");
+                                    res.redirect('/admin')
+
+                                    commentCollection.deleteMany(
+                                        { authorId: req.params.id },
+                                        (err) => {
+                                            if (!err) {
+                                                console.log("delete authorId comment ok");
+                                            } else {
+                                                res.rend(err)
+                                            }
+                                        }
+                                    )
+                                    messageCollection.deleteMany(
+                                        { authorId: req.params.id },
+                                        (err) => {
+                                            if (!err) {
+                                                console.log("delete authorId message ok");
+                                            } else {
+                                                res.rend(err)
+                                            }
+                                        }
+                                    )
+                                    noteCollection.deleteMany(
+                                        { authorId: req.params.id },
+                                        (err) => {
+                                            if (!err) {
+                                                console.log("delete authorId note ok");
+                                            } else {
+                                                res.rend(err)
+                                            }
+                                        }
+                                    )
+                                    repertoryCollection.deleteMany(
+                                        { authorId: req.params.id },
+                                        (err) => {
+                                            if (!err) {
+                                                console.log("delete authorId repertory ok");
+                                            } else {
+                                                res.rend(err)
+                                            }
+                                        }
+                                    )
+                                }
+                            }
+                        )
+                    } else {
+                        res.send(err)
+                    }
+                })
+        }
+    }
 }
