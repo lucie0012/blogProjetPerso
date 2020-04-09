@@ -126,18 +126,18 @@ Section répertoire de la page admin avec ces modals liés
                                                 <div class="form-group">
                                                     <label for="titleModalEditSite{{_id}}">Titre du site</label>
                                                     <input type="text" class="form-control" name="title"
-                                                        id="titleModalEditSite{{_id}}" value="{{ title }}" required>
+                                                        id="titleModalEditSite{{_id}}" value="{{ title }}" maxlength="100" required>
                                                     {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="urlModalEditSite{{_id}}">URL du site</label>
                                                     <input type="url" class="form-control" name="url"
-                                                        id="urlModalEditSite{{_id}}" value="{{ url }}" required>
+                                                        id="urlModalEditSite{{_id}}" value="{{ url }}" maxlength="100" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="contentModalEditSite{{_id}}">Contenu</label>
                                                     <textarea type="text" class="form-control" name="content"
-                                                        id="contentModalEditSite{{_id}}" rows="6"
+                                                        id="contentModalEditSite{{_id}}" rows="6" maxlength="5000"
                                                         required> {{ content }}</textarea>
                                                 </div>
                                                 <div class="form-group">
@@ -272,7 +272,7 @@ Section répertoire de la page admin avec ces modals liés
 
                             <div class="form-group">
                                 <label for="titleModalCreateSite">Titre du site</label>
-                                <input type="text" class="form-control" name="title" id="titleModalCreateSite" required>
+                                <input type="text" class="form-control" name="title" id="titleModalCreateSite" maxlength="100" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
@@ -307,7 +307,7 @@ Section répertoire de la page admin avec ces modals liés
                             <div class="form-group">
                                 <label for="descriptionModalCreateSite">Contenu</label>
                                 <textarea type="text" class="form-control" name="content"
-                                    id="descriptionModalCreateSite" required></textarea>
+                                    id="descriptionModalCreateSite" maxlength="5000" required></textarea>
                             </div>
                             <div class="form-group row">
                                 <label for="addSitePhoto" class="col-sm-12 col-form-label">Envoyer une image</label>

@@ -32,7 +32,7 @@ script associé (page header)
                                 <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nameModalCreateAccount"
-                                        id="nameModalCreateAccount" required>
+                                        id="nameModalCreateAccount" maxlength="100" required>
                                 </div>
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
@@ -40,7 +40,7 @@ script associé (page header)
                                 <label for="pseudoModalCreateAccount" class="col-sm-5 col-form-label">Pseudo</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="pseudoModalCreateAccount"
-                                        id="pseudoModalCreateAccount" required>
+                                        id="pseudoModalCreateAccount" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -48,7 +48,7 @@ script associé (page header)
                                     email</label>
                                 <div class="col-sm-7">
                                     <input type="email" class="form-control" name="emailModalCreateAccount"
-                                        id="emailModalCreateAccount" required>
+                                        id="emailModalCreateAccount" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -56,7 +56,7 @@ script associé (page header)
                                     passe</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="passwordModalCreateAccount"
-                                        id="passwordModalCreateAccount" required>
+                                        id="passwordModalCreateAccount" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -65,7 +65,7 @@ script associé (page header)
                                     passe</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="confPasswordModalCreateAccount"
-                                        id="confPasswordModalCreateAccount" required>
+                                        id="confPasswordModalCreateAccount" maxlength="100" required>
                                 </div>
                             </div>
                             <div class="form-group row ">
@@ -89,7 +89,7 @@ script associé (page header)
                         </div>
                         <div class="col-md-12 ">
                             <div class="d-flex flex-row-reverse">
-                                <button type="submit" id="buttonCreateUser" class="btn btnSite">Créer</button>
+                                <button type="submit" class="btn btnSite">Créer</button>
                                 <button type="button" class="btn btnSite p-2 mr-2" data-dismiss="modal">Annuler</button>
                             </div>
                         </div>

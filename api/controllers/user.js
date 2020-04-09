@@ -94,6 +94,7 @@ module.exports = {
                     }
                 })
             //console.log("coucou");
+            console.log(req.file);
             res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
         } else if (Pass !== confPass) {
             //comparaison des mots de passe
@@ -107,6 +108,7 @@ module.exports = {
                     }
                 })
             res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
+            console.log(req.file);
             //res.redirect('/')
         } else {
             if (!req.file) {

@@ -29,17 +29,17 @@ Modal de la page répertoire pour proposer un site à l'ajout
 
                             <div class="form-group">
                                 <label for="pseudoModalAddSite">Votre pseudo</label>
-                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite"
+                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite" maxlength="100"
                                     value="{{ dbUserId.pseudo }}" disabled="disabled">
                             </div>
                             <div class="form-group">
                                 <label for="titleModalAddSite">Titre du site</label>
-                                <input type="text" class="form-control" name="title" id="titleModalAddSite" required>
+                                <input type="text" class="form-control" name="title" id="titleModalAddSite" maxlength="100" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
                                 <label for="urlModalAddSite">URL du site</label>
-                                <input type="url" class="form-control" name="url" id="urlModalAddSite" required>
+                                <input type="url" class="form-control" name="url" id="urlModalAddSite" maxlength="100" required>
                             </div>
                             <div class="form-group">
                                 <label for="category">Catégorie</label>
@@ -72,7 +72,7 @@ Modal de la page répertoire pour proposer un site à l'ajout
                             </div>
                             <div class="form-group">
                                 <label for="descriptionModalAddSite">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite"
+                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite" maxlength="5000"
                                     required></textarea>
                             </div>
                             <div class="form-group row">

@@ -79,13 +79,13 @@ Section articles de la page admin avec ces modals liés
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="title">Titre de l'article</label>
-                                                    <input type="text" class="form-control" name="title"
+                                                    <input type="text" class="form-control" name="title" maxlength="100"
                                                         value="{{ title }}" required>
                                                     {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="description">Contenu</label>
-                                                    <textarea type="text" class="form-control" name="content" rows="10"
+                                                    <textarea type="text" class="form-control" name="content" rows="10" maxlength="5000"
                                                         required> {{ content }}</textarea>
                                                 </div>
                                                 <div class="form-group">
@@ -176,12 +176,12 @@ Section articles de la page admin avec ces modals liés
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="title">Titre de l'article</label>
-                                <input type="text" class="form-control" name="title" required>
+                                <input type="text" class="form-control" name="title" maxlength="100" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
                                 <label for="description">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" required></textarea>
+                                <textarea type="text" class="form-control" name="content" maxlength="5000" required></textarea>
                             </div>
                             <div class="form-group">
                                 <label>
