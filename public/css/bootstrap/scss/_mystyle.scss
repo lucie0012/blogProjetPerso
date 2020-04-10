@@ -1,29 +1,14 @@
-.scrollup {
-    z-index: 10;
-    position:fixed; 
-    width:100px;
-    top: 90vh;
-    right:-60px;
-}
+/*
+* Mon style
+************/
 
-.scrollup:hover {
-    transition:0.8s;
-    transform: scale(1.4, 1.4);
+// Font
+.font {
+    font-family: "bembo" 
 }
 
 
-.limitCard {
-    border-color: #F2CA80;
-    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
-    min-width: 340px;
-    max-width: 340px;
-}
-
-.cardRepertory {
-    border-color: #F2CA80;
-    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
-}
-
+// Couleurs background
 .bgNav {
     background-color: #BCBF56;
 }
@@ -36,6 +21,7 @@
     background-color: #CCD9D7;
 }
 
+// Couleurs font
 .colorWrite {
     color: #F2CA80;
 }
@@ -44,6 +30,8 @@
     color: $white !important
 }
 
+
+// Titres
 .title {
     border-color: rgb(240, 183, 78);
     transition:0.8s;
@@ -54,6 +42,8 @@
     transform: scale(1.1, 1.1);
 }
 
+
+// Boutons
 .btnSite {
     color: #000000;
     background-color: #F2CA80;
@@ -77,6 +67,7 @@
     transform: scale(1.2, 1.2);
 }
 
+// Icones réseaux sociaux
 .network {
     border-color: rgb(48, 152, 217);
     transition:0.8s;
@@ -89,7 +80,36 @@
     transform: scale(1.8, 1.8);
 }
 
+// Cards
+.limitCard {
+    border-color: #F2CA80;
+    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+    min-width: 340px;
+    max-width: 340px;
+}
 
+.cardRepertory {
+    border-color: #F2CA80;
+    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+}
+
+
+// Scrollup
+.scrollup {
+    z-index: 10;
+    position:fixed; 
+    width:100px;
+    top: 90vh;
+    right:-60px;
+}
+
+.scrollup:hover {
+    transition:0.8s;
+    transform: scale(1.4, 1.4);
+}
+
+
+// Responsive table page admin
 @media (max-width: 850px) {
     .table thead {
         display: none;

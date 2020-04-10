@@ -7881,26 +7881,11 @@ a.text-color1:hover, a.text-color1:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-.scrollup {
-  z-index: 10;
-  position: fixed;
-  width: 100px;
-  top: 90vh;
-  right: -60px; }
-
-.scrollup:hover {
-  transition: 0.8s;
-  transform: scale(1.4, 1.4); }
-
-.limitCard {
-  border-color: #F2CA80;
-  box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
-  min-width: 340px;
-  max-width: 340px; }
-
-.cardRepertory {
-  border-color: #F2CA80;
-  box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3); }
+/*
+* Mon style
+************/
+.font {
+  font-family: "bembo"; }
 
 .bgNav {
   background-color: #BCBF56; }
@@ -7956,6 +7941,27 @@ a.text-color1:hover, a.text-color1:focus {
   box-shadow: 20px 20px 10px rgba(48, 152, 217, 0.3);
   transition: 0.8s;
   transform: scale(1.8, 1.8); }
+
+.limitCard {
+  border-color: #F2CA80;
+  box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+  min-width: 340px;
+  max-width: 340px; }
+
+.cardRepertory {
+  border-color: #F2CA80;
+  box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3); }
+
+.scrollup {
+  z-index: 10;
+  position: fixed;
+  width: 100px;
+  top: 90vh;
+  right: -60px; }
+
+.scrollup:hover {
+  transition: 0.8s;
+  transform: scale(1.4, 1.4); }
 
 @media (max-width: 850px) {
   .table thead {

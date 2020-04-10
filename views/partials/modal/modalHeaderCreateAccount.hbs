@@ -77,12 +77,12 @@ script associé (page header)
                                 <input type="file" accept="image/*" class="form-control-file col-sm-12"
                                     id="createProfilPhotoModalCreateAccount" name="imageModalCreateAccount">
                             </div>
-                            <div class="form-group mt-4">
-                                <input type="checkbox" id="gridCheckConditionsModalCreateAccount" name="gridCheck"
-                                    required>
+                            <div class="form-group form-check mt-4">
+                                <input type="checkbox" class="form-check-input"
+                                    id="gridCheckConditionsModalCreateAccount" name="gridCheck" required>
                                 {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
-                                <label for="gridCheckConditionsModalCreateAccount">
-                                    J'accepte les termes des conditions générales d’utilisation de ce site
+                                <label class="form-check-label" for="gridCheckConditionsModalCreateAccount">
+                                    J'accepte les termes des conditions générales d’utilisation de ce site et les mentions légales
                                 </label>
                             </div>
 
