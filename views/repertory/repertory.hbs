@@ -30,7 +30,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 
         {{!-- Descriptif de la page --}}
         <div class="col-md-9 mb-4">
-            <p>Cette section permet de recenser tous les sites proposant des recettes sans allergènes. Vous pouvez les
+            <p class="text-justify">Cette section permet de recenser tous les sites proposant des recettes sans allergènes. Vous pouvez les
                 trier selon les catégories que vous désirez. Si vous êtes connecté à votre compte, vous pouvez également
                 me proposer un ou des
                 site(s) à ajouter à ce répertoire.
@@ -131,7 +131,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                     <div class="col-md-12 d-flex flex-column">
                                         <h5 class="card-title">{{ title }}</h5>
                                         <a href="{{ url }}" target="_blank">{{ url }}</a>
-                                        <p class="card-text mt-2">{{ truncate content 200 }}</p>
+                                        <p class="card-text mt-2 text-justify">{{ truncate content 200 }}</p>
                                     </div>
                                     {{!-- bouton noter --}}
                                     {{#if ../userVerified }}

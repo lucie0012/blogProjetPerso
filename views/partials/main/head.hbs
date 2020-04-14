@@ -2,9 +2,32 @@
 <html lang="fr" class="h-100">
 
 <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163588076-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-163588076-1');
+    </script>
+    <!-- /Global site tag (gtag.js) - Google Analytics -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog pour cuisiner sans allergènes</title>
+
+    {{!-- meta pour crawlers moteur de recherche --}}
+    {{!-- <meta name="robots" /> --}}
+
+    {{!-- balise titre --}}
+    <title>Le blog qui liste les sites de recettes sans allergènes</title>
+
+    {{!-- balise description : doit être unique par page --}}
+    {{!-- <meta name="description"
+        content="Ce blog permet de référencer et trier les sites proposant des recettes sans allergènes. Vous y trouverez également des articles et recettes sur le sujet."> --}}
+
+    {{!-- {{> seo}} --}}
 
     {{!-- JQUERY --}}
     {{!-- <script src="/public/jquery/jquery-3.4.1.min.js"></script> --}}
