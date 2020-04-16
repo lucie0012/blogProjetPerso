@@ -44,7 +44,7 @@ Section répertoire de la page admin avec ces modals liés
                     <tr>
                         <td data-label="Pseudo de l'auteur">{{ pseudoAuthor }}</td>
                         <td data-label="Titre du site">{{ title }}</td>
-                        <td data-label="URL"><a href="{{ url }}" target="_blank">{{ url }}</a></td>
+                        <td data-label="URL"><a href="{{ url }}" target="_blank" rel="noopener">{{ url }}</a></td>
                         <td data-label="Outils">
                             <span>
                                 {{#unless isVerified}}
