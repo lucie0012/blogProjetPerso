@@ -56,7 +56,10 @@ script associé (page header)
                                     passe</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="passwordModalCreateAccount"
-                                        id="passwordModalCreateAccount" maxlength="100" required>
+                                        id="passwordModalCreateAccount" maxlength="100"
+                                        title="Au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 chiffre ou 1 caractère spécial."
+                                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -65,7 +68,10 @@ script associé (page header)
                                     passe</label>
                                 <div class="col-sm-7">
                                     <input type="password" class="form-control" name="confPasswordModalCreateAccount"
-                                        id="confPasswordModalCreateAccount" maxlength="100" required>
+                                        id="confPasswordModalCreateAccount" maxlength="100"
+                                        title="Au moins 8 caractères dont 1 majuscule, 1 minuscule et 1 chiffre ou 1 caractère spécial."
+                                        pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group row ">
@@ -82,7 +88,8 @@ script associé (page header)
                                     id="gridCheckConditionsModalCreateAccount" name="gridCheck" required>
                                 {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
                                 <label class="form-check-label" for="gridCheckConditionsModalCreateAccount">
-                                    J'accepte les termes des conditions générales d’utilisation de ce site et les mentions légales
+                                    J'accepte les termes des conditions générales d’utilisation de ce site et les
+                                    mentions légales
                                 </label>
                             </div>
 
