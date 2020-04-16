@@ -17,9 +17,9 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         {{!-- Bouton vers modal proposition site à l'ajout --}}
         <div class="col-md-3">
             {{#if isVerified}}
-            <a class="btn btnRepertoryAdd d-flex align-items-center mb-4" type="button" data-toggle="modal"
+            <button class="btn btnRepertoryAdd d-flex align-items-center ml-1 mb-4 pr-5" data-toggle="modal"
                 data-target="#modalPropoSite" data-whatever="@getbootstrap"><i
-                    class="far fa-plus-square fa-2x mx-2"></i>Proposer un site</a>
+                    class="far fa-plus-square fa-2x mx-2"></i>Proposer un site</button>
             {{/if}}
         </div>
         {{!-- /Bouton vers modal proposition site à l'ajout --}}
@@ -30,7 +30,8 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 
         {{!-- Descriptif de la page --}}
         <div class="col-md-9 mb-4">
-            <p class="text-justify">Cette section permet de recenser tous les sites proposant des recettes sans allergènes. Vous pouvez les
+            <p class="text-justify">Cette section permet de recenser tous les sites proposant des recettes sans
+                allergènes. Vous pouvez les
                 trier selon les catégories que vous désirez. Si vous êtes connecté à votre compte, vous pouvez également
                 me proposer un ou des
                 site(s) à ajouter à ce répertoire.
@@ -48,8 +49,8 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             {{!-- <form action="/repertoryFilter" method="POST"> --}}
             {{!-- /ANCIEN FORMULAIRE --}}
 
+            <p class="ml-2">Trier par catégorie</p>
             <ul class="list-group list-group-flush ml-2 mb-5 " style="max-width: 200px;">
-                <p>Trier par catégorie</p>
                 <li class="list-group-item" style="background-color: rgba(204, 217, 215, 0.2);">
                     <input class="form-check-input" type="checkbox" name="categoryFilter" value="sansGluten"
                         id="sansGluten">
@@ -104,7 +105,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             <div class="card cardRepertory mb-5" style="max-width: 600px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{ image }}" class="card-img" height="140px" width="100px" style="object-fit: contain"
+                        <img src="{{ image }}" class="card-img" height="140" width="100" style="object-fit: contain"
                             alt="image ou logo du site">
                     </div>
                     <div class="col-md-8">
@@ -156,7 +157,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalNoterLabel">Ajouter une note</h5>
+                            <h5 class="modal-title" id="modalNoterLabel{{_id}}">Ajouter une note</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -182,8 +183,8 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                         <div class="form-group">
                                             <label for="commentNote{{_id}}" class="col-form-label">Votre commentaire :
                                             </label>
-                                            <textarea class="form-control" id="commentNote{{_id}}" type="text"
-                                                name="comment" maxlength="5000" required></textarea>
+                                            <textarea class="form-control" id="commentNote{{_id}}" name="comment"
+                                                maxlength="5000" required></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 ">

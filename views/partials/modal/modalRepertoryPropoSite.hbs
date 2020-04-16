@@ -3,11 +3,12 @@ Modal de la page répertoire pour proposer un site à l'ajout
  --}}
 
 {{!----------------------- Modal proposition site pour répertoire -----------------------}}
-<div class="modal fade" id="modalPropoSite" tabindex="-1" role="dialog" aria-labelledby="#modalPropoSite"
+<div class="modal fade" id="modalPropoSite" tabindex="-1" role="dialog" aria-labelledby="modalPropoSite"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">Proposer un site à ajouter dans le répertoire</h5>
+            <div class="modal-header">
+                <h5 class="modal-title">Proposer un site à ajouter dans le répertoire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -29,26 +30,29 @@ Modal de la page répertoire pour proposer un site à l'ajout
 
                             <div class="form-group">
                                 <label for="pseudoModalAddSite">Votre pseudo</label>
-                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite" maxlength="100"
-                                    value="{{ dbUserId.pseudo }}" disabled="disabled">
+                                <input type="text" class="form-control" name="pseudo" id="pseudoModalAddSite"
+                                    maxlength="100" value="{{ dbUserId.pseudo }}" disabled="disabled">
                             </div>
                             <div class="form-group">
                                 <label for="titleModalAddSite">Titre du site</label>
-                                <input type="text" class="form-control" name="title" id="titleModalAddSite" maxlength="100" required>
+                                <input type="text" class="form-control" name="title" id="titleModalAddSite"
+                                    maxlength="100" required>
                                 {{!-- bien indiqué là où on saisi les données (input, textarea, ...) le type (text, file, ...) et le name (qui fait référence au req.body.name) --}}
                             </div>
                             <div class="form-group">
                                 <label for="urlModalAddSite">URL du site</label>
-                                <input type="url" class="form-control" name="url" id="urlModalAddSite" maxlength="100" required>
+                                <input type="url" class="form-control" name="url" id="urlModalAddSite" maxlength="100"
+                                    required>
                             </div>
                             <div class="form-group">
-                                <label for="category">Catégorie</label>
 
                                 {{!-- Zone affichage message d'alerte aux utilisateurs --}}
                                 <label id="messageErrorAddSite" class="text-danger d-none"></label>
+                                <br>
                                 {{!-- Zone affichage message d'alerte aux utilisateurs --}}
 
-                                </br>
+                                <label>Catégorie</label>
+                                <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input groupCheckboxScript" type="checkbox"
                                         id="inlineCheckbox1" name="category" value="sansGluten">
@@ -72,11 +76,11 @@ Modal de la page répertoire pour proposer un site à l'ajout
                             </div>
                             <div class="form-group">
                                 <label for="descriptionModalAddSite">Contenu</label>
-                                <textarea type="text" class="form-control" name="content" id="descriptionModalAddSite" maxlength="5000"
-                                    required></textarea>
+                                <textarea class="form-control" name="content" id="descriptionModalAddSite"
+                                    maxlength="5000" required></textarea>
                             </div>
                             <div class="form-group row">
-                                <label for="addSitePhoto" class="col-sm-12 col-form-label">Envoyer une image</label>
+                                <label for="addSitePhotoUser" class="col-sm-12 col-form-label">Envoyer une image</label>
                             </div>
                             <div class="form-group row">
                                 <input type="file" accept="image/*" class="form-control-file col-sm-12"

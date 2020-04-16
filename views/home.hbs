@@ -59,7 +59,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
                                 <h5 class="card-title">{{ title }}</h5>
                                 <a href="{{ url }}" class="my-2" target="_blank">{{ url }}</a>
                                 <p class="card-text my-2 text-justify">{{ truncate content 200 }}</p>
-                                <img src="{{ image }}" class="rounded float-left" height="120px" width="100px"
+                                <img src="{{ image }}" class="rounded float-left" height="120" width="100"
                                     style="object-fit: contain" alt="image ou logo du site">
                             </div>
                         </div>
@@ -86,7 +86,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
             Manger sans ALLERGENES n'est pas manger sans GOURMANDISES !!!
         </p>
         <img src="/public/ressources/images/default/imgDivBackgroundHome.jpeg" alt="photo d'un repas entre amis"
-            class="rounded-circle mt-2" width="250px">
+            class="rounded-circle mt-2" width="250">
     </div>
 </div>
 {{!-- /Div de séparation avec slogan --}}
@@ -96,7 +96,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
 <div class="container my-5">
 
     {{!-- Titre section cards des articles --}}
-    <h2 class="colorWrite title text-center h1"><a href="/actus" class="text-reset"> Mes derniers articles</a></h1>
+    <h2 class="colorWrite title text-center h1"><a href="/actus" class="text-reset"> Mes derniers articles</a></h2>
     {{!-- /Titre section cards des articles --}}
 
     <div class="row">
@@ -111,7 +111,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
                             <div class="col-md-12 d-flex flex-column">
                                 <h5 class="card-title mt-2">{{ title }}</h5>
                                 <p class="card-text mt-2 text-justify">{{ truncate content 200 }}</p>
-                                <img src="{{ image }}" class="rounded float-left mt-2" height="200px" width="180px"
+                                <img src="{{ image }}" class="rounded float-left mt-2" height="200" width="180"
                                     style="object-fit: contain" alt="image de l'article">
                                 <a href="/actuSingle/{{ id }}"
                                     class="d-flex justify-content-end text-decoration-none mt-2"><button

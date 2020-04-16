@@ -162,7 +162,6 @@ router.route('/userEdit/:id')
 router.route('/userEditDelete/:id')
     .put(user.putUserEditDelete)
 
-
 // Déconnexion
 router.route('/userLogOut')
     .get(user.getLogOut)

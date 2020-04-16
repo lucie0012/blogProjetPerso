@@ -4,23 +4,23 @@ Section utilisateur de la page admin avec ces modals liés
 {{!------------------------------------------------------------- SECTION UTILISATEURS-----------------------------------------------------------}}
 <div class="card">
   <div class="card-header" id="headingOne">
-    <h2 class="mb-0">
+    <div class="mb-0">
       <div class="container">
         <div class="row modal-body">
           <div class="col-md-12">
             <div class="d-flex flex-row">
-              <a class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseOne"
-                aria-expanded="false" aria-controls="collapseOne">
+              <button class="btn btn-link collapsed text-reset text-decoration-none" data-toggle="collapse"
+                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Liste des utilisateurs
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </h2>
+    </div>
   </div>
   <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionAdmin">
-    <div class="tableclass=" event-URL"">
+    <div class="table-responsive">
 
       <table class="table table-striped events-table">
         <thead>
@@ -121,7 +121,7 @@ Section utilisateur de la page admin avec ces modals liés
                     <div class="row modal-body">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <img src="{{ image }}" alt="image de profil de l'utilisateur" widht="100px" height="100px"
+                          <img src="{{ image }}" alt="image de profil de l'utilisateur" width="100" height="100"
                             style="object-fit: contain">
                         </div>
                         <div class="form-group">

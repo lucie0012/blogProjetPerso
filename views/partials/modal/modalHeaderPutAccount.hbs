@@ -7,7 +7,7 @@ Vérification de compte via le bouton à faire
  --}}
 
 {{!------------ modal Gestion compte ------------------}}
-<div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog" aria-labelledby="#modalUserEditLabel"
+<div class="modal fade" id="modalUserEdit{{ _id }}" tabindex="-1" role="dialog" aria-labelledby="modalUserEditLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -26,16 +26,16 @@ Vérification de compte via le bouton à faire
                             <div class="form-group row">
                                 <label for="nameModalEditAccount" class="col-sm-4 col-form-label">Nom</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="name" id="nameModalEditAccount" maxlength="100"
-                                        value="{{ dbUserId.name }}">
+                                    <input type="text" class="form-control" name="name" id="nameModalEditAccount"
+                                        maxlength="100" value="{{ dbUserId.name }}">
                                 </div>
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
                             <div class="form-group row">
                                 <label for="pseudoModalEditAccount" class="col-sm-4 col-form-label">Pseudo</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="pseudo" id="pseudoModalEditAccount" maxlength="100"
-                                        value="{{ dbUserId.pseudo }}">
+                                    <input type="text" class="form-control" name="pseudo" id="pseudoModalEditAccount"
+                                        maxlength="100" value="{{ dbUserId.pseudo }}">
                                 </div>
                                 {{!--required permet de forcer le remplissage de la zone de texte --}}
                             </div>
@@ -43,8 +43,8 @@ Vérification de compte via le bouton à faire
                                 <label for="emailModalEditAccount" class="col-sm-4 col-form-label">Adresse
                                     Email</label>
                                 <div class="col-sm-8">
-                                    <input type="email" class="form-control" name="email" id="emailModalEditAccount" maxlength="100"
-                                        value="{{ dbUserId.email }}">
+                                    <input type="email" class="form-control" name="email" id="emailModalEditAccount"
+                                        maxlength="100" value="{{ dbUserId.email }}">
                                 </div>
                             </div>
 
@@ -75,7 +75,7 @@ Vérification de compte via le bouton à faire
 
                             <div class="form-group row mt-4 ml-2">
                                 <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label"
-                                    widht="100px" height="120px" style="object-fit: contain">
+                                    width="100" height="120" style="object-fit: contain">
                             </div>
                             <div class="form-group row">
                                 <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
@@ -84,7 +84,7 @@ Vérification de compte via le bouton à faire
                             </div>
                             <div class="form-group row">
                                 <input type="file" accept="image/*" class="form-control-file col-sm-12"
-                                    id="editProfilPhoto" name="image" value="{{ dbUserId.image }}">
+                                    id="editProfilPhoto" name="image">
                             </div>
                         </div>
                         <div class="col-md-12 mt-1">
