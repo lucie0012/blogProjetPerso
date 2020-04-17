@@ -12,6 +12,7 @@ const expressSession = require('express-session');
 const MongoStore = require('connect-mongo');
 const helpers = require('handlebars-helpers')();
 // pour utiliser tout les helpers de la librairie (sinon possible de sélectionner l'helpers souhaité)
+const helmet = require('helmet');
 
 
 const app = express();
@@ -27,6 +28,9 @@ const urlDB = config.prod.urlDBcloud;
 // const urlDB = config.prod.urlDBlocal;
 
 
+/* Helmet (protection des entête HTTP)
+ ******************************/
+app.use(helmet())
 
 /* Gestion fichiers statiques
  ******************************/
