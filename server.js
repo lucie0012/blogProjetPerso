@@ -13,6 +13,15 @@ const MongoStore = require('connect-mongo');
 const helpers = require('handlebars-helpers')();
 // pour utiliser tout les helpers de la librairie (sinon possible de sélectionner l'helpers souhaité)
 const helmet = require('helmet');
+// protéger les entêtes HTTP
+
+// const expressOasGenerator = require('express-oas-generator');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./api/config/swagger.json');
+// documenter l'API
+const morgan = require('morgan')
+// logger les requêtes
+
 
 
 const app = express();
@@ -28,9 +37,20 @@ const urlDB = config.prod.urlDBcloud;
 // const urlDB = config.prod.urlDBlocal;
 
 
-/* Helmet (protection des entête HTTP)
- ******************************/
+/* morgan (log requêtes) - format "dev"
+ **************************************/
+app.use(morgan('dev'))
+
+
+/* openAPI/swagger (documenter API)
+ ***********************************/
+// expressOasGenerator.init(app, {});
+
+
+/* Helmet (protection des entêtes HTTP)
+ **************************************/
 app.use(helmet())
+
 
 /* Gestion fichiers statiques
  ******************************/
@@ -140,6 +160,11 @@ app.engine('hbs', exphbs({
     // ajout du 2ème layout
 }));
 app.set('view engine', 'hbs');
+
+
+/* openAPI/swagger (documenter API)
+ ***********************************/
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 /*

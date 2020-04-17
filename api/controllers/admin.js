@@ -116,13 +116,6 @@ module.exports = {
         // appel du layout spécifique "adminMain"
     },
 
-    /**************Affichage page édition utilisateur pour admin***************/
-    getUserEdit: async (req, res) => {
-        const dbUser = await userCollection.findById(req.params.id)
-        // console.log(req.params.id);
-
-        res.render('admin/adminUserEdit', { dbUser })
-    },
 
     /**************Edition utilisateur en isVerified pour admin***************/
     putVerifiedUser: (req, res) => {

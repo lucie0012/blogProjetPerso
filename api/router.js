@@ -194,7 +194,6 @@ router.route('/verifiedUser/:id')
 
 // Gestion des utilisateurs par admin
 router.route('/adminUserEdit/:id')
-    .get(isAdmin, admin.getUserEdit)
     .put(isAdmin, admin.putlistUser)
     .delete(isAdmin, admin.deleteOneUserAdmin)
 

@@ -404,15 +404,15 @@ module.exports = {
 
         if (!dbUser) {
             console.log('user pas dans la DB');
-            res.json({ message: "Email ou mot de passe incorrect." });
+            res.json({ message: "Email ou mot de passe incorrect." }).status(401);
             // res.redirect('/')
         } else if (dbUser.isBan) {
             console.log('user banni');
-            res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions générales d'utilisation du site." });
+            res.json({ message: "Votre compte a été banni car vous n'avez pas respecté l'une des conditions générales d'utilisation du site." }).status(401);
             // res.redirect('/')
         } else if (dbUser.isDelete) {
             console.log('user delete');
-            res.json({ message: "Ce compte est supprimé. Veuillez créer un nouveau compte." });
+            res.json({ message: "Ce compte est supprimé. Veuillez créer un nouveau compte." }).status(401);
             // res.redirect('/')
         } else {
             const sess = req.session
