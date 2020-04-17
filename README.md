@@ -4,38 +4,39 @@
 
 ## NodeJS v12
 ## NPM v6.13
-## MongoDB Local ou Cloud (db: apiRest) Nodemon
+## MongoDB Local ou Cloud 
+## Nodemon
 =======
 # Download project
-## clone with ssh
+## Clone with ssh
 ```
 git clone git@github.com:lucie0012/blogProjetPerso.git
 ```
-## clone with https
+## Clone with https
 ```
 git clone https://github.com/lucie0012/blogProjetPerso.git
 ```
 =======
-# install
-## if node_modules in your repository
+# Install
+## If node_modules in your repository
 ```
 sudo rm -r node_modules
 ```
-## install with npm
+## Install with npm
 ```
 npm i
 ```
-## install nodemon
+## Install nodemon
 ```
 npm i nodemon
 ```
 =======
-# run
-## run project
+# Run
+## Run project with nodemon
 ```
 npm start
 ```
-## run with node basic
+## Run with node basic
 ```
 node server.js
 ```
