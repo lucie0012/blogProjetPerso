@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon --exec 'mocha ./test/*.js'",
     "start": "nodemon server.js",
     "reinstall": "sudo rm -r node_modules* && npm i && npm start",
     "sass": "sass --watch ./public/css/bootstrap/scss/bootstrap.scss:./public/css/style.css"
@@ -31,6 +31,7 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "handlebars": "^4.5.3"
+    "handlebars": "^4.5.3",
+    "mocha": "^7.1.1"
   }
 }

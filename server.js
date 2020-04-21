@@ -145,8 +145,8 @@ mongoose.connect(urlDB, {
     useFindAndModify: false,
     useCreateIndex: true
 })
-    .then(() => console.log('Connecté à MongoDb Cloud'))
-    .catch((err) => console.log(err))
+    .then(() => console.log('Connecté à MongoDB Cloud'))
+    .catch(() => console.log('Connexion à MongoDB Cloud échouée'))
 
 
 /*

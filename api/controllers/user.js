@@ -422,7 +422,7 @@ module.exports = {
             bcrypt.compare(password, dbUser.password, (err, same) => {
                 if (!same) {
                     console.log('mdp non correct');
-                    res.json({ message: "Email ou mot de passe incorrect." });
+                    res.json({ message: "Email ou mot de passe incorrect." }).status(401);
                     // res.redirect('back')
                 } else {
                     sess.userId = dbUser._id
