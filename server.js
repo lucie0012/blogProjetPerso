@@ -14,13 +14,15 @@ const helpers = require('handlebars-helpers')();
 // pour utiliser tout les helpers de la librairie (sinon possible de sélectionner l'helpers souhaité)
 const helmet = require('helmet');
 // protéger les entêtes HTTP
-
-// const expressOasGenerator = require('express-oas-generator');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./api/config/swagger.json');
-// documenter l'API
 const morgan = require('morgan');
 // logger les requêtes
+
+// const expressOasGenerator = require('express-oas-generator');
+// (génère le fichier pour documenter API - mettre en commentaire une fois qu'il est généré)
+// const swaggerUi = require('swagger-ui-express');
+// const swaggerDocument = require('./api/config/swagger.json');
+// (rend visible la doc API à l'adresse /api-docs : à commenter en mode prod)
+// documenter l'API
 
 
 const app = express();
@@ -41,7 +43,7 @@ const urlDB = config.prod.urlDBcloud;
 app.use(morgan('dev'));
 
 
-/* openAPI/swagger (génère le fichier pour documenter API)
+/* openAPI/swagger (génère le fichier pour documenter API - mettre en commentaire une fois qu'il est généré)
  ***********************************/
 // expressOasGenerator.init(app, {});
 
@@ -161,9 +163,9 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 
-/* openAPI/swagger (documenter API)
+/* openAPI/swagger (rend visible la doc API à l'adresse /api-docs : à commenter en mode prod)
  ***********************************/
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 /*

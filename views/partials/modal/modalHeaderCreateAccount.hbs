@@ -29,7 +29,7 @@ script associé (page header)
                             {{!-- /Zone affichage message d'alerte aux utilisateurs --}}
 
                             <div class="form-group row">
-                                <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Nom</label>
+                                <label for="nameModalCreateAccount" class="col-sm-5 col-form-label">Prénom</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="nameModalCreateAccount"
                                         id="nameModalCreateAccount" maxlength="100" required>
@@ -85,11 +85,11 @@ script associé (page header)
                             </div>
                             <div class="form-group form-check mt-4">
                                 <input type="checkbox" class="form-check-input"
-                                    id="gridCheckConditionsModalCreateAccount" name="gridCheck" required>
-                                {{!--gridcheck renvoi "on" dans un req.body.gridCheck si cocher--}}
+                                    id="gridCheckConditionsModalCreateAccount" name="gridCheckCreateAccount" required>
+                                {{!--gridcheckCreateAccount renvoi "on" dans un req.body.gridCheckCreateAccount si cocher--}}
                                 <label class="form-check-label" for="gridCheckConditionsModalCreateAccount">
-                                    J'accepte les termes des conditions générales d’utilisation de ce site et les
-                                    mentions légales
+                                    J’accepte que mes données soient utilisées dans le cadre de mon utilisation de ce site. J'accepte également les termes des <a class="text-reset" href="/termsOfService">conditions générales d'utilisation</a> de ce site et les
+                                    <a class="text-reset" href="/legalNotice">mentions légales</a>
                                 </label>
                             </div>
 

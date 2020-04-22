@@ -205,6 +205,7 @@ Barre de recherche : à rendre fonctionnel
                         formData.append('email', $("input[name=emailModalCreateAccount]").val());
                         formData.append('password', $("input[name=passwordModalCreateAccount]").val());
                         formData.append('confPassword', $("input[name=confPasswordModalCreateAccount]").val());
+                        formData.append('gridCheck', $("input[name=gridCheckCreateAccount]:checked").val());
 
                         $.ajax({
                             url: '/userCreate',

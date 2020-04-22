@@ -15,8 +15,10 @@ Page contact
                     {{!-- Zone affichage message d'alerte aux utilisateurs --}}
                     {{#if needAlert }}
                     {{#if isError  }}
-                    <label class="text-danger h3 mb-5">Votre message n'a pas pu être envoyé. Veuillez réessayer plus
-                        tard.</label>
+                    {{#if notGridCheck}}
+                    <label class="text-danger h3 mb-5">Vous n'avez pas accepté les conditions d'envoi du formulaire. Veuillez cocher la case.</label>
+                    {{/if}}
+                    <label class="text-danger h3 mb-5">Votre message n'a pas pu être envoyé. Veuillez réessayer.</label>
                     {{/if}}
                     {{#unless isError  }}
                     <label class="text-success h3 mb-5">Votre message a bien été envoyé.</label>
@@ -57,6 +59,18 @@ Page contact
                                 message</label>
                             <textarea id="messageContact" class="form-control" rows="5" placeholder="Votre message*"
                                 name="content" maxlength="5000" required></textarea>
+                        </div>
+                        <div class="form-group form-check mt-4">
+                            <input type="checkbox" class="form-check-input d-flex justify-content-start"
+                                name="gridCheckContact" id="gridCheckContact" required>
+                            {{!--gridcheckContact renvoi "on" dans un req.body.gridCheckContact si cocher--}}
+                            <label class="form-check-label" for="gridCheckContact">
+                                En soumettant ce formulaire, j’accepte que mes données soient utilisées dans le cadre de
+                                ma demande et afin de me recontacter.
+                                J'accepte également les termes des <a class="text-reset"
+                                    href="/termsOfService">conditions générales d'utilisation</a> de ce site et les
+                                <a class="text-reset" href="/legalNotice">mentions légales</a>
+                            </label>
                         </div>
                         <button id="envoyer" type="submit" class="btn btnSite mt-2">Envoyer</button>
                     </form>

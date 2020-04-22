@@ -75,46 +75,90 @@ module.exports = {
         // console.log("mailOptions.to : " + mailOptions.to);  //donne l'adresse mail renseigné lors de la création du compte
 
         //console.log(req.file);
-        //console.log(req.body);
+        // console.log(req.body);
         const Pass = req.body.password
         const confPass = req.body.confPassword
         // console.log(Pass + ' ' + confPass);
 
+        let gridCheck;
+        // console.log(gridCheck);
+        if (req.body.gridCheck == 'on' ) {
+            gridCheck = true
+        } else {
+            gridCheck = false
+        }
+        // console.log(gridCheck);
+
+
         const user = await userCollection.findOne({ email: req.body.email })
 
         if (user) {
-            const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
-            //console.log('email déjà dans BDD');
-            fs.unlink(pathImage,
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('img delete');
-                    }
-                })
-            //console.log("coucou");
-            console.log(req.file);
-            res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
+        // check si user déjà dans BDD
+            // console.log(req.file);
+            if (!req.file) {
+                res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
+            } else {
+                const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
+                //console.log('email déjà dans BDD');
+                fs.unlink(pathImage,
+                    // suppression de l'image dans le cas où celle si sera envoyé et stockée dans la BDD sans création d'user malgré tout les contrôles
+                    (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('img delete');
+                        }
+                    })
+                //console.log("coucou");
+                res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
+            }
         } else if (Pass !== confPass) {
-            //comparaison des mots de passe
-            const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
-            fs.unlink(pathImage,
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('img delete');
-                    }
-                })
-            res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
-            console.log(req.file);
-            //res.redirect('/')
+        //comparaison des mots de passe
+            // console.log(req.file);
+            if (!req.file) {
+                res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
+
+            } else {
+                const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
+                fs.unlink(pathImage,
+                    // suppression de l'image dans le cas où celle si sera envoyé et stockée dans la BDD sans création d'user malgré tout les contrôles
+                    (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('mdp différent');
+                        }
+                    })
+                res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
+                //res.redirect('/')
+            }
+        } else if (!gridCheck) {
+        //contrôle case conditions cochée
+            // console.log(req.file);
+            if (!req.file) {
+                res.json({ message: "Vous n'avez pas accepté les conditions générales d'utilisations du site. Veuillez cocher la case." });
+                // console.log("case non cochée");
+            } else {
+                const pathImage = path.resolve("public/ressources/images/" + req.file.filename)
+                fs.unlink(pathImage,
+                    // suppression de l'image dans le cas où celle si sera envoyé et stockée dans la BDD sans création d'user malgré tout les contrôles
+                    (err) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('case non cochée');
+                        }
+                    })
+                res.json({ message: "Vous n'avez pas accepté les conditions générales d'utilisations du site. Veuillez cocher la case." });
+                console.log("case non cochée");
+                //res.redirect('/')
+            }
         } else {
             if (!req.file) {
                 userCollection.create(
                     {
                         email: req.body.email,
+                        // name : email : fourni dans le formData.append de la requête Ajax
                         name: req.body.name,
                         pseudo: req.body.pseudo,
                         password: Pass,

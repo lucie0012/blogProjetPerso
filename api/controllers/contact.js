@@ -8,36 +8,61 @@ module.exports = {
     getContact: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('contact', { dbUserId: dbUserId,
-         needAlert: false})
+        res.render('contact', {
+            dbUserId: dbUserId,
+            needAlert: false
+        })
     },
 
     /**************Envoi d'un message***************/
     postMessage: (req, res) => {
- 
-        messageCollection.create(
-            {
-                authorId: req.session.userId,
-                nameAuthor: req.body.name,
-                pseudoAuthor: req.body.pseudo,
-                emailAuthor: req.body.email,
-                subject: req.body.subject,
-                content: req.body.content,
-            },
-            (err) => {
-                // err != null -> est l'équivalent d'une condition if qui retourne un boolean
-                let isError = err != null;
 
-                if(isError)
-                {
-                    console.log(err);
-                }    
+        // console.log(req.body);
 
-                res.render('contact', { needAlert : true,
-                    isError : isError})
+        let gridCheck;
+        // console.log(gridCheck);
+        if (req.body.gridCheckContact == 'on') {
+            gridCheck = true
+        } else {
+            gridCheck = false
+        }
+        // console.log(gridCheck);
+
+        if (!gridCheck) {
+            let notGridCheck = true;
+            let isError = true;
+
+            res.render('contact', {
+                needAlert: true,
+                isError: isError,
+                notGridCheck: notGridCheck
             })
-        // console.log(req.body)
-        // console.log(req.params.id)
+        } else {
+            messageCollection.create(
+                {
+                    authorId: req.session.userId,
+                    nameAuthor: req.body.name,
+                    pseudoAuthor: req.body.pseudo,
+                    emailAuthor: req.body.email,
+                    subject: req.body.subject,
+                    content: req.body.content,
+                },
+                (err) => {
+                    // err != null -> est l'équivalent d'une condition if qui retourne un boolean
+                    let isError = err != null;
+
+                    if (isError) {
+                        console.log(err);
+                    }
+
+                    res.render('contact', {
+                        needAlert: true,
+                        isError: isError
+                    })
+                })
+            // console.log(req.body)
+            // console.log(req.params.id)
+        }
     },
 
     /**************Suppression de message***************/
