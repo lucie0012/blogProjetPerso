@@ -50,10 +50,10 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                         </div>
                         {{!-- bouton noter --}}
                         {{#if ../userVerified }}
-                        {{!-- <div class="col-md-12 d-flex justify-content-end">
+                        <div class="col-md-12 d-flex justify-content-end">
                             <button class="btn btnSite mt-3" type="button" data-toggle="modal"
                                 data-target="#modalNoter{{_id}}" data-whatever="@getbootstrap">Noter</button>
-                        </div> --}}
+                        </div>
                         {{/if}}
                         {{!-- bouton noter --}}
                     </div>
@@ -82,7 +82,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                             <div class="form-group">
                                 <label for="pseudoComment{{_id}}" class="col-form-label">Votre pseudo :
                                 </label>
-                                <input class="form-control" id="pseudoComment{{_id}}" type="text" name="pseudo" maxlength="100"
+                                <input class="form-control" id="pseudoComment{{_id}}" type="number" min="0" max="10" name="pseudo" maxlength="100"
                                     value="{{ ../dbUserId.pseudo }}" disabled="disabled">
                                 {{!-- pour "sortir" du each et obtenir d'autres infos de bdd il faut utiliser : "../" : (changing the context handlebars) --}}
                             </div>

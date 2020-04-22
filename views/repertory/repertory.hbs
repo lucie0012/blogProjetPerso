@@ -136,11 +136,11 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                     </div>
                                     {{!-- bouton noter --}}
                                     {{#if ../userVerified }}
-                                    {{!-- <div class="col-md-12 d-flex justify-content-end">
+                                    <div class="col-md-12 d-flex justify-content-end">
                                         <button class="btn btnSite mt-3" type="button" data-toggle="modal"
                                             data-target="#modalNoter{{_id}}"
                                             data-whatever="@getbootstrap">Noter</button>
-                                    </div> --}}
+                                    </div>
                                     {{/if}}
                                     {{!-- bouton noter --}}
                                 </div>
@@ -177,7 +177,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                         </div>
                                         <div class="form-group">
                                             <label for="noteSite{{_id}}" class="col-form-label">Votre note : </label>
-                                            <input class="form-control" id="noteSite{{_id}}" type="text" name="note"
+                                            <input class="form-control" id="noteSite{{_id}}" type="number" min="0" max="10" name="note"
                                                 maxlength="100" required>
                                         </div>
                                         <div class="form-group">

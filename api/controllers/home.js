@@ -13,10 +13,10 @@ module.exports = {
         const dbRepertoryVerified = await repertoryCollection.find({ isVerified: true })
 
         res.render('home', {
-            dbActu: dbActu,
-            dbUserId: dbUserId,
-            dbRepertoryVerified: dbRepertoryVerified
-        })
+                dbActu: dbActu,
+                dbUserId: dbUserId,
+                dbRepertoryVerified: dbRepertoryVerified
+            })
     },
 
 

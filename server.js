@@ -6,8 +6,8 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-const MomentHandler = require("handlebars.moment");
-const Handlebars = require("handlebars");
+const MomentHandler = require('handlebars.moment');
+const Handlebars = require('handlebars');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo');
 const helpers = require('handlebars-helpers')();
@@ -19,9 +19,8 @@ const helmet = require('helmet');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./api/config/swagger.json');
 // documenter l'API
-const morgan = require('morgan')
+const morgan = require('morgan');
 // logger les requêtes
-
 
 
 const app = express();
@@ -39,17 +38,17 @@ const urlDB = config.prod.urlDBcloud;
 
 /* morgan (log requêtes) - format "dev"
  **************************************/
-app.use(morgan('dev'))
+app.use(morgan('dev'));
 
 
-/* openAPI/swagger (documenter API)
+/* openAPI/swagger (génère le fichier pour documenter API)
  ***********************************/
 // expressOasGenerator.init(app, {});
 
 
 /* Helmet (protection des entêtes HTTP)
  **************************************/
-app.use(helmet())
+app.use(helmet());
 
 
 /* Gestion fichiers statiques
@@ -67,8 +66,8 @@ app.use(methodOverride(config.methodOverride.value));
 /*
  * Body Parser (PENSER à le mettre avant "app.use("/", router)" sinon il ne prend pas le "req.body")
  ******************************/
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 /*
@@ -169,17 +168,18 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 /*
  * Router (PENSER à mettre à la fin dans l'architecture)
- ******************************/
-const router = require('./api/router')
-app.use("/", router)
+ ********************************************************/
+const router = require('./api/router');
+
+app.use('/', router);
 
 
 /*
- * Error 404
+ * Error 404 (à la fin également car c'est si ne trouve pas les routes alors passe ici)
  ******************************/
 app.use((req, res) => {
     res.render('error')
-})
+});
 
 
 /*
@@ -187,4 +187,4 @@ app.use((req, res) => {
  ******************************/
 app.listen(port, function () {
     console.log("Le serveur tourne sur le port : " + port);
-})
+});

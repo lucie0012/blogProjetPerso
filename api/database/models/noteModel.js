@@ -4,7 +4,7 @@ const noteSchema = new mongoose.Schema({
 
     authorId: String,
     siteId : String,
-    note : String,
+    note : Number,
     comment : String,
     createDate : {
         type: Date,

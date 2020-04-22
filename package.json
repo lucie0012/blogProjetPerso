@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon --exec 'mocha ./test/*.js'",
+    "lint": "eslint .",
+    "test": "nodemon --exec 'mocha ./tests/*.js'",
     "start": "nodemon server.js",
     "reinstall": "sudo rm -r node_modules* && npm i && npm start",
     "sass": "sass --watch ./public/css/bootstrap/scss/bootstrap.scss:./public/css/style.css"
@@ -31,6 +32,9 @@
     "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "handlebars": "^4.5.3",
     "mocha": "^7.1.1"
   }
