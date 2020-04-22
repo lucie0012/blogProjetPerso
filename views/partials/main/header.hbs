@@ -112,6 +112,26 @@ Barre de recherche : à rendre fonctionnel
 
 </header>
 
+{{#if bandeauCookieGA}}
+<div id="cookie_directive_container" class="container bgFooter">
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="navbar-inner navbar-content-center" id="cookie_accept">
+                <p class="text-muted credit mt-3">
+                    Mon site utilise des cookies pour vous garantir une meilleure expérience et pour analyser le trafic
+                    et la performance du site.
+                    <br>Veuillez consulter nos <a class="text-reset" href="/termsOfService">conditions générales
+                        d'utilisation</a> et les
+                    <a class="text-reset" href="/legalNotice">mentions légales</a> pour plus d'informations.
+                </p>
+                <a href="/refuseCookieGA" class="btn btn-default pull-right">Refuser</a>
+                <a href="/newCookieGA" class="btn btn-default pull-right">Accepter</a>
+            </div>
+        </div>
+    </nav>
+</div>
+{{/if}}
+
 <script>
 
     //{{!-- SCRIPT MESSAGE MODAL CONNEXION --}}

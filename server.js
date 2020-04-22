@@ -9,6 +9,7 @@ const methodOverride = require('method-override');
 const MomentHandler = require('handlebars.moment');
 const Handlebars = require('handlebars');
 const expressSession = require('express-session');
+const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo');
 const helpers = require('handlebars-helpers')();
 // pour utiliser tout les helpers de la librairie (sinon possible de sélectionner l'helpers souhaité)
@@ -46,6 +47,11 @@ app.use(morgan('dev'));
 /* openAPI/swagger (génère le fichier pour documenter API - mettre en commentaire une fois qu'il est généré)
  ***********************************/
 // expressOasGenerator.init(app, {});
+
+
+/* Cookie Parser (pour utiliser req.cookies)
+ **************************************/
+app.use(cookieParser());
 
 
 /* Helmet (protection des entêtes HTTP)

@@ -267,7 +267,12 @@ module.exports = {
 
     // *************Affichage page confirmation vérification mail***************
     getConfirmVerifyMail: (req, res) => {
-        res.render('user/confirmVerifyMail')
+
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('user/confirmVerifyMail', {
+            cookieGA : cookieGA
+        })
     },
 
 

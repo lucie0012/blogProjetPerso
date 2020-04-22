@@ -12,23 +12,46 @@ module.exports = {
         const dbActu = await actuCollection.find({})
         const dbRepertoryVerified = await repertoryCollection.find({ isVerified: true })
 
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
+
         res.render('home', {
-                dbActu: dbActu,
-                dbUserId: dbUserId,
-                dbRepertoryVerified: dbRepertoryVerified
-            })
+            dbActu: dbActu,
+            dbUserId: dbUserId,
+            dbRepertoryVerified: dbRepertoryVerified,
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
+        })
     },
 
 
     /**************Affichage page conditions générales utilisation***************/
     getTermsOfService: (req, res) => {
-        res.render('termsOfService')
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('termsOfService', {
+            cookieGA: cookieGA
+        })
     },
 
 
     /**************Affichage page mentions légales***************/
     getLegalNotice: (req, res) => {
-        res.render('legalNotice')
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('legalNotice', {
+            cookieGA: cookieGA
+        })
     },
 
 }

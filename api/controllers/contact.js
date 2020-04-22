@@ -8,9 +8,12 @@ module.exports = {
     getContact: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
 
+        const cookieGA = req.cookies.cookieGA
+
         res.render('contact', {
             dbUserId: dbUserId,
-            needAlert: false
+            needAlert: false,
+            cookieGA : cookieGA
         })
     },
 

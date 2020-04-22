@@ -74,8 +74,8 @@ Vérification de compte via le bouton à faire
                                 </div> --}}
 
                             <div class="form-group row mt-4 ml-2">
-                                <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label"
-                                    width="100" height="120" style="object-fit: contain">
+                                <img src="{{ dbUserId.image }}" alt="image de profil" class="col-form-label" width="100"
+                                    height="120" style="object-fit: contain">
                             </div>
                             <div class="form-group row">
                                 <label for="editProfilPhoto" class="col-sm-12 col-form-label">Envoyer une nouvelle
@@ -127,6 +127,57 @@ Vérification de compte via le bouton à faire
             </div>
             {{!-- </form> --}}
             {{!------------ /bouton suppression compte  ------------------}}
+
+            {{!------------ bouton effacer cookies  ------------------}}
+            {{#if cookieGA}}
+            <form action="/clearCookieGA" method="POST">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mes cookies*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton effacer cookies  ------------------}}
+
+            {{!------------ bouton refuser les cookies GA ------------------}}
+            {{#if cookieGA}}
+            <form action="/refuseCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Refuser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton refuser les cookies GA ------------------}}
+
+            {{!------------ bouton autoriser les cookies GA ------------------}}
+            {{#unless cookieGA}}
+            <form action="/newCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
+                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Autoriser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/unless}}
+            {{!------------ /bouton autoriser les cookies GA ------------------}}
 
         </div>
     </div>

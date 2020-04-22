@@ -34,7 +34,12 @@ module.exports = {
 
     /**************Affichage page réinitialisation mot de passe***************/
     getForgotPassword: (req, res) => {
-        res.render('user/forgotPassword')
+
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('user/forgotPassword', {
+            cookieGA: cookieGA
+        })
     },
 
 
@@ -88,7 +93,7 @@ module.exports = {
                     next()
                 }
             }),
-            isError = false;
+                isError = false;
             //console.log(isError);
             res.render('user/forgotPassword', {
                 needAlertSend: needAlertSend,
@@ -195,7 +200,7 @@ module.exports = {
                                 next()
                             }
                         }),
-                        isError = false;
+                            isError = false;
                         // console.log(isError);
                         res.render('user/resetPassword', {
                             needAlertSend: needAlertSend,

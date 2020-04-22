@@ -15,6 +15,7 @@ const about = require('./controllers/about')
 const user = require('./controllers/user')
 const admin = require('./controllers/admin')
 const password = require('./controllers/password')
+const cookie = require('./controllers/cookie')
 
 
 /*
@@ -31,6 +32,20 @@ const isVerified = require('../middleware/isVerified')
  ***********/
 router.route('/')
     .get(home.getHome)
+
+
+/*
+ * Cookie
+ ***********/
+// Création cookie acceptation google analytics
+router.route('/newCookieGA')
+    .get(cookie.newCookieGA)
+// Refus cookie acceptation google analytics
+router.route('/refuseCookieGA')
+    .get(cookie.refuseCookieGA)
+// Suppression cookie acceptation google analytics
+router.route('/clearCookieGA')
+    .post(cookie.clearCookieGA)
 
 
 

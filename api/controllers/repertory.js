@@ -17,16 +17,17 @@ module.exports = {
         //console.log(dbUserId);
         // console.log(dbUserId.isVerified);
 
+        const cookieGA = req.cookies.cookieGA
+
         let userVerified = dbUserId != null ? dbUserId.isVerified : false;
         // condition ternaire
         // console.log(userVerified);
 
-
-
         res.render('repertory/repertory', {
             dbUserId: dbUserId,
             dbRepertory: dbRepertory,
-            userVerified: userVerified
+            userVerified: userVerified,
+            cookieGA : cookieGA
         })
     },
 
@@ -405,6 +406,8 @@ module.exports = {
         // condition ternaire
         // console.log(userVerified);
 
+        const cookieGA = req.cookies.cookieGA
+
         const search = req.body.category;
         // console.log(search);
 
@@ -429,7 +432,8 @@ module.exports = {
             userVerified: userVerified,
             dbRepertory: dbRepertoryFilter,
             dbUserId: dbUserId,
-            isEmpty: isEmpty
+            isEmpty: isEmpty,
+            cookieGA : cookieGA
         })
 
         // TEST 3 OK : pour que sans gluten récupère tout ceux où il y a sans gluten / pour le reste récupère que si les 2 sont présent

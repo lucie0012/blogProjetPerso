@@ -6,7 +6,12 @@ module.exports = {
     getAbout: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('about', { dbUserId: dbUserId })
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('about', {
+            dbUserId: dbUserId,
+            cookieGA: cookieGA
+        })
     },
 
 }

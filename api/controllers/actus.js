@@ -46,7 +46,13 @@ module.exports = {
         // console.log(dbActu);
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        res.render('actu/actus', { dbActu: dbActu, dbUserId: dbUserId })
+        const cookieGA = req.cookies.cookieGA
+
+        res.render('actu/actus', {
+            dbActu: dbActu,
+            dbUserId: dbUserId,
+            cookieGA: cookieGA
+        })
         // on renvoi la page "actus" avec les données de chaque BDD nécessaire dans cette page
     },
     // ATTENTION : dans la page actus, bien penser à mettre le "each" pour afficher tout les élements de la BDD et indiquer plusieurs infos (cf page actus)
@@ -59,19 +65,26 @@ module.exports = {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbComment = await commentCollection.find({ articleId: req.params.id })
 
+        const cookieGA = req.cookies.cookieGA
+
         for (let i in dbComment) {
             if (dbComment[i].authorId == null) {
                 dbComment[i].pseudoAuthor = "anonyme";
             } else {
-            const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
-            dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
+                const dbUserIdauthorIdComment = await userCollection.findById(dbComment[i].authorId)
+                dbComment[i].pseudoAuthor = dbUserIdauthorIdComment.pseudo;
 
-            // console.log(i + "coucou 1 " + dbComment[i].pseudoAuthor)
+                // console.log(i + "coucou 1 " + dbComment[i].pseudoAuthor)
             }
         }
 
 
-        res.render('actu/actuSingle', { dbActu: dbActu, dbUserId: dbUserId, dbComment: dbComment })
+        res.render('actu/actuSingle', {
+            dbActu: dbActu, 
+            dbUserId: dbUserId, 
+            dbComment: dbComment,
+            cookieGA : cookieGA
+        })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"
 
