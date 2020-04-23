@@ -46,12 +46,24 @@ module.exports = {
         // console.log(dbActu);
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('actu/actus', {
             dbActu: dbActu,
             dbUserId: dbUserId,
-            cookieGA: cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
         // on renvoi la page "actus" avec les données de chaque BDD nécessaire dans cette page
     },
@@ -65,7 +77,18 @@ module.exports = {
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbComment = await commentCollection.find({ articleId: req.params.id })
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         for (let i in dbComment) {
             if (dbComment[i].authorId == null) {
@@ -80,10 +103,11 @@ module.exports = {
 
 
         res.render('actu/actuSingle', {
-            dbActu: dbActu, 
-            dbUserId: dbUserId, 
+            dbActu: dbActu,
+            dbUserId: dbUserId,
             dbComment: dbComment,
-            cookieGA : cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"

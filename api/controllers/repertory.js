@@ -17,7 +17,18 @@ module.exports = {
         //console.log(dbUserId);
         // console.log(dbUserId.isVerified);
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         let userVerified = dbUserId != null ? dbUserId.isVerified : false;
         // condition ternaire
@@ -27,7 +38,8 @@ module.exports = {
             dbUserId: dbUserId,
             dbRepertory: dbRepertory,
             userVerified: userVerified,
-            cookieGA : cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 
@@ -406,7 +418,18 @@ module.exports = {
         // condition ternaire
         // console.log(userVerified);
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         const search = req.body.category;
         // console.log(search);
@@ -433,7 +456,8 @@ module.exports = {
             dbRepertory: dbRepertoryFilter,
             dbUserId: dbUserId,
             isEmpty: isEmpty,
-            cookieGA : cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
 
         // TEST 3 OK : pour que sans gluten récupère tout ceux où il y a sans gluten / pour le reste récupère que si les 2 sont présent

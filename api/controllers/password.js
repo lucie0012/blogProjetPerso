@@ -35,10 +35,22 @@ module.exports = {
     /**************Affichage page réinitialisation mot de passe***************/
     getForgotPassword: (req, res) => {
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('user/forgotPassword', {
-            cookieGA: cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 

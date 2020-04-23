@@ -8,12 +8,24 @@ module.exports = {
     getContact: async (req, res) => {
         const dbUserId = await userCollection.findById(req.session.userId)
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('contact', {
             dbUserId: dbUserId,
             needAlert: false,
-            cookieGA : cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 

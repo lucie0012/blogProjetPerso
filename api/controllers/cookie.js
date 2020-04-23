@@ -23,7 +23,8 @@ module.exports = {
         // console.log('test refus cookie')
         // console.log(req.cookies);
 
-        res.cookie('cookieGA', 'refuse')
+        res.cookie('cookieGA', 'refuse', { expires: 0 })
+        // expires : 0 pour que le cookie expire à la fermeture du naviguateur
 
         res.redirect('/')
 

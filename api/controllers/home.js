@@ -37,20 +37,44 @@ module.exports = {
 
     /**************Affichage page conditions générales utilisation***************/
     getTermsOfService: (req, res) => {
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('termsOfService', {
-            cookieGA: cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 
 
     /**************Affichage page mentions légales***************/
     getLegalNotice: (req, res) => {
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('legalNotice', {
-            cookieGA: cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 

@@ -82,7 +82,7 @@ module.exports = {
 
         let gridCheck;
         // console.log(gridCheck);
-        if (req.body.gridCheck == 'on' ) {
+        if (req.body.gridCheck == 'on') {
             gridCheck = true
         } else {
             gridCheck = false
@@ -93,7 +93,7 @@ module.exports = {
         const user = await userCollection.findOne({ email: req.body.email })
 
         if (user) {
-        // check si user déjà dans BDD
+            // check si user déjà dans BDD
             // console.log(req.file);
             if (!req.file) {
                 res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
@@ -113,7 +113,7 @@ module.exports = {
                 res.json({ message: "Cette email est déjà enregistré. Connectez-vous." });
             }
         } else if (Pass !== confPass) {
-        //comparaison des mots de passe
+            //comparaison des mots de passe
             // console.log(req.file);
             if (!req.file) {
                 res.json({ message: "Vos mots de passe sont différents. Veuillez rééssayer." });
@@ -133,7 +133,7 @@ module.exports = {
                 //res.redirect('/')
             }
         } else if (!gridCheck) {
-        //contrôle case conditions cochée
+            //contrôle case conditions cochée
             // console.log(req.file);
             if (!req.file) {
                 res.json({ message: "Vous n'avez pas accepté les conditions générales d'utilisations du site. Veuillez cocher la case." });
@@ -268,10 +268,22 @@ module.exports = {
     // *************Affichage page confirmation vérification mail***************
     getConfirmVerifyMail: (req, res) => {
 
-        const cookieGA = req.cookies.cookieGA
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         res.render('user/confirmVerifyMail', {
-            cookieGA : cookieGA
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
         })
     },
 
