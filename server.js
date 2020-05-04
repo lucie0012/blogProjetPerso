@@ -36,7 +36,7 @@ const config = require('./api/config/config');
 // PORT SITE EN PROD
 const port = config.dev.portProd;
 // PORT test serveur
-// const port =config.test.portDev;
+// const port =config.dev.portDev;
 const urlDB = config.prod.urlDBcloud;
 // const urlDB = config.prod.urlDBlocal;
 
