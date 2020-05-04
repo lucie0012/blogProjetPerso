@@ -30,11 +30,13 @@ const app = express();
 const mongoStore = MongoStore(expressSession);
 
 /*
- * Gestion urlDB et port
+ * Gestion urlDB et port (au départ du projet : le port et l'urlDb peuvent être ici)
  ******************************/
 const config = require('./api/config/config');
-// au départ du projet : le port et l'urlDb peuvent être ici
-const port = config.dev.port;
+// PORT SITE EN PROD
+const port = config.dev.portProd;
+// PORT test serveur
+// const port =config.test.portDev;
 const urlDB = config.prod.urlDBcloud;
 // const urlDB = config.prod.urlDBlocal;
 
