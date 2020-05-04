@@ -5,8 +5,7 @@ const noteCollection = require('../database/models/noteModel');
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
-// pour gestion suppression image
-
+// pour gestion suppression image 
 
 module.exports = {
 

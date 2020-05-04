@@ -25,7 +25,9 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         {{!-- /Bouton vers modal proposition site à l'ajout --}}
 
         {{!------- Modal proposition site à l'ajout pour répertoire -----------------------}}
+        {{#if isVerified}}
         {{> modal/modalRepertoryPropoSite}}
+        {{/if}}
         {{!------- /Modal proposition site à l'ajout pour répertoire --------------}}
 
         {{!-- Descriptif de la page --}}
@@ -152,6 +154,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             </div>
 
             {{!-------------- Modal noter site/répertoire -------------------}}
+            {{#if ../userVerified }}
             <div class="modal fade" id="modalNoter{{_id}}" tabindex="-1" role="dialog"
                 aria-labelledby="modalNoterLabel{{_id}}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -177,8 +180,8 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                         </div>
                                         <div class="form-group">
                                             <label for="noteSite{{_id}}" class="col-form-label">Votre note : </label>
-                                            <input class="form-control" id="noteSite{{_id}}" type="number" min="0" max="10" name="note"
-                                                maxlength="100" required>
+                                            <input class="form-control" id="noteSite{{_id}}" type="number" min="0"
+                                                max="10" name="note" maxlength="100" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="commentNote{{_id}}" class="col-form-label">Votre commentaire :
@@ -201,6 +204,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                     </div>
                 </div>
             </div>
+            {{/if}}
             {{!-------------- /Modal noter site/répertoire -------------------}}
 
             {{/if}}

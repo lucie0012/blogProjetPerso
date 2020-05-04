@@ -22,10 +22,15 @@ Page article seul
 
         {{!-- Image --}}
         <div class="col-md-12 mb-5 text-center">
-            <img src="{{ dbActu.image }}" alt="image de l'article" width="200" height="200"
-                style="object-fit: contain">
+            <img src="{{ dbActu.image }}" alt="image de l'article" width="200" height="200" style="object-fit: contain">
         </div>
         {{!-- /Image --}}
+
+        <div class="col-md-12 d-flex">
+            {{!-- bouton commenter --}}
+            <p class="text-muted">Publié le
+                {{ moment dbActu.createDate format="DD/MM/YYYY" }}</p>
+        </div>
 
         <div class="col-md-12 d-flex flex-row-reverse">
             {{!-- bouton commenter --}}
@@ -63,5 +68,7 @@ Page article seul
 
 
 {{!-- Modal commenter actualité --}}
+{{#if isVerified}}
 {{> modal/modalActuSingleComment}}
+{{/if}}
 {{!-- /Modal commenter actualité --}}

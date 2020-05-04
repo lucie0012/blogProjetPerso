@@ -89,18 +89,7 @@ Barre de recherche : à rendre fonctionnel
     </div> --}}
     {{!------------ /barre recherche ------------------}}
 
-
-
-    {{!------------ modal Création compte ------------------}}
-    {{> modal/modalHeaderCreateAccount}}
-    {{!------------ /modal Création compte ------------------}}
-
-
-    {{!------------ modal Connexion ------------------}}
-    {{> modal/modalHeaderConnexion}}
-    {{!------------ /modal Connexion ------------------}}
-
-
+    {{#if user}}
     {{!------------ modal Gestion compte ------------------}}
     {{> modal/modalHeaderPutAccount}}
     {{!------------ /modal Gestion compte  ------------------}}
@@ -110,14 +99,30 @@ Barre de recherche : à rendre fonctionnel
     {{> modal/modalHeaderConfirmDeleteUser}}
     {{!--------------------- /Modal confirmation suppression compte-------------------}}
 
+    {{else}}
+
+    {{!------------ modal Création compte ------------------}}
+    {{> modal/modalHeaderCreateAccount}}
+    {{!------------ /modal Création compte ------------------}}
+
+
+    {{!------------ modal Connexion ------------------}}
+    {{> modal/modalHeaderConnexion}}
+    {{!------------ /modal Connexion ------------------}}
+    {{/if}}
+
+
 </header>
 
+{{!------------ Bandeau cookie ------------------}}
 {{#if bandeauCookieGA}}
 <div class="container bgFooter shadow-sm rounded">
     <nav class="navbar">
         <div class="container">
             <div class="row">
-                <p class="col-md-12 text-muted mt-3">
+                <img src="/public/ressources/images/default/cookie.jpg" class="col-md-1 rounded-circle mt-3"
+                    alt="cookie">
+                <p class="col-md-11 text-muted mt-3">
                     Mon site utilise des cookies pour vous garantir une meilleure expérience et pour analyser le trafic
                     et la performance du site.
                     <br>Veuillez consulter nos <a class="text-reset" href="/termsOfService">conditions générales
@@ -133,6 +138,7 @@ Barre de recherche : à rendre fonctionnel
     </nav>
 </div>
 {{/if}}
+{{!------------ /Bandeau cookie ------------------}}
 
 <script>
 

@@ -41,7 +41,7 @@ const urlDB = config.prod.urlDBcloud;
 
 /* morgan (log requêtes) - format "dev"
  **************************************/
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 
 /* openAPI/swagger (génère le fichier pour documenter API - mettre en commentaire une fois qu'il est généré)
