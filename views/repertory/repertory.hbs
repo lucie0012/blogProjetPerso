@@ -219,6 +219,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 ​
 <script>
 
+    {{#if isVerified}}
     //{{!-- SCRIPT CREATION SITE :  message et éviter Multer envoi image --}}
     //DOM
     const messageErrorCreateSiteUser = document.getElementById('messageErrorCreateSiteUser')
@@ -248,7 +249,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
     //{{!-- /SCRIPT CREATION SITE : message et éviter Multer envoi image --}}
 
 
-    //{{!-- SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
+    //{{!-- SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE dans modal creation site--}}
     //JQUERY
     $(document).ready(function () {
         $("input[name='category']").click(function () {
@@ -256,7 +257,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             $("#messageErrorAddSite").addClass("d-none");
         });
     })
-    //{{!-- /SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE --}}
+    //{{!-- /SCRIPT RETRAIT MESSAGE ERREUR CHECKBOX QUAND CLIENT COCHE dans modal creation site --}}
 
 
 
@@ -282,7 +283,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         }
     })
     //{{!-- /SCRIPT CHECKBOX REQUIRE MODAL PROPO SITE --}}
-
+    {{/if}}
 
 
     //{{!-- SCRIPT FILTRE CLICK CHECKBOX REPERTORY --}}

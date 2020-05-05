@@ -142,6 +142,7 @@ Barre de recherche : à rendre fonctionnel
 
 <script>
 
+    {{#unless user}}
     //{{!-- SCRIPT MESSAGE MODAL CONNEXION --}}
     //{{!-- Requête ajax avec Jquery --}}
     function connexionModal() {
@@ -272,5 +273,6 @@ Barre de recherche : à rendre fonctionnel
         }
     })
 //{{!-- /SCRIPT CREATION COMPTE : message et éviter Multer envoi image quand mdp différent et quand email déjà dans BDD--}}
+    {{/unless }}
 
 </script>
