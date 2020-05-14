@@ -2,7 +2,13 @@
 // const actuCollection = require('../api/database/models/actuModel');
 
 // describe("CRUD 1 article : CREATE", () => {
-    
+
+//     beforeEach(async () => {
+//     // exécution à faire avant chaque test (ici avant chaque it)
+//         // console.log("Suppression des collections (ici actu) avant le debut de chaque it");
+//         await actuCollection.deleteMany({})
+//     });
+
 //     it("CREATE : Créer un article", (done) => {
 //         const actu = new actuCollection({
 //             title: "test",

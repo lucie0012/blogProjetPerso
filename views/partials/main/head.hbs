@@ -23,12 +23,11 @@
     {{!-- meta pour crawlers moteur de recherche --}}
     {{!-- <meta name="robots" /> --}}
 
-    {{!-- balise titre --}}
-    <title>Le blog qui liste les sites de recettes sans allergènes</title>
+    {{!-- balise titre : doit être unique par page --}}
+    <title>Le blog qui liste les sites de recettes sans allergènes : {{title}}</title>
 
     {{!-- balise description : doit être unique par page --}}
-    {{!-- <meta name="description"
-        content="Ce blog permet de référencer et trier les sites proposant des recettes sans allergènes. Vous y trouverez également des articles et recettes sur le sujet."> --}}
+    <meta name="description" content={{description}}>
 
     {{!-- {{> seo}} --}}
 

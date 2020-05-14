@@ -18,18 +18,20 @@
 
 // const connection = mongoose.connection;
 // connection.once('open', () => console.log('Connected!'))
-//     // évenement unique
+// // évenement unique
 // connection.on('error', (error) => {
-//         console.warn('Error : ',error);
-//     });
-//     // fonction à exécuter (ici : en cas d'erreur) une fois que l'évenement se produit 
-
-// beforeEach((done) => {
-// // exécution à faire avant chaque test (ici avant chaque describe)
-//     mongoose.connection.db.dropDatabase(() => {
-//     //permet de vider notre BDD avant d'éxécuter nos tests
-
-//         // console.log("DB drop");
-//         done();
-//     });
+//     console.warn('Error : ', error);
 // });
+// // fonction à exécuter (ici : en cas d'erreur) une fois que l'évenement se produit 
+
+// // beforeEach((done) => {
+// //     // exécution à faire avant chaque test (ici avant chaque it)
+// //     mongoose.connection.db.dropDatabase(() => {
+// //         //permet de vider notre BDD avant d'éxécuter nos tests
+
+// //         console.log("DB drop");
+// //         done();
+// //     });
+// // });
+// // ici retiré car l'action de vider la BDD entièrement cause des problèmes pour le test unitaire de "email : unique"
+// // car la suppression de la BDD supprime l'index qui n'est pas reconstruit automatiquement (le modèle n'est donc pas bien "reconnu")

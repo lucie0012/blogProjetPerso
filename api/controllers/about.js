@@ -4,7 +4,10 @@ module.exports = {
 
     /**************Affichage page A propos***************/
     getAbout: async (req, res) => {
-        const dbUserId = await userCollection.findById(req.session.userId)
+        const title = "A propos de moi";
+        const description = "Cette page vous permettra d'apprendre à me connaitre ainsi que les raisons qui m'ont poussées à créer ce blog listant les sites de recettes sans allergènes (sans gluten, sans lactose, sans caséine, sans oeufs).";
+
+        const dbUserId = await userCollection.findById(req.session.userId);
 
         // console.log(req.cookies);
         let cookieGA = false
@@ -22,7 +25,9 @@ module.exports = {
         res.render('about', {
             dbUserId: dbUserId,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
     },
 

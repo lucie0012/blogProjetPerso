@@ -1,3 +1,51 @@
+{{!------------ bouton effacer cookies  ------------------}}
+            {{#if cookieGA}}
+            <form action="/clearCookieGA" method="POST">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Supprimer mes cookies*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton effacer cookies  ------------------}}
+
+            {{!------------ bouton refuser les cookies GA ------------------}}
+            {{#if cookieGA}}
+            <form action="/refuseCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Refuser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton refuser les cookies GA ------------------}}
+
+            {{!------------ bouton autoriser les cookies GA ------------------}}
+            {{#unless cookieGA}}
+            <form action="/newCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Autoriser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/unless}}
+            {{!------------ /bouton autoriser les cookies GA ------------------}}
+
 {{!-- 
 Page conditions générales d'utilisation du site
  --}}

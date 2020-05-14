@@ -128,56 +128,7 @@ Vérification de compte via le bouton à faire
             {{!-- </form> --}}
             {{!------------ /bouton suppression compte  ------------------}}
 
-            {{!------------ bouton effacer cookies  ------------------}}
-            {{#if cookieGA}}
-            <form action="/clearCookieGA" method="POST">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
-                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Supprimer mes cookies*</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            {{/if}}
-            {{!------------ /bouton effacer cookies  ------------------}}
-
-            {{!------------ bouton refuser les cookies GA ------------------}}
-            {{#if cookieGA}}
-            <form action="/refuseCookieGA" method="GET">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
-                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Refuser les cookies d'analyse*</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            {{/if}}
-            {{!------------ /bouton refuser les cookies GA ------------------}}
-
-            {{!------------ bouton autoriser les cookies GA ------------------}}
-            {{#unless cookieGA}}
-            <form action="/newCookieGA" method="GET">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="d-flex flex-row">
-                                <button type="submit" class="btn" aria-label="Supprimer" data-toggle="modal"
-                                    data-target="#modalConfirmSuppAccount{{ _id }}">*Autoriser les cookies d'analyse*</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            {{/unless}}
-            {{!------------ /bouton autoriser les cookies GA ------------------}}
+            
 
         </div>
     </div>

@@ -5,6 +5,12 @@
 
 //     let actu;
 
+//     beforeEach(async () => {
+//     // exécution à faire avant chaque test (ici avant chaque it)
+//         // console.log("Suppression des collections (ici actu) avant le debut de chaque it");
+//         await actuCollection.deleteMany({})
+//     });
+
 //     beforeEach((done) => {
 
 //         // console.log("beforeEach CRUD 4");
@@ -21,7 +27,7 @@
 //             });
 //     });
 
-//     it("DELETE : suppression d'un article en utilisant son instance", (done) => {
+//     it("DELETE : Supprimer un article en utilisant son instance", (done) => {
 //         actu.deleteOne()
 //             .then(() => actuCollection.findOne({ title: 'test' }))
 //             .then((actu) => {
@@ -32,7 +38,7 @@
 //             });
 //     });
 
-//     it('DELETE : suppression de plusieurs articles', (done) => {
+//     it('DELETE : Supprimer plusieurs articles', (done) => {
 //         actuCollection.deleteMany({ title: 'test' })
 //             .then(() => actuCollection.findOne({ title: 'test' }))
 //             .then((actu) => {
@@ -41,7 +47,7 @@
 //             });
 //     });
 
-//     it("DELETE : suppression d'un article", (done) => {
+//     it("DELETE : Supprimer un article", (done) => {
 //         actuCollection.findOneAndRemove({ title: 'test' })
 //             .then(() => actuCollection.findOne({ title: 'test' }))
 //             .then((actu) => {
@@ -50,7 +56,7 @@
 //             });
 //     });
 
-//     it("DELETE : supprime un article en utilisant l'id", (done) => {
+//     it("DELETE : Supprimer un article en utilisant l'id", (done) => {
 //         actuCollection.findByIdAndRemove(actu._id)
 //             // the following code block is repeated again and again
 //             .then(() => actuCollection.findOne({ title: 'test' }))
