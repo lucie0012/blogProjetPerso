@@ -38,6 +38,7 @@ const port = config.dev.portProd;
 // PORT test serveur
 // const port =config.dev.portDev;
 const urlDB = config.prod.urlDBcloud;
+// const urlDB = config.prod.urlDBcloudTest;
 // const urlDB = config.prod.urlDBlocal;
 
 
@@ -198,3 +199,5 @@ app.use((req, res) => {
 app.listen(port, function () {
     console.log("Le serveur tourne sur le port : " + port);
 });
+
+module.exports = app
