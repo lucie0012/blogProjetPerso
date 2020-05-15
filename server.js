@@ -122,6 +122,7 @@ app.use(expressSession({
         maxAge: 900000,
         // correspond à 15mn inactif
         httpOnly: true,
+        sameSite: true,
         // secure: true
     }
 }));

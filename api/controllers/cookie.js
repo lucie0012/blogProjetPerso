@@ -13,9 +13,10 @@ module.exports = {
         const date = new Date(year + 1, month, day);
         // console.log(date);
 
-        res.cookie('cookieGA', 'accept', { 
-            expires: date, 
-            httpOnly: true, 
+        res.cookie('cookieGA', 'accept', {
+            expires: date,
+            httpOnly: true,
+            sameSite: true,
             // secure: true
         })
 
@@ -27,7 +28,12 @@ module.exports = {
         // console.log('test refus cookie')
         // console.log(req.cookies);
 
-        res.cookie('cookieGA', 'refuse', { expires: 0 })
+        res.cookie('cookieGA', 'refuse', {
+            expires: 0,
+            httpOnly: true,
+            sameSite: true,
+            // secure: true
+        })
         // expires : 0 pour que le cookie expire à la fermeture du naviguateur
 
         res.redirect('/')
