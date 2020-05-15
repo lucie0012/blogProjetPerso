@@ -121,6 +121,8 @@ app.use(expressSession({
     cookie: {
         maxAge: 900000,
         // correspond à 15mn inactif
+        httpOnly: true,
+        // secure: true
     }
 }));
 

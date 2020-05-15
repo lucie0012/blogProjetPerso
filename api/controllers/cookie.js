@@ -13,7 +13,11 @@ module.exports = {
         const date = new Date(year + 1, month, day);
         // console.log(date);
 
-        res.cookie('cookieGA', 'accept', { expires: date })
+        res.cookie('cookieGA', 'accept', { 
+            expires: date, 
+            httpOnly: true, 
+            // secure: true
+        })
 
         res.redirect('/')
 
