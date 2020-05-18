@@ -4,6 +4,7 @@ const messageCollection = require('../database/models/messageModel');
 const commentCollection = require('../database/models/commentModel');
 const repertoryCollection = require('../database/models/repertoryModel');
 const noteCollection = require('../database/models/noteModel');
+const meta = require('./meta');
 
 
 const path = require('path');
@@ -15,6 +16,9 @@ module.exports = {
 
     /**************Affichage page admin***************/
     getAdmin: async (req, res) => {
+        const title = meta.admin.title;
+        const description = meta.admin.description;
+
         const dbUserId = await userCollection.findById(req.session.userId)
         const dbUser = await userCollection.find({})
         const dbActu = await actuCollection.find({})
@@ -111,7 +115,9 @@ module.exports = {
             dbMessage: dbMessage,
             dbComment: dbComment,
             dbRepertory: dbRepertory,
-            dbNote: dbNote
+            dbNote: dbNote,
+            title: title,
+            description: description
         })
         // appel du layout spécifique "adminMain"
     },

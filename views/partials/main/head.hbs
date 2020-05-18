@@ -24,10 +24,10 @@
     {{!-- <meta name="robots" /> --}}
 
     {{!-- balise titre : doit être unique par page --}}
-    <title>Le blog qui liste les sites de recettes sans allergènes : {{title}}</title>
+    <title>Le blog qui liste les sites de recettes sans allergènes : {{title}} {{ dbActu.title }}</title>
 
     {{!-- balise description : doit être unique par page --}}
-    <meta name="description" content={{description}}>
+    <meta name="description" content={{description}} {{ dbActu.title }}>
 
     {{!-- {{> seo}} --}}
 

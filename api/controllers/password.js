@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 // pour compare password chiffré
 const nodemailer = require('nodemailer');
 // pour utiliser nodemailer
-
 const config = require('../config/config');
 // import fichier config pour mail/mdp nodemailer
+const meta = require('./meta');
 
 
 /**************Paramétrage nodemailer*************/
@@ -33,7 +33,11 @@ let mailOptionsResetPass, linkResetPass    //création de variable sans affectat
 module.exports = {
 
     /**************Affichage page réinitialisation mot de passe***************/
-    getForgotPassword: (req, res) => {
+    getForgotPassword: async (req, res) => {
+        const title = meta.forgotPassword.title;
+        const description = meta.forgotPassword.description;
+
+        const dbUserId = await userCollection.findById(req.session.userId);
 
         // console.log(req.cookies);
         let cookieGA = false
@@ -50,7 +54,10 @@ module.exports = {
 
         res.render('user/forgotPassword', {
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            dbUserId: dbUserId,
+            title: title,
+            description: description
         })
     },
 
@@ -73,6 +80,24 @@ module.exports = {
         // console.log("host :" + hostForgotPass);   //donne : "localhost:5000"
         // console.log("mailOptions.to : " + mailOptionsForgotPass.to);  //donne l'adresse mail renseigné lors de la création du compte
 
+        const title = meta.forgotPassword.title;
+        const description = meta.forgotPassword.description;
+
+        const dbUserId = await userCollection.findById(req.session.userId);
+
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
+
         const email = req.body.email
         // console.log(req.body.email)
 
@@ -88,6 +113,11 @@ module.exports = {
             //res.redirect('/')
             res.render('user/forgotPassword', {
                 errorUserNotExist: errorUserNotExist,
+                cookieGA: cookieGA,
+                bandeauCookieGA: bandeauCookieGA,
+                dbUserId: dbUserId,
+                title: title,
+                description: description
             })
         } else {
             needAlertSend = true;
@@ -98,7 +128,12 @@ module.exports = {
                     console.error("ERREUR :" + err);
                     res.render('user/forgotPassword', {
                         needAlertSend: needAlertSend,
-                        isError: isError
+                        isError: isError,
+                        cookieGA: cookieGA,
+                        bandeauCookieGA: bandeauCookieGA,
+                        dbUserId: dbUserId,
+                        title: title,
+                        description: description
                     })
                 } else {
                     console.log('Message envoyé');
@@ -109,7 +144,12 @@ module.exports = {
             //console.log(isError);
             res.render('user/forgotPassword', {
                 needAlertSend: needAlertSend,
-                isError: isError
+                isError: isError,
+                cookieGA: cookieGA,
+                bandeauCookieGA: bandeauCookieGA,
+                dbUserId: dbUserId,
+                title: title,
+                description: description
             })
         }
         // res.redirect('/')
@@ -118,6 +158,23 @@ module.exports = {
 
     /**************Affichage page création nouveau mot de passe suite lien***************/
     getResetPassword: async (req, res) => {
+        const title = meta.resetPassword.title;
+        const description = meta.resetPassword.description;
+
+        const dbUserId = await userCollection.findById(req.session.userId);
+
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
 
         // console.log("1 get");
         // console.log("mailOptionsForgotPass.to :" + mailOptionsForgotPass.to);
@@ -125,7 +182,7 @@ module.exports = {
         // console.log("ID : " + req.params.id)
         // console.log("RAND : " + mailOptionsForgotPass.randForgotPass);
 
-        const user = await userCollection.findOne({ email: mailOptionsForgotPass.to })  //recherche de l'utilisateur concerné par l'email (celui à qui on envoi et donc celui recup via req.body lors du post)
+        const dbUser = await userCollection.findOne({ email: mailOptionsForgotPass.to })  //recherche de l'utilisateur concerné par l'email (celui à qui on envoi et donc celui recup via req.body lors du post)
         // console.log("user :" + user);
 
         if ((req.protocol + "://" + req.get('host')) == ("http://" + hostForgotPass)) {   //compare le lien utilisé pour venir sur la page (celui généré par le clic sur le lien dans le mail) et celui de notre site 
@@ -134,8 +191,15 @@ module.exports = {
             if (req.params.id == mailOptionsForgotPass.randForgotPass) {    //récupère dans l'url l'id (qui est censé être le numéro random généré pour le lien dans le mail) et le compare au même randon généré dans les options de l'envoi du mail
                 console.log("Rand is matched. Information is from Authentic email")
 
-                res.render('user/resetPassword', { user })
-                // renvoi des données user sur la page afin de pouvoir y récupérer l'id dans l'url afin de pouvoir cibler l'user (via req.params.id) et submit sur le bon user
+                res.render('user/resetPassword', {
+                    // renvoi des données user (via dbUser) sur la page afin de pouvoir y récupérer l'id dans l'url afin de pouvoir cibler l'user (via req.params.id) et submit sur le bon user
+                    dbUser: dbUser,
+                    dbUserId: dbUserId,
+                    cookieGA: cookieGA,
+                    bandeauCookieGA: bandeauCookieGA,
+                    title: title,
+                    description: description
+                })
 
             } else {
                 res.send("Bad Request")
@@ -148,6 +212,21 @@ module.exports = {
 
     /**************Création nouveau mot de passe***************/
     postResetPassword: async (req, res) => {
+        const title = meta.resetPassword.title;
+        const description = meta.resetPassword.description;
+
+        const dbUserId = await userCollection.findById(req.session.userId);
+
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
         // console.log("2 post");
         // console.log(req.body);
         // console.log("ID : " + req.params.id)
@@ -176,7 +255,12 @@ module.exports = {
             errorPass = true;
             console.log("mdp différent");
             res.render('user/resetPassword', {
-                errorPass: errorPass
+                errorPass: errorPass,
+                dbUserId: dbUserId,
+                cookieGA: cookieGA,
+                bandeauCookieGA: bandeauCookieGA,
+                title: title,
+                description: description
             })
         } else {
             needAlertSend = true;
@@ -195,7 +279,12 @@ module.exports = {
                         console.log("ERREUR : " + err);
                         res.render('user/resetPassword', {
                             needAlertSend: needAlertSend,
-                            isError: isError
+                            isError: isError,
+                            dbUserId: dbUserId,
+                            cookieGA: cookieGA,
+                            bandeauCookieGA: bandeauCookieGA,
+                            title: title,
+                            description: description
                         })
                     } else {
                         // Envoi mail confirmation changement mdp NODEMAILER     
@@ -205,7 +294,12 @@ module.exports = {
                                 console.error("ERREUR :" + err);
                                 res.render("user/resetPassword", {
                                     needAlertSend: needAlertSend,
-                                    isError: isError
+                                    isError: isError,
+                                    dbUserId: dbUserId,
+                                    cookieGA: cookieGA,
+                                    bandeauCookieGA: bandeauCookieGA,
+                                    title: title,
+                                    description: description
                                 })
                             } else {
                                 console.log('Message envoyé');
@@ -216,7 +310,12 @@ module.exports = {
                         // console.log(isError);
                         res.render('user/resetPassword', {
                             needAlertSend: needAlertSend,
-                            isError: isError
+                            isError: isError,
+                            dbUserId: dbUserId,
+                            cookieGA: cookieGA,
+                            bandeauCookieGA: bandeauCookieGA,
+                            title: title,
+                            description: description
                         })
                     }
                 })

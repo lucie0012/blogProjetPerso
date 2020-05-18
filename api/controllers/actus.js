@@ -1,6 +1,7 @@
 const actuCollection = require('../database/models/actuModel');
 const userCollection = require('../database/models/userModel');
 const commentCollection = require('../database/models/commentModel');
+const meta = require('./meta');
 
 
 const path = require('path');
@@ -42,6 +43,9 @@ module.exports = {
     /**************Affichage page de tous les articles***************/
     getActu: async (req, res) => {
         // "async" car on utilise "await" pour attendre de récupérer les données
+        const title = meta.actus.title;
+        const description = meta.actus.description;
+
         const dbActu = await actuCollection.find({})
         // console.log(dbActu);
         const dbUserId = await userCollection.findById(req.session.userId)
@@ -63,7 +67,9 @@ module.exports = {
             dbActu: dbActu,
             dbUserId: dbUserId,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
         // on renvoi la page "actus" avec les données de chaque BDD nécessaire dans cette page
     },
@@ -72,6 +78,9 @@ module.exports = {
 
     /**************Affichage page article seul***************/
     getActuSingle: async (req, res) => {
+        const title = meta.actuSingle.title;
+        const description = meta.actuSingle.description;
+
         const dbActu = await actuCollection.findById(req.params.id)
         // console.log(req.params.id);
         const dbUserId = await userCollection.findById(req.session.userId)
@@ -107,7 +116,9 @@ module.exports = {
             dbUserId: dbUserId,
             dbComment: dbComment,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
     },
     // ATTENTION : dans la page actu single, bien penser à indiquer à la place tu "titre", "content", etc.. "dbActu.title", "dbActu.content"

@@ -12,9 +12,9 @@ const bcrypt = require('bcrypt');
 // pour compare password chiffré
 const nodemailer = require('nodemailer');
 // pour utiliser nodemailer
-
 const config = require('../config/config');
 // import fichier config pour mail/mdp nodemailer
+const meta = require('./meta');
 
 
 /**************Paramétrage nodemailer*************/
@@ -266,7 +266,11 @@ module.exports = {
     },
 
     // *************Affichage page confirmation vérification mail***************
-    getConfirmVerifyMail: (req, res) => {
+    getConfirmVerifyMail: async (req, res) => {
+        const title = meta.confirmVerifyMail.title;
+        const description = meta.confirmVerifyMail.description;
+
+        const dbUserId = await userCollection.findById(req.session.userId);
 
         // console.log(req.cookies);
         let cookieGA = false
@@ -282,8 +286,11 @@ module.exports = {
         // console.log(bandeauCookieGA);
 
         res.render('user/confirmVerifyMail', {
+            dbUserId: dbUserId,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
     },
 

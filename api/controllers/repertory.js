@@ -1,17 +1,22 @@
 const repertoryCollection = require('../database/models/repertoryModel');
 const userCollection = require('../database/models/userModel');
 const noteCollection = require('../database/models/noteModel');
-
 const path = require('path');
 // pour gestion suppression image
 const fs = require('fs')
 // pour gestion suppression image 
+const meta = require('./meta');
+
 
 module.exports = {
 
     /**************Affichage page Repertoire***************/
     getRepertory: async (req, res) => {
+        const title = meta.repertory.title;
+        const description = meta.repertory.description;
+
         const dbUserId = await userCollection.findById(req.session.userId)
+
         const dbRepertory = await (await repertoryCollection.find({})).reverse()    //double await suite au ".reverse()"
         //console.log(dbUserId);
         // console.log(dbUserId.isVerified);
@@ -38,7 +43,9 @@ module.exports = {
             dbRepertory: dbRepertory,
             userVerified: userVerified,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
     },
 
@@ -404,11 +411,14 @@ module.exports = {
         //     userVerified: userVerified,
         //     dbRepertory: dbRepertoryFilter,
         //     dbUserId: dbUserId,
-        //     isEmpty: isEmpty
+        //     isEmpty: isEmpty,
         // })
 
         // // TEST 2 OK : récupère pour sans gluten et sans lactose coché : les sites où il y a sans gluten, 
         // // sans lactose et sans gluten ET sans lactose / pour sans gluten coché : récupère les sites où il y a sans gluten (même les sans gluten et sans lactose)
+
+        const title = meta.filterRepertory.title;
+        const description = meta.filterRepertory.description;
 
         const dbUserId = await userCollection.findById(req.session.userId)
         // console.log(req.body.category);
@@ -456,7 +466,9 @@ module.exports = {
             dbUserId: dbUserId,
             isEmpty: isEmpty,
             cookieGA: cookieGA,
-            bandeauCookieGA: bandeauCookieGA
+            bandeauCookieGA: bandeauCookieGA,
+            title: title,
+            description: description
         })
 
         // TEST 3 OK : pour que sans gluten récupère tout ceux où il y a sans gluten / pour le reste récupère que si les 2 sont présent
