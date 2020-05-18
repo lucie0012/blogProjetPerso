@@ -36,7 +36,9 @@ module.exports = {
 
 
     /**************Affichage page conditions générales utilisation***************/
-    getTermsOfService: (req, res) => {
+    getTermsOfService: async (req, res) => {
+        const dbUserId = await userCollection.findById(req.session.userId)
+
         // console.log(req.cookies);
         let cookieGA = false
         let bandeauCookieGA = true
@@ -51,6 +53,7 @@ module.exports = {
         // console.log(bandeauCookieGA);
 
         res.render('termsOfService', {
+            dbUserId: dbUserId,
             cookieGA: cookieGA,
             bandeauCookieGA: bandeauCookieGA
         })
@@ -58,7 +61,9 @@ module.exports = {
 
 
     /**************Affichage page mentions légales***************/
-    getLegalNotice: (req, res) => {
+    getLegalNotice: async (req, res) => {
+        const dbUserId = await userCollection.findById(req.session.userId)
+
         // console.log(req.cookies);
         let cookieGA = false
         let bandeauCookieGA = true
@@ -73,6 +78,31 @@ module.exports = {
         // console.log(bandeauCookieGA);
 
         res.render('legalNotice', {
+            dbUserId: dbUserId,
+            cookieGA: cookieGA,
+            bandeauCookieGA: bandeauCookieGA
+        })
+    },
+
+    /**************Affichage page mentions légales***************/
+    getManagingCookiesPreferences: async (req, res) => {
+        const dbUserId = await userCollection.findById(req.session.userId)
+
+        // console.log(req.cookies);
+        let cookieGA = false
+        let bandeauCookieGA = true
+
+        if (req.cookies.cookieGA === 'accept') {
+            cookieGA = true
+            bandeauCookieGA = false
+        } else if (req.cookies.cookieGA === 'refuse') {
+            bandeauCookieGA = false
+        }
+        // console.log(cookieGA);
+        // console.log(bandeauCookieGA);
+
+        res.render('managingCookiesPreferences', {
+            dbUserId: dbUserId,
             cookieGA: cookieGA,
             bandeauCookieGA: bandeauCookieGA
         })

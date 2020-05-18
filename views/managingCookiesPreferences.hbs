@@ -1,0 +1,65 @@
+{{!-- 
+Page GEstion des préférences de cookies
+ --}}
+<div class="container my-5">
+    <div class="row mt-5 d-flex flex-column">
+
+        {{!-- Titre --}}
+        <h1 class="colorWrite my-5 text-center">Gestion des préférences de cookies du site "Blog sans allergènes"</h1>
+        {{!-- /Titre --}}
+
+        <div class="col-md-12">
+            {{!------------ bouton effacer cookies  ------------------}}
+            {{#if cookieGA}}
+            <h3 class="h5">Je souhaite supprimer tout mes cookies : </h3>
+            <form action="/clearCookieGA" method="POST">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Supprimer mes cookies*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton effacer cookies  ------------------}}
+
+            {{!------------ bouton refuser les cookies GA ------------------}}
+            {{#if cookieGA}}
+            <h3 class="h5 mt-5">Je souhaite refuser les cookies : </h3>
+            <form action="/refuseCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Refuser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/if}}
+            {{!------------ /bouton refuser les cookies GA ------------------}}
+
+            {{!------------ bouton autoriser les cookies GA ------------------}}
+            {{#unless cookieGA}}
+            <h3 class="h5 mt-5">Je souhaite autoriser les cookies : </h3>
+            <form action="/newCookieGA" method="GET">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row">
+                                <button type="submit" class="btn">*Autoriser les cookies d'analyse*</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {{/unless}}
+            {{!------------ /bouton autoriser les cookies GA ------------------}}
+        </div>
+
+    </div>
+</div>

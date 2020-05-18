@@ -208,7 +208,6 @@ Barre de recherche : à rendre fonctionnel
         });
 
         function submitModalCreateUser() {
-            //console.log("coucou")
 
             $.ajax({
                 url: '/checkMail',
@@ -217,7 +216,6 @@ Barre de recherche : à rendre fonctionnel
                     email: $("input[name=emailModalCreateAccount]").val()
                 },
                 success: function (json, statut) {
-                    //console.log("test")
                     //console.log(json)
 
                     if (json.emailExist) {
@@ -243,18 +241,14 @@ Barre de recherche : à rendre fonctionnel
                             contentType: false,
                             processData: false,
                             success: function (json, statut) {
-                                //console.log("test")
                                 //console.log(json.message);
-                                //console.log(json.noError)
                                 $("#messageErrorCreateAccount").removeClass("text-danger").addClass("text-success");
                                 $("#messageErrorCreateAccount").removeClass("d-none");
                                 $("#messageErrorCreateAccount").text(json.message);
 
                                 if (json.noError) {
-                                    //window.location.replace("/");
                                     setTimeout(function () { window.location.replace("/"); }, 3000);
                                 }
-
                             },
                             error: function (resultat, statut, erreur) {
                                 console.log(resultat);

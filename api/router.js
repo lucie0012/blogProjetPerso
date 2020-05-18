@@ -58,6 +58,11 @@ router.route('/termsOfService')
 // Affichage page mentions légales
 router.route('/legalNotice')
     .get(home.getLegalNotice)
+// Affichage page de gestion des préférences cookies
+router.route('/managingCookiesPreferences')
+    .get(home.getManagingCookiesPreferences)
+
+    
 
 
 
