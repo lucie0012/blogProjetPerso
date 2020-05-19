@@ -134,7 +134,7 @@ module.exports = {
             (err) => {
                 if (!err) {
                     // console.log('UPDATE OK');
-                    res.redirect('/admin')
+                    res.redirect('/privateAdmin')
                 } else {
                     res.send(err)
                 }
@@ -162,7 +162,7 @@ module.exports = {
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/admin')
+                        res.redirect('/privateAdmin')
                     } else {
                         res.rend(err)
                     }
@@ -180,7 +180,7 @@ module.exports = {
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/admin')
+                        res.redirect('/privateAdmin')
                     } else {
                         res.rend(err)
                     }
@@ -198,7 +198,7 @@ module.exports = {
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/admin')
+                        res.redirect('/privateAdmin')
                     } else {
                         res.rend(err)
                     }
@@ -216,7 +216,7 @@ module.exports = {
                 { multi: true },
                 (err) => {
                     if (!err) {
-                        res.redirect('/admin')
+                        res.redirect('/privateAdmin')
                     } else {
                         res.rend(err)
                     }
@@ -248,7 +248,7 @@ module.exports = {
             (err) => {
                 if (!err) {
                     console.log("User status delete");
-                    res.redirect('/admin')
+                    res.redirect('/privateAdmin')
 
                     commentCollection.updateMany(
                         { authorId: req.params.id },
@@ -329,7 +329,7 @@ module.exports = {
                 (err) => {
                     if (!err) {
                         console.log("User delete");
-                        res.redirect('/admin')
+                        res.redirect('/privateAdmin')
 
                         commentCollection.deleteMany(
                             { authorId: req.params.id },
@@ -386,7 +386,7 @@ module.exports = {
                                     console.log(err);
                                 } else {
                                     console.log("User and File delete");
-                                    res.redirect('/admin')
+                                    res.redirect('/privateAdmin')
 
                                     commentCollection.deleteMany(
                                         { authorId: req.params.id },

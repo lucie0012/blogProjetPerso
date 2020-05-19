@@ -232,11 +232,11 @@ module.exports = {
                                     res.send(err)
                                     console.log('suppression pas OK');
                                 } else {
-                                    res.redirect('/admin')
+                                    res.redirect('/privateAdmin')
                                     console.log('suppression note/comm OK');
                                 }
                             })
-                        // res.redirect('/admin')
+                        // res.redirect('/privateAdmin')
                     }
                 })
         } else {
@@ -259,11 +259,11 @@ module.exports = {
                                                 res.send(err)
                                                 console.log('suppression pas OK');
                                             } else {
-                                                res.redirect('/admin')
+                                                res.redirect('/privateAdmin')
                                                 console.log('suppression note/comm OK');
                                             }
                                         })
-                                    // res.redirect('/admin')
+                                    // res.redirect('/privateAdmin')
                                 }
                             }
                         )
@@ -328,7 +328,7 @@ module.exports = {
                     res.send(err)
                     // console.log('suppression pas OK');
                 } else {
-                    res.redirect('/admin')
+                    res.redirect('/privateAdmin')
                     // console.log('suppression OK');
                 }
             })
@@ -504,7 +504,7 @@ module.exports = {
         //     console.log("test 2");
         // }
 
-        // res.redirect('/admin')
+        // res.redirect('/privateAdmin')
 
     },
 

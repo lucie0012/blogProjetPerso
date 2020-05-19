@@ -124,7 +124,7 @@ module.exports = {
                     res.send(err)
                     // console.log('suppression pas OK');
                 } else {
-                    res.redirect('/admin')
+                    res.redirect('/privateAdmin')
                     // console.log('suppression OK');
                 }
             })

@@ -205,7 +205,7 @@ router.route('/resetPassword/:id')  //(id : correspond au chiffre random)
  * Admin
  ***********/
 // Affichage page admin
-router.route('/admin')
+router.route('/privateAdmin')
     .get(isAdmin, admin.getAdmin)
 
 // Edition utilisateur en isVerified par admin
