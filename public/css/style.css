@@ -7889,16 +7889,29 @@ a.text-color1:hover, a.text-color1:focus {
   font-display: swap; }
 
 .bgNav {
-  background-color: #BCBF56; }
+  background-color: #BCBF56;
+  background-image: url(/public/ressources/images/default/backgroundNav70Opa.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 250px; }
+
+.bgBandeau {
+  background-color: #BCBF56;
+  background-image: url(/public/ressources/images/default/backgroundHomeOpa70.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  height: 220px; }
 
 .bgNavAdmin {
-  background-color: #F2CA80; }
+  background-color: #BCBF56; }
 
 .bgFooter {
   background-color: #CCD9D7; }
 
 .colorWrite {
-  color: #F2CA80; }
+  color: #BCBF56; }
 
 .colorBlack {
   color: #fff !important; }
