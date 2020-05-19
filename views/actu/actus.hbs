@@ -5,45 +5,57 @@ Page articles
 <div class="container my-5">
 
     {{!---------------- titre -----------------}}
-    <h1 class="colorWrite title text-center">Mes articles</h1>
+    <h1 class="colorWrite title text-center">Mes articles : conseils ou recettes</h1>
     {{!----------------/titre -----------------}}
 
-    <div class="row">
+    <div class="row mt-4 justify-content-center">
 
-        {{!----------------cards des articles --------------}}
-        <div class="card-deck">
+        <div class="col-md-10 mb-4">
+            <p class="text-left px-2">Ici vous pourrez retrouver toutes les publications de mes articles ou recettes. Toujours bien sûr autour du sujet de l'alimentation sans allergènes (pour le moment : sans
+                gluten, sans lactose, sans oeufs et sans caséine).
+                <br>Si vous êtes connecté vous pouvez également laisser des commentaires.
+            </p>
+        </div>
+
+        {{!-- Cards des articles --}}
+        <div class="col-md-12">
             {{#each (reverse dbActu) }}
-            <div class="card limitCard mt-4 ml-3">
-                {{!-- titre et contenu --}}
-                <div class="card-body">
-                    <h5 class="card-title">{{ title }}</h5>
-                    <p class="card-text text-justify">{{ truncate content 200 }}</p>
+            <div class="card cardRepertory mb-5 mr-4">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ image }}" class="card-img cardImage" height="250" width="100"
+                            alt="image ou logo du site">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 d-flex flex-column">
+                                        <h5 class="card-title">{{ title }}</h5>
+                                        <p class="card-text mt-2">{{ truncate content 300 }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- bouton --}}
+                        <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button
+                                class="btn btnSite my-3 mr-3">Voir l'article</button></a>
+                        {{!-- /bouton --}}
+                    </div>
+                    <div class="col-md-12">
+                        {{!-- infos --}}
+                        <div class="card-footer">
+                            <small class="text-muted d-flex flex-row-reverse">Publié le
+                                {{ moment createDate format="DD/MM/YYYY" }}</small>
+                        </div>
+                        {{!-- /infos --}}
+                    </div>
                 </div>
-                {{!-- /titre et contenu --}}
-
-                {{!-- image --}}
-                <div class="card-body">
-                    <img src="{{ image }}" class="rounded float-left" height="200" width="180"
-                        style="object-fit: contain" alt="image de l'article">
-                </div>
-                {{!-- /image --}}
-
-                {{!-- bouton --}}
-                <a href="/actuSingle/{{ id }}" class="d-flex justify-content-end text-decoration-none"><button
-                        class="btn btnSite mb-3 mr-3">Voir l'article</button></a>
-                {{!-- /bouton --}}
-
-                {{!-- infos --}}
-                <div class="card-footer">
-                    <small class="text-muted">Publié le
-                        {{ moment createDate format="DD/MM/YYYY" }}</small>
-                </div>
-                {{!-- /infos --}}
-
             </div>
             {{/each }}
         </div>
-        {{!----------------/cards des articles -------------}}
+        {{!-- Cards des articles --}}
 
     </div>
 </div>

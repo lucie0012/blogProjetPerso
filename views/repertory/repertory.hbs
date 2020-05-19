@@ -9,7 +9,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 <div class="container my-5">
 
     {{!-- Titre --}}
-    <h1 class="colorWrite title text-center">Répertoire</h1>
+    <h1 class="colorWrite title text-center">Répertoire des sites proposant des recettes</h1>
     {{!-- /Titre --}}
 
     <div class="row mt-4 flex-row-reverse">
@@ -32,18 +32,16 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
 
         {{!-- Descriptif de la page --}}
         <div class="col-md-9 mb-4">
-            <p class="text-justify">Cette section permet de recenser tous les sites proposant des recettes sans
+            <p class="text-left">Cette section permet de recenser tous les sites proposant des recettes sans
                 allergènes. Vous pouvez les
-                trier selon les catégories que vous désirez. Si vous êtes connecté à votre compte, vous pouvez également
+                trier selon les catégories que vous désirez. 
+                <br>Si vous êtes connecté à votre compte, vous pouvez également
                 me proposer un ou des
-                site(s) à ajouter à ce répertoire.
+                site(s) à ajouter à ce répertoire ou noter les différents sites.
             </p>
         </div>
         {{!-- /Descriptif de la page --}}
 
-    </div>
-
-    <div class="row flex-row-reverse">
 
         {{!-- Filtre par catégorie --}}
         <div class="col-md-3">
@@ -51,10 +49,10 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
             {{!-- <form action="/repertoryFilter" method="POST"> --}}
             {{!-- /ANCIEN FORMULAIRE --}}
 
-            <p class="ml-2">Trier par catégorie</p>
+            <p class="ml-3">Trier par catégorie</p>
             <ul class="list-group list-group-flush ml-2 mb-5 " style="max-width: 200px;">
                 <li class="list-group-item" style="background-color: rgba(204, 217, 215, 0.2);">
-                    <input class="form-check-input" type="checkbox" name="categoryFilter" value="sansGluten"
+                    <input type="checkbox" name="categoryFilter" value="sansGluten"
                         id="sansGluten">
 
                     <label class="form-check-label" for="sansGluten">
@@ -62,7 +60,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                     </label>
                 </li>
                 <li class="list-group-item" style="background-color: rgba(204, 217, 215, 0.2);">
-                    <input class="form-check-input" type="checkbox" name="categoryFilter" value="sansLactose"
+                    <input type="checkbox" name="categoryFilter" value="sansLactose"
                         id="sansLactose">
 
                     <label class="form-check-label" for="sansLactose">
@@ -70,7 +68,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                     </label>
                 </li>
                 <li class="list-group-item" style="background-color: rgba(204, 217, 215, 0.2);">
-                    <input class="form-check-input" type="checkbox" name="categoryFilter" value="sansOeufs"
+                    <input type="checkbox" name="categoryFilter" value="sansOeufs"
                         id="sansOeufs">
 
                     <label class="form-check-label" for="sansOeufs">
@@ -78,7 +76,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                     </label>
                 </li>
                 <li class="list-group-item" style="background-color: rgba(204, 217, 215, 0.2);">
-                    <input class="form-check-input" type="checkbox" name="categoryFilter" value="sansCaseine"
+                    <input type="checkbox" name="categoryFilter" value="sansCaseine"
                         id="sansCaseine">
 
                     <label class="form-check-label" for="sansCaseine">
@@ -86,7 +84,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                     </label>
                 </li>
                 {{!-- <li>
-                        <input class="form-check-input" type="checkbox" value="" id="populaires">
+                        <input type="checkbox" value="" id="populaires">
                         <label class="form-check-label" for="populaires">
                                 Les plus populaires
                         </label>
@@ -104,10 +102,10 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         <div class="col-md-9" id="recharger">
             {{#each dbRepertory }}
             {{#if isVerified}}
-            <div class="card cardRepertory mb-5" style="max-width: 600px;">
+            <div class="card cardRepertory mb-5 mr-4">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <img src="{{ image }}" class="card-img" height="140" width="100" style="object-fit: contain"
+                        <img src="{{ image }}" class="card-img cardImage" height="140" width="100"
                             alt="image ou logo du site">
                     </div>
                     <div class="col-md-8">
@@ -134,7 +132,7 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
                                     <div class="col-md-12 d-flex flex-column">
                                         <h5 class="card-title">{{ title }}</h5>
                                         <a href="{{ url }}" target="_blank" rel="noopener">{{ url }}</a>
-                                        <p class="card-text mt-2 text-justify">{{ truncate content 200 }}</p>
+                                        <p class="card-text mt-2">{{ truncate content 200 }}</p>
                                     </div>
                                     {{!-- bouton noter --}}
                                     {{#if ../userVerified }}
@@ -213,7 +211,6 @@ trie par popularité (selon les notes) à remettre dès que fonctionnalité en p
         {{!-- Cards du répertoire --}}
 
     </div>
-
 </div>
 
 ​

@@ -12,6 +12,11 @@
 // Couleurs background
 .bgNav {
     background-color: #BCBF56;
+    // background-image: url(/public/ressources/images/default/imageLogo.jpeg);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    // background-position: center center;
+    // height: 300px;
 }
 
 .bgNavAdmin {
@@ -35,13 +40,13 @@
 // Titres
 .title {
     border-color: rgb(240, 183, 78);
-    transition:0.8s;
+    // transition:0.8s;
 }
     
-.title:hover {
-    transition:0.8s;
-    transform: scale(1.1, 1.1);
-}
+// .title:hover {
+//     transition:0.8s;
+//     transform: scale(1.1, 1.1);
+// }
 
 
 // Boutons
@@ -83,15 +88,25 @@
 
 // Cards
 .limitCard {
-    border-color: #F2CA80;
-    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+    // border-color: #F2CA80;
+    border-color: #F4f7f7;
+    // box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+    box-shadow: 3px 5px 9px 2px rgba(193, 189, 181, 0.3);
     min-width: 340px;
     max-width: 340px;
 }
 
 .cardRepertory {
-    border-color: #F2CA80;
-    box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+    // border-color: #F2CA80;
+    border-color: #F4f7f7;
+    // box-shadow: 10px 10px 5px rgba(242, 202, 128, 0.3);
+    box-shadow: 3px 5px 9px 2px rgba(193, 189, 181, 0.3);
+}
+
+.cardImage {
+    object-fit: cover;
+    // height: 100%;
+    // border-radius: 0;
 }
 
 

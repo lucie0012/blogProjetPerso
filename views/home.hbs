@@ -8,11 +8,17 @@ bouton "noter" à remettre dès que fonctionnalité en place
 
 {{!-- Descriptif du site --}}
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-justify">Bienvenue sur le "Blog sans allergènes".
-                <br> Ici vous pourrez retrouver un répertoire qui liste tous les sites qui publient des recettes sans
-                allergènes (pour le moment : sans gluten, sans lactose, sans oeufs et sans caséine) et y effectuer un
+
+    {{!-- Titre --}}
+    <h1 class="colorWrite title text-center">Bienvenue sur le "Blog sans allergènes"</h1>
+    {{!-- /Titre --}}
+
+    <div class="row mt-4 justify-content-center">
+
+        <div class="col-md-10 ">
+            <p class="text-left px-2">Ici vous pourrez retrouver un répertoire qui liste tous les sites qui publient des recettes sans
+                allergènes 
+                <br>(pour le moment : sans gluten, sans lactose, sans oeufs et sans caséine) et y effectuer un
                 tri selon les catégories qui vous intéressent.
                 <br> Vous retrouverez également des articles ou recettes que je posterais.
                 <br> Si vous créez un compte, cela vous permettra de me proposer des sites à ajouter au répertoire mais
@@ -30,8 +36,8 @@ bouton "noter" à remettre dès que fonctionnalité en place
 <div class="container mt-3 mb-5">
 
     {{!-- Titre section cards du répertoire --}}
-    <h1 class="colorWrite title text-center"><a href="/repertory" class="text-reset"> Les derniers sites ajoutés</a>
-    </h1>
+    <h2 class="colorWrite title text-center"><a href="/repertory" class="text-reset"> Les derniers sites ajoutés</a>
+    </h2>
     {{!-- /Titre section cards du répertoire --}}
 
     <div class="row">
@@ -63,7 +69,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
                             <div class="col-md-12 d-flex flex-column">
                                 <h5 class="card-title">{{ title }}</h5>
                                 <a href="{{ url }}" class="my-2" target="_blank" rel="noopener">{{ url }}</a>
-                                <p class="card-text my-2 text-justify">{{ truncate content 200 }}</p>
+                                <p class="card-text my-2 text-left">{{ truncate content 200 }}</p>
                                 <img src="{{ image }}" class="rounded float-left" height="120" width="100"
                                     style="object-fit: contain" alt="image ou logo du site">
                             </div>
@@ -91,7 +97,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
             Manger sans ALLERGENES n'est pas manger sans GOURMANDISE !!!
         </p>
         <img src="/public/ressources/images/default/imgDivBackgroundHome.jpeg" alt="photo d'un repas entre amis"
-            class="rounded-circle mt-2" width="250">
+            class="mt-2" width="250" style="clip-path: circle(40%);">
     </div>
 </div>
 {{!-- /Div de séparation avec slogan --}}
@@ -101,7 +107,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
 <div class="container my-5">
 
     {{!-- Titre section cards des articles --}}
-    <h2 class="colorWrite title text-center h1"><a href="/actus" class="text-reset"> Mes derniers articles</a></h2>
+    <h2 class="colorWrite title text-center"><a href="/actus" class="text-reset"> Mes derniers articles</a></h2>
     {{!-- /Titre section cards des articles --}}
 
     <div class="row">
@@ -115,7 +121,7 @@ bouton "noter" à remettre dès que fonctionnalité en place
                         <div class="row">
                             <div class="col-md-12 d-flex flex-column">
                                 <h5 class="card-title mt-2">{{ title }}</h5>
-                                <p class="card-text mt-2 text-justify">{{ truncate content 200 }}</p>
+                                <p class="card-text mt-2 text-left">{{ truncate content 200 }}</p>
                                 <img src="{{ image }}" class="rounded float-left mt-2" height="200" width="180"
                                     style="object-fit: contain" alt="image de l'article">
                                 <a href="/actuSingle/{{ id }}"

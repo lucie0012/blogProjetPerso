@@ -2,12 +2,12 @@ module.exports = {
 
     /************** Meta title et description pour chaque page ***************/
     home: {
-        title: "Accueil",
+        title: "Bienvenue sur le Blog sans allergènes",
         description: "Découvrez ce blog qui recense les sites proposant des recettes sans allergènes (sans gluten, sans lactose, sans oeufs, sans caséine) et des articles."
     },
 
     repertory: {
-        title: "Répertoire",
+        title: "Répertoire des sites proposant des recettes",
         description: "Découvrez, donnez votre avis et triez les recettes selon vos allergènes (sans gluten, sans lactose, sans oeufs, sans caséine) parmi les sites listés."
     },
 
@@ -17,13 +17,13 @@ module.exports = {
     },
 
     actus: {
-        title: "Mes articles",
+        title: "Mes articles : conseils ou recettes",
         description: "Découvrez tous les articles (conseils, recettes) concernant les régimes sans allergènes (sans gluten, sans lactose, sans oeufs, sans caséine) et partagez votre avis."
     },
 
     actuSingle: {
-        title: "Article : ",
-        description: "Découvrez l article concernant les régimes sans allergènes : "
+        title: "Article ou recette : ",
+        description: "Découvrez l article ou recette concernant les régimes alimentaires sans allergènes : "
     },
 
     about: {
@@ -32,7 +32,7 @@ module.exports = {
     },
 
     contact: {
-        title: "Contact",
+        title: "Me contacter",
         description: "Sur mon blog de recettes sans allergènes, n hésitez pas à me contacter ou à me faire remonter toutes informations utiles."
     },
 
