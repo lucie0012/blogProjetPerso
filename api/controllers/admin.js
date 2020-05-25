@@ -129,7 +129,9 @@ module.exports = {
             { _id: req.params.id },
             {
                 isVerified: true,
-                fonction: "Vérifié",
+                isAdmin: false,
+                isBan: false,
+                fonction: "Vérifié"
             },
             (err) => {
                 if (!err) {

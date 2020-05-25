@@ -26,7 +26,7 @@ const transporter = nodemailer.createTransport({
     secure: false,  //si "true", la connexion utilisera TLS lors de la connexion au serveur. 
     // Si "false" (par défaut), TLS est utilisé si le serveur prend en charge l'extension STARTTLS (laisser sur false lors de l'utilisation des ports 587 et 25)
     auth: {
-        // définission des données d'authentification
+        // définition des données d'authentification
         user: config.nodemailer.email,
         pass: config.nodemailer.password
     },

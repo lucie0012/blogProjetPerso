@@ -17,6 +17,8 @@
 //     it("Créer un utilisateur : succès ", async () => {
 //         const validUser = new userCollection(userData);
 //         const savedUser = await validUser.save()
+//         // const savedUser = await userCollection.create(userData)
+//             // autre moyen de faire la création (remplace la ligne const savedUser)
 
 //         expect(savedUser._id).to.have.property('id');
 //         expect(savedUser.name).to.be.equal(userData.name);
